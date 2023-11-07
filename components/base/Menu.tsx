@@ -1,24 +1,15 @@
-// Menu.tsx
-
 import React from "react";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
-// import UserInfo from "../common/global/UserInfo";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Button, { ButtonType } from "@/components/util/Button";
 import UserInfo from "../auth/UserInfo";
 
 interface MenuProps {
-  themeToggler: () => void;
-  theme: string;
   open: boolean;
   onClose: () => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ themeToggler, theme, open, onClose }) => {
+const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const handleLinkClick = () => {
-    // Call the onClose function to close the header
     onClose();
   };
 
@@ -52,25 +43,6 @@ const Menu: React.FC<MenuProps> = ({ themeToggler, theme, open, onClose }) => {
       </li>
       <li className={`${styles.menuItem} ${styles.navFooter}`}>
         <UserInfo menuOpen={open} />
-
-        <Button states={[
-          {
-            type: ButtonType.Round,
-            icon_url: "/icons/theme/sun.svg",
-            icon_alt: "Light",
-            onLeftClickState: "Dark",
-          },
-          {
-            type: ButtonType.Round,
-            icon_url: "/icons/theme/moon.svg",
-            icon_alt: "Dark",
-            onLeftClickState: "Light",
-          },
-        ]}
-          onStateChange={() => {
-            themeToggler();
-          }}
-          isDisabled={false} />
       </li>
     </ul>
   );

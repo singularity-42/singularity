@@ -7,11 +7,9 @@ import styles from "./Header.module.scss";
 import Hamburger from "../util/Hamburger";
 
 type HeaderProps = {
-    themeToggler: () => void;
-    theme: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ themeToggler, theme }) => {
+const Header: React.FC<HeaderProps> = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isShrunk, setIsShrunk] = useState(false);
@@ -40,18 +38,11 @@ const Header: React.FC<HeaderProps> = ({ themeToggler, theme }) => {
 
     return (
         <nav className={`${styles.header} ${isShrunk ? styles.shrink : ""}`}>
-            {/* <a href="/" className={styles.headerBrand} onClick={() => setMenuOpen(false)}>
-                Drumni.com
-            </a> */}
-            <Link href="/" className={styles.headerBrand} onClick={() => setMenuOpen(false)}>
-                Drumni.com
-            </Link>
+            <Link href="/" className={styles.headerBrand} onClick={() => setMenuOpen(false)}>Singularity</Link>
 
             <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
             <Menu
                 open={menuOpen}
-                themeToggler={themeToggler}
-                theme={theme}
                 onClose={() => {
                     setMenuOpen(false);
                 }}
