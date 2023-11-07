@@ -1,0 +1,93 @@
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.name {
+  font-size: 1em;
+  color: #fff;
+}
+
+@keyframes minecraftTextAnimation {
+  0% {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+  }
+
+  50% {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(10px);
+  }
+}
+
+.spanned {
+  white-space: pre;
+  font-family: monospace;
+  display: inline-block;
+  margin: 25px;
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--color-sub);
+
+  transition: color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+
+  transform: translateX(0);
+  animation: none;
+  color: var(--color-sub);
+}
+
+.spanned:hover {
+  color: var(--color-add);
+  background-color: var(--color-sub);
+  transform: cX(0);
+  // animation: minecraftTextAnimation 2s infinite;
+  animation: minecraftTextAnimation 2s infinite alternate;
+}
+
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em;
+  border: #fff solid 1px;
+  border-radius: 50%;
+  font-size: 1em;
+  width: 40px;
+  height: 40px;
+  white-space: nowrap;
+  background-color: transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: rgba(var(--color-sub-rgb), 0.8);
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.button:hover>img {
+  filter: var(--filter-invert);
+}
+
+.button>img {
+  filter: var(--filter);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 790px) {
+  .userInfo {
+    display: none !important; // hide component
+
+
+  }
+}

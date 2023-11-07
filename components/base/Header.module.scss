@@ -1,0 +1,134 @@
+.userInfoWrapper {
+    transition: all 0.3s ease-in-out;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-add);
+    padding: 0 0.96rem;
+    box-shadow: var(--box-shadow);
+    z-index: 420;
+    margin-top: 0;
+    font-family: var(--font-family);
+}
+
+.headerBrand {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-sub);
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 2;
+    transition: color 0.3s ease;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.headerBrand:hover {
+    color: var(--color-primary);
+    transform: translateX(1rem);
+}
+
+.headerNav {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: left 0.3s ease;
+    left: 100%;
+    top: 4.2rem;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-add);
+}
+
+.headerNav.show {
+    left: 0;
+}
+
+.shrink {
+    height: 3rem;
+    /* Set the desired height when scrolling down */
+}
+
+.headerNav li {
+    border-bottom: 1px solid var(--color-sub);
+}
+
+.headerNav li a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-sub);
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.headerNav li a:hover {
+    color: var(--color-primary);
+    // effect some random idk what
+    transform: translateX(1rem);
+}
+
+.navItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+.navLink {
+    text-decoration: none;
+    color: var(--color-sub);
+    list-style: none;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.navLink:hover {
+    color: var(--color-add);
+}
+
+.userInfoNavItem {
+    display: none;
+}
+
+.navFooter {
+    padding: 3rem;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em;
+    border: #fff solid 1px;
+    border-radius: 50%;
+    font-size: 1em;
+    width: 40px;
+    height: 40px;
+    white-space: nowrap;
+    background-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: rgba(var(--color-sub-rgb), 0.8);
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.button:hover>img {
+    filter: var(--filter-invert);
+}
+
+.button>img {
+    filter: var(--filter);
+}

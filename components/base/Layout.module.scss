@@ -1,0 +1,67 @@
+/* Layout.module.scss */
+
+.layoutContainer {
+  height: 100%;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.themeContext {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: var(--font-family);
+  overflow: hidden;
+}
+
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.contentWrapper {
+  flex-grow: 1;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--color-add);
+}
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    padding: 1rem;
+  }
+}
+
+.footerWrapper {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.sceneWrapper {
+  position: fixed;
+  top: 10vh;
+  left: 0;
+  width: 100vw;
+  bottom: 10vh;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  font-family: var(--font-family);
+}

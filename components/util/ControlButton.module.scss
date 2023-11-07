@@ -1,0 +1,49 @@
+.controlButtonText {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-sub);
+
+    // center the text
+    position: relative;
+    top: -0.05rem;
+    padding-left: 0.42rem;
+
+    // no warp
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+.controlButton {
+
+    background-color: var(--color-add);
+    color: var(--color-sub);
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--color-sub);
+        color: var(--color-dark);
+        box-shadow: 0 0 5px var(--color-add);
+
+        .controlButtonText {
+            color: var(--color-add);
+        }
+
+        .invertedImage {
+            filter: var(--filter-invert);
+        }
+    }
+
+    .invertedImage {
+        position: relative;
+        top: 0.2rem;
+        filter: var(--filter);
+    }
+
+}

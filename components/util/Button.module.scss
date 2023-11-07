@@ -1,0 +1,71 @@
+/* Button.module.scss */
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1em;
+    border: #fff solid 1px;
+    font-size: 42%;
+    width: 40px;
+    height: 40px;
+    white-space: nowrap;
+    background-color: transparent;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+    // alt text should be centered and all in caps
+    img {
+        object-fit: contain;
+        object-position: center;
+        // all in caps
+        text-transform: uppercase;
+
+        // text is a bit to way up, so we move it down a bit but only if alt text is present
+    }
+
+
+}
+
+.button:hover {
+    background-color: rgba(var(--color-sub-rgb), 0.8);
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+
+.button > img {
+    filter: var(--filter);
+}
+
+/* Square Button Styles */
+.square {
+    border-radius: 8px; /* Adjust the value to change the roundness of the corners */
+}
+
+.square:hover {
+    background-color: rgba(var(--color-sub-rgb), 0.8);
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Round Button Styles */
+.round {
+    background-color: var(--color-add); /* Change this color to the desired accent color */
+    border: var(--border);
+    border-radius: 50%;
+    color: var(--color-sub); /* Change this color to the desired text color */
+    box-shadow: var(--box-shadow);
+}
+
+.round:hover {
+    background-color: var(--color-add); /* Lighter shade of the accent color on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

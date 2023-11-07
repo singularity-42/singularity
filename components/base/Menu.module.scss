@@ -1,0 +1,70 @@
+/* Menu.module.scss */
+
+.menu {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: left 0.3s ease;
+    left: 100%;
+    top: 4.2rem;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--color-add);
+    z-index: 100 !important;
+    // make sure the menu is on top of everything
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    
+}
+
+.menu.show {
+    left: 0;
+}
+
+.menuItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    // use --color-sub-rgb to set the opacity of the border
+
+    border-bottom: 1px solid rgba(var(--color-sub-rgb), 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.menuLink {
+    width: 100%;
+    text-decoration: none;
+    color: var(--color-sub);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.menuLink:hover {
+    color: var(--color-primary);
+    transform: translateX(1rem);
+}
+
+.theBox {
+    background-color: var(--color-sub);
+
+    .menuLink {
+        color: var(--color-add);
+    }
+
+    &:hover {
+        .menuLink {
+            color: var(--color-add);
+        }
+    }
+}
