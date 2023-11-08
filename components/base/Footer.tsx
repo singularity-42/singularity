@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './Footer.module.scss';
+import styles from '@/styles/Footer.module.scss';
 
 const Footer: React.FC = () => {
   const config = [

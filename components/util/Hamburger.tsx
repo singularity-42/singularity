@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import styles from "./Hambruger.module.scss";
+import styles from "@/styles/Hambruger.module.scss";
 
 interface HambugerProps {
   menuOpen: boolean;

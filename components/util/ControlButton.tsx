@@ -1,6 +1,6 @@
 
 import React from 'react';
-import styles from './ControlButton.module.scss';
+import styles from '@/styles/ControlButton.module.scss';
 
 type ControlButtonProps = {
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

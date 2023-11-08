@@ -7,10 +7,9 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    transition: left 0.3s ease;
-    left: 100%;
-    top: 4.2rem;
-    width: 100%;
+    transition: right 0.3s ease;
+    right: -42vw;
+    top: 4rem;
     overflow: hidden;
     background-color: #000;
     z-index: 100 !important;
@@ -22,42 +21,45 @@
 }
 
 .menu.show {
-    left: 0;
+    right: 0rem;
+    transition: right 0.3s ease;
 }
 
 .menuItem {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3rem;
+    justify-content: right;
+    align-items: right;
+    /// all to right
     // use --color-sub-rgb to set the opacity of the border
 
     border-bottom: 1px solid rgba(var(--color-sub-rgb), 0.2);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    right: -3rem;
 }
 
-.menuItem:hover {
-    background-color: #fff;
-    transition: all 0.3s ease;
-
-}
 
 
 .menuLink {
-    width: 100%;
+    background-color: #fff;
+    padding-right: 5rem;
     text-decoration: none;
-    color: #fff;
+    padding-left: 1rem;
+    color: #000;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
-    text-align: center;
+    text-align: right;
     transition: all 0.3s ease;
+
 }
 
 .menuLink:hover {
+    background-color: #fff;
+    transition: all 0.3s ease;
     color: #f00;
     transform: translateX(1rem);
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.module.scss';
+import '@/styles/About.module.scss';
 
 interface AboutProps {
     name: string;

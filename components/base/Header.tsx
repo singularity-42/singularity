@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Menu from "./Menu";
-import styles from "./Header.module.scss";
+import styles from "@/styles/Header.module.scss";
 import Hamburger from "../util/Hamburger";
 
 type HeaderProps = {

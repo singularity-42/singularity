@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import styles from './Upload.module.scss';
+import styles from '@/styles/Upload.module.scss';
 
 type UploadProps = {
     onFileUpload: (file: File) => void;

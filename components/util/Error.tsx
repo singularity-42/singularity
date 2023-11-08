@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Error.module.scss';
+import styles from '@/styles/Error.module.scss';
 
 interface ErrorDisplayProps {
     error: string;

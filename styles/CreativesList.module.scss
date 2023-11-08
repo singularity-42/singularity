@@ -1,0 +1,12 @@
+// styles/CreativesList.module.scss
+
+.creativeTable {
+  width: 100%;
+  .thead {
+    font-weight: bold;
+  }
+  .td, .th {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+}
