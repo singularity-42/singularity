@@ -9,7 +9,7 @@ const variants = {
   exit: { opacity: 0 },
 };
 
-const CreativesPage: React.FC = () => {
+export default function CreativesPage() {
   return (
     <div>
       <motion.div initial="initial" animate="animate" exit="exit" variants={variants}>
@@ -18,5 +18,3 @@ const CreativesPage: React.FC = () => {
     </div>
   );
 };
-
-export default CreativesPage;
