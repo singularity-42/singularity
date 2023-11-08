@@ -57,15 +57,15 @@
 
 /* Round Button Styles */
 .round {
-    background-color: var(--color-add); /* Change this color to the desired accent color */
+    background-color: #000; /* Change this color to the desired accent color */
     border: var(--border);
     border-radius: 50%;
-    color: var(--color-sub); /* Change this color to the desired text color */
+    color: #fff; /* Change this color to the desired text color */
     box-shadow: var(--box-shadow);
 }
 
 .round:hover {
-    background-color: var(--color-add); /* Lighter shade of the accent color on hover */
+    background-color: #000; /* Lighter shade of the accent color on hover */
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

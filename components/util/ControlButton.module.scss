@@ -2,7 +2,7 @@
     font-size: 11px;
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--color-sub);
+    color: #fff;
 
     // center the text
     position: relative;
@@ -17,8 +17,8 @@
 
 .controlButton {
 
-    background-color: var(--color-add);
-    color: var(--color-sub);
+    background-color: #000;
+    color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 14px;
@@ -27,12 +27,12 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--color-sub);
+        background-color: #fff;
         color: var(--color-dark);
-        box-shadow: 0 0 5px var(--color-add);
+        box-shadow: 0 0 5px #000;
 
         .controlButtonText {
-            color: var(--color-add);
+            color: #000;
         }
 
         .invertedImage {

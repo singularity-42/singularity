@@ -18,7 +18,7 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: var(--color-add);
+    background-color: #000;
   }
 }
 
@@ -33,7 +33,7 @@
 
 
 .uploadForm {
-  background-color: var(--color-add);
+  background-color: #000;
   border-top-left-radius: 42px;
   border-top-right-radius: 42px;
   padding-bottom: 20px;
@@ -45,11 +45,11 @@
   flex-direction: column;
   font-family: var(--font-family);
 
-  color: var(--color-sub);
-  border: 4.2px dashed var(--color-sub);
+  color: #fff;
+  border: 4.2px dashed #fff;
 
   &.dragActive {
-    border: 4.2px dashed var(--color-primary);
+    border: 4.2px dashed #f00;
   }
 }
 
@@ -61,7 +61,7 @@
   margin-top: 10px;
   padding: 10px 20px;
   border-radius: 5px;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(to right, #f00, #0f0);
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;

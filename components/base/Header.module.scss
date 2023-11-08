@@ -6,10 +6,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--color-add);
+    background: #000;
     padding: 0 0.96rem;
     box-shadow: var(--box-shadow);
     z-index: 420;
+    width: 100%;
     margin-top: 0;
     font-family: var(--font-family);
 }
@@ -17,7 +18,7 @@
 .headerBrand {
     font-size: 2rem;
     font-weight: 900;
-    color: var(--color-sub);
+    color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     line-height: 2;
@@ -27,7 +28,7 @@
 }
 
 .headerBrand:hover {
-    color: var(--color-primary);
+    color: #f00;
     transform: translateX(1rem);
 }
 
@@ -43,7 +44,7 @@
     top: 4.2rem;
     width: 100%;
     overflow: hidden;
-    background-color: var(--color-add);
+    background-color: #000;
 }
 
 .headerNav.show {
@@ -56,13 +57,13 @@
 }
 
 .headerNav li {
-    border-bottom: 1px solid var(--color-sub);
+    border-bottom: 1px solid #fff;
 }
 
 .headerNav li a {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--color-sub);
+    color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     text-align: center;
@@ -71,7 +72,7 @@
 }
 
 .headerNav li a:hover {
-    color: var(--color-primary);
+    color: #f00;
     // effect some random idk what
     transform: translateX(1rem);
 }
@@ -85,14 +86,14 @@
 
 .navLink {
     text-decoration: none;
-    color: var(--color-sub);
+    color: #fff;
     list-style: none;
     transition: all 0.3s ease;
     border: none;
 }
 
 .navLink:hover {
-    color: var(--color-add);
+    color: #000;
 }
 
 .userInfoNavItem {

@@ -15,7 +15,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
 
   const getCurrentPage = (path: string) => {
     const currentPath = "video";
-    return currentPath === path ? styles.currentSelected : "";
+    return currentPath === path ? styles.currentSelected : styles.theBox;
   };
 
   let isMenuOpen = open === true ? styles.show : "";
@@ -41,9 +41,9 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
           The Box
         </Link>
       </li>
-      <li className={`${styles.menuItem} ${styles.navFooter}`}>
+      {/* <li className={`${styles.menuItem} ${styles.navFooter}`}>
         <UserInfo menuOpen={open} />
-      </li>
+      </li> */}
     </ul>
   );
 };

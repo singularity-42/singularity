@@ -12,7 +12,7 @@
     top: 4.2rem;
     width: 100%;
     overflow: hidden;
-    background-color: var(--color-add);
+    background-color: #000;
     z-index: 100 !important;
     // make sure the menu is on top of everything
 
@@ -36,10 +36,17 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.menuItem:hover {
+    background-color: #fff;
+    transition: all 0.3s ease;
+
+}
+
+
 .menuLink {
     width: 100%;
     text-decoration: none;
-    color: var(--color-sub);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,20 +58,21 @@
 }
 
 .menuLink:hover {
-    color: var(--color-primary);
+    color: #f00;
     transform: translateX(1rem);
 }
 
 .theBox {
-    background-color: var(--color-sub);
+    background-color: #000;
+    transition: all 0.3s ease;
+    color: #fff;
 
+    
     .menuLink {
-        color: var(--color-add);
     }
 
     &:hover {
         .menuLink {
-            color: var(--color-add);
         }
     }
 }
