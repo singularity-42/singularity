@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import CreativesList from '@/components/util/CreativesList';
 import useMarkdownData from '@/hooks/useMarkdownData';
