@@ -1,8 +1,13 @@
 // interfaces/index.ts
 
-export interface Creative {
-    id: number;
-    name: string;
-    role: string;
-  }
-  
+export interface MarkdownData {
+  title: string;
+  children: string;
+  metadata: {
+    website: string;
+    instagram: string;
+    mail: string;
+    tel: string;
+    tags: string[];
+  };
+}  

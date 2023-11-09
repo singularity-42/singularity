@@ -1,20 +1,37 @@
-// pages/creatives.tsx
-
-import { motion } from 'framer-motion';
+import React from 'react';
 import CreativesList from '@/components/util/CreativesList';
+import useMarkdownData from '@/hooks/useMarkdownData';
 
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-};
+interface MarkdownData {
+  title: string;
+  children: string;
+  metadata: {
+    website: string;
+    instagram: string;
+    mail: string;
+    tel: string;
+    tags: string[];
+  };
+}
 
-export default function CreativesPage() {
+const CreativesPage: React.FC = () => {
+  const directoryPath = 'docs/creatives';
+  const markdownData = useMarkdownData(directoryPath);
+
+  if (!markdownData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <motion.div initial="initial" animate="animate" exit="exit" variants={variants}>
-        <CreativesList />
-      </motion.div>
+      {markdownData.map((data, index) => (
+        <div key={index}>
+          <h2>{data.title}</h2>
+          <CreativesList markdownData={data} />
+        </div>
+      ))}
     </div>
   );
 };
+
+export default CreativesPage;
