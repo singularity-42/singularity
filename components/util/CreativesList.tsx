@@ -1,14 +1,14 @@
-// components/CreativesList.tsx
-
 import React from 'react';
-import { Creative } from '@/interfaces';
+import { MarkdownData } from '@/interfaces';
 import styles from '@/styles/CreativesList.module.scss';
 
 interface CreativesListProps {
-  creatives?: Creative[];
+  markdownData: MarkdownData;
 }
 
-const CreativesList: React.FC<CreativesListProps> = ({ creatives }) => {
+const CreativesList: React.FC<CreativesListProps> = ({ markdownData }) => {
+  const creatives: MarkdownData = markdownData;
+
   return (
     <table className={styles.creativeTable}>
       <thead className={styles.thead}>
@@ -18,6 +18,8 @@ const CreativesList: React.FC<CreativesListProps> = ({ creatives }) => {
         </tr>
       </thead>
       <tbody>
+      
+      
         {creatives?.map((creative) => (
           <tr key={creative.id}>
             <td className={styles.td}>{creative.name}</td>
