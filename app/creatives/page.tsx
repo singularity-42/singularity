@@ -2,9 +2,9 @@
 
 import React from 'react';
 import CreativesList from '@/components/util/CreativesList';
-import useMarkdownData from '@/hooks/useMarkdownData';
+import useEntityData from '@/hooks/useEntityData';
 
-interface MarkdownData {
+interface EntityData {
   title: string;
   children: string;
   metadata: {
@@ -17,21 +17,16 @@ interface MarkdownData {
 }
 
 const CreativesPage: React.FC = () => {
-  const directoryPath = 'docs/creatives';
-  const markdownData = useMarkdownData(directoryPath);
+  const entityType = 'creatives';
+  const entityData = useEntityData(entityType);
 
-  if (!markdownData) {
+  if (!entityData) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {markdownData.map((data, index) => (
-        <div key={index}>
-          <h2>{data.title}</h2>
-          <CreativesList markdownData={data} />
-        </div>
-      ))}
+        <CreativesList entityData={entityData} />
     </div>
   );
 };

@@ -856,7 +856,7 @@ svg.dataloom-svg--xl {
   height: 100%;
   border-top: 1px solid var(--background-modifier-border);
 }
-.dataloom-app--markdown-view {
+.dataloom-app--entity-view {
   border-bottom: 1px solid var(--background-modifier-border);
 }
 .dataloom-light-gray--light {
