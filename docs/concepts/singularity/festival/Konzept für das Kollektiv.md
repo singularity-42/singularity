@@ -6,7 +6,7 @@ Das Singularity Festival ist eine visionäre Idee, die sich um Musik, Kreativit�
 
 ## Bühnen und Konzepte
 
-Die [[Strawberry Jam Stage]] lädt zu spontanen Jam-Sessions ein, während die [[Blueberry Juice Stage]] lokale Bands und vielfältige musikalische Klänge präsentiert. Die [[Synth Jungle Stage]] verschmilzt elektronische Beats mit Synthesizer-Improvisationen zu einer einzigartigen Klanglandschaft.
+Die [[Strawberry Jam]] lädt zu spontanen Jam-Sessions ein, während die [[Blueberry Juice]] lokale Bands und vielfältige musikalische Klänge präsentiert. Die [[Synth Jungle Stage]] verschmilzt elektronische Beats mit Synthesizer-Improvisationen zu einer einzigartigen Klanglandschaft.
 
 ## Kosteneffizienz und Zusammenarbeit
 

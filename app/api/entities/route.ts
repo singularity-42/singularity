@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import * as glob from 'glob';
+import { Url } from 'next/dist/shared/lib/router/router';
 
 // const marked = require('marked');
 
@@ -15,110 +16,64 @@ tags:
   - test2
 ---
 */
-
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  let entity_type = "creatives"
-
+export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
+  let url: Url = req.url as Url;
+  // get entity_type from url
+  let entity_type = url.toString().split('=')[1];
+  // console.log(params['entity_type'] as string);
   const entityFiles = glob.sync(`./docs/${entity_type}/*.md`);
-
-  let entityData = entityFiles.map((file) => {
+  const entityData = entityFiles.map((file) => {
     const content = fs.readFileSync(file, 'utf8');
     return { file, content };
   });
 
-
-  const extractMetadata = (metadataString: string | undefined) => {
-    if (!metadataString) {
-      return {};
+  const extractMetadata = (metadataString: string | undefined, title: string = '') => {
+    if (!metadataString || !metadataString.includes('\n')) {
+      return { title };
     }
 
+    const metadataArray = metadataString.split('\n').map((item: string) => item.trim()).filter(Boolean);
 
-    // const dataStack = metadataString.split('---');
-    console.log('Data stack:', metadataString);
-    const metadata = metadataString;
-    // const markdownContent = dataStack[2];
-    if (!metadata) {
-      console.log('No metadata found');
-      return {};
+    if (metadataArray.length == 0) {
+      return { title };
     }
 
-    // check if there is a new line
-    if (!metadata.includes('\n')) {
-      console.log('No new line found');
-      return {};
-    }
-
-    let metadataArray = metadata.split('\n');
-    if (metadataArray.length === 0) {
-      console.log('No metadata found');
-      return {};
-    }
-
-    const metadataObject: any = {};
-    metadataArray = metadataArray.map((item: string) => item.trim());
-    metadataArray.forEach((item, index) => {
-      if (item.length === 0)
-        if (metadataArray[index + 1] && metadataArray[index + 1][0] != '-') {
-          console.log('Empty item');
-          return;
-          // check if next item is -
-        }
-      // check if item has a colon
+    const metadata: any = {};
+    metadataArray.forEach((item) => {
       if (!item.includes(':')) {
-        if (item[0] != '-') {
-          console.log('No colon found');
-          return;
+        if (item[0] === '-') {
+          const item_ = item.replace('-', '').trim();
+          const list_key = Object.keys(metadata).pop() || '';
+          const _list = metadata[list_key] || [];
+          _list.push(item_);
+          metadata[list_key] = _list;
         } else {
-          let list = metadataArray[index - 1].split(':')[0];
-
-          if(!metadataObject[list]){
-            metadataObject[list] = []; 
-          }
-
-          let values = metadataObject[list];
-          console.log(list, values);
-
-          let value = item;
-
-          metadataObject[list].push(value);
-          return;
-
+          console.error(`Invalid metadata: "${item}"`);
         }
-
       } else {
-
-        let itemArray = item.split(':');
-        // const key = itemArray[0].trim(); trip not possible
-        // const value = itemArray[1].trim();
-        // smt creative to remove the space in the key and value start and end
-        const key = itemArray[0];
-        const value = itemArray[1];
-
-        if (key.length === 0) {
-          console.log('Empty key');
-          return;
-        }
-
-        metadataObject[key] = value;
-        return
+        const [key, value] = item.split(':').map((s) => s.trim());
+        if (key.length > 0) metadata[key] = value;
+        else console.error('Empty key');
       }
     });
-    console.log('Metadata object:', metadataObject);
-
-
-
-
-    return metadataObject;
+    let _metadata = {
+      title,
+      ...metadata,
+    }
+    return _metadata;
   };
 
-  return new Response(JSON.stringify(entityData.map((file: any) => {
-    const content = file.content;
-    const metadataString = content.split('---')[1];
-    const metadata = extractMetadata(metadataString);
-    return metadata;
-  })), {
+  const responseJSON = JSON.stringify(
+    entityData.map((file: any) => {
+      const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
+      const metadataString = file.content.split('---')[1];
+      return extractMetadata(metadataString, file_name);
+    })
+  );
+
+  return new Response(responseJSON, {
     headers: {
       'content-type': 'application/json;charset=UTF-8',
     },
   });
-}
+};

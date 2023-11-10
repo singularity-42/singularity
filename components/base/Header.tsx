@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Menu from "./Menu";
 import styles from "@/styles/Header.module.scss";
-import Hamburger from "../util/Hamburger";
+import Hamburger from "../util/event/Hamburger";
 
 type HeaderProps = {
 };

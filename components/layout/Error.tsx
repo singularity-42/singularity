@@ -3,14 +3,14 @@ import styles from '@/styles/Error.module.scss';
 
 interface ErrorDisplayProps {
     error: string;
-    onClose: () => void;
+    onClick: () => void;
 }
 
-const Error: React.FC<ErrorDisplayProps> = ({ error, onClose }) => {
+const Error: React.FC<ErrorDisplayProps> = ({ error, onClick }) => {
     return (
         <div className={styles.errorDisplay}>
             <p className={styles.errorText}>{error}</p>
-            <button className={styles.closeButton} onClick={onClose}>
+            <button className={styles.closeButton} onClick={() => onClick()}>
                 <span className={styles.closeIcon}>&times;</span>
             </button>
         </div>

@@ -1,0 +1,86 @@
+// Entity.module.scss
+
+.entityContainer {
+    // Add styles for the overall container
+    // Example:
+    width: 94%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin: 10px 1rem;
+}
+
+.title {
+    // Add styles for the title
+    // Example:
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.imageGallery {
+    // Add styles for the image gallery container
+    // Example:
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items: start;
+    align-items: start;
+}
+
+.largeImageContainer {
+    // Add styles for the large image container
+    // Example:
+    margin-bottom: 10px;
+}
+
+.largeImage {
+    // Add styles for the large image
+    // Example:
+    max-width: 100%;
+    height: auto;
+}
+
+.smallImagesContainer {
+    // Add styles for the small images container
+    // Example:
+    display: flex;
+}
+
+.smallImage {
+    // Add styles for the small images
+    // Example:
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+}
+
+.nameContainer {
+    // Add styles for the name container
+    // Example:
+    align-self: flex-end;
+}
+
+.name {
+    // Add styles for the name
+    // Example:
+    font-weight: bold;
+}
+
+.detailsContainer {
+    // Add styles for the details container
+    // Example:
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoContainer {
+    // Add styles for the information container
+    // Example:
+    flex-grow: 1;
+}
+
+.instagram,
+.website {
+    // Add styles for the Instagram and website elements
+    // Example:
+    margin-bottom: 5px;
+}

@@ -1,9 +1,11 @@
 // styles/CreativesList.module.scss
 
-.creativeTable {
+.entityTable {
   width: 100%;
   .thead {
-    font-weight: bold;
+    // font-weight: bold;
+    // hidden
+    display: none;
   }
   .td, .th {
     padding: 10px;

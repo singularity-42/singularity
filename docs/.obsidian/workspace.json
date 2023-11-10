@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "collectives/Reiz Kollektiv.md",
+                "file": "collectives/Reset.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 278.5026054382324
+    "width": 352.5
   },
   "right": {
     "id": "d3e1212fb40f73db",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "collectives/Reiz Kollektiv.md",
+                "file": "collectives/Reset.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "collectives/Reiz Kollektiv.md",
+                "file": "collectives/Reset.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "collectives/Reiz Kollektiv.md"
+                "file": "collectives/Reset.md"
               }
             }
           }
@@ -138,43 +138,46 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "remotely-save:Remotely Save": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
+      "remotely-save:Remotely Save": false,
       "notion-like-tables:Create loom": false
     }
   },
   "active": "d798d1f898e881d8",
   "lastOpenFiles": [
-    "concepts/Blueberry Juice Stage.md",
-    "concepts/Singularity Festival Konzept für das Kollektiv.md",
-    "concepts/Singularity Workshops.md",
-    "concepts/Singularity Festival Stages.md",
-    "concepts/Singularity Festival Vorbereitung und Organisation.md",
-    "concepts/Singularity Info.md",
-    "concepts/Singularity Festival.md",
-    "creatives/Eder.md",
-    "collectives/Lokomov.md",
-    "collaborations/2024-05-24.md",
-    "concepts/Singularity Termine.md",
-    "concepts/Strawberry Jam Stage.md",
-    "concepts/Guacamole Cream Stage.md",
-    "collectives/DNB Chemnitz.md",
-    "collectives/Kreativ Achse.md",
-    "creatives/Jasi.md",
-    "collectives/AJZ.md",
-    "collectives/Reset.md",
     "collectives/Reiz Kollektiv.md",
-    "Untitled.md",
-    "creatives/Lena.md",
-    "Lena.md",
-    "creatives/Nidardo.md",
-    "Untitled",
+    "collectives/Reset.md",
+    "collectives/Lokomov.md",
+    "collectives/Kreativ Achse.md",
+    "collectives/DNB Chemnitz.md",
+    "collectives/AJZ.md",
+    "collaborations/2024-05-24.md",
+    "concepts/singularity/Singularity Festival.md",
+    "concepts/singularity/festival/Konzept für das Kollektiv.md",
+    "concepts/singularity/festival/stages/Info.md",
+    "concepts/singularity/festival/Vorbereitung und Organisation.md",
+    "concepts/singularity/festival/Stages.md",
+    "concepts/singularity/festival/stages/Guacamole Cream.md",
+    "concepts/singularity/festival/stages/Blueberry Juice.md",
+    "concepts/singularity/festival/stages/Strawberry Jam.md",
+    "concepts/singularity/festival/Workshops.md",
+    "concepts/singularity/festival/Termine.md",
+    "concepts/singularity/festival/stages",
+    "concepts/singularity/festival",
+    "concepts/singularity",
+    "creatives/Eder.md",
     "creatives/Drumnicorn.md",
+    "creatives/Nidardo.md",
+    "creatives/Lena.md",
+    "creatives/Jasi.md",
+    "Untitled.md",
+    "Lena.md",
+    "Untitled",
     "collaborations",
     "collectives",
     "concepts",

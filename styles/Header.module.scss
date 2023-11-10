@@ -25,6 +25,10 @@
     transition: color 0.3s ease;
     transition: transform 0.3s ease;
     transform: translateX(0);
+
+    @media (max-width: 260px) {
+        font-size: 12vw;
+    }
 }
 
 .headerBrand:hover {

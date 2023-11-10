@@ -5,8 +5,8 @@ import EntityList from '@/components/layout/EntityList';
 import useEntityData from '@/hooks/useEntityData';
 import Loading from '@/components/util/view/Loading';
 
-const CreativesPage: React.FC = () => {
-  const entityType = 'creatives';
+const ConceptPage: React.FC = () => {
+  const entityType = 'concepts';
   const entityData = useEntityData(entityType);
 
   if (!entityData) {
@@ -20,4 +20,4 @@ const CreativesPage: React.FC = () => {
   );
 };
 
-export default CreativesPage;
+export default ConceptPage;

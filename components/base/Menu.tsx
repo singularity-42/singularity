@@ -14,23 +14,13 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   };
 
   const getCurrentPage = (path: string) => {
-    const currentPath = "video";
+    const currentPath = window.location.pathname;
     return currentPath === path ? styles.currentSelected : styles.theBox;
   };
 
   let isMenuOpen = open === true ? styles.show : "";
   return (
     <ul className={`${styles.menu} ${isMenuOpen}`}>
-      <li className={`${styles.menuItem} ${getCurrentPage("/thebox")} ${styles.theBox}`}>
-        <Link href="/creatives" className={styles.menuLink} onClick={handleLinkClick}>
-          Creatives
-        </Link>
-      </li>
-      <li className={`${styles.menuItem} ${getCurrentPage("/about")}`}>
-        <Link href="/concepts" className={styles.menuLink} onClick={handleLinkClick}>
-          Concepts
-        </Link>
-      </li>
       <li className={`${styles.menuItem} ${getCurrentPage("/video")}`}>
         <Link href="/collaborations" className={styles.menuLink} onClick={handleLinkClick}>
           Collaborations
@@ -39,6 +29,16 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
       <li className={`${styles.menuItem} ${getCurrentPage("/jukebox")}`}>
         <Link href="/collectives" className={styles.menuLink} onClick={handleLinkClick}>
           Collectives
+        </Link>
+      </li>
+      <li className={`${styles.menuItem} ${getCurrentPage("/thebox")} ${styles.theBox}`}>
+        <Link href="/creatives" className={styles.menuLink} onClick={handleLinkClick}>
+          Creatives
+        </Link>
+      </li>
+      <li className={`${styles.menuItem} ${getCurrentPage("/about")}`}>
+        <Link href="/concepts" className={styles.menuLink} onClick={handleLinkClick}>
+          Concepts
         </Link>
       </li>
       {/* <li className={`${styles.menuItem} ${styles.navFooter}`}>
