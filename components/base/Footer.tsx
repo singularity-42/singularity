@@ -5,27 +5,27 @@ import styles from '@/styles/Footer.module.scss';
 const Footer: React.FC = () => {
   const config = [
     {
-      href: 'https://www.patreon.com/Drumnicorn/about',
+      href: '',
       alt: 'patreon',
       src: '/icons/artist/patreon.svg',
     },
     {
-      href: 'https://open.spotify.com/artist/07WSvNqUYT3u5Hgkao5qiT?si=kp-boHjkTdKlMvOMEJlFxg',
+      href: '',
       alt: 'spotify',
       src: '/icons/artist/spotify.svg',
     },
     {
-      href: 'https://soundcloud.com/drumnicorn',
+      href: '',
       alt: 'soundcloud',
       src: '/icons/artist/soundcloud.svg',
     },
     {
-      href: 'https://www.youtube.com/@drumnicorn',
+      href: '',
       alt: 'youtube',
       src: '/icons/artist/youtube.svg',
     },
     {
-      href: 'https://www.instagram.com/drumnicorn/',
+      href: '',
       alt: 'instagram',
       src: '/icons/artist/instagram.svg',
     },

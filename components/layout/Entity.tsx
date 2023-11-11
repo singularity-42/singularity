@@ -45,8 +45,6 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
         "https://scontent-fra5-2.cdninstagram.com/v/t51.2885-19/311902218_1165966927367757_3440204424326455679_n.jpg"
     ]; // Replace this with the actual array of image URLs
 
-    console.log(entity);
-
     return (
         <div className={styles.entityContainer}>
             <h2 className={styles.title}>{title}</h2>
