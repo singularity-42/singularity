@@ -25,26 +25,26 @@ const EntityList: React.FC<EntityListProps> = ({ entityData }) => {
   }
 
   return (
-    <table className={styles.entityTable}>
-      <thead className={styles.thead}>
-        <tr>
-          <th className={styles.th}>title
-          </th>
-          {Object.keys(entitys[0]).map((key: string) => (
-            <th key={key} className={styles.th}>
+    <div className={styles.entityTable}>
+      <div className={styles.thead}>
+        <div>
+          <div className={styles.th}>title
+          </div>
+          {Object.keys(entitys[0].metadata).map((key: string) => (
+            <div key={key} className={styles.th}>
               {key}
-            </th>
+            </div>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </div>
+      </div>
+      <div>
         {entitys?.map((entity: any, index: number) => (
-          <tr key={index} className={styles.tr}>
+          <div key={index} className={styles.tr}>
             <Entity entity={entity} />
-          </tr>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

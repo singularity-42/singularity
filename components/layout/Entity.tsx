@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../styles/Entity.module.scss';
 import TagBubbleList from './TagBubble';
+import Markdown from '../util/view/Markdown';
 
 interface ImageGalleryProps {
     images: string[];
@@ -36,18 +37,22 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
     }
 
 
-    const { title, instagram, website, tags } = entity;
+    const { title, instagram, website, tags } = entity.metadata;
+    const content = entity.content;
 
     // Assuming images is an array of image URLs from Instagram
     const images = [
         "https://scontent-fra5-2.cdninstagram.com/v/t51.2885-19/311902218_1165966927367757_3440204424326455679_n.jpg"
     ]; // Replace this with the actual array of image URLs
 
+    console.log(entity);
+
     return (
         <div className={styles.entityContainer}>
             <h2 className={styles.title}>{title}</h2>
             <TagBubbleList tags={tags || []} />
             {website}&nbsp;
+            <Markdown content={content} />
             @{instagram}
             <ImageGallery images={images} name={title} />
             <div className={styles.detailsContainer}>

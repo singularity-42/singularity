@@ -21,7 +21,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   // get entity_type from url
   let entity_type = url.toString().split('=')[1];
   // console.log(params['entity_type'] as string);
-  const entityFiles = glob.sync(`./docs/${entity_type}/*.md`);
+  const entityFiles = glob.sync(`./docs/${entity_type}/**/*.md`);
   const entityData = entityFiles.map((file) => {
     const content = fs.readFileSync(file, 'utf8');
     return { file, content };
@@ -67,7 +67,12 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     entityData.map((file: any) => {
       const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
       const metadataString = file.content.split('---')[1];
-      return extractMetadata(metadataString, file_name);
+      const contentString = file.content.split('---')[2];
+
+      return {
+        metadata: extractMetadata(metadataString, file_name),
+        content: file.content
+      };
     })
   );
 
