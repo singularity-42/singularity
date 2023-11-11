@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import * as glob from 'glob';
 import { Url } from 'next/dist/shared/lib/router/router';
@@ -16,7 +15,10 @@ tags:
   - test2
 ---
 */
-export const GET = async (req: NextApiRequest) => {
+
+import { NextRequest, NextResponse } from 'next/server';
+
+export const GET = async (req: NextRequest, res: NextResponse) => {
   let url: Url = req.url as Url;
   // get entity_type from url
   let entity_type = url.toString().split('=')[1];
