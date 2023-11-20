@@ -1,4 +1,11 @@
 // Entity.module.scss
+.entityWebsite {
+    // Add styles for the website
+    // Example:
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
 
 .entityContainer {
     // Add styles for the overall container
@@ -7,6 +14,8 @@
     border: 1px solid #ccc;
     padding: 1rem;
     margin: 10px 1rem;
+    position: relative;
+    top: 1px;
 }
 
 .title {
@@ -14,6 +23,8 @@
     // Example:
     font-size: 24px;
     margin-bottom: 10px;
+    color: #FFFFFF;
+    text-align: start;
 }
 
 .imageGallery {
@@ -83,4 +94,8 @@
     // Add styles for the Instagram and website elements
     // Example:
     margin-bottom: 5px;
+}
+
+.background {
+    background-color: rgba(0, 0, 0, 0.33);
 }

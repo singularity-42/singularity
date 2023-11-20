@@ -40,6 +40,7 @@ const Header: React.FC<HeaderProps> = () => {
         <nav className={`${styles.header} ${isShrunk ? styles.shrink : ""}`}>
             <Link href="/" className={styles.headerBrand} onClick={() => setMenuOpen(false)}>Singularity</Link>
 
+            <Icon
             <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
             <Menu
                 open={menuOpen}

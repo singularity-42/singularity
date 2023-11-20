@@ -4,5 +4,6 @@ instagram:
 mail: 
 tel: 
 tags: 
-relations:
+relations: 
+location:
 ---

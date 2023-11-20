@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "04cb299da215e0fa",
+        "id": "7fd6d1e840d08c59",
         "type": "tabs",
         "children": [
           {
-            "id": "d798d1f898e881d8",
+            "id": "032dacefa3140478",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:hardgroove",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -148,39 +148,43 @@
       "notion-like-tables:Create loom": false
     }
   },
-  "active": "d798d1f898e881d8",
+  "active": "032dacefa3140478",
   "lastOpenFiles": [
-    "collectives/Reiz Kollektiv.md",
-    "collectives/Reset.md",
     "collectives/Lokomov.md",
-    "collectives/Kreativ Achse.md",
-    "collectives/DNB Chemnitz.md",
     "collectives/AJZ.md",
-    "collaborations/2024-05-24.md",
-    "concepts/singularity/Singularity Festival.md",
+    "collectives/DNB Chemnitz.md",
+    "collectives/Kreativ Achse.md",
     "concepts/singularity/festival/Konzept für das Kollektiv.md",
-    "concepts/singularity/festival/stages/Info.md",
-    "concepts/singularity/festival/Vorbereitung und Organisation.md",
     "concepts/singularity/festival/Stages.md",
-    "concepts/singularity/festival/stages/Guacamole Cream.md",
-    "concepts/singularity/festival/stages/Blueberry Juice.md",
-    "concepts/singularity/festival/stages/Strawberry Jam.md",
+    "collectives/Reset.md",
+    "collectives/Reiz Kollektiv.md",
+    "creatives/Lanafant.md",
+    "creatives/Nidardo.md",
+    "creatives/Jasi.md",
+    "creatives/Eder.md",
+    "creatives/Drumnicorn.md",
     "concepts/singularity/festival/Workshops.md",
     "concepts/singularity/festival/Termine.md",
+    "collaborations/2024-05-24.md",
+    "concepts/lifelines/spielablauf/Die Hausratversicherung.md",
+    "creatives/Lena.md",
+    "concepts/lifelines/weiters/Aleph.md",
+    "concepts/lifelines/weiters/Bürogebäude.md",
+    "concepts/lifelines/core/Spielziel.md",
+    "concepts/lifelines/spielablauf/Das Smartphone.md",
+    "concepts/lifelines/spielablauf/Das Tutorial.md",
+    "concepts/lifelines/spielablauf/Die Ereignisse.md",
+    "concepts/lifelines/spielablauf/Das Sandbox Shopping.md",
+    "concepts/lifelines/spielablauf/Die Sandbox.md",
+    "concepts/lifelines/core",
+    "concepts/lifelines/weiters",
+    "concepts/lifelines/spielablauf",
+    "concepts/lifelines",
     "concepts/singularity/festival/stages",
     "concepts/singularity/festival",
     "concepts/singularity",
-    "creatives/Eder.md",
-    "creatives/Drumnicorn.md",
-    "creatives/Nidardo.md",
-    "creatives/Lena.md",
-    "creatives/Jasi.md",
-    "Untitled.md",
-    "Lena.md",
     "Untitled",
     "collaborations",
-    "collectives",
-    "concepts",
-    "creatives"
+    "collectives"
   ]
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '@/styles/TagBubble.module.scss';
+import styles from '../../styles/TagBubble.module.scss';
 
 interface TagBubbleListProps {
   tags: string[];

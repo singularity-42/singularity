@@ -47,12 +47,10 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
 
     return (
         <div className={styles.entityContainer}>
-            <h2 className={styles.title}>{title}</h2>
             <TagBubbleList tags={tags || []} />
-            {website}&nbsp;
-            <Markdown content={content} />
-            @{instagram}
-            <ImageGallery images={images} name={title} />
+            <h2 className={styles.title}>{title}</h2>
+            <div className={styles.entityWebsite}>&nbsp;</div>
+            @<ImageGallery images={images} name={title} />
             <div className={styles.detailsContainer}>
                 <div className={styles.infoContainer}>
                     <div className={styles.instagram}></div>

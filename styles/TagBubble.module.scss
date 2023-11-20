@@ -8,9 +8,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
-  
-  .tagBubble {
+}
+
+.tagBubble {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,12 +22,12 @@
     margin: 10px;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #FFFFFF;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
-  }
-  
-  .tagBubble:hover {
+    position: static;
+}
+
+.tagBubble:hover {
     transform: scale(1.1);
-  }
-  
+}
