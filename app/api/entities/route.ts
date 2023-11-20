@@ -20,8 +20,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
   let url: Url = req.url as Url;
-  // get entity_type from url
   let entity_type = url.toString().split('=')[1];
+  let tags = url.toString().split('=')[2];
   const entityFiles = glob.sync(`./docs/${entity_type}/**/*.md`);
   const entityData = entityFiles.map((file) => {
     const content = fs.readFileSync(file, 'utf8');
@@ -65,20 +65,30 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   };
 
   const responseJSON = JSON.stringify(
-    entityData.map((file: any) => {
-      const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
-      const metadataString = file.content.split('---')[1];
+   entityData.map((file: any) => {
+     const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
+     const metadataString = file.content.split('---')[1];
+     const metadata = extractMetadata(metadataString, file_name);
 
-      return {
-        metadata: extractMetadata(metadataString, file_name),
-        content: file.content
-      };
-    })
-  );
+     if (tags) {
+       const requestedTags = tags.split(',');
+       const metadataTags = metadata.tags || [];
 
-  return new Response(responseJSON, {
-    headers: {
-      'content-type': 'application/json;charset=UTF-8',
-    },
-  });
+       if (!requestedTags.every(tag => metadataTags.includes(tag))) {
+         return null;
+       }
+     }
+
+     return {
+       metadata: metadata,
+       content: file.content
+     };
+   }).filter(Boolean)
+ );
+
+ return new Response(responseJSON, {
+   headers: {
+     'content-type': 'application/json;charset=UTF-8',
+   },
+ });
 };

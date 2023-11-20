@@ -3,6 +3,7 @@ import styles from '../../styles/Entity.module.scss';
 import ImageGallery from '../util/view/ImageGallery';
 import SocialMediaTag, { SocialMedia } from '../util/view/SocialMediaTag';
 import TagBubble from '../util/view/TagBubble';
+import Markdown from '../util/view/Markdown';
 
 
 interface EntityProps {
@@ -33,7 +34,11 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
             <div className={styles.detailsContainer}>
                 <div className={styles.infoContainer}>
                     <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />
-                </div></div>
+                </div>
+            </div>
+            <div className={styles.entityMarkdown}>
+                <Markdown content={content} />
+            </div>
         </div>
     );
 };
