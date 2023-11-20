@@ -1,7 +1,5 @@
 // Entity.module.scss
 .entityWebsite {
-
-
     // Add styles for the website
     // Example:
     color: #FFFFFF;
@@ -12,10 +10,10 @@
 .entityContainer {
     // Add styles for the overall container
     // Example:
-    width: 100%;
+    width: 94%;
     border: 1px solid #ccc;
     padding: 1rem;
-    // margin: 10px 1rem;
+    margin: 10px 1rem;
     position: relative;
     top: 1px;
 }
@@ -37,7 +35,9 @@
     justify-content: space-around;
     justify-items: start;
     align-items: start;
-}
+
+    max-height: 500px;
+    height: 100px;}
 
 .largeImageContainer {
     // Add styles for the large image container

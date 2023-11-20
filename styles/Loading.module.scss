@@ -6,7 +6,18 @@
     height: 80%;
     position: absolute;
 
+    // animation: flash 0.5s ease-in-out;
+
 }
+
+// @keyframes flash {
+//     0% {
+//        background-color: #fff;
+//     }
+//     100% {
+//        background-color: #000;
+//     }
+// }
 
 .loading {
     position: relative;
@@ -32,5 +43,28 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.loadingText {
+    // the text is "42 and we want to make the size aniamte based from center and we will make that it kinda jumps in size over 0.5 seconds
+    animation: jump 0.42s ease-in-out infinite alternate;
+    transform: scale(0);
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    //center the text
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+}
+
+@keyframes jump {
+    0% {
+        transform: scale(0.2);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

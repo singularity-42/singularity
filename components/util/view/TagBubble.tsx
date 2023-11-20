@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '../../styles/TagBubble.module.scss';
+import styles from '@/styles/TagBubble.module.scss';
 
 interface TagBubbleListProps {
   tags: string[];
@@ -55,6 +55,10 @@ const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags }) => {
     const maxOffset = 40; // Adjust the maximum offset value
     return Math.floor(Math.random() * (maxOffset - minOffset + 1) + minOffset);
   };
+
+  if (!tags || tags.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.tagBubbleList} ref={containerRef}>

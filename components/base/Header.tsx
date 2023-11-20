@@ -5,6 +5,7 @@ import Link from "next/link";
 import Menu from "./Menu";
 import styles from "@/styles/Header.module.scss";
 import Hamburger from "../util/event/Hamburger";
+import Map from "../util/event/Map";
 
 type HeaderProps = {
 };
@@ -40,7 +41,6 @@ const Header: React.FC<HeaderProps> = () => {
         <nav className={`${styles.header} ${isShrunk ? styles.shrink : ""}`}>
             <Link href="/" className={styles.headerBrand} onClick={() => setMenuOpen(false)}>Singularity</Link>
 
-            <Icon
             <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
             <Menu
                 open={menuOpen}
@@ -53,3 +53,4 @@ const Header: React.FC<HeaderProps> = () => {
 };
 
 export default Header;
+
