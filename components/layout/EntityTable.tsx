@@ -14,8 +14,7 @@ interface EntityTableProps {
 }
 
 const EntityTable: React.FC<EntityTableProps> = ({ type }) => {
-    const entityType = 'collaborations';
-    const entityData = useEntityData(entityType);
+    const entityData = useEntityData(type);
 
 
     // filtered entitys 

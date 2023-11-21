@@ -1,22 +1,10 @@
-"use client"
 
 import React from 'react';
-import EntityList from '@/components/layout/EntityList';
-import useEntityData from '@/hooks/useEntityData';
-import Loading from '@/components/util/view/Loading';
+import EntityTable from '@/components/layout/EntityTable';
 
 const CreativesPage: React.FC = () => {
-  const entityType = 'creatives';
-  const entityData = useEntityData(entityType);
-
-  if (!entityData) {
-    return <Loading />
-  }
-
   return (
-    <div>
-        <EntityList entityData={entityData} />
-    </div>
+      <EntityTable type='creatives' />
   );
 };
 

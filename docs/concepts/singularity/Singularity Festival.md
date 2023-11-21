@@ -1,5 +1,5 @@
 **Datum:** [[2024-05-24]]
-**Ort:** [[AJZ]]
+**Ort:** [[AJZ Chemnitz]]
 ## Info
 #### [[Vorbereitung und Organisation]]
 #### [[Konzept für das Kollektiv]]

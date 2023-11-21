@@ -11,7 +11,10 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const handleLinkClick = () => {
-    onClose();
+    // wait 420ms and then close the menu
+    setTimeout(() => {
+      onClose();
+    }, 420);
   };
 
 

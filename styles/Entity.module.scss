@@ -1,111 +1,57 @@
 // Entity.module.scss
-.entityWebsite {
-
-
-    // Add styles for the website
-    // Example:
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-
 .entityContainer {
-    // Add styles for the overall container
-    // Example:
     width: 100%;
     border: 1px solid #ccc;
     padding: 1rem;
-    // margin: 10px 1rem;
-    position: relative;
-    top: 1px;
+    transition: border 0.2s ease-in-out;
+}
+
+.entityContainer:hover {
+    border: 1px solid #000;
+    .entityMarkdown {
+        color: #ccc;
+        padding: 1rem;
+    }
 }
 
 .title {
-    // Add styles for the title
-    // Example:
     font-size: 24px;
     margin-bottom: 10px;
-    color: #FFFFFF;
-    text-align: start;
 }
 
-.imageGallery {
-    // Add styles for the image gallery container
-    // Example:
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    justify-items: start;
-    align-items: start;
-}
-
-.largeImageContainer {
-    // Add styles for the large image container
-    // Example:
-    margin-bottom: 10px;
-}
-
-.largeImage {
-    // Add styles for the large image
-    // Example:
-    max-width: 100%;
-    height: auto;
-}
-
-.smallImagesContainer {
-    // Add styles for the small images container
-    // Example:
-    display: flex;
-}
-
-.smallImage {
-    // Add styles for the small images
-    // Example:
-    width: 50px;
-    height: 50px;
-    margin-right: 5px;
-}
-
-.nameContainer {
-    // Add styles for the name container
-    // Example:
-    align-self: flex-end;
-}
-
-.name {
-    // Add styles for the name
-    // Example:
-    font-weight: bold;
-}
-
-.detailsContainer {
-    // Add styles for the details container
-    // Example:
-    display: flex;
-    justify-content: space-between;
-}
-
-.infoContainer {
-    // Add styles for the information container
-    // Example:
-    flex-grow: 1;
-}
-
-.instagram,
-.website {
-    // Add styles for the Instagram and website elements
-    // Example:
+.entityWebsite {
+    color: #0000FF; /* Change the color to your preference */
+    text-decoration: underline;
     margin-bottom: 5px;
 }
 
-.background {
-    background-color: rgba(0, 0, 0, 0.33);
+.entityMarkdown {
+    color: #333333; /* Adjust text color as desired */
+    padding: 1rem;
+    transition: color 0.2s ease-in-out;
 }
 
-.entityMarkdown {
-    // Add styles for the markdown
-    // Example:
-    color: #FFFFFF;
-    text-align: start;
-    padding: 1rem;
+.detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.socialMediaLink {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.socialMediaLink:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+// should be all on left next to each other horizontally
+.socialMediaContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
 }

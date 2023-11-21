@@ -9,11 +9,25 @@ export enum SocialMedia {
     YouTube = 'YouTube',
     SoundCloud = 'SoundCloud',
     Spotify = 'Spotify',
-    AppleMusic = 'AppleMusic',
-    Bandcamp = 'Bandcamp',
-    Twitch = 'Twitch',
     Beatport = 'Beatport'
 }
+
+enum SocialMediaUrl {
+    Instagram = 'https://www.instagram.com/',
+    YouTube = 'https://www.youtube.com/',
+    SoundCloud = 'https://soundcloud.com/',
+    Spotify = 'https://open.spotify.com/user/',
+    Beatport = 'https://www.beatport.com/artist/'
+}
+
+enum SocialMediaIcon {
+    Instagram = '/icons/socials/instagram',
+    YouTube = '/icons/socials/youtube',
+    SoundCloud = '/icons/socials/soundcloud',
+    Spotify = '/icons/socials/spotify',
+    Beatport = '/icons/socials/headphones'
+}
+
 
 interface SocialMediaTagProps {
     socialMedia: SocialMedia;
@@ -24,10 +38,10 @@ const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }
     if (!username) {
         return null;
     }
+
     return (
         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
-            <div className={styles.socialMediaIcon}>&nbsp;</div>
-            <div className={styles.username}>@{username}</div>
+            <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer"><div className={styles.socialMediaIcon}><img src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} /></div></a>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 ---
 website: 
-instagram: 
-mail: 
+instagram: dnbchemnitz
+mail: dnbchemnitz@gmail.com
 tel: 
 tags: 
 relations: 

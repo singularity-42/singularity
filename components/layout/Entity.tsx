@@ -1,10 +1,9 @@
+// Entity.tsx
 import React from 'react';
 import styles from '../../styles/Entity.module.scss';
-import ImageGallery from '../util/view/ImageGallery';
 import SocialMediaTag, { SocialMedia } from '../util/view/SocialMediaTag';
-import TagBubble from '../util/view/TagBubble';
 import Markdown from '../util/view/Markdown';
-
+import TagBubbleList from '../util/view/TagBubble';
 
 interface EntityProps {
     entity: any;
@@ -15,26 +14,24 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
         return <div>Loading...</div>;
     }
 
-    if (!entity) {
-        return <div>Loading...</div>;
-    }
-
-
-    const { title, instagram, website, tags } = entity.metadata;
+    const { title, instagram, website, tags, soundcloud, spotify, beatport } = entity.metadata;
     const content = entity.content;
-
-    // Assuming images is an array of image URLs from Instagram
 
     return (
         <div className={styles.entityContainer}>
-            <TagBubble tags={tags || []} />
+            <div className={styles.tagsContainer}>
+                <TagBubbleList tags={tags} />
+            </div>
+            {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
             <h2 className={styles.title}>{title}</h2>
-            <div className={styles.entityWebsite}>&nbsp;</div>
-            <ImageGallery images={[]} name={title} />
             <div className={styles.detailsContainer}>
-                <div className={styles.infoContainer}>
-                    <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />
+                <div className={styles.socialMediaContainer}>
+                    {instagram && <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />}
+                    {soundcloud && <SocialMediaTag socialMedia={SocialMedia.SoundCloud} username={soundcloud} />}
+                    {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
+                    {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
                 </div>
+                {website && <a href={website} target="_blank" rel="noopener noreferrer" className={styles.socialMediaLink}> {website} </a>}
             </div>
             <div className={styles.entityMarkdown}>
                 <Markdown content={content} />

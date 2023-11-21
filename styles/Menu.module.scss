@@ -21,6 +21,7 @@
 .menu.show {
     width: 100%;
     right: 0rem;
+    height: 100%;
     transition: right 0.3s ease, width 0.3s ease;
 }
 
@@ -85,13 +86,4 @@
     background-color: #000;
     transition: all 0.3s ease;
     color: #fff;
-
-    
-    .menuLink {
-    }
-
-    &:hover {
-        .menuLink {
-        }
-    }
 }

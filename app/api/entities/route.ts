@@ -2,20 +2,6 @@ import fs from 'fs';
 import * as glob from 'glob';
 import { Url } from 'next/dist/shared/lib/router/router';
 
-// const marked = require('marked');
-
-/*
----
-website: https://test.com
-instagram: test
-mail: mail@test.com
-tel: 0034 666 666 666
-tags:
-  - test
-  - test2
----
-*/
-
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
@@ -79,9 +65,14 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
        }
      }
 
+     let content = file.content.split('---')[2] || '';
+     if (content.length === 0) {
+        content = file.content;
+     }
+
      return {
        metadata: metadata,
-       content: file.content
+       content: content
      };
    }).filter(Boolean)
  );
