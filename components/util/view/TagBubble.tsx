@@ -3,9 +3,10 @@ import styles from '@/styles/TagBubble.module.scss';
 
 interface TagBubbleListProps {
   tags: string[];
+  onTagClick?: (tag: string) => void;
 }
 
-const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags }) => {
+const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags, onTagClick }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,8 +47,9 @@ const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags }) => {
   }, [tags]);
 
   const handleTagClick = (tag: string) => {
-    // Handle tag click event
-    console.log(`Clicked tag: ${tag}`);
+    if (onTagClick) {
+      onTagClick(tag);
+    }
   };
 
   const getRandomOffset = () => {
@@ -59,6 +61,7 @@ const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags }) => {
   if (!tags || tags.length === 0) {
     return null;
   }
+
 
   return (
     <div className={styles.tagBubbleList} ref={containerRef}>

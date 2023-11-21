@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/EntityTable.module.scss';
 import EntityFilter from './EntityFilter';
 import EntityList from './EntityList';
@@ -14,20 +14,27 @@ interface EntityTableProps {
 }
 
 const EntityTable: React.FC<EntityTableProps> = ({ type }) => {
-    const entityData = useEntityData(type);
+    const [filter, setFilter] = useState<string[]>([]);
+    const entityData = useEntityData(type, filter);
 
+    const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
 
-    // filtered entitys 
-    const [filteredEntitys, setFilteredEntitys] = useState(entityData);
-    const [filter, setFilter] = useState([]);
+    useEffect(() => {
+        let tags = entityData?.map(entity => entity.metadata.tags);
+        // flatten tags
+        tags = tags?.reduce((acc, val) => acc.concat(val), []);
+        setCurrentVisibleTags(tags ?? []);
+    }, [entityData]);
 
     if (!entityData) {
         return <Loading />
     }
 
     return <div className={styles.entityTable}>
-        <EntityFilter filter={filter} onChange={(filter: any) => { setFilter(filter) }} />
-        <EntityList entityData={entityData} />
+        <EntityFilter filter={filter} currentVisibleTags={currentVisibleTags} onChange={setFilter} />
+        <EntityList entityData={entityData} onTagClick={(tag: string) => {
+            setFilter([...filter, tag]);
+        }} />
         {/*
         <EntityPagination /> // for pagination of entitys (by default 10 entitys per page)
         <EntityCreate /> // for creating a new entity

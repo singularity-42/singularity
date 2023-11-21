@@ -1,13 +1,11 @@
 import fs from 'fs';
 import * as glob from 'glob';
-import { Url } from 'next/dist/shared/lib/router/router';
 
 import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
-  let url: Url = req.url as Url;
-  let entity_type = url.toString().split('=')[1];
-  let tags = url.toString().split('=')[2];
+  let entity_type = req.nextUrl.searchParams.get('entity_type');
+  let filter = req.nextUrl.searchParams.get('filter');
   const entityFiles = glob.sync(`./docs/${entity_type}/**/*.md`);
   const entityData = entityFiles.map((file) => {
     const content = fs.readFileSync(file, 'utf8');
@@ -56,11 +54,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
      const metadataString = file.content.split('---')[1];
      const metadata = extractMetadata(metadataString, file_name);
 
-     if (tags) {
-       const requestedTags = tags.split(',');
-       const metadataTags = metadata.tags || [];
+     if (filter && filter !== 'all') {
+       const requestedFilter = filter.split(',');
+       const metadataFilter = metadata.tags || [];
 
-       if (!requestedTags.every(tag => metadataTags.includes(tag))) {
+       if (!requestedFilter.every(filter => metadataFilter.includes(filter))) {
          return null;
        }
      }

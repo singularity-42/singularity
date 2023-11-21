@@ -7,9 +7,10 @@ import TagBubbleList from '../util/view/TagBubble';
 
 interface EntityProps {
     entity: any;
+    onTagClick?: (tag: string) => void;
 }
 
-const Entity: React.FC<EntityProps> = ({ entity }) => {
+const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
     if (!entity) {
         return <div>Loading...</div>;
     }
@@ -20,7 +21,7 @@ const Entity: React.FC<EntityProps> = ({ entity }) => {
     return (
         <div className={styles.entityContainer}>
             <div className={styles.tagsContainer}>
-                <TagBubbleList tags={tags} />
+                <TagBubbleList tags={tags} onTagClick={onTagClick} />
             </div>
             {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
             <h2 className={styles.title}>{title}</h2>

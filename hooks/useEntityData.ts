@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const useEntityData = (entityType: string): any[] | null => {
+const useEntityData = (entityType: string, filter: string[] | null) => {
   const [entityData, setEntityData] = useState<any[] | null>(null);
 
   useEffect(() => {
@@ -13,7 +13,12 @@ const useEntityData = (entityType: string): any[] | null => {
     const fetchEntityData = async () => {
       try {
         // http://localhost:3000/api/entity
-        let url = `${process.env.NEXT_PUBLIC_API_URL}/entities?entity_type=${entityType}`;
+        let filter_string = filter ? filter.join(',') : '';
+        if (filter_string === '') {
+          filter_string = 'all';
+        }
+        let url = `${process.env.NEXT_PUBLIC_API_URL}/entities?entity_type=${entityType}&filter=${filter_string}`;
+
         // let url = 'http://localhost:3000/api/entity'
         const response = await axios.get(url);
         setEntityData(response.data);
@@ -23,7 +28,7 @@ const useEntityData = (entityType: string): any[] | null => {
     };
 
     fetchEntityData();
-  }, [entityType]);
+  }, [entityType, filter]);
 
 
   return entityData;

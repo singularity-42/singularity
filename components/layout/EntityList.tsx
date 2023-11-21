@@ -3,12 +3,14 @@ import styles from '@/styles/EntityList.module.scss';
 import Entity from './Entity';
 import Loading from '../util/view/Loading';
 import Error from './Error';
+import { on } from 'events';
 
 interface EntityListProps {
   entityData: any;
+  onTagClick?: (tag: string) => void;
 }
 
-const EntityList: React.FC<EntityListProps> = ({ entityData }) => {
+const EntityList: React.FC<EntityListProps> = ({ entityData, onTagClick }) => {
   const entitys: any = entityData;
 
   if (!entitys) {
@@ -40,7 +42,7 @@ const EntityList: React.FC<EntityListProps> = ({ entityData }) => {
       <div>
         {entitys?.map((entity: any, index: number) => (
           <div key={index} className={styles.tr}>
-            <Entity entity={entity} />
+            <Entity entity={entity} onTagClick={onTagClick} />
           </div>
         ))}
       </div>
