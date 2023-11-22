@@ -7,8 +7,6 @@ import EntityList from './EntityList';
 import useEntityData from '@/hooks/useEntityData';
 import Loading from '../util/view/Loading';
 
-
-
 interface EntityTableProps {
     type: string;
 }

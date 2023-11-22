@@ -13,3 +13,12 @@
     border-radius: 5px;
    }
    
+.link {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}

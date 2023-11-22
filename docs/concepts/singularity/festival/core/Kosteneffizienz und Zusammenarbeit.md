@@ -1,0 +1,1 @@
+Durch die optimale Nutzung vorhandener Ausrüstung und die Einbindung der Kreativität unserer Gemeinschaft können wir das Festival mit minimalem Budget realisieren. Musiker können ihre eigenen Instrumente und Equipment mitbringen, um die Vielfalt und Authentizität der Darbietungen zu erhöhen.

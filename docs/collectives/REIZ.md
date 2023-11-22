@@ -7,5 +7,5 @@ tags:
   - techno
   - dnb
   - band
-relations: "[[Reiz Kollektiv]]"
+relations: "[[reset]]"
 ---

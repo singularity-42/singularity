@@ -1,0 +1,1 @@
+Das Singularity Festival ist eine visionäre Idee, die sich um Musik, Kreativität und Gemeinschaft dreht. Unser Konzept bietet eine einzigartige musikalische Erfahrung, die auf drei individuellen Bühnen stattfindet.

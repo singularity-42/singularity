@@ -1,7 +1,9 @@
 // Entity.module.scss
 .entityContainer {
-    width: 100%;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
+    //pretter stylistic border maybe dottet
+    border: 1px dashed #ccc;
+
     padding: 1rem;
     transition: border 0.2s ease-in-out;
 }
@@ -16,13 +18,7 @@
 
 .title {
     font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.entityWebsite {
-    color: #0000FF; /* Change the color to your preference */
-    text-decoration: underline;
-    margin-bottom: 5px;
+    margin-bottom: 0.2rem;
 }
 
 .entityMarkdown {
@@ -54,4 +50,12 @@
     justify-content: flex-start;
     align-items: center;
     gap: 4px;
+}
+
+.tagsContainer {
+    // flex center horizontally
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }

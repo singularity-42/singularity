@@ -4,19 +4,33 @@
     "type": "split",
     "children": [
       {
-        "id": "7fd6d1e840d08c59",
+        "id": "98ea370b5328fba5",
         "type": "tabs",
         "children": [
           {
-            "id": "032dacefa3140478",
+            "id": "d1add84971a4e5fa",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "creatives/Drumnicorn.md",
+                "file": "concepts/singularity/festival/core/Bühnen und Konzepte.md",
                 "mode": "source",
                 "source": false
               }
+            }
+          }
+        ]
+      },
+      {
+        "id": "5350775346f297af",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5d3d48c78a490395",
+            "type": "leaf",
+            "state": {
+              "type": "reveal-preview-view",
+              "state": {}
             }
           }
         ]
@@ -85,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "creatives/Drumnicorn.md",
+                "file": "concepts/singularity/festival/core/Bühnen und Konzepte.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "creatives/Drumnicorn.md",
+                "file": "concepts/singularity/festival/core/Bühnen und Konzepte.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "creatives/Drumnicorn.md"
+                "file": "concepts/singularity/festival/core/Bühnen und Konzepte.md"
               }
             }
           }
@@ -145,37 +159,41 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "remotely-save:Remotely Save": false,
-      "notion-like-tables:Create loom": false
+      "notion-like-tables:Create loom": false,
+      "obsidian-advanced-slides:Show Slide Preview": false
     }
   },
-  "active": "032dacefa3140478",
+  "active": "d1add84971a4e5fa",
   "lastOpenFiles": [
-    "collaborations/2024-05-26.md",
-    "collaborations/2024-05-25.md",
+    "concepts/singularity/festival/core/Einführung.md",
+    "concepts/singularity/festival/core/Gemeinschaft und Teilhabe.md",
+    "concepts/singularity/festival/workshops/Ergänzung mit zusätzlichen Workshops (offen).md",
+    "concepts/singularity/festival/core/Zusammenfassung und Ausblick.md",
+    "concepts/singularity/festival/Konzept für das Kollektiv.md",
+    "concepts/singularity/festival/core/Künstlerische Gestaltung und Technologie.md",
+    "concepts/singularity/festival/core/Kosteneffizienz und Zusammenarbeit.md",
+    "concepts/singularity/festival/core/Presentation Of Singularity.md",
+    "Pasted image 20231122125137.png",
+    "concepts/singularity/festival/core/Bühnen und Konzepte.md",
+    "concepts/singularity/festival/workshops/Zirkus Workshop.md",
+    "concepts/singularity/festival/workshops/Sieb-Druckwerkstatt.md",
+    "concepts/singularity/festival/workshops/DNB Step Workshop.md",
+    "concepts/singularity/festival/workshops/Jam Session Workshop.md",
     "collaborations/2024-05-24.md",
+    "collectives/AJZ Chemnitz.md",
+    "collectives/DNB Chemnitz.md",
+    "collectives/Playandlearnlab.md",
+    "collectives/REIZ.md",
+    "collectives/reset.md",
+    "creatives/Jasi.md",
     "creatives/Lanafant.md",
     "creatives/Nidardo.md",
     "creatives/Lena.md",
-    "collectives/AJZ Chemnitz.md",
-    "collectives/REIZ.md",
-    "collectives/DNB Chemnitz.md",
-    "collectives/Playandlearnlab.md",
     "creatives/Calea.md",
-    "creatives/Eder.md",
     "creatives/Drumnicorn.md",
-    "creatives/Jasi.md",
-    "concepts/singularity/festival/Stages.md",
-    "collectives/Lokomov.md",
-    "collectives/Kreativ Achse.md",
-    "collectives/Reset.md",
-    "collectives/Reiz Kollektiv.md",
-    "concepts/singularity/Singularity Festival.md",
-    "concepts/singularity/festival/Workshops.md",
-    "concepts/singularity/festival/Vorbereitung und Organisation.md",
-    "concepts/singularity/festival/Termine.md",
-    "concepts/singularity/festival/stages/Strawberry Jam.md",
-    "concepts/singularity/festival/stages/Info.md",
-    "concepts/singularity/festival/stages/Guacamole Cream.md",
+    "creatives/Eder.md",
+    "concepts/singularity/festival/core",
+    "concepts/singularity/festival/workshops",
     "concepts/lifelines/core",
     "concepts/lifelines/weiters",
     "concepts/lifelines/spielablauf",
@@ -183,8 +201,6 @@
     "concepts/singularity/festival/stages",
     "concepts/singularity/festival",
     "concepts/singularity",
-    "Untitled",
-    "collaborations",
-    "collectives"
+    "Untitled"
   ]
 }

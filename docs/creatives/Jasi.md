@@ -5,5 +5,5 @@ tags:
   - educator
   - coach
   - dancer
-relations: "[[Reiz Kollektiv]]"
+relations: "[[reset]]"
 ---

@@ -9,7 +9,6 @@ interface EntityProps {
     entity: any;
     onTagClick?: (tag: string) => void;
 }
-
 const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
     if (!entity) {
         return <div>Loading...</div>;
@@ -20,23 +19,24 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
 
     return (
         <div className={styles.entityContainer}>
-            <div className={styles.tagsContainer}>
-                <TagBubbleList tags={tags} onTagClick={onTagClick} />
-            </div>
             {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
-            <h2 className={styles.title}>{title}</h2>
             <div className={styles.detailsContainer}>
                 <div className={styles.socialMediaContainer}>
+                    <h2 className={styles.title}>{title}</h2> &nbsp;
                     {instagram && <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />}
                     {soundcloud && <SocialMediaTag socialMedia={SocialMedia.SoundCloud} username={soundcloud} />}
                     {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
                     {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
+                    <div className={styles.tagsContainer}>
+                        <TagBubbleList tags={tags} onTagClick={onTagClick} />
+                    </div>
                 </div>
                 {website && <a href={website} target="_blank" rel="noopener noreferrer" className={styles.socialMediaLink}> {website} </a>}
             </div>
-            <div className={styles.entityMarkdown}>
-                <Markdown content={content} />
-            </div>
+            {content.length > 10 &&
+                <div className={styles.entityMarkdown}>
+                    <Markdown content={content} />
+                </div>}
         </div>
     );
 };
