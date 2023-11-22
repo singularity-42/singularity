@@ -1,10 +1,10 @@
 "use client"
 // path: app/page.tsx
-import styles from '@/styles/Home.module.scss'
-import Loading from '@/components/util/view/Loading'
+import styles from './page.module.scss'
+import Loading from '@/components/design/Loading'
 
 import { Canvas } from '@react-three/fiber';
-import BlackHole from '@/components/util/view/BlackHole'
+import BlackHole from '@/components/design/BlackHole'
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Icon from "../view/Icon";
+import Icon from "../../base/Icon";
 
 import styles from '@/styles/Map.module.scss';
 

@@ -2,14 +2,14 @@
 .entityContainer {
     // border: 1px solid #ccc;
     //pretter stylistic border maybe dottet
-    border: 1px dashed #ccc;
+    // border: 1px dashed #ccc;
 
+    border: 1px solid #000;
     padding: 1rem;
-    transition: border 0.2s ease-in-out;
 }
 
 .entityContainer:hover {
-    border: 1px solid #000;
+    border: 1px dashed #ccc;
     .entityMarkdown {
         color: #ccc;
         padding: 1rem;

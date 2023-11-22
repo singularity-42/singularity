@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/EntityTable.module.scss';
-import EntityFilter from './EntityFilter';
-import EntityList from './EntityList';
+import styles from './Table.module.scss';
+import EntityFilter from './Filter';
+import List from './List';
 import useEntityData from '@/hooks/useEntityData';
-import Loading from '../util/view/Loading';
+import Loading from '../design/Loading';
 
 export enum OrderType {
    Alphabetical = "Alphabetical",
@@ -13,12 +13,12 @@ export enum OrderType {
    CounterAlphabetical = "CounterAlphabetical"
 }
 
-interface EntityTableProps {
+interface TableProps {
    type: string;
    orderType?: OrderType;
 }
 
-const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
    const [filter, setFilter] = useState<string[]>([]);
    const entityData = useEntityData(type, filter);
 
@@ -49,9 +49,9 @@ const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.C
        return <Loading />
    }
 
-   return <div className={styles.entityTable}>
+   return <div className={styles.table}>
        <EntityFilter filter={filter} currentVisibleTags={currentVisibleTags} onChange={setFilter} />
-       <EntityList entityData={entityData} onTagClick={(tag: string) => {
+       <List entityData={entityData} onTagClick={(tag: string) => {
            setFilter([...filter, tag]);
        }} />
        {/*
@@ -61,4 +61,4 @@ const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.C
    </div>;
 };
 
-export default EntityTable;
+export default Table;

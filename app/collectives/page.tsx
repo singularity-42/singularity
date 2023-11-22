@@ -1,10 +1,10 @@
-import EntityTable from '@/components/layout/EntityTable';
+import Table from '@/components/layout/Table';
 import React from 'react';
 
 const CollectivePage: React.FC = () => {
   return (
     <div>
-      <EntityTable type='collectives' />
+      <Table type='collectives' />
     </div>
   );
 };

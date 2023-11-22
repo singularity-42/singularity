@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '@/styles/Markdown.module.scss';
+import styles from './Markdown.module.scss';
 import ReactMarkdown from 'react-markdown';
 import remarkParse from 'remark-parse';
 import { visit } from 'unist-util-visit';

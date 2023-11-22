@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styles from '@/styles/EntityFilter.module.scss';
+import styles from './Filter.module.scss';
 
-interface EntityFilterProps {
+interface FilterProps {
     filter: string[]; // Available filters
     currentVisibleTags: string[]; // Tags currently visible
     onChange: (filter: string[]) => void; // Callback when filters change
 }
 
-const EntityFilter: React.FC<EntityFilterProps> = ({ filter, currentVisibleTags, onChange }) => {
+const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange }) => {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [seenTags, setSeenTags] = useState<string[]>([]);
 
@@ -48,7 +48,7 @@ const EntityFilter: React.FC<EntityFilterProps> = ({ filter, currentVisibleTags,
     };
 
     return (
-        <div className={styles.entityFilter}>
+        <div className={styles.filter}>
             <div className={styles.filterContainer}>
                 {(seenTags || []).sort((a, b) => a.localeCompare(b)).map(tag => (
                     <div
@@ -64,4 +64,4 @@ const EntityFilter: React.FC<EntityFilterProps> = ({ filter, currentVisibleTags,
     );
 };
 
-export default EntityFilter;
+export default Filter;

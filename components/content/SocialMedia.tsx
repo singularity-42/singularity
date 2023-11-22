@@ -2,7 +2,7 @@
 // social media tag has enum for all social media types and a  value for the username
 
 import React from 'react';
-import styles from '@/styles/SocialMediaTag.module.scss';
+import styles from './SocialMedia.module.scss';
 
 export enum SocialMedia {
     Instagram = 'Instagram',

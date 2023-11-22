@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/Menu.module.scss";
+import styles from "./Menu.module.scss";
 import Link from "next/link";
 import UserInfo from "../auth/UserInfo";
 import { usePathname } from 'next/navigation';

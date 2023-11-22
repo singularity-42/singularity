@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '@/styles/TagBubble.module.scss';
+import styles from './Tags.module.scss';
 
-interface TagBubbleListProps {
+interface TagsProps {
   tags: string[];
   onTagClick?: (tag: string) => void;
 }
 
-const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags, onTagClick }) => {
+const Tags: React.FC<TagsProps> = ({ tags, onTagClick }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags, onTagClick }) => {
 
 
   return (
-    <div className={styles.tagBubbleList} ref={containerRef}>
+    <div className={styles.tags} ref={containerRef}>
       {tags.map((tag, index) => (
         <div
           key={index}
@@ -78,4 +78,4 @@ const TagBubbleList: React.FC<TagBubbleListProps> = ({ tags, onTagClick }) => {
   );
 };
 
-export default TagBubbleList;
+export default Tags;

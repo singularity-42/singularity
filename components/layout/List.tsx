@@ -1,16 +1,16 @@
 import React from 'react';
-import styles from '@/styles/EntityList.module.scss';
+import styles from './List.module.scss';
 import Entity from './Entity';
-import Loading from '../util/view/Loading';
+import Loading from '../design/Loading';
 import Error from './Error';
 import { on } from 'events';
 
-interface EntityListProps {
+interface ListProps {
   entityData: any;
   onTagClick?: (tag: string) => void;
 }
 
-const EntityList: React.FC<EntityListProps> = ({ entityData, onTagClick }) => {
+const List: React.FC<ListProps> = ({ entityData, onTagClick }) => {
   const entitys: any = entityData;
 
   if (!entitys) {
@@ -27,7 +27,7 @@ const EntityList: React.FC<EntityListProps> = ({ entityData, onTagClick }) => {
   }
 
   return (
-    <div className={styles.entityTable}>
+    <div className={styles.table}>
       <div className={styles.thead}>
         <div>
           <div className={styles.th}>title
@@ -50,4 +50,4 @@ const EntityList: React.FC<EntityListProps> = ({ entityData, onTagClick }) => {
   );
 };
 
-export default EntityList;
+export default List;
