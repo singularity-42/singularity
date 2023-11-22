@@ -36,3 +36,9 @@ yarn-error.log*
 next-env.d.ts
 .env
 docs/.obsidian/plugins/
+docs/.obsidian/app.json
+docs/.obsidian/appearance.json
+docs/.obsidian/community-plugins.json
+docs/.obsidian/core-plugins-migration.json
+docs/.obsidian/core-plugins.json
+docs/.obsidian/workspace.json
