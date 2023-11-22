@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/EntityTable.module.scss';
 import EntityFilter from './EntityFilter';
@@ -16,7 +18,7 @@ interface EntityTableProps {
    orderType?: OrderType;
 }
 
-const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.Alphabetical }) => {
+const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
    const [filter, setFilter] = useState<string[]>([]);
    const entityData = useEntityData(type, filter);
 
@@ -41,7 +43,7 @@ const EntityTable: React.FC<EntityTableProps> = ({ type, orderType = OrderType.A
                entityData?.sort((a, b) => b.metadata.title.localeCompare(a.metadata.title));
                break;
        }
-   }, [orderType, entityData]);
+   }, [orderType]);
 
    if (!entityData) {
        return <Loading />
