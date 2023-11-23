@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import styles from '@/styles/UserInfo.module.scss';
-import Button, { ButtonType } from '@/components/util/event/Button';
+import Button, { ButtonType } from '../function/Button';
 
 enum SessionState {
   LoggedIn,
