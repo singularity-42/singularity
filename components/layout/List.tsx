@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './List.module.scss';
 import Entity from './Entity';
-import Loading from '../design/Loading';
+import Loading from '../content/Loading';
 import Error from './Error';
 import { on } from 'events';
 
 interface ListProps {
   entityData: any;
   onTagClick?: (tag: string) => void;
+  selected?: string[];
 }
 
-const List: React.FC<ListProps> = ({ entityData, onTagClick }) => {
+const List: React.FC<ListProps> = ({ entityData, onTagClick, selected }) => {
   const entitys: any = entityData;
 
   if (!entitys) {
@@ -41,8 +42,8 @@ const List: React.FC<ListProps> = ({ entityData, onTagClick }) => {
       </div>
       <div>
         {entitys?.map((entity: any, index: number) => (
-          <div key={index} className={styles.tr}>
-            <Entity entity={entity} onTagClick={onTagClick} />
+          <div key={index} className={styles.entity}>
+            <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
           </div>
         ))}
       </div>

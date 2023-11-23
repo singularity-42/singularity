@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
-import UserInfo from "../auth/UserInfo";
+import UserInfo from "../function/UserInfo";
 import { usePathname } from 'next/navigation';
 
 interface MenuProps {

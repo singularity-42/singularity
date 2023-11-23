@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Tags.module.scss';
+import Tag from '../function/Tag';
 
 interface TagsProps {
   tags: string[];
   onTagClick?: (tag: string) => void;
+  selected?: string[];
 }
 
-const Tags: React.FC<TagsProps> = ({ tags, onTagClick }) => {
+const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,13 +68,12 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick }) => {
   return (
     <div className={styles.tags} ref={containerRef}>
       {tags.map((tag, index) => (
-        <div
+        <Tag
           key={index}
-          className={styles.tagBubble}
-          onClick={() => handleTagClick(tag)}
-        >
-          {tag}
-        </div>
+          tag={tag}
+          onClick={handleTagClick}
+          selected={selected && selected.includes(tag)}
+        />
       ))}
     </div>
   );

@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #000;
+  background-color: rgb(var(--dark-rgb));
   box-shadow: var(--box-shadow);
   padding: 0 0.42rem;
-  color: #fff;
+  color: rgb(var(--light-rgb));
 
   &__left {
     display: flex;
@@ -52,9 +52,9 @@
   /* Add transition for transform effect */
 
   &:hover {
-    color: #f00;
+    color: rgb(var(--secondary-rgb));
     transform: scale(1.1);
-    background-color: rgba(var(--color-sub-rgb), 0.8);
+    background-color: rgba(var(--smoke-rgb), 0.8);
   }
 
   width: 2rem;

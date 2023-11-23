@@ -8,8 +8,9 @@ import Tags from './Tags';
 interface EntityProps {
     entity: any;
     onTagClick?: (tag: string) => void;
+    selected?: string[];
 }
-const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
+const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
     if (!entity) {
         return <div>Loading...</div>;
     }
@@ -28,7 +29,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
                     {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
                     {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
                     <div className={styles.tagsContainer}>
-                        <Tags tags={tags} onTagClick={onTagClick} />
+                        <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
                     </div>
                 </div>
                 {website && <a href={website} className={styles.socialMediaLink}> {website} </a>}

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "@/styles/Button.module.scss";
+import styles from "./Button.module.scss";
 import Image from "next/image";
 
 enum ButtonType {

@@ -2,8 +2,8 @@
     height: 50px;
     display: flex;
     align-items: center;
-    background-color: #000;
-    color: #fff;
+    background-color: rgb(var(--dark-rgb));
+    color: rgb(var(--light-rgb));
     margin: 1rem;
     padding: 1rem;
     border-radius: 4px;
@@ -21,7 +21,7 @@
 
 .closeButton {
     background: none;
-    color: #fff;
+    color: rgb(var(--light-rgb));
     border: none;
     padding: 0;
     cursor: pointer;

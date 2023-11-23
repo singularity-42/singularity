@@ -3,6 +3,7 @@
     position: relative;
     width: 30px;
     height: 22.5px;
+    z-index: 3;
     cursor: pointer;
 
     // if display smaller than 768px (mobile) remove hamburger
@@ -31,7 +32,7 @@
     position: absolute;
     width: 100%;
     height: 2px;
-    background: #fff;
+    background: rgb(var(--smoke-rgb));
     opacity: 1;
     left: 0;
     transform: rotate(0deg);

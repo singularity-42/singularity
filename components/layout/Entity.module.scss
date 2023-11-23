@@ -22,7 +22,7 @@
 }
 
 .entityMarkdown {
-    color: #333333; /* Adjust text color as desired */
+    color: rgb(var(--shaded-rgb));
     padding: 1rem;
     transition: color 0.2s ease-in-out;
 }
@@ -40,7 +40,7 @@
 }
 
 .socialMediaLink:hover {
-    color: #FF0000;
+    color: rgb(var(--secondary-rgb));
     text-decoration: underline;
 }
 
