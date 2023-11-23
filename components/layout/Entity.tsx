@@ -1,15 +1,16 @@
 // Entity.tsx
 import React from 'react';
-import styles from '../../styles/Entity.module.scss';
-import SocialMediaTag, { SocialMedia } from '../util/view/SocialMediaTag';
-import Markdown from '../util/view/Markdown';
-import TagBubbleList from '../util/view/TagBubble';
+import styles from './Entity.module.scss';
+import SocialMediaTag, { SocialMedia } from '../content/SocialMedia';
+import Markdown from '../content/Markdown';
+import Tags from './Tags';
 
 interface EntityProps {
     entity: any;
     onTagClick?: (tag: string) => void;
+    selected?: string[];
 }
-const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
+const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
     if (!entity) {
         return <div>Loading...</div>;
     }
@@ -28,10 +29,10 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
                     {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
                     {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
                     <div className={styles.tagsContainer}>
-                        <TagBubbleList tags={tags} onTagClick={onTagClick} />
+                        <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
                     </div>
                 </div>
-                {website && <a href={website} target="_blank" rel="noopener noreferrer" className={styles.socialMediaLink}> {website} </a>}
+                {website && <a href={website} className={styles.socialMediaLink}> {website} </a>}
             </div>
             {content.length > 10 &&
                 <div className={styles.entityMarkdown}>

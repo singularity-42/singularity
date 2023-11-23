@@ -1,9 +1,9 @@
 import React from 'react';
-import EntityTable from '@/components/layout/EntityTable';
+import Table from '@/components/layout/Table';
 
 const ConceptPage: React.FC = () => {
   return (
-      <EntityTable type='concepts' />
+      <Table type='concepts' />
   );
 };
 

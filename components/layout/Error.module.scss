@@ -1,0 +1,37 @@
+.errorDisplay {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(var(--dark-rgb));
+    color: rgb(var(--light-rgb));
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.errorDisplay:hover {
+    transform: translateY(-5px);
+}
+
+.errorText {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.closeButton {
+    background: none;
+    color: rgb(var(--light-rgb));
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.closeIcon {
+    font-size: 20px;
+}
+
+.closeButton:hover {
+    opacity: 0.7;
+}

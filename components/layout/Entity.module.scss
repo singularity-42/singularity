@@ -1,0 +1,61 @@
+// Entity.module.scss
+.entityContainer {
+    // border: 1px solid #ccc;
+    //pretter stylistic border maybe dottet
+    // border: 1px dashed #ccc;
+
+    padding: 1rem;
+    border: 1px dashed rgb(var(--smoke-rgb));
+}
+
+.entityContainer:hover {
+    border: 1px solid rgb(var(--light-rgb));
+    .entityMarkdown {
+        color: rgb(var(--smoke-rgb));
+        padding: 1rem;
+    }
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 0.2rem;
+}
+
+.entityMarkdown {
+    color: rgb(var(--shaded-rgb));
+    padding: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.socialMediaLink {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.socialMediaLink:hover {
+    color: rgb(var(--secondary-rgb));
+    text-decoration: underline;
+}
+
+// should be all on left next to each other horizontally
+.socialMediaContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+
+.tagsContainer {
+    // flex center horizontally
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

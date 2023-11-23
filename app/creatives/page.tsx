@@ -1,10 +1,10 @@
 
 import React from 'react';
-import EntityTable from '@/components/layout/EntityTable';
+import Table from '@/components/layout/Table';
 
 const CreativesPage: React.FC = () => {
   return (
-      <EntityTable type='creatives' />
+      <Table type='creatives' />
   );
 };
 

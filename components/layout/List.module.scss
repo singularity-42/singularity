@@ -1,0 +1,21 @@
+// styles/CreativesList.module.scss
+.table {
+  .thead {
+    display: none;
+  }
+ }
+
+ .entity {
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 80%;
+   padding: 0.42rem;
+ }
+ 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+ }

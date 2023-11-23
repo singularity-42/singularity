@@ -1,0 +1,88 @@
+
+// // social media tag has enum for all social media types and a  value for the username
+
+// import React from 'react';
+// import styles from '@/styles/SocialMediaTag.module.scss';
+
+// export enum SocialMedia {
+//     Instagram = 'Instagram',
+//     YouTube = 'YouTube',
+//     SoundCloud = 'SoundCloud',
+//     Spotify = 'Spotify',
+//     AppleMusic = 'AppleMusic',
+//     Bandcamp = 'Bandcamp',
+//     Twitch = 'Twitch',
+//     Beatport = 'Beatport'
+// }
+
+// interface SocialMediaTagProps {
+//     socialMedia: SocialMedia;
+//     username: string;
+// }
+
+// const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }) => {
+//     return (
+//         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
+//             <div className={styles.socialMediaIcon}>&nbsp;</div>
+//             <div className={styles.username}>{username}</div>
+//         </div>
+//     );
+// };
+
+// export default SocialMediaTag;
+
+.socialMediaTag {
+    width: fit-content;
+
+
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    border-radius: 0.5rem;
+    
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(var(--light-rgb));
+}
+
+.socialMediaIcon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.username {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.Instagram { 
+    background-color: #E1306C;
+}
+
+.YouTube {
+    background-color: #FF0000;
+}
+
+.SoundCloud {
+    background-color: #FF5500;
+}
+
+.Spotify {
+    background-color: #1DB954;
+}
+
+.AppleMusic {
+    background-color: #000000;
+}
+
+.Bandcamp {
+    background-color: #629AA9;
+}
+
+.Twitch {
+    background-color: #9146FF;
+}
+
+.Beatport {
+    background-color: #FF5E00;
+}

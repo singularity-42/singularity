@@ -1,12 +1,21 @@
 "use client"
 // path: app/page.tsx
-import styles from '@/styles/Home.module.scss'
-import Loading from '@/components/util/view/Loading'
+import styles from './page.module.scss'
+import Loading from '@/components/content/Loading'
 
 import { Canvas } from '@react-three/fiber';
-import BlackHole from '@/components/util/view/BlackHole'
+import BlackHole from '@/components/content/BlackHole'
+import { useTooltip } from '@/hooks/provider/TooltipProvider';
+import { useEffect } from 'react';
 
 export default function Home() {
+
+  const {setTooltip} = useTooltip();
+
+  useEffect(() => {
+    setTooltip(`Welcome - to Singularity!`);
+  }, []);
+
   return (
     <main className={styles.main}>
       {/* <SessionProvider session={null}>*/}
