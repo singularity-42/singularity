@@ -3,7 +3,8 @@ website:
 instagram: dnbchemnitz
 mail: dnbchemnitz@gmail.com
 tel: 
-tags: 
+tags:
+  - dnb
 relations: 
 location:
 ---

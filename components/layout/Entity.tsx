@@ -4,6 +4,7 @@ import styles from './Entity.module.scss';
 import SocialMediaTag, { SocialMedia } from '../content/SocialMedia';
 import Markdown from '../content/Markdown';
 import Tags from './Tags';
+import Gallery from '../content/Gallery';
 
 interface EntityProps {
     entity: any;
@@ -34,6 +35,8 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 </div>
                 {website && <a href={website} className={styles.socialMediaLink}> {website} </a>}
             </div>
+          
+          
             {content.length > 10 &&
                 <div className={styles.entityMarkdown}>
                     <Markdown content={content} />

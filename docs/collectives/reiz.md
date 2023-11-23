@@ -6,6 +6,6 @@ tel:
 tags:
   - techno
   - dnb
-  - band
-relations: "[[reset]]"
+relations:
+  - "[[reset]]"
 ---
