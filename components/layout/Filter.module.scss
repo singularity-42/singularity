@@ -20,6 +20,7 @@
     
   }
   .filterContainer {
+    margin: 1rem;
     display: flex;
     flex-wrap: wrap;
   }
@@ -33,7 +34,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #ddd;
+      background-color: rgb(var(--primary-rgb));
     }
 
     &.selected {

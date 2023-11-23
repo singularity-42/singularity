@@ -4,14 +4,14 @@
     //pretter stylistic border maybe dottet
     // border: 1px dashed #ccc;
 
-    border: 1px solid #000;
     padding: 1rem;
+    border: 1px dashed rgb(var(--smoke-rgb));
 }
 
 .entityContainer:hover {
-    border: 1px dashed #ccc;
+    border: 1px solid rgb(var(--light-rgb));
     .entityMarkdown {
-        color: #ccc;
+        color: rgb(var(--smoke-rgb));
         padding: 1rem;
     }
 }

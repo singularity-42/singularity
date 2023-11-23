@@ -31,7 +31,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick }) => {
                         <Tags tags={tags} onTagClick={onTagClick} />
                     </div>
                 </div>
-                {website && <a href={website} target="_blank" rel="noopener noreferrer" className={styles.socialMediaLink}> {website} </a>}
+                {website && <a href={website} className={styles.socialMediaLink}> {website} </a>}
             </div>
             {content.length > 10 &&
                 <div className={styles.entityMarkdown}>

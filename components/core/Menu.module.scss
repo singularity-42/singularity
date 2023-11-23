@@ -11,7 +11,7 @@
     right: -42vw;
     top: 4rem;
     overflow: hidden;
-    background-color: #000;
+    background-color: rgb(var(--dark-rgb));
     z-index: 100 !important;
     // make sure the menu is on top of everything
     width: 0;
@@ -32,38 +32,35 @@
     /// all to right
     // use --color-sub-rgb to set the opacity of the border
 
-    border-bottom: 1px solid rgba(var(--color-sub-rgb), 0.2);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    // border-bottom: 1px solid rgba(var(--shaded-rgb), 0.2);
     position: relative;
     width: 100%;
     right: -3rem;
     // Set transition delay based on index
     &:nth-child(1) {
-        transition-delay: 0.2s * 4.2;
+        transition-delay: calc(0.2s * 4.2);
     }
 
     &:nth-child(2) {
-        transition-delay: 0.4s* 4.2;
+        transition-delay: calc(0.4s * 4.2);
     }
 
     &:nth-child(3) {
-        transition-delay: 0.6s* 4.2;
+        transition-delay: calc(0.6s * 4.2);
     }
 
     &:nth-child(4) {
-        transition-delay: 0.8s* 4.2;
+        transition-delay: calc(0.8s * 4.2);
     }
 }
 
-
-
 .menuLink {
-    background-color: #fff;
+    background-color: rgb(var(--smoke-rgb));
     width: 21rem;
     padding-right: 5rem;
     text-decoration: none;
     padding-left: 1rem;
-    color: #000;
+    color: rgb(var(--dark-rgb));
     display: flex;
     align-items: right;
     justify-content: right;
@@ -72,18 +69,18 @@
     text-transform: uppercase;
     text-align: right;
     transition: all 0.3s ease;
-
 }
 
 .menuLink:hover {
-    background-color: #fff;
+    background-color: rgb(var(--smoke-rgb));
     transition: all 0.3s ease;
-    color: #f00;
+    color: rgb(var(--secondary-rgb));
     transform: translateX(1rem);
 }
 
 .theBox {
-    background-color: #000;
+    background-color: rgb(var(--dark-rgb));
     transition: all 0.3s ease;
-    color: #fff;
+    color: rgb(var(--light-rgb));
 }
+
