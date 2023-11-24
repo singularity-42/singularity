@@ -48,10 +48,14 @@
 
 .tagsContainer {
     // flex center horizontally
+    width: 100%;
+    // place left
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 4px;
+    // place right
+    justify-content: flex-end;
     
 }
 
@@ -66,6 +70,25 @@
 @media (max-width: 768px) {
     .tagsContainer {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-end;
+        justify-content: flex-end;
     }
+}
+
+.galleryContainer
+{
+    width: 9000vw;  
+}
+
+.filterTagsContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+
+
+    // always place on the left
+    position: relative;
+    width: 100%;
+
 }

@@ -23,6 +23,9 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
     return (
         <div className={styles.entityContainer}>
             {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
+            <div className={styles.filterTagsContainer}>
+                <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
+            </div>
             <div className={styles.detailsContainer}>
                 <div className={styles.socialMediaContainer}>
                     <h2 className={styles.title}>{(() => {
@@ -32,25 +35,26 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                             // return `${date[2]}.${date[1]}.${date[0]}`;
                         }
                         return <HoverLink name={title}>{title}</HoverLink>;
-                        
+
                     })()}</h2>
                 </div>
-                    <div className={styles.tagsContainer}>
-                        <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
-                    </div>
-                 <div className={styles.tagsContainer}>
-                    {website && <SocialMediaTag socialMedia={SocialMedia.Website} username={website} />}
-                    {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
-                    {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
-                    {telegram && <SocialMediaTag socialMedia={SocialMedia.Telegram} username={telegram} />}
-                    {soundcloud && <SocialMediaTag socialMedia={SocialMedia.SoundCloud} username={soundcloud} />}
-                    {instagram && <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />}
-                    </div>
+                <div className={styles.galleryContainer}>
+                    <Gallery images={entity.images} name={title} />
+                </div>
                 {/* {website && <a href={website} className={styles.socialMediaLink}> {website} </a>} */}
             </div>
 
             <div className={styles.contentContainer}>
                 {content && <Markdown content={content} />}
+            </div>
+            
+            <div className={styles.tagsContainer}>
+                {website && <SocialMediaTag socialMedia={SocialMedia.Website} username={website} />}
+                {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
+                {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
+                {telegram && <SocialMediaTag socialMedia={SocialMedia.Telegram} username={telegram} />}
+                {soundcloud && <SocialMediaTag socialMedia={SocialMedia.SoundCloud} username={soundcloud} />}
+                {instagram && <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />}
             </div>
         </div>
     );
