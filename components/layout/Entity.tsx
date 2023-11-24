@@ -5,7 +5,6 @@ import SocialMediaTag, { SocialMedia } from '../content/SocialMedia';
 import Markdown from '../content/Markdown';
 import Tags from './Tags';
 import Gallery from '../content/Gallery';
-import Map from '../function/Map';
 import HoverLink from '../content/HoverLink';
 
 interface EntityProps {
@@ -50,33 +49,6 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 {/* {website && <a href={website} className={styles.socialMediaLink}> {website} </a>} */}
             </div>
 
-            {adress && <div className={styles.adressContainer}> {adress} </div>}
-
-            {/* { lat && long && (
-                <div className={styles.mapContainer}>
-                    <iframe
-                        src={`https://www.openstreetmap.org/export/embed.html?bbox=${long}%2C${lat}%2C${long}%2C${lat}&amp;layer=mapnik&amp;marker=${lat}%2C${long}`}
-                        width="100%"
-                        height="450"
-                        frameBorder="0"
-                        style={{
-                            border: 0,
-                            // filter: 'grayscale(100%); invert(100%)',
-                            // grayscale and invert for black and white effect
-                            filter: 'grayscale(100%) invert(100%)',
-                        }}
-                        allowFullScreen={false}
-                        aria-hidden="false"
-                        tabIndex={0}
-                    >
-                    </iframe>
-                </div>
-            )} */}
-
-            {content.length > 10 &&
-                <div className={styles.entityMarkdown}>
-                    <Markdown content={content} />
-                </div>}
         </div>
     );
 };
