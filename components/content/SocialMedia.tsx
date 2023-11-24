@@ -5,27 +5,33 @@ import React from 'react';
 import styles from './SocialMedia.module.scss';
 
 export enum SocialMedia {
+    Website = 'Website',
     Instagram = 'Instagram',
     YouTube = 'YouTube',
     SoundCloud = 'SoundCloud',
     Spotify = 'Spotify',
-    Beatport = 'Beatport'
+    Beatport = 'Beatport',
+    Telegram = 'Telegram'
 }
 
 enum SocialMediaUrl {
+    Website = 'https://',
     Instagram = 'https://www.instagram.com/',
-    YouTube = 'https://www.youtube.com/',
+    YouTube = 'https://www.youtube.com/@',
     SoundCloud = 'https://soundcloud.com/',
-    Spotify = 'https://open.spotify.com/user/',
-    Beatport = 'https://www.beatport.com/artist/'
+    Spotify = 'https://open.spotify.com/artist/',
+    Beatport = 'https://www.beatport.com/artist/',
+    Telegram = 'https://t.me/'
 }
 
 enum SocialMediaIcon {
+    Website = '/icons/socials/website',
     Instagram = '/icons/socials/instagram',
     YouTube = '/icons/socials/youtube',
     SoundCloud = '/icons/socials/soundcloud',
     Spotify = '/icons/socials/spotify',
-    Beatport = '/icons/socials/headphones'
+    Beatport = '/icons/socials/headphones',
+    Telegram = '/icons/socials/telegram'
 }
 
 

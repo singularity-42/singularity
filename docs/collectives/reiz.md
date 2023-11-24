@@ -1,11 +1,12 @@
 ---
 website: 
 instagram: reiz_kollektiv
+telegram: reizkollektiv
 mail: 
 tel: 
 tags:
   - techno
   - dnb
-  - band
-relations: "[[reset]]"
+relations:
+  - "[[reset]]"
 ---

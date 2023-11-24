@@ -5,6 +5,7 @@ tags:
   - dj
   - sync
   - electronic
+  - stage
 relations:
 ---
 ### Garten: Synth Jam Session

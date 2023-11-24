@@ -9,5 +9,9 @@ tags:
   - hypnotic
   - hardgroove
   - producer
+soundcloud: nidardo
+relations:
+  - "[[reset]]"
+  - "[[reiz]]"
 ---
 

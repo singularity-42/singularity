@@ -7,12 +7,7 @@ import List from './List';
 import useEntityData from '@/hooks/useEntityData';
 import Loading from '../content/Loading';
 import { useTooltip } from '@/hooks/provider/TooltipProvider';
-
-export enum OrderType {
-    Alphabetical = "Alphabetical",
-    Random = "Random",
-    CounterAlphabetical = "CounterAlphabetical"
-}
+import { OrderType } from '@/types';
 
 interface TableProps {
     type: string;

@@ -1,9 +1,9 @@
 ---
 website: 
-instagram: playandlearn.lab
+instagram: 
 mail: 
 tel: 
 tags:
-  - artist
-location: Jacobstraße 42
+  - jam
+location:
 ---

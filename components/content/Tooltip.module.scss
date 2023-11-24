@@ -1,7 +1,9 @@
 .tooltip {
-    position: relative;
     display: inline-block;
     padding: 0.42rem;
+    position: relative;
+    top: 0;
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 
 /* Hide the name on mobile */
@@ -12,10 +14,11 @@
     }
 
     .tooltip {
+        top: -10rem;
+        display: none;
+        opacity: 1; /* Initially visible */
 
-        /* Place it at the bottom right of the screen */
-        opacity: 0; /* Initially visible */
-    }
+    }   
 
     /* Hide the name on mobile */
     .tooltip.mobile-hide .name {
@@ -39,9 +42,11 @@
 
 @keyframes fadeOut {
     from {
+        width: 100%;
         opacity: 1;
     }
     to {
+        width: 0%;
         opacity: 0;
     }
 }

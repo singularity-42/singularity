@@ -1,65 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Markdown.module.scss';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkParse from 'remark-parse';
-import { visit } from 'unist-util-visit';
-import { Node, Parent } from 'unist';
+import styles from './Markdown.module.scss';
+import Link from 'next/link';
+import * as Url from 'url';
+
+interface ConnectionProps {
+  to: string;
+}
+
+const Connection: React.FC<ConnectionProps> = ({ to }) => {
+  return <a href={`#${to}`}>{to}</a>;
+};
 
 interface MarkdownProps {
- content: string;
+  content: string;
 }
 
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
- const [sections, setSections] = useState<string[]>([]);
+  // if its a  h1 h2 h3 or its a <p> than we will check the string text if there is one ore more [[...]] for each one we will add a new <Connection to={...} /> component and replace the [[...]] with the <Connection to={...} /> component
+  const regex = /(\[\[([^\]]+)\]\])/g;
+  const matches = content.match(regex);
 
- useEffect(() => {
-   const newSections = content.split(/-+/);
-   setSections(newSections);
- }, [content]);
+  if (matches) {
+    matches.forEach((match) => {
+      const to = match.replace('[[', '').replace(']]', '');
+      // convert to possible file name
+      const toFileName = to
+        .toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      content = content.replace(match, `[${to}](#${toFileName})`);
+    });
+  }
 
- if (!sections || sections.length === 0 || sections[0] === "") {
-   return null;
- }
-
- return (
-   <div className={styles.markdown}>
-     {sections.map((section: string, index: number) => {
-       return (
-         <div key={index} className={styles.section}>
-           <ReactMarkdown
-             children={section}
-             remarkPlugins={[remarkParse, linkifyPlugin]}
-             components={{
-              ul: ({node, ...props}) => <ul {...props} className={styles.customUl} />,
-              ol: ({node, ...props}) => <ol {...props} className={styles.customOl} />,
-              li: ({node, ...props}) => <li {...props} className={styles.customLi} />,
+  return (
+    <div className={styles.markdown}>
+      <ReactMarkdown
+        components={{
+          a: ({ node, ...props }) => {
+            const { ref, ...rest } = props;
+            if (props.href?.startsWith('#')) {
+              // return <a {...props} className={styles.anchor} />;
+              return <Link className={styles.anchor} href={props.href} {...rest} />;
             }
-           }
-           />
-         </div>
-       );
-     })}
-   </div>
- );
+            return <Link href={new URL(rest.href as string).toString()} {...rest} target="_blank" rel="noopener noreferrer" />;
+          },
+          ul: ({ node, ...props }) => {
+            const { ref, ...rest } = props;
+            return <ul {...rest} className={styles.list} />;
+          }
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
 };
-
-function linkifyPlugin() {
- return (tree: Node) => {
-   visit(tree, 'text', (node: Node, index: number, parent: Parent) => {
-     const matches = Array.from((node as any).value.matchAll(/\[\[(.*?)\]\]/g));
-     matches.reverse().forEach((match: any) => {
-       const link = {
-         type: 'link',
-         url: `/${match[1].replace(/\s+/g, '_')}`,
-         children: [{ type: 'text', value: match[1] }],
-         data: {
-           hProperties: { className: styles.link },
-         },
-       };
-       parent.children.splice(index, 1, link);
-     });
-   });
- };
-}
 
 export default Markdown;

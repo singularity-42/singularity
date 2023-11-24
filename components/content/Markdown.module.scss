@@ -4,14 +4,22 @@
     padding: 20px;
     // background-color: #f9f9f9;
     border-radius: 5px;
-   }
-   
-   .section {
+
+    &:hover {
+
+        .anchor {
+            color: rgb(var(--secondary-rgb));
+        }
+        color: rgb(var(--smoke-rgb));
+    }
+}
+
+.section {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
-   }
-   
+}
+
 .link {
     margin-right: 10px;
     text-decoration: none;
@@ -20,4 +28,19 @@
 .link:hover {
     color: rgb(var(--secondary-rgb));
     text-decoration: underline;
+}
+
+.anchor {
+    color: rgb(var(--primary-rgb));
+    transition: color 0.2s ease-in-out;
+    &:hover {
+        color: rgb(var(--secondary-rgb));
+        
+        text-decoration: underline;
+    }
+}
+
+.list {
+    list-style-type: disc;
+    margin-left: 20px;
 }
