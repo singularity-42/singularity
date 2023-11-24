@@ -31,11 +31,11 @@
 }
 
 .anchor {
+    display: inline-block;
     color: rgb(var(--primary-rgb));
     transition: color 0.2s ease-in-out;
     &:hover {
         color: rgb(var(--secondary-rgb));
-        
         text-decoration: underline;
     }
 }

@@ -8,6 +8,7 @@ import useEntityData from '@/hooks/useEntityData';
 import Loading from '../content/Loading';
 import { useTooltip } from '@/hooks/provider/TooltipProvider';
 import { OrderType } from '@/types';
+import Details from './Details';
 
 interface TableProps {
     type: string;
@@ -59,10 +60,16 @@ const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphab
     }
 
     return <div className={styles.table}>
+
+        {/* pop up section which will be filling the screen having a blose button on top right */}
+
+        <Details />
+        
         {
             currentVisibleTags.length > 0 &&
             <Filter filter={filter} currentVisibleTags={currentVisibleTags} onChange={setFilter} />
         }
+
 
         <List entityData={entityData} onTagClick={(tag: string) => {
             if(tag.length < 1) return;

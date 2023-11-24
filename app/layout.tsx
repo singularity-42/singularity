@@ -22,6 +22,13 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <Header />
+          {
+            // if url has #--- in name then render <Details />
+            // else render children
+
+            
+
+            }
           {children}
         </body>
       </html>

@@ -1,0 +1,16 @@
+/* HoverLink.module.scss */
+.link {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: inherit;
+    text-decoration: none;
+    z-index: 2;
+    position: relative;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

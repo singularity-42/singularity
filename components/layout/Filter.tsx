@@ -11,14 +11,18 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange }) => {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [seenTags, setSeenTags] = useState<string[]>([]);
+    const [shownTags, setShownTags] = useState<string[]>([]);
 
     useEffect(() => {
         const combinedTags = Array.from(new Set([...currentVisibleTags, ...seenTags]));
         const updatedFilters = selectedFilters.filter(filter => combinedTags.includes(filter));
+        let visibleTags = Array.from(new Set(currentVisibleTags));
+        // remove duplicates
 
         setSeenTags(combinedTags);
         setSelectedFilters(updatedFilters);
         onChange(updatedFilters);
+        setShownTags(visibleTags);
     }, [currentVisibleTags]);
 
     useEffect(() => {
@@ -47,7 +51,7 @@ const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange })
     return (
         <div className={styles.filter}>
             <div className={styles.filterContainer}>
-                {(seenTags || []).sort((a, b) => a.localeCompare(b)).map((tag, index) => (
+                {(shownTags || []).sort((a, b) => a.localeCompare(b)).map((tag, index) => (
                     // <div
                     //     key={tag}
                     //     className={`${styles.tag} ${selectedFilters.includes(tag) ? styles.selected : ''}`}

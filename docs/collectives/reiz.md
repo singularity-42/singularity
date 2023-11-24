@@ -2,7 +2,7 @@
 website: 
 instagram: reiz_kollektiv
 telegram: reizkollektiv
-mail: 
+mail: reizkollektiv.contact@gmail.com
 tel: 
 tags:
   - techno

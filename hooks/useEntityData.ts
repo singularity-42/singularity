@@ -19,7 +19,7 @@ const useEntityData = (entityType: string, filter: string[] | null) => {
         }
         let url = `${process.env.NEXT_PUBLIC_API_URL}/entities?entity_type=${entityType}&filter=${filter_string}`;
 
-        // let url = 'http://localhost:3000/api/entity'
+        // let url = 'http://localhost:3000/api/entities?entity_type='creative'&filter='artist, album''
         const response = await axios.get(url);
         setEntityData(response.data);
       } catch (error) {
