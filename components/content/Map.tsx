@@ -15,8 +15,8 @@ const Map: React.FC<MapProps> = ({ location }) => {
         <div className={styles.mapContainer}>
           <iframe
             src={`https://www.openstreetmap.org/export/embed.html?bbox=${long}%2C${lat}%2C${long}%2C${lat}&amp;layer=mapnik&amp;marker=${lat}%2C${long}`}
-            width="100%"
-            height="450"
+            width="77%"
+            height="20%"
             frameBorder="0"
             style={{
               border: 0,

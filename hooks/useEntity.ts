@@ -11,10 +11,8 @@ const useEntity = (name: string) => {
             }
 
             try {
-                console.log('Fetching entity:', name);
                 // Construct the API URL properly
                 const url = `${process.env.NEXT_PUBLIC_API_URL}/entity?name=${name}`;
-                console.log('URL:', url);
                 // Fetch data from the API
                 const response = await axios.get(url);
                 

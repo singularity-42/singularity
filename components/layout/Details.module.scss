@@ -5,20 +5,32 @@
     padding: 0.5rem;
     cursor: pointer;
     color: rgb(var(--light-rgb));
-}
+    
+    // reset all button styles
+    border: none;
+    background: none;
+    outline: none;
 
+
+    &:hover {
+        color: rgb(var(--secondary-rgb));
+    }
+}
 .popup {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
     width: 80vw;
-    margin: 10vh 10vw;
     height: 80vh;
+    color: rgb(var(--light-rgb));
     border: 1px solid rgb(var(--light-rgb));
+    // scollable
+    overflow-y: scroll;
+    overflow-x: hidden;
+
     padding: 2rem;
     z-index: 3;
     background-color: rgb(var(--dark-rgb));
-
 }
 
 // Entity.module.scss
@@ -40,7 +52,7 @@
 }
 
 .entityMarkdown {
-    color: rgb(var(--shaded-rgb));
+    color: rgb(var(--light-rgb));
     padding: 1rem;
     transition: color 0.2s ease-in-out;
 }
@@ -57,7 +69,7 @@
 }
 
 .socialMediaLink:hover {
-    color: rgb(var(--secondary-rgb));
+    color: rgb(var(--light-rgb));
     text-decoration: underline;
 }
 
@@ -91,4 +103,10 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+
+.descriptionContainer {
+    color: rgb(var(--light-rgb));
+    padding: 1rem;
+    transition: color 0.2s ease-in-out;
 }

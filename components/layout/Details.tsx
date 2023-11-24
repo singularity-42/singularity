@@ -1,5 +1,5 @@
 // Entity.tsx
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import styles from './Details.module.scss';
 import SocialMediaTag, { SocialMedia } from '../content/SocialMedia';
 import Markdown from '../content/Markdown';
@@ -7,6 +7,8 @@ import Tags from './Tags';
 import Map from '../content/Map';
 import useEntity from '@/hooks/useEntity';
 import SocialMedias from './SocialMedias';
+import Graph from '../content/Graph';
+import Link from 'next/link';
 
 interface EntityProps {
 }
@@ -14,6 +16,7 @@ const Entity: React.FC<EntityProps> = () => {
     // {url}#{name}
 
     const url = window.location.href;
+    const origin = url.split('#')[0];
     const name = url.split('#')[1];
     if (!name) {
         return;
@@ -21,18 +24,15 @@ const Entity: React.FC<EntityProps> = () => {
     const name2 = name.replace('-', ' ');
     const entity = useEntity(name2);
 
-    // const entity = useEntity(name);
-    
     if (!entity) {
-        return <div>Loading...</div>;
+        return 
     }
+    const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, address, location, description } = entity;
 
-    const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, adress, location } = entity;
-    const [lat, long] = location?.split(',').map((s: string) => parseFloat(s)) || [null, null];
     return (
         <div className={styles.popup}>
             <div className={styles.closeButton}>
-                <a href="">&times;</a>
+                <Link href={origin}> <a> X </a> </Link>  
             </div>
             <div className={styles.detailsContainer}>
                 <div className={styles.socialMediaContainer}>
@@ -50,14 +50,22 @@ const Entity: React.FC<EntityProps> = () => {
                     <SocialMedias website={website} spotify={spotify} beatport={beatport} telegram={telegram} soundcloud={soundcloud} instagram={instagram} />
             </div>
 
-            {adress && <div className={styles.adressContainer}> {adress} </div>}
+            {address && <div className={styles.adressContainer}> {address} </div>}
+{/*                 
+            <Graph graphData={
+                {
+                    nodes: [
+                        { id: 'node1', fx: 100, fy: 100 },
+                        { id: 'node2', fx: 200, fy: 200 },
+                    ],
+                    links: [
+                        { source: 'node1', target: 'node2' },
+                    ],
+                }
+            } /> */}
 
-            <Map />
-
-            <div className={styles.descriptionContainer}>
-                <Markdown content={entity.description || ''} />
-            </div>
-
+            <Map location={location} />
+            <Markdown content={description} />
         </div>
     );
 };
