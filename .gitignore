@@ -39,3 +39,7 @@ next-env.d.ts
 # docs
 docs/.obsidian
 docs/.trash
+
+# yarn / npm
+yarn.lock
+package-lock.json
