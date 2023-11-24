@@ -29,7 +29,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                         // title is sometimes a date so we want to display it with . and reorder to day.month.year
                         if (title.includes('-')) {
                             const date = title.split('-');
-                            return `${date[2]}.${date[1]}.${date[0]}`;
+                            // return `${date[2]}.${date[1]}.${date[0]}`;
                         }
                         return <HoverLink name={title}>{title}</HoverLink>;
                         
@@ -49,6 +49,9 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 {/* {website && <a href={website} className={styles.socialMediaLink}> {website} </a>} */}
             </div>
 
+            <div className={styles.contentContainer}>
+                {content && <Markdown content={content} />}
+            </div>
         </div>
     );
 };
