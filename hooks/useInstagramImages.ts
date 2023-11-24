@@ -6,8 +6,6 @@ const useInstagramImages = (username: string): any[] | null => {
     const [imagesList, setImageList] = useState<any[] | null>(null);
 
     useEffect(() => {
-        console.log('useInstagramImages: useEffect');
-
         if (!username) {
             return;
         }

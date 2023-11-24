@@ -11,7 +11,7 @@ export enum SocialMedia {
     SoundCloud = 'SoundCloud',
     Spotify = 'Spotify',
     Beatport = 'Beatport',
-    Telegram = 'Telegram'
+    Telegram = 'Telegram',
 }
 
 enum SocialMediaUrl {
@@ -21,7 +21,7 @@ enum SocialMediaUrl {
     SoundCloud = 'https://soundcloud.com/',
     Spotify = 'https://open.spotify.com/artist/',
     Beatport = 'https://www.beatport.com/artist/',
-    Telegram = 'https://t.me/'
+    Telegram = 'https://t.me/',
 }
 
 enum SocialMediaIcon {

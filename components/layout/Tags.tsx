@@ -23,8 +23,8 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected }) => {
     const updateTagBubblePositions = () => {
       tags.forEach((tag, index) => {
         const tagBubble = container.children[index] as HTMLDivElement;
-        const currentX = parseFloat(tagBubble.style.left || '0');
-        const currentY = parseFloat(tagBubble.style.top || '0');
+        const currentX = parseFloat(tagBubble?.style.left || '0');
+        const currentY = parseFloat(tagBubble?.style.top || '0');
         const xOffset = getRandomOffset();
         const yOffset = getRandomOffset();
         let newX = currentX + xOffset;
@@ -35,6 +35,8 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected }) => {
         if (newX + tagBubbleWidth > containerWidth) newX = containerWidth - tagBubbleWidth;
         if (newY < 0) newY = 0;
         if (newY + tagBubbleHeight > containerHeight) newY = containerHeight - tagBubbleHeight;
+
+        if (!tagBubble) return;
 
         tagBubble.style.left = `${newX}px`;
         tagBubble.style.top = `${newY}px`;

@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import styles from './Markdown.module.scss';
 import Link from 'next/link';
 import * as Url from 'url';
+import HoverLink from './HoverLink';
 
 interface ConnectionProps {
   to: string;
@@ -26,10 +27,9 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
       const to = match.replace('[[', '').replace(']]', '');
       // convert to possible file name
       const toFileName = to
-        .toLowerCase()
+        // .toLowerCase()
         .replace(/ /g, '-')
-        .replace(/[^a-z0-9-]/g, '');
-      content = content.replace(match, `[${to}](#${toFileName})`);
+      content = content.replace(match, `[${to}](${toFileName})`);
     });
   }
 
@@ -39,11 +39,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
         components={{
           a: ({ node, ...props }) => {
             const { ref, ...rest } = props;
-            if (props.href?.startsWith('#')) {
-              // return <a {...props} className={styles.anchor} />;
-              return <Link className={styles.anchor} href={props.href} {...rest} />;
-            }
-            return <Link href={new URL(rest.href as string).toString()} {...rest} target="_blank" rel="noopener noreferrer" />;
+            return (<div className={styles.anchor}><HoverLink name={props.href || ''} {...rest} > {props.children} </HoverLink></div>)
           },
           ul: ({ node, ...props }) => {
             const { ref, ...rest } = props;
@@ -58,3 +54,4 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
 };
 
 export default Markdown;
+

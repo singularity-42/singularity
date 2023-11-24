@@ -2,6 +2,6 @@
 tags:
   - creative
   - workshop
+mail: ajubi@ajz-chemnitz.de
 ---
 
-ajubi@ajz-chemnitz.de
