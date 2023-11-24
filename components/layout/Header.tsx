@@ -7,7 +7,7 @@ import styles from "./Header.module.scss";
 import Hamburger from "../function/Hamburger";
 import { useTooltip } from "@/hooks/provider/TooltipProvider";
 import Tooltip from "../content/Tooltip";
-import Map from "../function/Map";
+// import Map from "../function/Map";
 
 type HeaderProps = {
 };
