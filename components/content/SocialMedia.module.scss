@@ -1,36 +1,3 @@
-
-// // social media tag has enum for all social media types and a  value for the username
-
-// import React from 'react';
-// import styles from '@/styles/SocialMediaTag.module.scss';
-
-// export enum SocialMedia {
-//     Instagram = 'Instagram',
-//     YouTube = 'YouTube',
-//     SoundCloud = 'SoundCloud',
-//     Spotify = 'Spotify',
-//     AppleMusic = 'AppleMusic',
-//     Bandcamp = 'Bandcamp',
-//     Twitch = 'Twitch',
-//     Beatport = 'Beatport'
-// }
-
-// interface SocialMediaTagProps {
-//     socialMedia: SocialMedia;
-//     username: string;
-// }
-
-// const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }) => {
-//     return (
-//         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
-//             <div className={styles.socialMediaIcon}>&nbsp;</div>
-//             <div className={styles.username}>{username}</div>
-//         </div>
-//     );
-// };
-
-// export default SocialMediaTag;
-
 .socialMediaTag {
     width: fit-content;
 
@@ -43,11 +10,20 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: rgb(var(--light-rgb));
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
 }
 
 .socialMediaIcon {
     width: 2rem;
     height: 2rem;
+    // make image smaller
+    // &.Website {
+    //     transform: scale(0.1);
+    // }
 }
 
 .username {
@@ -85,4 +61,20 @@
 
 .Beatport {
     background-color: #FF5E00;
+}
+
+.Telegram {
+    background-color: #0088CC;
+}
+
+.Website {
+    background-color: #fff;
+
+    .socialMediaIcon {
+        scale: 0.05;
+        position: relative;
+        top: -1.175rem;
+        left: -1.175rem;
+    }
+
 }

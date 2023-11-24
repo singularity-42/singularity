@@ -22,7 +22,9 @@ const List: React.FC<ListProps> = ({ entityData, onTagClick, selected }) => {
     return <Error error='No entitys found' onClick={
       () => {
         // go a page back
-        window.history.back();
+        // window.history.back();
+        // reload the page
+        window.location.reload();
       }
     } />;
   }
