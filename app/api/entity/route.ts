@@ -39,7 +39,11 @@ import { NextRequest, NextResponse } from 'next/server';
 export const GET = async (req: NextRequest, res: NextResponse) => {
     let entity_name = req.nextUrl.searchParams.get('name');
     const entityFiles = glob.sync(`./docs/**/*.md`);
-    const entityData = entityFiles.map((file) => {
+    const relevantEntityFiles = entityFiles.filter((file) => {
+        const [file_name] = file.split('/').slice(-1)[0].split('.md');
+        return file_name === entity_name;
+    });
+    const entityData = relevantEntityFiles.map((file) => {
         const content = fs.readFileSync(file, 'utf8');
         return { file, content };
     });

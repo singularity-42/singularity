@@ -3,11 +3,11 @@ website:
 instagram: 
 mail: 
 tel: 
-tags:
-soundcloud: 
+tags: 
+soundcloud: anjo_vi
 spotify: 
-bandcamp:
-apple:
-youtube:
+bandcamp: 
+apple: 
+youtube: 
 twitter:
 ---

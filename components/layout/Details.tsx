@@ -27,45 +27,36 @@ const Entity: React.FC<EntityProps> = () => {
     if (!entity) {
         return 
     }
-    const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, address, location, description } = entity;
+
+    const handleExit = () => {
+
+        window.history.back();
+
+    }
 
     return (
         <div className={styles.popup}>
             <div className={styles.closeButton}>
-                <Link href={origin}> <a> X </a> </Link>  
+                <div onClick={() =>handleExit()}>X</div>  
             </div>
             <div className={styles.detailsContainer}>
                 <div className={styles.socialMediaContainer}>
                     <h2 className={styles.title}>{(() => {
-                        if (title.includes('-')) {
-                            const date = title.split('-');
+                        if (entity.title.includes('-')) {
+                            const date = entity.title.split('-');
                             return `${date[2]}.${date[1]}.${date[0]}`;
                         }
-                        return title
+                        return entity.title
                     })()}</h2>
                 </div>
                     <div className={styles.tagsContainer}>
-                        <Tags tags={tags} />
+                        <Tags tags={entity.tags} />
                     </div>
-                    <SocialMedias website={website} spotify={spotify} beatport={beatport} telegram={telegram} soundcloud={soundcloud} instagram={instagram} />
+                    <SocialMedias metadata={entity} />
             </div>
-
-            {address && <div className={styles.adressContainer}> {address} </div>}
-{/*                 
-            <Graph graphData={
-                {
-                    nodes: [
-                        { id: 'node1', fx: 100, fy: 100 },
-                        { id: 'node2', fx: 200, fy: 200 },
-                    ],
-                    links: [
-                        { source: 'node1', target: 'node2' },
-                    ],
-                }
-            } /> */}
-
-            <Map location={location} />
-            <Markdown content={description} />
+            {entity.address && <div className={styles.addressContainer}> {entity.address} </div>}
+            {entity.location && <Map location={entity.location} />}
+            {entity.description && <Markdown content={entity.description} />}
         </div>
     );
 };

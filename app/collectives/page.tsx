@@ -1,10 +1,10 @@
-import Table from '@/components/layout/Table';
+import TableContent from '@/components/layout/Table';
 import React from 'react';
 
 const CollectivePage: React.FC = () => {
   return (
     <div>
-      <Table type='collectives' />
+      <TableContent type='collectives' />
     </div>
   );
 };

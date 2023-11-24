@@ -3,35 +3,43 @@
 
 import React from 'react';
 import styles from './SocialMedia.module.scss';
+import Icon from './Icon';
+import Image from 'next/image';
 
 export enum SocialMedia {
-    Website = 'Website',
-    Instagram = 'Instagram',
-    YouTube = 'YouTube',
-    SoundCloud = 'SoundCloud',
-    Spotify = 'Spotify',
-    Beatport = 'Beatport',
-    Telegram = 'Telegram',
+    website = 'website',
+    instagram = 'instagram',
+    youtube = 'youtube',
+    soundcloud = 'soundcloud',
+    spotify = 'spotify',
+    beatport = 'beatport',
+    bandcamp = 'bandcamp',
+    telegram = 'telegram',
+    twitter = 'twitter',
 }
 
 enum SocialMediaUrl {
-    Website = 'https://',
-    Instagram = 'https://www.instagram.com/',
-    YouTube = 'https://www.youtube.com/@',
-    SoundCloud = 'https://soundcloud.com/',
-    Spotify = 'https://open.spotify.com/artist/',
-    Beatport = 'https://www.beatport.com/artist/',
-    Telegram = 'https://t.me/',
+    website = 'https://',
+    instagram = 'https://www.instagram.com/',
+    youtube = 'https://www.youtube.com/@',
+    soundcloud = 'https://soundcloud.com/',
+    spotify = 'https://open.spotify.com/artist/',
+    beatport = 'https://www.beatport.com/artist/',
+    bandcamp = 'https://',
+    telegram = 'https://t.me/',
+    twitter = 'https://twitter.com/',
 }
 
 enum SocialMediaIcon {
-    Website = '/icons/socials/website',
-    Instagram = '/icons/socials/instagram',
-    YouTube = '/icons/socials/youtube',
-    SoundCloud = '/icons/socials/soundcloud',
-    Spotify = '/icons/socials/spotify',
-    Beatport = '/icons/socials/headphones',
-    Telegram = '/icons/socials/telegram'
+    website = '/icons/socials/website',
+    instagram = '/icons/socials/instagram',
+    youtube = '/icons/socials/youtube-color-svgrepo-com',
+    soundcloud = '/icons/socials/soundcloud',
+    spotify = '/icons/socials/spotify-svgrepo-com',
+    beatport = '/icons/socials/beatport',
+    bandcamp = '/icons/socials/beatport',
+    telegram = '/icons/socials/telegram',
+    twitter = '/icons/socials/x',
 }
 
 
@@ -47,7 +55,10 @@ const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }
 
     return (
         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
-            <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer"><div className={styles.socialMediaIcon}><img src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} /></div></a>
+            {/* <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer"><div className={styles.socialMediaIcon}><img src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} /></div></a> */}
+            <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer">
+                <Image src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} width={20} height={20} />
+            </a>
         </div>
     );
 };

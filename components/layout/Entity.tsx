@@ -6,6 +6,7 @@ import Markdown from '../content/Markdown';
 import Tags from './Tags';
 import Gallery from '../content/Gallery';
 import HoverLink from '../content/HoverLink';
+import SocialMedias from './SocialMedias';
 
 interface EntityProps {
     entity: any;
@@ -17,7 +18,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
         return <div>Loading...</div>;
     }
 
-    const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, adress, location } = entity.metadata;
+    const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, address, location } = entity.metadata;
     const content = entity.content;
     const [lat, long] = location?.split(',').map((s: string) => parseFloat(s)) || [null, null];
     return (
@@ -45,17 +46,11 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
             </div>
 
             <div className={styles.contentContainer}>
-                {content && <Markdown content={content} />}
+                {content.length > 4.2
+                 && <Markdown content={content} />}
             </div>
-            
-            <div className={styles.tagsContainer}>
-                {website && <SocialMediaTag socialMedia={SocialMedia.Website} username={website} />}
-                {spotify && <SocialMediaTag socialMedia={SocialMedia.Spotify} username={spotify} />}
-                {beatport && <SocialMediaTag socialMedia={SocialMedia.Beatport} username={beatport} />}
-                {telegram && <SocialMediaTag socialMedia={SocialMedia.Telegram} username={telegram} />}
-                {soundcloud && <SocialMediaTag socialMedia={SocialMedia.SoundCloud} username={soundcloud} />}
-                {instagram && <SocialMediaTag socialMedia={SocialMedia.Instagram} username={instagram} />}
-            </div>
+
+            <SocialMedias metadata={entity.metadata} />
         </div>
     );
 };

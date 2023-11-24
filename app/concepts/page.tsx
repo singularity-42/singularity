@@ -1,9 +1,9 @@
 import React from 'react';
-import Table from '@/components/layout/Table';
+import TableContent from '@/components/layout/Table';
 
 const ConceptPage: React.FC = () => {
   return (
-      <Table type='concepts' />
+      <TableContent type='concepts' />
   );
 };
 

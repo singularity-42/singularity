@@ -20,7 +20,7 @@ interface MarkdownProps {
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
   // if its a  h1 h2 h3 or its a <p> than we will check the string text if there is one ore more [[...]] for each one we will add a new <Connection to={...} /> component and replace the [[...]] with the <Connection to={...} /> component
   const regex = /(\[\[([^\]]+)\]\])/g;
-  const matches = content.match(regex);
+  const matches = content?.match(regex);
 
   if (matches) {
     matches.forEach((match) => {

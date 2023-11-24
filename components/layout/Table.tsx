@@ -9,6 +9,7 @@ import Loading from '../content/Loading';
 import { useTooltip } from '@/hooks/provider/TooltipProvider';
 import { OrderType } from '@/types';
 import Details from './Details';
+import { FilterProvider, useFilter } from '@/hooks/provider/FilterProvider';
 
 interface TableProps {
     type: string;
@@ -22,9 +23,9 @@ const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     "collaborations": "Joint projects creating beloved content.",
 };
 
-const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
-    const [filter, setFilter] = useState<string[]>([]);
-    const entityData = useEntityData(type, filter);
+const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+    const { filter, setFilter } = useFilter();
+    const entityData = useEntityData(type);
     const { setTooltip } = useTooltip();
 
     const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
@@ -61,18 +62,19 @@ const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphab
 
     return <div className={styles.table}>
 
+
         {/* pop up section which will be filling the screen having a blose button on top right */}
 
         <Details />
-        
+
         {
             currentVisibleTags.length > 0 &&
-            <Filter filter={filter} currentVisibleTags={currentVisibleTags} onChange={setFilter} />
+            <Filter currentVisibleTags={currentVisibleTags} />
         }
 
 
         <List entityData={entityData} onTagClick={(tag: string) => {
-            if(tag.length < 1) return;
+            if (tag.length < 1) return;
 
             if (filter.includes(tag)) {
                 setFilter(filter.filter((t) => t !== tag));
@@ -88,5 +90,13 @@ const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphab
        */}
     </div>;
 };
+
+const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+    return (
+        <FilterProvider>
+            <TableContent type={type} orderType={orderType} />
+        </FilterProvider>
+    );
+}
 
 export default Table;

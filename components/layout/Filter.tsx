@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './Filter.module.scss';
 import Tag from '../function/Tag';
+import { useFilter } from '@/hooks/provider/FilterProvider';
 
 interface FilterProps {
-    filter: string[]; // Available filters
     currentVisibleTags: string[]; // Tags currently visible
-    onChange: (filter: string[]) => void; // Callback when filters change
 }
 
-const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange }) => {
+const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [seenTags, setSeenTags] = useState<string[]>([]);
     const [shownTags, setShownTags] = useState<string[]>([]);
+    const { filter, setFilter } = useFilter();
 
     useEffect(() => {
         const combinedTags = Array.from(new Set([...currentVisibleTags, ...seenTags]));
@@ -21,7 +21,7 @@ const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange })
 
         setSeenTags(combinedTags);
         setSelectedFilters(updatedFilters);
-        onChange(updatedFilters);
+        setFilter(updatedFilters);
         setShownTags(visibleTags);
     }, [currentVisibleTags]);
 
@@ -40,7 +40,7 @@ const Filter: React.FC<FilterProps> = ({ filter, currentVisibleTags, onChange })
         }
 
         setSelectedFilters(updatedFilters);
-        onChange(updatedFilters);
+        setFilter(updatedFilters);
 
         // Update seen tags if necessary
         if (!seenTags.includes(tag)) {
