@@ -6,7 +6,7 @@ import Markdown from '../content/Markdown';
 import Tags from './Tags';
 import Gallery from '../content/Gallery';
 import HoverLink from '../content/HoverLink';
-import SocialMedias from './SocialMedias';
+import SocialMedias from './SocialList';
 
 interface EntityProps {
     entity: any;
@@ -17,12 +17,18 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
     if (!entity) {
         return <div>Loading...</div>;
     }
+    const [isHovered, setIsHovered] = React.useState(false); // State to track hover
+
 
     const { title, instagram, website, tags, soundcloud, spotify, beatport, telegram, address, location } = entity.metadata;
     const content = entity.content;
     const [lat, long] = location?.split(',').map((s: string) => parseFloat(s)) || [null, null];
     return (
-        <div className={styles.entityContainer}>
+        <div
+            className={styles.entityContainer}
+            onMouseEnter={() => setIsHovered(true)} // Set isHovered to true on mouse enter
+            onMouseLeave={() => setIsHovered(false)} // Set isHovered to false on mouse leave
+        >
             {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
             <div className={styles.filterTagsContainer}>
                 <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
@@ -46,8 +52,9 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
             </div>
 
             <div className={styles.contentContainer}>
-                {content.length > 4.2
-                 && <Markdown content={content} />}
+                {content.length > 4.2 && ( // Check if content length meets the condition
+                    <Markdown content={content} active={isHovered} /> // Pass active prop based on hover state
+                )}
             </div>
 
             <SocialMedias metadata={entity.metadata} />

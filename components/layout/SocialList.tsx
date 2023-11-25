@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './Entity.module.scss';
+import styles from './SocialList.module.scss';
 import SocialMediaTag, { SocialMedia } from '../content/SocialMedia';
 
-interface SocialMediasProps {
+interface SocialListProps {
     metadata: any;
 }
 
-const SocialMedias: React.FC<SocialMediasProps> = ({ metadata }) => {
-    return <div className={styles.tagsContainer}>
+const SocialList: React.FC<SocialListProps> = ({ metadata }) => {
+    return <div className={styles.socialList}>
         {
             Object.keys(metadata).map((key) => {
                 if (Object.values(SocialMedia).includes(key as SocialMedia)) {
@@ -18,4 +18,4 @@ const SocialMedias: React.FC<SocialMediasProps> = ({ metadata }) => {
         }
     </div>;
 }
-export default SocialMedias;
+export default SocialList;

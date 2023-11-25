@@ -25,31 +25,48 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   };
 
   let isMenuOpen = open === true ? styles.show : "";
+
+  
+  const pages = [
+    "/collaborations",
+    "/collectives",
+    "/creatives",  //   "/creators",
+    "/concepts",
+    // "/creations",
+    "/changes",
+    // "/canvas",
+    // "/cyber",
+    // "/culture",
+    // "/curation",
+    // "/cats",
+    // "/coffe",
+    // "/comedy",
+  ];
+
   return (
     <ul className={`${styles.menu} ${isMenuOpen}`}>
-      <li className={`${styles.menuItem} ${getCurrentPage("/collaborations")}`}>
-        <Link href="/collaborations" className={styles.menuLink} onClick={handleLinkClick}>
-          Collaborations
-        </Link>
-      </li>
-      <li className={`${styles.menuItem} ${getCurrentPage("/collectives")}`}>
-        <Link href="/collectives" className={styles.menuLink} onClick={handleLinkClick}>
-          Collectives
-        </Link>
-      </li>
-      <li className={`${styles.menuItem} ${getCurrentPage("/creatives")} ${styles.theBox}`}>
-        <Link href="/creatives" className={styles.menuLink} onClick={handleLinkClick}>
-          Creatives
-        </Link>
-      </li>
-      <li className={`${styles.menuItem} ${getCurrentPage("/concepts")}`}>
-        <Link href="/concepts" className={styles.menuLink} onClick={handleLinkClick}>
-          Concepts
-        </Link>
-      </li>
-      {/* <li className={`${styles.menuItem} ${styles.navFooter}`}>
-        <UserInfo menuOpen={open} />
-      </li> */}
+       {
+        pages.sort((a, b) => 
+          {
+            if (a.length > b.length) {
+              return -1;
+            }
+            if (a.length < b.length) {
+              return 1;
+            }
+            return 0;
+          }
+        ).map((page, index) => {
+          let innerText = page.replace("/", "");
+          return (
+            <li key={index} className={`${styles.menuItem} ${getCurrentPage(page)}`}>
+              <Link href={page} className={styles.menuLink} onClick={handleLinkClick}>
+                {innerText}
+              </Link>
+            </li>
+          )
+        })
+       }
     </ul>
   );
 };

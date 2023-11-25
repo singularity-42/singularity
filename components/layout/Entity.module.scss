@@ -1,11 +1,19 @@
 // Entity.module.scss
 .entityContainer {
-    // border: 1px solid #ccc;
-    //pretter stylistic border maybe dottet
-    // border: 1px dashed #ccc;
-
     padding: 0.42rem;
     border: 1px dashed rgb(var(--smoke-rgb));
+    width: 100%;
+    transition: border-color 0.3s ease-in-out; /* Add transition for smooth effect */
+    height: 100%;
+    z-index: 5;
+    &:hover {
+        border: 1px solid rgb(var(--light-rgb)); /* Change border color on hover */
+    }
+}
+
+.title {
+    font-size: 24px;
+    width: 50vw;
 }
 
 .entityContainer:hover {
