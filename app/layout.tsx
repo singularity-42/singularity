@@ -1,12 +1,11 @@
-// path: app/layout.tsx
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Header from '@/components/layout/Header';
+import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
+import Tooltip from '@/components/content/Tooltip';
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '@/components/base/Header'
-import { AnimatePresence } from 'framer-motion'
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Singularity',
@@ -19,16 +18,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <TooltipProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <Header />
+          {
+            // if url has #--- in name then render <Details />
+            // else render children
 
-      <body className={inter.className}>
-        <AnimatePresence exitBeforeEnter>
-        <Header />
+            
 
-        {children}
-
-        </AnimatePresence>
-      </body>
-    </html>
+            }
+          {children}
+        </body>
+      </html>
+    </TooltipProvider>
   )
 }

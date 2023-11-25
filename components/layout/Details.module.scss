@@ -1,0 +1,149 @@
+.closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: rgb(var(--light-rgb));
+
+    // reset all button styles
+    border: none;
+    background: none;
+    outline: none;
+
+
+    &:hover {
+        color: rgb(var(--secondary-rgb));
+    }
+}
+
+
+
+.popup {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    width: 80vw;
+    height: 80vh;
+    color: rgb(var(--light-rgb));
+    // scollable
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    padding: 2rem;
+    background-color: rgb(var(--dark-rgb));
+
+    &.show {
+        border: 1px solid rgb(var(--light-rgb));
+        display: block;
+        opacity: 1;
+        animation: fadeIn 0.3s ease-in-out forwards;
+    }
+    
+    &.hide {
+        border: 1px solid #0000;
+        display: block;
+        opacity: 0;
+        animation: fadeOut 0.3s ease-in-out forwards;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }    
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+// Entity.module.scss
+.entityContainer {
+    // border: 1px solid #ccc;
+    //pretter stylistic border maybe dottet
+    // border: 1px dashed #ccc;
+
+    padding: 0.42rem;
+    border: 1px dashed rgb(var(--smoke-rgb));
+}
+
+.entityContainer:hover {
+    border: 1px solid rgb(var(--light-rgb));
+}
+
+.title {
+    font-size: 24px;
+}
+
+.entityMarkdown {
+    color: rgb(var(--light-rgb));
+    padding: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.socialMediaLink {
+    padding-top: 10rem;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.socialMediaLink:hover {
+    color: rgb(var(--light-rgb));
+    text-decoration: underline;
+}
+
+// should be all on left next to each other horizontally
+.socialMediaContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+}
+
+.tagsContainer {
+    // flex center horizontally
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.mapContainer {
+    margin: 1rem;
+    position: relative;
+    width: 95vw;
+}
+
+// on mobile tags Container should be vertical
+
+@media (max-width: 768px) {
+    .tagsContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.descriptionContainer {
+    color: rgb(var(--light-rgb));
+    padding: 1rem;
+    transition: color 0.2s ease-in-out;
+}

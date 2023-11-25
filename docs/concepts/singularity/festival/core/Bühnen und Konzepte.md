@@ -1,0 +1,1 @@
+Die [[Garten]] lädt zu spontanen Jam-Sessions ein, während die [[Großer Saal]] lokale Bands und vielfältige musikalische Klänge präsentiert. Die [[St. Etienne]] verschmilzt elektronische Beats mit Synthesizer-Improvisationen zu einer einzigartigen Klanglandschaft.

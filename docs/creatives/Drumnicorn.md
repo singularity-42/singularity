@@ -7,8 +7,8 @@ tags:
   - dj
   - dnb
   - techno
-  - postpunk
   - producer
+soundcloud: drumnicorn
+spotify: 07WSvNqUYT3u5Hgkao5qiT
 ---
-
 

@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    align-items: center;
+    background: rgb(var(--dark-rgb));
+    padding: 0 0.96rem;
+    z-index: 420;
+    width: 100%;
+    margin-top: 0;
+    justify-content: space-between;
+}
+
+.headerBrand {
+    z-index: 2;
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgb(var(--color-sub));
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 2;
+    transition: color 0.3s ease;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+
+    @media (max-width: 260px) {
+        font-size: 12vw;
+    }
+}
+
+.headerBrand:hover {
+    color: rgb(var(--secondary-rgb));
+    transform: translateX(1rem);
+}
