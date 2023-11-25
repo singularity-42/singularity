@@ -32,7 +32,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
     "/collectives",
     "/cyberware",
     "/concepts",
-    "/creators",  
+    "/creatives",  
     "/change",
     // "/creations",
     //   "/creators",

@@ -8,6 +8,9 @@ import Image from 'next/image';
 
 export enum SocialMedia {
     website = 'website',
+    mail = 'mail',
+    address = 'address',
+    tel = 'tel',
     instagram = 'instagram',
     youtube = 'youtube',
     soundcloud = 'soundcloud',
@@ -28,6 +31,9 @@ enum SocialMediaUrl {
     bandcamp = 'https://',
     telegram = 'https://t.me/',
     twitter = 'https://twitter.com/',
+    mail = 'mailto:',
+    address = 'https://maps.google.com/?q=',
+    tel = 'tel:',
 }
 
 enum SocialMediaIcon {
@@ -40,6 +46,9 @@ enum SocialMediaIcon {
     bandcamp = '/icons/socials/beatport',
     telegram = '/icons/socials/telegram',
     twitter = '/icons/socials/x',
+    mail = '/icons/socials/mail-alt-svgrepo-com',
+    address = '/icons/socials/map',
+    tel = '/icons/socials/phone-flip-svgrepo-com',
 }
 
 

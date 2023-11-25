@@ -9,9 +9,11 @@ interface SocialListProps {
 const SocialList: React.FC<SocialListProps> = ({ metadata }) => {
     return <div className={styles.socialList}>
         {
-            Object.keys(metadata).map((key) => {
+            Object.keys(metadata).map((key, index) => {
                 if (Object.values(SocialMedia).includes(key as SocialMedia)) {
-                    return <SocialMediaTag socialMedia={key as SocialMedia} username={metadata[key]} />;
+                    return <SocialMediaTag 
+                    key={`${index}`} 
+                    socialMedia={key as SocialMedia} username={metadata[key]} />;
                 }
             }
             )

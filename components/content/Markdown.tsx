@@ -4,7 +4,7 @@ import styles from './Markdown.module.scss';
 import Link from 'next/link';
 import * as Url from 'url';
 import HoverLink from './HoverLink';
-import remarkGfm from 'remark-gfm'
+// import remarkGfm from 'remark-gfm'
 interface ConnectionProps {
   to: string;
 }
@@ -36,21 +36,30 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
   return (
     <div className={`${styles.markdown} ${active ? styles.active : ''}`}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        // Other configurations remain unchanged
         components={{
           a: ({ node, ...props }) => {
-            const { ref, ...rest } = props;
-            if (props.href?.startsWith('http'))
-              return <p className={styles.anchor}><a {...rest} target="_blank" rel="noopener noreferrer">{props.children}</a></p>
+            const { href, children } = props;
 
-            if (props.href?.startsWith('#'))
-              return (<div className={styles.anchor}><HoverLink name={props.href || ''} {...rest} > {props.children} </HoverLink></div>)
+            if (href?.startsWith('http')) {
+              return (
+                <a href={href} target="_blank" rel="noopener noreferrer" className={styles.anchor}>
+                  {children}
+                </a>
+              );
+            }
 
+            if (href?.startsWith('#')) {
+              return (
+                <div className={styles.anchor}>
+                  <HoverLink name={href || ''}>{children}</HoverLink>
+                </div>
+              );
+            }
+
+            // Render other cases as needed
           },
-          ul: ({ node, ...props }) => {
-            const { ref, ...rest } = props;
-            return <ul {...rest} className={styles.list} />;
-          }
+          // Adjust other components as necessary
         }}
       >
         {content}

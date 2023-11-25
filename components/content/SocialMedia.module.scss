@@ -14,16 +14,9 @@
         cursor: pointer;
         transform: scale(1.1);
     }
+    background-color: #fff;
 }
 
-.socialMediaIcon {
-    width: 2rem;
-    height: 2rem;
-    // make image smaller
-    // &.website {
-    //     transform: scale(0.1);
-    // }
-}
 
 .username {
     font-size: 1rem;
@@ -86,4 +79,8 @@
 
 .twitter {
     background-color: #fff;
+}
+
+.address {
+    padding-left: 0.2rem;
 }

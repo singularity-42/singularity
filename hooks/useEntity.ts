@@ -5,29 +5,27 @@ import { Entity } from '@/types';
 
 const useEntity = (name: string) => {
     const [entity, setEntity] = useState<Entity>({
-            title: '',
-            tags: [],
-            description: '',
-        }
+        title: '',
+        tags: [],
+        description: '',
+    }
     );
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        setLoading(true);
         const fetchEntity = async () => {
-            console.log('Fetching entity:', name);
-
+            
             if (!name) {
                 return;
             }
 
-            if (name.length > 0)
-                return;
-
+            console.log('Fetching entity:', name);
 
             try {
                 // Construct the API URL properly
-                const url = `${process.env.NEXT_PUBLIC_API_URL}/entity?name=${name}`;
+                const url = `${process.env.NEXT_PUBLIC_API_URL}`+`entity?name=${name}`;
                 // Fetch data from the API
                 const response = await axios.get(url);
 
@@ -35,6 +33,7 @@ const useEntity = (name: string) => {
                 setEntity(response.data);
             } catch (error) {
                 console.error('Error fetching entity:', error);
+                setError((error as string) || 'Unknown error');
                 setEntity(
                     {
                         title: '',
@@ -43,6 +42,7 @@ const useEntity = (name: string) => {
                     }
                 );
             }
+            setLoading(false);
         };
 
 
@@ -50,7 +50,11 @@ const useEntity = (name: string) => {
         fetchEntity();
     }, [name]);
 
-    return { entity };
+    return {
+        entity, 
+        loading, 
+        error
+    };
 }
 
 export default useEntity;

@@ -63,12 +63,6 @@ const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.Counte
     }
 
     return <div className={styles.table}>
-
-
-        {/* pop up section which will be filling the screen having a blose button on top right */}
-
-        <Details />
-
         {
             currentVisibleTags.length > 0 &&
             <Filter currentVisibleTags={currentVisibleTags} />
