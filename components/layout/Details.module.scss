@@ -37,14 +37,14 @@
 
     &.show {
         border: 1px solid rgb(var(--light-rgb));
-        display: block;
+    display: none;
         opacity: 1;
         animation: fadeIn 0.3s ease-in-out forwards;
     }
     
     &.hide {
         border: 1px solid #0000;
-        display: block;
+        display: none;
         opacity: 0;
         animation: fadeOut 0.3s ease-in-out forwards;
     }

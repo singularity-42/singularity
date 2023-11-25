@@ -21,6 +21,8 @@ const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     "collectives": "Groups crafting engaging content together.",
     "concepts": "Ideas shaping the content we adore.",
     "collaborations": "Joint projects creating beloved content.",
+    "cyberware": "Tools and services powering the Singularity.",
+    "change": "Changes to the Singularity.",
 };
 
 const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {

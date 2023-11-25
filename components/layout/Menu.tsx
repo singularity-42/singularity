@@ -30,12 +30,13 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const pages = [
     "/collaborations",
     "/collectives",
-    "/creatives",  //   "/creators",
+    "/cyberware",
     "/concepts",
+    "/creators",  
+    "/change",
     // "/creations",
-    "/changes",
+    //   "/creators",
     // "/canvas",
-    // "/cyber",
     // "/culture",
     // "/curation",
     // "/cats",
@@ -46,17 +47,19 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   return (
     <ul className={`${styles.menu} ${isMenuOpen}`}>
        {
-        pages.sort((a, b) => 
-          {
-            if (a.length > b.length) {
-              return -1;
-            }
-            if (a.length < b.length) {
-              return 1;
-            }
-            return 0;
-          }
-        ).map((page, index) => {
+        pages
+        // .sort((a, b) => 
+        //   {
+        //     if (a.length > b.length) {
+        //       return -1;
+        //     }
+        //     if (a.length < b.length) {
+        //       return 1;
+        //     }
+        //     return 0;
+        //   }
+        // )
+        .map((page, index) => {
           let innerText = page.replace("/", "");
           return (
             <li key={index} className={`${styles.menuItem} ${getCurrentPage(page)}`}>
