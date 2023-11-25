@@ -8,7 +8,7 @@ tags:
   - producer
 soundcloud: album/nebulous-reverie
 spotify: 7zXySu6Kr3w2FmhpCkr2Ic
-bandcamp: nebulous-reverie
+bandcamp: vosakiz.bandcamp.com
 apple: vosakiz/1530267977
 youtube: UCaPrGCmu7C-UDLMrWgbVrIA
 twitter: vosakiz

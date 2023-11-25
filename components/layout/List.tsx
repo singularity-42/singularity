@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './List.module.scss';
 import Entity from './Entity';
 import Loading from '../content/Loading';
 import Error from './Error';
-import { on } from 'events';
 
 interface ListProps {
   entityData: any;
@@ -12,38 +11,43 @@ interface ListProps {
 }
 
 const List: React.FC<ListProps> = ({ entityData, onTagClick, selected }) => {
-  const entitys: any = entityData;
+  const entities: any = entityData;
 
-  if (!entitys) {
+  useEffect(() => {
+    const entityElements = document.querySelectorAll(`.${styles.entity}`);
+
+    // Apply fade-in animation to each entity with a delay
+    entityElements.forEach((entity: Element, index: number) => {
+      const htmlEntity = entity as HTMLElement;
+      htmlEntity.style.opacity = '0';
+      htmlEntity.style.animation = `${styles.fadeIn} 0.5s ease-in-out forwards`;
+      htmlEntity.style.animationDelay = `${index * 0.1}s`;
+    });
+  }, [entities]);
+
+  if (!entities) {
     return <Loading />;
   }
 
-  if (entitys.length === 0) {
-    return <Error error='No entitys found' onClick={
-      () => {
-        // go a page back
-        // window.history.back();
-        // reload the page
-        window.location.reload();
-      }
-    } />;
+  if (entities.length === 0) {
+    return (
+      <Error
+        error="No entities found"
+        onClick={() => {
+          // Reload the page
+          window.location.reload();
+        }}
+      />
+    );
   }
 
   return (
     <div className={styles.table}>
       <div className={styles.thead}>
-        <div>
-          <div className={styles.th}>title
-          </div>
-          {Object.keys(entitys[0].metadata).map((key: string) => (
-            <div key={key} className={styles.th}>
-              {key}
-            </div>
-          ))}
-        </div>
+        {/* Header content */}
       </div>
-      <div>
-        {entitys?.map((entity: any, index: number) => (
+      <div className={styles.tbody}>
+        {entities?.map((entity: any, index: number) => (
           <div key={index} className={styles.entity}>
             <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
           </div>

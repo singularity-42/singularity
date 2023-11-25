@@ -1,3 +1,10 @@
+.active {
+    color: rgb(var(--smoke-rgb)) !important;
+    .anchor {
+        color: rgb(var(--secondary-rgb)) !important;
+    }
+}
+
 .markdown {
     width: 100%;
     margin: 0 auto;
@@ -5,12 +12,13 @@
     // background-color: #f9f9f9;
     border-radius: 5px;
 
+    color: rgb(var(--shaded-rgb));
+    transition: color 0.2s ease-in-out;
     &:hover {
-
+        color: rgb(var(--smoke-rgb));
         .anchor {
             color: rgb(var(--secondary-rgb));
         }
-        color: rgb(var(--smoke-rgb));
     }
 }
 
@@ -31,11 +39,13 @@
 }
 
 .anchor {
+    border-radius: 5px;
+    // inline
     display: inline-block;
-    color: rgb(var(--primary-rgb));
+    color: rgba(var(--secondary-rgb), 0.4);
     transition: color 0.2s ease-in-out;
     &:hover {
-        color: rgb(var(--secondary-rgb));
+        color: rgba(var(--secondary-rgb), 1);
         text-decoration: underline;
     }
 }

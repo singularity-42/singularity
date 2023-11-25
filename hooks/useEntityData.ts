@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useFilter } from './provider/FilterProvider';
 
-const useEntityData = (entityType: string, filter: string[] | null) => {
+const useEntityData = (entityType: string) => {
   const [entityData, setEntityData] = useState<any[] | null>(null);
+  const { filter } = useFilter();
 
   useEffect(() => {
     if (!entityType) {

@@ -15,8 +15,6 @@
       font-size: 18px;
       color: rgb(var(--dark-rgb));
     }
-  
-    
   }
   .filterContainer {
     padding: 0.42rem;
@@ -24,5 +22,6 @@
     border-radius: 20px;
 
     display: flex;
+    gap: 4px;
     flex-wrap: wrap;
   }

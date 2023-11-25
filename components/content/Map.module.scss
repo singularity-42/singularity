@@ -1,0 +1,21 @@
+.mapContainer {
+    height: 42%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  
+    padding: 0.42rem;
+    border: 1px dashed rgb(var(--smoke-rgb));
+    
+    .map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.map {
+  padding: 0.42rem;
+}

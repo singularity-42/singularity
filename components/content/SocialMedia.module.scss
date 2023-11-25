@@ -1,13 +1,12 @@
 .socialMediaTag {
     width: fit-content;
 
-
     display: flex;
     align-items: center;
     padding: 0.1rem;
     border-radius: 0.5rem;
     
-    font-size: 1.5rem;
+    font-size: 0.42rem;
     font-weight: bold;
     color: rgb(var(--light-rgb));
 
@@ -21,7 +20,7 @@
     width: 2rem;
     height: 2rem;
     // make image smaller
-    // &.Website {
+    // &.website {
     //     transform: scale(0.1);
     // }
 }
@@ -31,19 +30,25 @@
     font-weight: normal;
 }
 
-.Instagram { 
+.instagram { 
     background-color: #E1306C;
 }
 
-.YouTube {
-    background-color: #FF0000;
+.youtube {
+    background-color: #fff;
+
+
+    .socialMediaIcon {
+        scale: 0.55;
+    }
+    
 }
 
-.SoundCloud {
+.soundcloud {
     background-color: #FF5500;
 }
 
-.Spotify {
+.spotify {
     background-color: #1DB954;
 }
 
@@ -51,7 +56,7 @@
     background-color: #000000;
 }
 
-.Bandcamp {
+.bandcamp {
     background-color: #629AA9;
 }
 
@@ -59,15 +64,15 @@
     background-color: #9146FF;
 }
 
-.Beatport {
+.beatport {
     background-color: #FF5E00;
 }
 
-.Telegram {
+.telegram {
     background-color: #0088CC;
 }
 
-.Website {
+.website {
     background-color: #fff;
 
     .socialMediaIcon {
@@ -77,4 +82,8 @@
         left: -1.175rem;
     }
 
+}
+
+.twitter {
+    background-color: #fff;
 }

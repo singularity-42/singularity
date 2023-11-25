@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Table from '@/components/layout/Table';
+import TableContent from '@/components/layout/Table';
 
 const CreativesPage: React.FC = () => {
   return (
-      <Table type='creatives' />
+      <TableContent type='creatives' />
   );
 };
 

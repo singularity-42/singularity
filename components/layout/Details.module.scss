@@ -5,7 +5,7 @@
     padding: 0.5rem;
     cursor: pointer;
     color: rgb(var(--light-rgb));
-    
+
     // reset all button styles
     border: none;
     background: none;
@@ -16,21 +16,58 @@
         color: rgb(var(--secondary-rgb));
     }
 }
+
+
+
 .popup {
+    display: none;
+    opacity: 0;
     position: fixed;
     top: 10vh;
     left: 10vw;
     width: 80vw;
     height: 80vh;
     color: rgb(var(--light-rgb));
-    border: 1px solid rgb(var(--light-rgb));
     // scollable
     overflow-y: scroll;
     overflow-x: hidden;
 
     padding: 2rem;
-    z-index: 3;
     background-color: rgb(var(--dark-rgb));
+
+    &.show {
+        border: 1px solid rgb(var(--light-rgb));
+        display: block;
+        opacity: 1;
+        animation: fadeIn 0.3s ease-in-out forwards;
+    }
+    
+    &.hide {
+        border: 1px solid #0000;
+        display: block;
+        opacity: 0;
+        animation: fadeOut 0.3s ease-in-out forwards;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }    
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 // Entity.module.scss
@@ -60,10 +97,11 @@
 .detailsContainer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
 }
 
 .socialMediaLink {
+    padding-top: 10rem;
     margin-right: 10px;
     text-decoration: none;
 }
@@ -87,13 +125,12 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    
 }
 
 .mapContainer {
     margin: 1rem;
     position: relative;
-    width: 95vw;  
+    width: 95vw;
 }
 
 // on mobile tags Container should be vertical
