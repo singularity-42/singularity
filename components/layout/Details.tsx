@@ -40,7 +40,6 @@ const Entity: React.FC<EntityProps> = () => {
                 <div onClick={() =>handleExit()}>X</div>  
             </div>
             <div className={styles.detailsContainer}>
-                <div className={styles.socialMediaContainer}>
                     <h2 className={styles.title}>{(() => {
                         if (entity.title.includes('-')) {
                             const date = entity.title.split('-');
@@ -48,15 +47,16 @@ const Entity: React.FC<EntityProps> = () => {
                         }
                         return entity.title
                     })()}</h2>
-                </div>
                     <div className={styles.tagsContainer}>
                         <Tags tags={entity.tags} />
                     </div>
-                    <SocialMedias metadata={entity} />
+                    <div className={styles.socialMediaContainer}>
+                        <SocialMedias metadata={entity} />
+                    </div>
             </div>
             {entity.address && <div className={styles.addressContainer}> {entity.address} </div>}
             {entity.location && <Map location={entity.location} />}
-            {entity.description && <Markdown content={entity.description} />}
+            {entity.description && <Markdown content={entity.description} active={true} />}
         </div>
     );
 };

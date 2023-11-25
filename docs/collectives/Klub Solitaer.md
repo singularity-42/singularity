@@ -10,7 +10,7 @@ tags:
   - culture
   - urbaninterventions
 relations: 
-location: 
+location: 50.830613735661586, 12.939564584215244
 address: Augustustburger Str. 102, 09126 Chemnitz, Germany
 ---
  non-profit organization, focusing on [#culture](https://www.instagram.com/explore/tags/culture/), [#art](https://www.instagram.com/explore/tags/art/), [#urbaninterventions](https://www.instagram.com/explore/tags/urbaninterventions/), [#collaboration](https://www.instagram.com/explore/tags/collaboration/) and [#cofunding](https://www.instagram.com/explore/tags/cofunding/) of the independent art scene.

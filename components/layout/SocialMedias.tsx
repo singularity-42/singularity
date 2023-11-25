@@ -15,7 +15,6 @@ const SocialMedias: React.FC<SocialMediasProps> = ({ metadata }) => {
                 }
             }
             )
-
         }
     </div>;
 }

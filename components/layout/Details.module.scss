@@ -28,9 +28,22 @@
     overflow-y: scroll;
     overflow-x: hidden;
 
+    opacity: 0;
+
+    animation: fadeIn 0.3s ease-in-out forwards;
+
     padding: 2rem;
     z-index: 3;
     background-color: rgb(var(--dark-rgb));
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 // Entity.module.scss
@@ -60,10 +73,11 @@
 .detailsContainer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
 }
 
 .socialMediaLink {
+    padding-top: 10rem;
     margin-right: 10px;
     text-decoration: none;
 }
@@ -75,6 +89,7 @@
 
 // should be all on left next to each other horizontally
 .socialMediaContainer {
+    padding-top: 2rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -87,7 +102,6 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    
 }
 
 .mapContainer {
@@ -110,3 +124,4 @@
     padding: 1rem;
     transition: color 0.2s ease-in-out;
 }
+

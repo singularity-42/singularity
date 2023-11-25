@@ -14,7 +14,7 @@
 
 .title {
     font-size: 24px;
-    width: 100%;
+    width: 50vw;
 }
 
 .entityMarkdown {
@@ -50,11 +50,13 @@
 .tagsContainer {
     // flex center horizontally
     width: 100%;
+    height: 20vh;
     // place left
     position: relative;
     display: flex;
     align-items: center;
     gap: 4px;
+    bottom: 0;
     // place right
     justify-content: flex-end;
     

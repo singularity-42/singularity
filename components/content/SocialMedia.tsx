@@ -31,7 +31,7 @@ enum SocialMediaUrl {
 }
 
 enum SocialMediaIcon {
-    website = '/icons/socials/website',
+    website = '/icons/socials/globe-svgrepo-com',
     instagram = '/icons/socials/instagram',
     youtube = '/icons/socials/youtube-color-svgrepo-com',
     soundcloud = '/icons/socials/soundcloud',
