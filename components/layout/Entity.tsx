@@ -30,21 +30,22 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
             onMouseLeave={() => setIsHovered(false)} // Set isHovered to false on mouse leave
         >
             {/* {tags && tags.length > 0 && <div>{tags.join(', ')}</div>} */}
+            <div className={styles.socialMediaContainer}>
+                <h2 className={styles.title}>{(() => {
+                    // title is sometimes a date so we want to display it with . and reorder to day.month.year
+                    if (title.includes('-')) {
+                        const date = title.split('-');
+                        // return `${date[2]}.${date[1]}.${date[0]}`;
+                    }
+                    return <HoverLink name={title}>{title}</HoverLink>;
+
+                })()}</h2>
+            </div>
             <div className={styles.filterTagsContainer}>
+                <SocialMedias metadata={entity.metadata} />
                 <Tags tags={tags} onTagClick={onTagClick} selected={selected} />
             </div>
             <div className={styles.detailsContainer}>
-                <div className={styles.socialMediaContainer}>
-                    <h2 className={styles.title}>{(() => {
-                        // title is sometimes a date so we want to display it with . and reorder to day.month.year
-                        if (title.includes('-')) {
-                            const date = title.split('-');
-                            // return `${date[2]}.${date[1]}.${date[0]}`;
-                        }
-                        return <HoverLink name={title}>{title}</HoverLink>;
-
-                    })()}</h2>
-                </div>
                 <div className={styles.galleryContainer}>
                     <Gallery images={entity.images} name={title} />
                 </div>
@@ -57,7 +58,6 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 )}
             </div>
 
-            <SocialMedias metadata={entity.metadata} />
         </div>
     );
 };

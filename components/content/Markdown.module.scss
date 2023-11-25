@@ -54,3 +54,12 @@
     list-style-type: disc;
     margin-left: 20px;
 }
+
+
+.tr {
+    border-bottom: 1px solid rgba(var(--secondary-rgb), 0.2);
+}
+
+.td {
+    padding: 0 0.42rem;
+}

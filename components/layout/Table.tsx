@@ -11,11 +11,6 @@ import { OrderType } from '@/types';
 import Details from './Details';
 import { FilterProvider, useFilter } from '@/hooks/provider/FilterProvider';
 
-interface TableProps {
-    type: string;
-    orderType?: OrderType;
-}
-
 const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     "creatives": "Content creators bringing imagination to life.",
     "collectives": "Groups crafting engaging content together.",
@@ -24,6 +19,12 @@ const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     "cyberware": "Tools and services powering the Singularity.",
     "change": "Changes to the Singularity.",
 };
+
+interface TableProps {
+    type: string;
+    orderType?: OrderType;
+    maxColumns?: number;
+}
 
 const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
     const { filter, setFilter } = useFilter();
@@ -87,7 +88,7 @@ const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.Counte
     </div>;
 };
 
-const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
     return (
         <FilterProvider>
             <TableContent type={type} orderType={orderType} />

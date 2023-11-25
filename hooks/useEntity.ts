@@ -21,8 +21,6 @@ const useEntity = (name: string) => {
                 return;
             }
 
-            console.log('Fetching entity:', name);
-
             try {
                 // Construct the API URL properly
                 const url = `${process.env.NEXT_PUBLIC_API_URL}`+`entity?name=${name}`;

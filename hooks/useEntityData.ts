@@ -6,7 +6,7 @@ import { useFilter } from './provider/FilterProvider';
 const useEntityData = (entityType: string) => {
   const [entityData, setEntityData] = useState<any[] | null>(null);
   const { filter } = useFilter();
-  const [previousFilter, setPreviousFilter] = useState<any[] | null>(null);
+  const [previousFilter, setPreviousFilter] = useState<string[] | null>([]);
 
   const [previousType, setPreviousType] = useState<string>('');
 
@@ -19,7 +19,9 @@ const useEntityData = (entityType: string) => {
     if (entityType != previousType) 
       setPreviousType(entityType)
     else
-      return;
+      {
+        return;
+      }
 
     if (!entityType) {
       return;

@@ -3,14 +3,12 @@
     align-items: center;
     background: rgb(var(--dark-rgb));
     padding: 0 0.96rem;
-    z-index: 420;
     width: 100%;
     margin-top: 0;
     justify-content: space-between;
 }
 
 .headerBrand {
-    z-index: 2;
     font-size: 2rem;
     font-weight: 900;
     color: rgb(var(--color-sub));
