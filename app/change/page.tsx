@@ -24,7 +24,7 @@ const ChangePage: React.FC = () => {
         In Future is this the place to change information about the <Brand /> 
         will be made. */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          <span>Change information about the</span>
+          <span>Soon you can change information about the</span>
           <Brand />
         </div>
 
