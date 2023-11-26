@@ -1,15 +1,23 @@
 const util = require('util');
 const fs = require('fs');
 const net = require('net');
+const colors = require('colors'); // Import colors.js for colorized console output
+
+// get current directory
+const currentDirectory = process.cwd();
 
 // Read the configuration file
 const config = {
   serverStartCommand: "yarn start",
-  projectDirectory: ".",
+  projectDirectory: currentDirectory,
   buildCommand: "yarn build",
-  checkInterval: 5000,
+  checkInterval: 1000,
   serverPort: 3000, // Change this to your server's port
 };
+
+const execAsync = util.promisify(require('child_process').exec);
+const readdirAsync = util.promisify(fs.readdir);
+const readFileAsync = util.promisify(fs.readFile);
 
 async function startServer() {
   try {
@@ -24,16 +32,16 @@ async function startServer() {
       }
     });
   } catch (error) {
-    console.error(`Error starting server: ${error}`);
+    console.error('Error starting server:'.red, error); // Using colors.js to colorize the error message
   }
 }
 
 async function handlePortInUse() {
-  console.log('Port in use, waiting for it to become available...');
+  console.log('Port in use, waiting for it to become available...'.yellow);
   while (true) {
     try {
       await checkPortAvailability(config.serverPort);
-      console.log('Port is now available. Restarting the server...');
+      console.log('Port is now available. Restarting the server...'.green);
       await startServer();
       break;
     } catch (err) {
@@ -62,53 +70,57 @@ async function checkPortAvailability(port) {
   });
 }
 
+async function executeGitPull() {
+  try {
+    const { stdout, stderr } = await execAsync('git pull');
+    console.log(`Git pull output: ${stdout}`.cyan);
+    console.error(`Git pull error: ${stderr}`.red);
+  } catch (error) {
+    console.error(`Error executing git pull: ${error}`.red);
+  }
+}
+async function updateAndRebuild() {
+  await executeGitPull(); // Execute git pull to fetch the latest changes
+  
+  try {
+    // ... Perform other update-related actions like installing dependencies, building the app, etc.
+    // Example:
+    const { stdout, stderr } = await execAsync('yarn install && yarn build');
+    console.log(`Update and rebuild output: ${stdout}`.cyan);
+    console.error(`Update and rebuild error: ${stderr}`.red);
+  } catch (error) {
+    console.error(`Error updating and rebuilding: ${error}`.red);
+  }
+}
+
 async function checkForUpdatesAndRebuild() {
   try {
     while (true) {
-      // Check for updates - for example, read a directory or file content
-      const files = await readdirAsync(config.projectDirectory);
+      console.log('Checking for updates...'.yellow);
 
-      // Simulated check for updates - check if certain files have changed
-      const fileContentsPromises = files.map(async (file) => {
-        const content = await readFileAsync(`${config.projectDirectory}/${file}`, 'utf-8');
-        return { file, content };
-      });
-
-      const fileContents = await Promise.all(fileContentsPromises);
-
-      // Here, you can compare the file contents with some previous state
-      // If changes are detected, rebuild the project
-      const rebuildNeeded = /* Your logic to determine if rebuild is needed based on fileContents */ true;
-
-      if (rebuildNeeded) {
-        console.log(chalk.cyan('Rebuilding project...'));
-        const { stdout, stderr } = await execAsync(config.buildCommand);
-        console.log(chalk.green(`Build output: ${stdout}`));
-        console.error(chalk.red(`Build error: ${stderr}`));
-      }
+      await updateAndRebuild(); // Perform update-related actions periodically
 
       // Sleep for a certain interval before checking for updates again
       await new Promise((resolve) => setTimeout(resolve, config.checkInterval));
     }
   } catch (error) {
-    console.error(chalk.red(`Error checking for updates or rebuilding: ${error}`));
+    console.error(`Error checking for updates or rebuilding: ${error}`.red);
   }
 }
-
 // Log functions (if needed)
 function logServerOutput(data) {
-  console.log(`Server output: ${data}`);
+  console.log(`Server output: ${data}`.green);
 }
 
 function logServerError(data) {
-  console.error(`Server error: ${data}`);
+  console.error(`Server error: ${data}`.red);
 }
 
 // Run both tasks asynchronously
 Promise.all([startServer(), checkForUpdatesAndRebuild()])
   .then(() => {
-    console.log('Server and update check started.');
+    console.log('Server and update check started.'.blue);
   })
   .catch((error) => {
-    console.error(`Error starting server or update check: ${error}`);
+    console.error(`Error starting server or update check: ${error}`.red);
   });
