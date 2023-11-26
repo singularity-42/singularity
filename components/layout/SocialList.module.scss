@@ -3,13 +3,26 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0.42rem 0;
+    padding: 0.42rem 0.2rem;
     width: 100%;
-    gap: 0.21rem;
+    gap: 0.33rem;
 
     // make overflow only 
+    // animation of opacity each child has longer as the previous one
+    animation: fadeIn 0.5s ease-in-out forwards;
+
 }
 
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 @media (max-width: 768px) {
     .socialList {

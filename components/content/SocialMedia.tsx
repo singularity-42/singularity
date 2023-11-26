@@ -8,6 +8,9 @@ import Image from 'next/image';
 
 export enum SocialMedia {
     website = 'website',
+    mail = 'mail',
+    address = 'address',
+    tel = 'tel',
     instagram = 'instagram',
     youtube = 'youtube',
     soundcloud = 'soundcloud',
@@ -28,6 +31,9 @@ enum SocialMediaUrl {
     bandcamp = 'https://',
     telegram = 'https://t.me/',
     twitter = 'https://twitter.com/',
+    mail = 'mailto:',
+    address = 'https://maps.google.com/?q=',
+    tel = 'tel:',
 }
 
 enum SocialMediaIcon {
@@ -40,6 +46,9 @@ enum SocialMediaIcon {
     bandcamp = '/icons/socials/beatport',
     telegram = '/icons/socials/telegram',
     twitter = '/icons/socials/x',
+    mail = '/icons/socials/mail-alt-svgrepo-com',
+    address = '/icons/socials/map',
+    tel = '/icons/socials/phone-flip-svgrepo-com',
 }
 
 
@@ -57,7 +66,7 @@ const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }
         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
             {/* <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer"><div className={styles.socialMediaIcon}><img src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} /></div></a> */}
             <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer">
-                <Image src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} width="42" height="42" />
+                <Image src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} width="30" height="30" />
             </a>
         </div>
     );

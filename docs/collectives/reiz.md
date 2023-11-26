@@ -7,6 +7,9 @@ tel:
 tags:
   - techno
   - dnb
+  - dj
+  - party
+  - music
 relations:
   - "[[reset]]"
 ---

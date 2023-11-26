@@ -7,7 +7,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   let entity_type = req.nextUrl.searchParams.get('entity_type');
   let filter = req.nextUrl.searchParams.get('filter');
   const entityFiles = glob.sync(`./docs/${entity_type}/**/*.md`);
-  const entityData = entityFiles.map((file) => {
+  const entities = entityFiles.map((file) => {
     const content = fs.readFileSync(file, 'utf8');
     return { file, content };
   });
@@ -32,13 +32,10 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
           const _list = metadata[list_key] || [];
           _list.push(item_);
           metadata[list_key] = _list;
-        } else {
-          console.error(`Invalid metadata: "${item}"`);
-        }
+        } 
       } else {
         const [key, value] = item.split(':').map((s) => s.trim());
         if (key.length > 0) metadata[key] = value;
-        else console.error('Empty key');
       }
     });
     let _metadata = {
@@ -49,7 +46,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   };
 
   const responseJSON = JSON.stringify(
-   entityData.map((file: any) => {
+   entities.map((file: any) => {
      const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
      const metadataString = file.content.split('---')[1];
      const metadata = extractMetadata(metadataString, file_name);

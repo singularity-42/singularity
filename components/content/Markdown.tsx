@@ -37,19 +37,104 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
     <div className={`${styles.markdown} ${active ? styles.active : ''}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        // Other configurations remain unchanged
         components={{
-          a: ({ node, ...props }) => {
-            const { ref, ...rest } = props;
-            if (props.href?.startsWith('http'))
-              return <p className={styles.anchor}><a {...rest} target="_blank" rel="noopener noreferrer">{props.children}</a></p>
+          td: ({ node, ...props }) => {
+            const children = node?.children;
 
-            if (props.href?.startsWith('#'))
-              return (<div className={styles.anchor}><HoverLink name={props.href || ''} {...rest} > {props.children} </HoverLink></div>)
+            if (!children) {
+              return <td {...props}></td>;
+            }
 
+            let row = children.map((child: any) => {
+              const isElement = child?.type === 'element';
+
+              if (!isElement) {
+                return child.value;
+              } else {
+                return <HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>;
+              }
+            });
+
+            return <td className={styles.td} {...props}>{row}</td>;
           },
-          ul: ({ node, ...props }) => {
-            const { ref, ...rest } = props;
-            return <ul {...rest} className={styles.list} />;
+          a: ({ node, ...props }) => {
+            const { href, children } = props;
+
+            if (href?.startsWith('http')) {
+              return (
+                <a href={href} target="_blank" rel="noopener noreferrer">
+                  {children}
+                </a>
+              );
+            }
+
+            if (href?.startsWith('#')) {
+              return (
+                  <HoverLink name={href || ''}>{children}</HoverLink>
+              );
+            }
+
+            // Render other cases as needed
+          },
+
+          h1: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
+              else newChildren.push(<span key={i}>{child.value}</span>);
+            }
+            return <h1 {...props}>{newChildren}</h1>;
+          },
+          h2: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
+              else newChildren.push(<span key={i}>{child.value}</span>);
+            }
+            return <h2 {...props}>{newChildren}</h2>;
+          },
+          h3: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
+              else newChildren.push(<span key={i}>{child.value}</span>);
+            }
+            return <h3 {...props}>{newChildren}</h3>;
+          },
+          h4: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
+              else newChildren.push(<span key={i}>{child.value}</span>);
+            }
+            return <h4 {...props}>{newChildren}</h4>;
+          },
+          p: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i]; // @TODO Fix this, will cause <strong></strong> to not work  
+              if (child?.type === 'element' && child?.tagName == "a") {
+                if (child?.properties?.href?.startsWith('http')) // if link is http or https than do this
+                newChildren.push(<a key={i} href={child?.properties?.href} target="_blank" rel="noopener noreferrer">bb{child?.children[0]?.value || ''}</a>);
+                else // if #{hash}  its hash than do this 
+                  newChildren.push(<HoverLink key={i} name={child?.children[0]?.value.replace('#', '') || ''}>{child?.children[0]?.value.replace('#', '') || ''}</HoverLink>);
+                
+              }
+              else if (child.value) newChildren.push(<span key={i}>{child.value}</span>);
+              else if (child?.children[0]?.value) newChildren.push(<span key={i}>{child?.children[0]?.value}</span>);
+              else newChildren.push(<span key={i}>{child}</span>);
+            }
+            return <p {...props}>{newChildren}</p>;
           }
         }}
       >

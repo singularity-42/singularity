@@ -1,11 +1,12 @@
 .closeButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.5rem;
+    position: relative;
+    width: 100%;
+    text-align: right;
+
     cursor: pointer;
     color: rgb(var(--light-rgb));
 
+    font-size: 24px;
     // reset all button styles
     border: none;
     background: none;
@@ -20,7 +21,6 @@
 
 
 .popup {
-    display: none;
     opacity: 0;
     position: fixed;
     top: 10vh;
@@ -28,23 +28,23 @@
     width: 80vw;
     height: 80vh;
     color: rgb(var(--light-rgb));
-    // scollable
     overflow-y: scroll;
     overflow-x: hidden;
 
+    z-index: 2;
     padding: 2rem;
     background-color: rgb(var(--dark-rgb));
 
     &.show {
         border: 1px solid rgb(var(--light-rgb));
-        display: block;
         opacity: 1;
+        background-color: rgb(var(--dark-rgb));
         animation: fadeIn 0.3s ease-in-out forwards;
     }
     
     &.hide {
         border: 1px solid #0000;
-        display: block;
+        display: none;
         opacity: 0;
         animation: fadeOut 0.3s ease-in-out forwards;
     }
@@ -139,6 +139,20 @@
     .tagsContainer {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+
+    .popup {
+        padding: 1rem;
+        top: 4rem;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 4rem);
+
+        .closeButton {
+            top: 0vh;
+            right: 0rem;
+        }
     }
 }
 

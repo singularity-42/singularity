@@ -16,12 +16,11 @@ const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
     useEffect(() => {
         const combinedTags = Array.from(new Set([...currentVisibleTags, ...seenTags]));
         const updatedFilters = selectedFilters.filter(filter => combinedTags.includes(filter));
-        let visibleTags = Array.from(new Set(currentVisibleTags));
+        let visibleTags = Array.from(new Set(currentVisibleTags)).filter(tag => (tag || '').length > 0);
         // remove duplicates
 
         setSeenTags(combinedTags);
         setSelectedFilters(updatedFilters);
-        setFilter(updatedFilters);
         setShownTags(visibleTags);
     }, [currentVisibleTags]);
 
@@ -51,7 +50,7 @@ const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
     return (
         <div className={styles.filter}>
             <div className={styles.filterContainer}>
-                {(shownTags || []).sort((a, b) => a.localeCompare(b)).map((tag, index) => (
+                {((shownTags || []).sort((a, b) => a.localeCompare(b)) || []).map((tag, index) => (
                     // <div
                     //     key={tag}
                     //     className={`${styles.tag} ${selectedFilters.includes(tag) ? styles.selected : ''}`}

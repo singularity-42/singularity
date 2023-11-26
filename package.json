@@ -18,11 +18,14 @@
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-force-graph": "^1.44.0",
+    "react-graph-vis": "^1.0.7",
     "react-markdown": "^9.0.0",
     "remark-gfm": "^4.0.0",
     "sass": "^1.69.5",
-    "three": "^0.158.0"
+    "three": "^0.158.0",
+    "uuid": "^9.0.1",
+    "vis-data": "^7.1.9",
+    "vis-network": "^9.1.9"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -3,39 +3,6 @@ import * as glob from 'glob';
 
 import { NextRequest, NextResponse } from 'next/server';
 
-
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// const useEntity = ( name: string ) => {
-//     const [entity, setEntity] = useState<any | null>(null);
-    
-//     useEffect(() => {
-//         if (!name) {
-//         return;
-//         }
-    
-//         const fetchEntity = async () => {
-//         try {
-//             // http://localhost:3000/api/entity
-//             let url = `${process.env.NEXT_PUBLIC_API_URL}/entity?name=${name}`;
-    
-//             // let url = 'http://localhost:3000/api/entities?entity_type='creative'&filter='artist, album''
-//             const response = await axios.get(url);
-//             setEntity(response.data);
-//         } catch (error) {
-//             console.error(error);
-//         }
-//         };
-    
-//         fetchEntity();
-//     }, [name]);
-
-//     return entity;
-// }
-
-// export default useEntity;
-
 export const GET = async (req: NextRequest, res: NextResponse) => {
     let entity_name = req.nextUrl.searchParams.get('name');
     const entityFiles = glob.sync(`./docs/**/*.md`);
@@ -43,7 +10,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         const [file_name] = file.split('/').slice(-1)[0].split('.md');
         return file_name === entity_name;
     });
-    const entityData = relevantEntityFiles.map((file) => {
+    const entities = relevantEntityFiles.map((file) => {
         const content = fs.readFileSync(file, 'utf8');
         return { file, content };
     });
@@ -69,12 +36,10 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
                     _list.push(item_);
                     metadata[list_key] = _list;
                 } else {
-                    console.error(`Invalid metadata: "${item}"`);
                 }
             } else {
                 const [key, value] = item.split(':').map((s) => s.trim());
                 if (key.length > 0) metadata[key] = value;
-                else console.error('Empty key');
             }
         });
         let _metadata = {
@@ -86,7 +51,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     let foundEntity = null;
 
-    for (const file of entityData) {
+    for (const file of entities) {
         const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
         const metadataString = file.content.split('---')[1];
         let metadata = extractMetadata(metadataString, file_name);

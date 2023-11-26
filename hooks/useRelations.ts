@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Entity } from '@/types';
+import { Relation } from '@/types';
 
 
-const useEntity = (name: string) => {
-    const [entity, setEntity] = useState<Entity>({
+const useRelation = (name: string) => {
+    const [relations, setRelation] = useState<Relation>({
         title: '',
-        tags: [],
-        description: '',
+        nodes: [],
+        edges: [],
     }
     );
     const [loading, setLoading] = useState<boolean>(false);
@@ -15,7 +15,7 @@ const useEntity = (name: string) => {
 
     useEffect(() => {
         setLoading(true);
-        const fetchEntity = async () => {
+        const fetchRelation = async () => {
             
             if (!name) {
                 return;
@@ -23,19 +23,19 @@ const useEntity = (name: string) => {
 
             try {
                 // Construct the API URL properly
-                const url = `${process.env.NEXT_PUBLIC_API_URL}`+`entity?name=${name}`;
+                const url = `${process.env.NEXT_PUBLIC_API_URL}`+`relations?name=${name}`;
                 // Fetch data from the API
                 const response = await axios.get(url);
-
+                console.log(response.data);
                 // Assuming the API returns data in the expected format
-                setEntity(response.data);
+                setRelation(response.data);
             } catch (error) {
                 setError((error as string) || 'Unknown error');
-                setEntity(
+                setRelation(
                     {
                         title: '',
-                        tags: [],
-                        description: '',
+                        nodes: [],
+                        edges: [],
                     }
                 );
             }
@@ -44,14 +44,14 @@ const useEntity = (name: string) => {
 
 
 
-        fetchEntity();
+        fetchRelation();
     }, [name]);
 
     return {
-        entity, 
+        relations, 
         loading, 
         error
     };
 }
 
-export default useEntity;
+export default useRelation;

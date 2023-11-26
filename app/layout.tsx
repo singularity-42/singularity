@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
-import Tooltip from '@/components/content/Tooltip';
+import Details from '@/components/layout/Details';
+import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,26 +13,27 @@ export const metadata: Metadata = {
   description: '42',
 }
 
+
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <TooltipProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <Header />
-          {
-            // if url has #--- in name then render <Details />
-            // else render children
-
-            
-
+    <html suppressHydrationWarning={true}>
+      <body className={inter.className}>
+        <DetailsProvider>
+          <TooltipProvider>
+            <Header />
+            {
+              // if url has #--- in name then render <Details />
+              // else render children
             }
-          {children}
-        </body>
-      </html>
-    </TooltipProvider>
+            {children}
+          </TooltipProvider>
+        </DetailsProvider>
+      </body>
+    </html>
   )
 }

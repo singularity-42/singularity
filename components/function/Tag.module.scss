@@ -3,19 +3,22 @@
     justify-content: center;
     align-items: center;
     // width: 200px;
-    border-radius: 20%;
     cursor: pointer;
     font-size: 16px;
     height: 2rem;
     padding: 0.42rem;
     font-weight: bold;
-    color: rgb(var(--light-rgb));
+    color: rgba(var(--light-rgb), 0.8);
     transition: transform 0.3s ease;
     position: static;
-    border-radius: 20px;
+    border-radius: 4.2px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
+    // background-color: rgba(var(--light-rgb), 0.2);
+    border: 1px solid rgba(var(--shaded-rgb), 0.42);
+    
+    
     &:hover {
     transform: scale(1.1);
     background-color: rgb(var(--primary-rgb));

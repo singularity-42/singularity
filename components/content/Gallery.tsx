@@ -1,5 +1,4 @@
 
-import useInstagramImages from '@/hooks/useInstagramImages';
 import styles from './Gallery.module.scss';
 
 interface GalleryProps {
@@ -8,7 +7,6 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ images, name }) => {
-    const imageList = useInstagramImages("drumni");
 
     if (!images || images.length === 0) {
         return null;
