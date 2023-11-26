@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "auto": "node ./init.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.15.11",
-    "@types/three": "^0.158.2",
     "axios": "^1.6.1",
+    "colors": "^1.4.0",
     "fs": "^0.0.1-security",
     "glob": "^10.3.10",
     "next": "14.0.1",
@@ -28,9 +28,11 @@
     "vis-network": "^9.1.9"
   },
   "devDependencies": {
+    "@react-three/fiber": "^8.15.11",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.158.2",
     "@wixc3/react-board": "^2.3.0",
     "typescript": "^5"
   }

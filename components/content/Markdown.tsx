@@ -125,7 +125,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               const child = children[i]; // @TODO Fix this, will cause <strong></strong> to not work  
               if (child?.type === 'element' && child?.tagName == "a") {
                 if (child?.properties?.href?.startsWith('http')) // if link is http or https than do this
-                newChildren.push(<a key={i} href={child?.properties?.href} target="_blank" rel="noopener noreferrer">bb{child?.children[0]?.value || ''}</a>);
+                  newChildren.push(<HoverLink key={i} href={child?.properties?.href}>{child?.children[0]?.value || ''}</HoverLink>); 
                 else // if #{hash}  its hash than do this 
                   newChildren.push(<HoverLink key={i} name={child?.children[0]?.value.replace('#', '') || ''}>{child?.children[0]?.value.replace('#', '') || ''}</HoverLink>);
                 
@@ -135,7 +135,17 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               else newChildren.push(<span key={i}>{child}</span>);
             }
             return <p {...props}>{newChildren}</p>;
-          }
+          },
+          li: ({ node, ...props }) => {
+            let children = node?.children as any;
+            let newChildren = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
+              else newChildren.push(<span key={i}>{child.value}</span>);
+            }
+            return <li style={{ marginLeft: '1rem' }} {...props}>{newChildren}</li>;
+          },
         }}
       >
         {content}
