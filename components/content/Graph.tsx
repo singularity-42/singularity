@@ -1,30 +1,109 @@
-import React from 'react';
-import { ForceGraph2D } from 'react-force-graph';
+import React, { useRef, useEffect } from 'react';
+import { DataSet, Network, Node, Edge, Options } from 'vis-network';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './Graph.module.scss';
+import { useDetails } from '@/hooks/provider/DetailsProvider';
 
 interface GraphProps {
- graphData: { nodes: any[], links: any[] };
+  graphData: { nodes: Node[]; edges: Edge[] };
+  options?: Options;
+  events?: { [key: string]: Function };
+  getNetwork?: Function;
+  getNodes?: Function;
+  getEdges?: Function;
+  identifier?: string;
+  style?: React.CSSProperties;
 }
 
-const Graph: React.FC<GraphProps> = ({ graphData }) => {
- return (
- <div className={styles.graphContainer}>
-   <ForceGraph2D
-     graphData={graphData}
-     nodeCanvasObject={(node, ctx, globalScale) => {
-       const label = node.id;
-       const fontSize = 12 / globalScale;
-       ctx.font = `${fontSize}px sans-serif`;
-       ctx.textAlign = 'center';
-       ctx.textBaseline = 'middle';
-       ctx.fillStyle = styles.nodeLabel;
-       ctx.fillText(label, node.x, node.y);
-     }}
-     linkColor={styles.link}
-     nodeColor={styles.node}
-   />
- </div>
- );
-}
+const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork }) => {
+  const container = useRef<HTMLDivElement | null>(null);
+  const { edges, nodes } = graphData;
+  const { setName } = useDetails();
+
+  useEffect(() => {
+    let network: Network | null = null;
+
+    const defaultOptions: Options = {
+      physics: {
+        stabilization: false,
+      },
+      autoResize: false,
+      edges: {
+        smooth: false,
+        color: '#ffffff',
+        width: 0.5,
+        arrows: {
+          to: {
+            enabled: true,
+            scaleFactor: 0.5,
+          },
+        },
+      },
+      nodes: {
+        shape: 'dot',
+        size: 10,
+        opacity: 1,
+        font: {
+          size: 10,
+          color: '#ffffff',
+        },
+        color: {
+          border: '#ffffff',
+          background: '#ffffff',
+          highlight: {
+            background: '#420000',
+            border: '#ffffff',
+          },
+        },
+        borderWidth: 2,
+        shadow: true,
+      },
+
+    };
+
+    const mergedOptions = { ...defaultOptions, ...options };
+
+    if (container.current) {
+      network = new Network(container.current, { edges, nodes }, mergedOptions);
+
+      if (events) {
+        for (const eventName of Object.keys(events)) {
+          network.on(eventName as any, events[eventName] as any);
+        }
+      }
+
+      // Add onClick event to nodes
+      network.on('doubleClick', (properties) => {
+        if (properties.nodes && properties.nodes.length > 0) {
+          const clickedNodeId = properties.nodes[0];
+          const clickedNode = nodes.find((node) => node.id === clickedNodeId);
+
+          // Check if a node is clicked and trigger the onClick event
+          if (clickedNode) {
+            // Perform actions or trigger the onClick event with the clicked node data
+            console.log('doubleClick node:', clickedNode);
+            // Call the event handler provided in props, if available
+            if (clickedNode.label)
+              setName(clickedNode.label);
+            if (events && events.onClick) {
+              events.onClick(clickedNode);
+            }
+          }
+        }
+      });
+    }
+
+
+    if (getNetwork && network) {
+      getNetwork(network);
+    }
+
+    // Additional logic for getNodes, getEdges
+  }, [edges, nodes, options, events, getNetwork]);
+
+  const identifier = uuidv4(); // Generate a unique identifier
+
+  return <div className={styles.graphContainer} id={identifier} ref={container}></div>;
+};
 
 export default Graph;

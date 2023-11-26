@@ -1,11 +1,12 @@
 .closeButton {
-    position: fixed;
-    top: 10vh;
-    right: 10vw;
-    padding: 0.5rem;
+    position: relative;
+    width: 100%;
+    text-align: right;
+
     cursor: pointer;
     color: rgb(var(--light-rgb));
 
+    font-size: 24px;
     // reset all button styles
     border: none;
     background: none;
@@ -138,6 +139,20 @@
     .tagsContainer {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+
+    .popup {
+        padding: 1rem;
+        top: 4rem;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 4rem);
+
+        .closeButton {
+            top: 0vh;
+            right: 0rem;
+        }
     }
 }
 

@@ -45,14 +45,14 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             if (!children) {
               return <td {...props}></td>;
             }
-            
+
             let row = children.map((child: any) => {
               const isElement = child?.type === 'element';
 
               if (!isElement) {
                 return child.value;
               } else {
-                return <div className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>; 
+                return <HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>;
               }
             });
 
@@ -63,7 +63,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
 
             if (href?.startsWith('http')) {
               return (
-                <a href={href} target="_blank" rel="noopener noreferrer" className={styles.anchor}>
+                <a href={href} target="_blank" rel="noopener noreferrer">
                   {children}
                 </a>
               );
@@ -71,9 +71,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
 
             if (href?.startsWith('#')) {
               return (
-                <div className={styles.anchor}>
                   <HoverLink name={href || ''}>{children}</HoverLink>
-                </div>
               );
             }
 
@@ -85,7 +83,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             let newChildren = [];
             for (let i = 0; i < children.length; i++) {
               const child = children[i];
-              if (child?.type === 'element') newChildren.push(<div key={i} className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>);
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
             return <h1 {...props}>{newChildren}</h1>;
@@ -95,7 +93,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             let newChildren = [];
             for (let i = 0; i < children.length; i++) {
               const child = children[i];
-              if (child?.type === 'element') newChildren.push(<div key={i} className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>);
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
             return <h2 {...props}>{newChildren}</h2>;
@@ -105,7 +103,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             let newChildren = [];
             for (let i = 0; i < children.length; i++) {
               const child = children[i];
-              if (child?.type === 'element') newChildren.push(<div key={i} className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>);
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
             return <h3 {...props}>{newChildren}</h3>;
@@ -115,7 +113,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             let newChildren = [];
             for (let i = 0; i < children.length; i++) {
               const child = children[i];
-              if (child?.type === 'element') newChildren.push(<div key={i} className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>);
+              if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
             return <h4 {...props}>{newChildren}</h4>;
@@ -125,7 +123,13 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             let newChildren = [];
             for (let i = 0; i < children.length; i++) {
               const child = children[i]; // @TODO Fix this, will cause <strong></strong> to not work  
-              if (child?.type === 'element' && child?.tagName == "a") newChildren.push(<div key={i} className={styles.anchor}><HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink></div>);
+              if (child?.type === 'element' && child?.tagName == "a") {
+                if (child?.properties?.href?.startsWith('http')) // if link is http or https than do this
+                newChildren.push(<a key={i} href={child?.properties?.href} target="_blank" rel="noopener noreferrer">bb{child?.children[0]?.value || ''}</a>);
+                else // if #{hash}  its hash than do this 
+                  newChildren.push(<HoverLink key={i} name={child?.children[0]?.value.replace('#', '') || ''}>{child?.children[0]?.value.replace('#', '') || ''}</HoverLink>);
+                
+              }
               else if (child.value) newChildren.push(<span key={i}>{child.value}</span>);
               else if (child?.children[0]?.value) newChildren.push(<span key={i}>{child?.children[0]?.value}</span>);
               else newChildren.push(<span key={i}>{child}</span>);

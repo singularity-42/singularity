@@ -38,18 +38,6 @@
     text-decoration: underline;
 }
 
-.anchor {
-    border-radius: 5px;
-    // inline
-    display: inline-block;
-    color: rgba(var(--secondary-rgb), 0.4);
-    transition: color 0.2s ease-in-out;
-    &:hover {
-        color: rgba(var(--secondary-rgb), 1);
-        text-decoration: underline;
-    }
-}
-
 .list {
     list-style-type: disc;
     margin-left: 20px;

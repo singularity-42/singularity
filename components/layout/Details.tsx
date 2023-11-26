@@ -9,13 +9,15 @@ import useEntity from '@/hooks/useEntity';
 import SocialList from './SocialList';
 import Graph from '../content/Graph';
 import { useDetails } from '@/hooks/provider/DetailsProvider';
+import useRelation from '@/hooks/useRelations';
 
 interface EntityProps {
 }
 
 const Details: React.FC<EntityProps> = ({ }) => {
     const { name, setName, visible, toggleVisibility } = useDetails();
-
+    
+    const { relations } = useRelation(name);
     const { entity, loading, error } = useEntity(name);
     useEffect(() => {
         if (name) {
@@ -31,17 +33,13 @@ const Details: React.FC<EntityProps> = ({ }) => {
     }, []);
 
     const handleExit = () => {
-        // window.location.hash = '';
-
-        // remove hash from url
-
-        
-
         if ( visible ) 
             toggleVisibility();
     };
 
     if (!visible) return null;
+    if (loading) return null;
+
 
     return (
         <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
@@ -57,6 +55,7 @@ const Details: React.FC<EntityProps> = ({ }) => {
             </div>
             {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
             {entity.description && <Markdown content={entity.description} active={true} />}
+            { relations && <Graph graphData={relations} />}
             {entity.location && <Map location={entity.location} />}
         </div>
     );

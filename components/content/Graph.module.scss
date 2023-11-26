@@ -1,28 +1,11 @@
 .graphContainer {
-    width: 100%;
-    height: 100%;
     position: relative;
+    width: 100%;
+    height: 30%;
     color: rgb(var(--light-rgb));
-   }
-   
-   .node {
-    fill: rgb(var(--secondary-rgb));
-    stroke: rgb(var(--light-rgb));
-    stroke-width: 1px;
-   }
-   
-   .link {
-    stroke: rgb(var(--light-rgb));
-    stroke-width: 1px;
-   }
-   
-   .nodeLabel {
-    font-size: 12px;
-    fill: rgb(var(--light-rgb));
-   }
-   
-   .linkLabel {
-    font-size: 10px;
-    fill: rgb(var(--light-rgb));
-   }
-   
+
+
+    padding: 0.42rem;
+    border: 1px dashed rgb(var(--smoke-rgb));
+    
+}

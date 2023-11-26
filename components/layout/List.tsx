@@ -5,14 +5,12 @@ import Loading from '../content/Loading';
 import Error from './Error';
 
 interface ListProps {
-  entityData: any;
+  entities: any;
   onTagClick?: (tag: string) => void;
   selected?: string[];
 }
 
-const List: React.FC<ListProps> = ({ entityData, onTagClick, selected }) => {
-  const entities: any = entityData;
-
+const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
   useEffect(() => {
     const entityElements = document.querySelectorAll(`.${styles.entity}`);
 

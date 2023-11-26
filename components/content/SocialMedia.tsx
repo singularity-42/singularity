@@ -66,7 +66,7 @@ const SocialMediaTag: React.FC<SocialMediaTagProps> = ({ socialMedia, username }
         <div className={styles.socialMediaTag + ' ' + styles[socialMedia]}>
             {/* <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer"><div className={styles.socialMediaIcon}><img src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} /></div></a> */}
             <a href={SocialMediaUrl[socialMedia] + username} target="_blank" rel="noopener noreferrer">
-                <Image src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} width="42" height="42" />
+                <Image src={SocialMediaIcon[socialMedia] + '.svg'} alt={socialMedia} width="30" height="30" />
             </a>
         </div>
     );

@@ -9,7 +9,14 @@
     text-decoration: none;
     z-index: 2;
     position: relative;
+    display: inline;
 
+    color: rgba(var(--secondary-rgb), 0.4);
+    transition: color 0.2s ease-in-out;
+    &:hover {
+        color: rgba(var(--secondary-rgb), 1);
+        text-decoration: underline;
+    }
     &:hover {
         text-decoration: underline;
     }

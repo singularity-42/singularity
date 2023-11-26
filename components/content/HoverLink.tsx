@@ -13,10 +13,9 @@ interface HoverLinkProps {
 
 const HoverLink: React.FC<HoverLinkProps> = ({ name, children }) => {
 
-    const { setName, visible, toggleVisibility } = useDetails(); 
+    const { setName, toggleVisibility } = useDetails(); 
 
     return (
-        <div className={styles.hoverLink}>
             <button
                 className={styles.link}
                 onMouseDown={() => {
@@ -27,7 +26,6 @@ const HoverLink: React.FC<HoverLinkProps> = ({ name, children }) => {
             >
                 {children}
             </button>
-        </div>
     );
 }
 

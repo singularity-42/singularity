@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Table.module.scss';
 import Filter from './Filter';
 import List from './List';
-import useEntityData from '@/hooks/useEntityData';
+import useEntities from '@/hooks/useEntities';
 import Loading from '../content/Loading';
 import { useTooltip } from '@/hooks/provider/TooltipProvider';
 import { OrderType } from '@/types';
@@ -28,7 +28,7 @@ interface TableProps {
 
 const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
     const { filter, setFilter } = useFilter();
-    const entityData = useEntityData(type);
+    const entities = useEntities(type, filter);
     const { setTooltip } = useTooltip();
 
     const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
@@ -38,53 +38,49 @@ const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.Counte
     }, [type]);
 
     useEffect(() => {
-        let tags = entityData?.map(entity => entity.metadata.tags);
+        let tags = entities?.map(entity => entity.metadata.tags);
         // flatten tags
         tags = tags?.reduce((acc, val) => acc.concat(val), []);
         // remove empty tags
         setCurrentVisibleTags(tags ?? []);
-    }, [entityData]);
+    }, [entities]);
 
     useEffect(() => {
         switch (orderType) {
             case OrderType.Alphabetical:
-                entityData?.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
+                entities?.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
                 break;
             case OrderType.Random:
-                entityData?.sort(() => Math.random() - 0.5);
+                entities?.sort(() => Math.random() - 0.5);
                 break;
             case OrderType.CounterAlphabetical:
-                entityData?.sort((a, b) => b.metadata.title.localeCompare(a.metadata.title));
+                entities?.sort((a, b) => b.metadata.title.localeCompare(a.metadata.title));
                 break;
         }
     }, [orderType]);
 
-    if (!entityData) {
+    const handleTagClick = (tag: string) => {
+        if (tag.length < 1) return;
+
+        if (filter.includes(tag)) {
+            setFilter(filter.filter((t) => t !== tag));
+        } else {
+            setFilter([...filter, tag]);
+        }
+    }
+
+    if (!entities) {
         return <Loading />
     }
 
     return <div className={styles.table}>
-        {
-            currentVisibleTags.length > 0 &&
-            <Filter currentVisibleTags={currentVisibleTags} />
-        }
-
-
-        <List entityData={entityData} onTagClick={(tag: string) => {
-            if (tag.length < 1) return;
-
-            if (filter.includes(tag)) {
-                setFilter(filter.filter((t) => t !== tag));
-            } else {
-                setFilter([...filter, tag]);
+        <div style={
+            {
+                height: '4.2rem', // TODO: fix this and find better spacer solution
             }
-        }}
-            selected={filter}
-        />
-        {/*
-       <EntityPagination /> // for pagination of entitys (by default 10 entitys per page)
-       <EntityCreate /> // for creating a new entity
-       */}
+        } />
+        <Filter currentVisibleTags={currentVisibleTags} />
+        <List entities={entities} onTagClick={handleTagClick} selected={filter} />
     </div>;
 };
 
