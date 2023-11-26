@@ -7,11 +7,12 @@ import Tags from "../layout/Tags";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
 
 interface HoverLinkProps {
-    name: string;
+    name?: string;
+    href?: string;
     children: React.ReactNode;
 }
 
-const HoverLink: React.FC<HoverLinkProps> = ({ name, children }) => {
+const HoverLink: React.FC<HoverLinkProps> = ({ name = '', href = '', children }) => {
 
     const { setName, toggleVisibility } = useDetails(); 
 
@@ -19,6 +20,10 @@ const HoverLink: React.FC<HoverLinkProps> = ({ name, children }) => {
             <button
                 className={styles.link}
                 onMouseDown={() => {
+                    if (href) {
+                        window.open(href, '_blank');
+                        return;
+                    }
                     setName(name);
                     window.history.pushState({}, '', `${window.location.pathname}#${name}`);
                     toggleVisibility();
