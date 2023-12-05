@@ -7,4 +7,4 @@ play_store:
 tags:
   - communication
 ---
-Telegram is a cloud-based instant messaging and voice over IP service. Telegram client apps are available for Android, iOS, Windows Phone, Windows NT, macOS and Linux. Users can send messages and exchange photos, videos, stickers, audio and files of any type.
+Telegram ist ein Cloud-basierter Instant-Messaging- und Voice-over-IP-Dienst. Telegram-Client-Apps sind für Android, iOS, Windows Phone, Windows NT, macOS und Linux verfügbar. Benutzer können Nachrichten senden und Fotos, Videos, Aufkleber, Audio und Dateien jeglicher Art austauschen.

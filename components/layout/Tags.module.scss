@@ -3,11 +3,14 @@
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    perspective: 1000px;
+
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: left;
     align-items: left;
     gap: 4px;
 
+    // no overflow
+    overflow-y: hidden;
+    overflow-x: auto;
 }

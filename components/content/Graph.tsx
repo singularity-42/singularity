@@ -102,6 +102,21 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
 
   const identifier = uuidv4(); // Generate a unique identifier
 
+  // on resize, update the network
+
+  useEffect(() => {
+    const handleResize = () => {
+      // reload the page if the window is resized
+      window.location.reload();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return <div className={styles.graphContainer} id={identifier} ref={container}></div>;
 };
 

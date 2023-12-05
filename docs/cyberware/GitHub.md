@@ -7,4 +7,5 @@ play_store:
 tags:
   - storage
 ---
-GitHub is a Git repository hosting service, but it adds many of its own features. While Git is a command line tool, GitHub provides a Web-based graphical interface. It also provides access control and several collaboration features, such as a wikis and basic task management tools for every project.
+
+GitHub ist ein Git-Repository-Hosting-Dienst, der jedoch viele seiner eigenen Funktionen hinzufügt. Während Git ein Befehlszeilentool ist, bietet GitHub eine webbasierte grafische Oberfläche. Es bietet auch Zugriffskontrolle und mehrere Funktionen für die Zusammenarbeit, wie z. B. ein Wiki und grundlegende Aufgabenverwaltungstools für jedes Projekt.

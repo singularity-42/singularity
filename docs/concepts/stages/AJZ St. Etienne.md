@@ -10,3 +10,5 @@ Hier im Garten sollen Akustische Jam Sessions Stattfinden. Vermutlich auch mögl
 
 ### Toiletten und St. Etienne (Nachts)
 Hier werden DJs sich abwechseln und in den Toiletten Techno Auflegen. Nach dem Bands wird der Techno floor hoch wandern ins [[AJZ St. Etienne]]
+
+> hier kommt noch ne Grafik hin, wo das ist und wie du hinkommst

@@ -119,7 +119,7 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
               />
             </div>
           ) : (
-            <div key={index} className={styles.entity}>
+            <div key={index} className={`${styles.entity} ${folders.includes(entity.path.split("\\").slice(0, entity.path.split("\\").length - 1).join("\\")) ? styles.inFolder : ""}`}>
               <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
             </div>
           )

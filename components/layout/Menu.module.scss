@@ -31,7 +31,7 @@
   /// all to right
   // use --color-sub-rgb to set the opacity of the border
 
-  // border-bottom: 1px solid rgba(var(--shaded-rgb), 0.2);
+  // border-bottom: 1px solid rgba(var(--light-rgb), 0.2);
   position: relative;
   width: 100%;
   right: -3rem;
@@ -54,7 +54,7 @@
 }
 
 .menuLink {
-  background-color: rgb(var(--smoke-rgb));
+  background-color: rgb(var(--light-rgb));
   width: 21rem;
   padding-right: 5rem;
   text-decoration: none;
@@ -71,7 +71,7 @@
 }
 
 .menuLink:hover {
-  background-color: rgb(var(--smoke-rgb));
+  background-color: rgb(var(--light-rgb));
   transition: all 0.3s ease;
   color: rgb(var(--secondary-rgb));
   transform: translateX(1rem);

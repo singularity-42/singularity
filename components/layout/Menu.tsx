@@ -37,10 +37,10 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const pages = [
     "/collaborations",
     "/collectives",
-    "/cyberware",
+    //"/cyberware",
     "/concepts",
     "/creatives",  
-    "/change",
+    //"/change",
     // "/creations",
     //   "/creators",
     // "/canvas",
