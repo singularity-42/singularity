@@ -39,8 +39,21 @@ const Entity: React.FC<EntityProps> = ({ name }) => {
     // }
 
     return (
-        <div className={`${styles.popup} ${isPopupVisible ? styles.show : styles.hide}`}>
-            {/* Rest of your component remains the same */}
+        <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
+            <button className={styles.closeButton} onClick={handleExit}>X</button>
+            <div className={styles.detailsContainer}>
+                <h2 className={styles.title}>{entity.title.
+            </div>
+            <div className={styles.tagsContainer}>
+                <Tags tags={entity.tags} />
+            </div>
+            <div className={styles.socialMediaContainer}>
+                <SocialList metadata={entity} />
+            </div>
+            {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
+            {entity.description && <Markdown content={entity.description} active={true} />}
+            { relations && <Graph graphData={relations} />}
+            {entity.location && <Map location={entity.location} />}
         </div>
     );
 };
