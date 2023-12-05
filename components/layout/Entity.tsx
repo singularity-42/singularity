@@ -1,5 +1,5 @@
 // Entity.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Entity.module.scss';
 import Markdown from '../content/Markdown';
 import Tags from './Tags';
@@ -33,10 +33,20 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                         // if there is time also display 
                         if (date.length == 6)
                             return <HoverLink name={title}>{`${date[2]}.${date[1]}.${date[0]} ${date[3]}:${date[4]}:${date[5]}`}</HoverLink>;
-                        return <HoverLink name={title}>{`${date[2]}.${date[1]}.${date[0]}`}</HoverLink>;
+                        let year = date[2].split('\\');
+                        year = year[year.length - 1];
+                        let month = date[1].split('\\');
+                        month = month[month.length - 1];
+                        let day = date[0].split('\\');
+                        day = day[day.length - 1];
+
+                        return <HoverLink name={title}>{`${day}.${month}.${year}`}</HoverLink>;
                         // return `${date[2]}.${date[1]}.${date[0]}`;
                     }
-                    return <HoverLink name={title}>{title}</HoverLink>;
+
+                    let path = title.split('\\');
+                    let name = path[path.length - 1];
+                    return <HoverLink name={title}>{name}</HoverLink>;
 
                 })()}</h2>
                 <Tags tags={tags} onTagClick={onTagClick} selected={selected} />

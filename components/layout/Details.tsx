@@ -6,7 +6,7 @@ import Markdown from '../content/Markdown';
 import Tags from './Tags';
 import Map from '../content/Map';
 import useEntity from '@/hooks/useEntity';
-import SocialList from './SocialList';
+import ListSocials from './ListSocials';
 import Graph from '../content/Graph';
 import { useDetails } from '@/hooks/provider/DetailsProvider';
 import useRelation from '@/hooks/useRelations';
@@ -16,7 +16,7 @@ interface EntityProps {
 
 const Details: React.FC<EntityProps> = ({ }) => {
     const { name, setName, visible, toggleVisibility } = useDetails();
-    
+
     const { relations } = useRelation(name);
     const { entity, loading, error } = useEntity(name);
     useEffect(() => {
@@ -45,13 +45,13 @@ const Details: React.FC<EntityProps> = ({ }) => {
         <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
             <button className={styles.closeButton} onClick={handleExit}>X</button>
             <div className={styles.detailsContainer}>
-                <h2 className={styles.title}>{entity.title}</h2>
+                <h2 className={styles.title}>{entity.title.split('\\').pop()}</h2>
             </div>
             <div className={styles.tagsContainer}>
                 <Tags tags={entity.tags} />
             </div>
             <div className={styles.socialMediaContainer}>
-                <SocialList metadata={entity} />
+                <ListSocials metadata={entity} />
             </div>
             {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
             {entity.description && <Markdown content={entity.description} active={true} />}

@@ -5,25 +5,32 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
     let entity_name = req.nextUrl.searchParams.get('name');
-    const entityFiles = glob.sync(`./docs/**/*.md`);
-    const relevantEntityFiles = entityFiles.filter((file) => {
-        const [file_name] = file.split('/').slice(-1)[0].split('.md');
-        return file_name === entity_name;
-    });
-    const entities = relevantEntityFiles.map((file) => {
+
+    // entity decode from url
+    if (entity_name) {
+        entity_name = decodeURIComponent(entity_name);
+    }
+
+    const entityFiles = glob.sync(`./docs/**/${entity_name}.md`);
+    
+    const entities = entityFiles.map((file) => {
         const content = fs.readFileSync(file, 'utf8');
         return { file, content };
     });
 
     const extractMetadata = (metadataString: string | undefined, title: string = '') => {
         if (!metadataString || !metadataString.includes('\n')) {
-            return { title };
+            return { title,
+              error: 'No metadata found'
+            };
         }
 
         const metadataArray = metadataString.split('\n').map((item: string) => item.trim()).filter(Boolean);
 
         if (metadataArray.length == 0) {
-            return { title };
+            return { title,
+              error: 'No metadata found'
+             };
         }
 
         const metadata: any = {};
@@ -52,9 +59,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     let foundEntity = null;
 
     for (const file of entities) {
-        const [file_name] = file.file.split('/').slice(-1)[0].split('.md');
         const metadataString = file.content.split('---')[1];
-        let metadata = extractMetadata(metadataString, file_name);
+        let metadata = extractMetadata(metadataString, entity_name || '');
 
         let description = file.content.split('---')[2];
 

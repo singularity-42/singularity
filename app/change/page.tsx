@@ -1,5 +1,5 @@
 
-import Brand from '@/components/content/Title';
+import Title from '@/components/content/Title';
 import Table from '@/components/layout/Table';
 import React from 'react';
 
@@ -21,11 +21,11 @@ const ChangePage: React.FC = () => {
       }
       >
 {/*         
-        In Future is this the place to change information about the <Brand /> 
+        In Future is this the place to change information about the <Title /> 
         will be made. */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <span>Soon you can change information about the</span>
-          <Brand />
+          <Title />
         </div>
 
       </div>

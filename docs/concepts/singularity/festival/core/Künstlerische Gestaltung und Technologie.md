@@ -1,1 +1,0 @@
-Visuelle Elemente wie Live-Visuals und Visual-DJs, Lichtdesign und Kunstinstallationen werden die Festivalerfahrung bereichern. Diese visuellen Ergänzungen nutzen die Technologie der Künstler, um eine einzigartige Atmosphäre zu schaffen.

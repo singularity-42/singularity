@@ -1,4 +1,8 @@
-#
+---
+
+---
+
+# Kern Idee
 
 ## Philosophie / Kernwerte
 

@@ -1,5 +1,5 @@
 
-.brand {
+.title {
     display: inline;
 
     // make it not warp 
@@ -22,7 +22,7 @@
     }
 }
 
-.brand:hover {
+.title:hover {
     color: rgb(var(--secondary-rgb));
     transform: translateX(1rem);
 }

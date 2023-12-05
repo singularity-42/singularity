@@ -1,5 +1,5 @@
 
-.socialList {
+.listSocials {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -25,7 +25,7 @@
 }
 
 @media (max-width: 768px) {
-    .socialList {
+    .listSocials {
         overflow-x: scroll;
     }
 }

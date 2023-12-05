@@ -1,1 +1,0 @@
-Das Singularity Festival ist mehr als eine Veranstaltung – es ist eine gemeinschaftliche Plattform. Wir ermutigen Musiker, Künstler und das Publikum, aktiv teilzunehmen und ihre Leidenschaft für Musik und Kunst zu teilen.

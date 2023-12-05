@@ -81,7 +81,6 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
           // Check if a node is clicked and trigger the onClick event
           if (clickedNode) {
             // Perform actions or trigger the onClick event with the clicked node data
-            console.log('doubleClick node:', clickedNode);
             // Call the event handler provided in props, if available
             if (clickedNode.label)
               setName(clickedNode.label);

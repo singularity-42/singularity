@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './Brand.module.scss';
+import styles from './Title.module.scss';
 
-const Brand = () => {
+const Title = () => {
     return (
-        <Link href="/" className={styles.brand}>Singularity</Link>
+        <Link href="/" className={styles.title}>Singularity</Link>
     )
 }
 
-export default Brand;
+export default Title;

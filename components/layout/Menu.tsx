@@ -28,7 +28,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const getCurrentPage = (path: string) => {
     // const currentPath = window.location.pathname;
     const pathname = usePathname();
-    return pathname === path ? styles.currentSelected : styles.theBox;
+    return pathname === path ? styles.selected : styles.notSelected;
   };
 
   let isMenuOpen = open === true ? styles.show : "";

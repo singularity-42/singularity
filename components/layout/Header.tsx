@@ -7,7 +7,7 @@ import styles from "./Header.module.scss";
 import Hamburger from "../function/Hamburger";
 import { useTooltip } from "@/hooks/provider/TooltipProvider";
 import Tooltip from "../content/Tooltip";
-import Brand from "../content/Title";
+import Title from "../content/Title";
 // import Map from "../function/Map";
 
 type HeaderProps = {
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = () => {
 
     return (
         <nav className={`${styles.header} ${isShrunk ? styles.shrink : ""}`}>
-            <Brand />
+            <Title />
             <Tooltip tooltip={context?.tooltip} />
             <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
             <Menu
