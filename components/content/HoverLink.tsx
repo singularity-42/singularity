@@ -19,7 +19,7 @@ const HoverLink: React.FC<HoverLinkProps> = ({ name = '', href = '', children })
 
     useEffect(() => {
         // name is a path to a file so we need to convert it to a file name
-        const path = name.split('\\');
+        const path = name.split(/\\|\//);
         const fileName = path[path.length - 1];
         setActualName(fileName);
     }, [name]);

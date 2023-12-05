@@ -56,7 +56,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   const responseJSON = JSON.stringify(
     entities
       .map((file: any) => {
-        const [file_name] = file.file.split("\\").slice(-1)[0].split(".md");
+        const [file_name] = file.file.split(/\\|\//).slice(-1)[0].split(".md");
         const metadataString = file.content.split("---")[1];
         const metadata = extractMetadata(metadataString, file_name);
 

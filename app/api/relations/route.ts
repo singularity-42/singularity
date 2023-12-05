@@ -48,7 +48,7 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
 
   for (const file of entityFiles) {
     const content = fs.readFileSync(file, 'utf8');
-    const fileName = file.split('\\').slice(-1)[0].split('.md')[0];
+    const fileName = file.split(/\\|\//).slice(-1)[0].split('.md')[0];
     const mainNodeId = nodes.length + 1;
 
     if (!existingNodes.has(fileName)) {

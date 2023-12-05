@@ -19,12 +19,12 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
   }
   const [isHovered, setIsHovered] = React.useState(false); // State to track hover
 
+  const { title, tags } = entity.metadata;
   const handleClick = () => {
-    setName(entity.metadata.title);
     toggleVisibility();
+    setName(title);
   };
 
-  const { title, tags } = entity.metadata;
   const content = entity.content;
   return (
     <div
@@ -39,11 +39,11 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
             // title is sometimes a date so we want to display it with . and reorder to day.month.year
             if (title.includes("-")) {
               const date = title.split("-");
-              let year = date[2].split("\\");
+              let year = date[2].split(/\\|\//);
               year = year[year.length - 1];
-              let month = date[1].split("\\");
+              let month = date[1].split(/\\|\//);
               month = month[month.length - 1];
-              let day = date[0].split("\\");
+              let day = date[0].split(/\\|\//);
               day = day[day.length - 1];
 
               // get wochentag Mo, Di, Mi, Do, Fr, Sa, So
@@ -61,7 +61,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
               // return `${date[2]}.${date[1]}.${date[0]}`;
             }
 
-            let path = title.split("\\");
+            let path = title.split(/\\|\//);
             let name = path[path.length - 1];
             return <p className={styles.date}>{name}</p>;
           })()}

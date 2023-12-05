@@ -61,7 +61,7 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
 
     entities.forEach((entity: any) => {
       if (entity.path) {
-        let path = entity.path.split("\\");
+        let path = entity.path.split(/\\|\//);
         let folderPath = path.slice(0, path.length - 1).join("\\");
         if (path.length == 1 || folders.includes(folderPath)) {
           visibleEntities.push(entity);
@@ -119,7 +119,7 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
               />
             </div>
           ) : (
-            <div key={index} className={`${styles.entity} ${folders.includes(entity.path.split("\\").slice(0, entity.path.split("\\").length - 1).join("\\")) ? styles.inFolder : ""}`}>
+            <div key={index} className={`${styles.entity} ${folders.includes(entity.path.split(/\\|\//).slice(0, entity.path.split(/\\|\//).length - 1).join("\\")) ? styles.inFolder : ""}`}>
               <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
             </div>
           )
