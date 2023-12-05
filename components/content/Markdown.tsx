@@ -67,7 +67,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
 
             if (href?.startsWith('http')) {
               return (
-                <a href={href} target="_blank" rel="noopener noreferrer">
+                <a href={href} target="_blank" rel="noopener noreferrer" className={styles.link}>
                   {children}
                 </a>
               );
@@ -138,7 +138,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               else if (child?.children[0]?.value) newChildren.push(<span key={i}>{child?.children[0]?.value}</span>);
               else newChildren.push(<span key={i}>{child}</span>);
             }
-            return <p {...props}>{newChildren}</p>;
+            return <p {...props} className={styles.p}>{newChildren}</p>;
           },
           li: ({ node, ...props }) => {
             let children = node?.children as any;

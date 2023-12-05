@@ -10,6 +10,7 @@ import ListSocials from './ListSocials';
 import Graph from '../content/Graph';
 import { useDetails } from '@/hooks/provider/DetailsProvider';
 import useRelation from '@/hooks/useRelations';
+import { MdClose } from 'react-icons/md';
 
 interface EntityProps {
 }
@@ -32,8 +33,15 @@ const Details: React.FC<EntityProps> = ({ }) => {
         setName(decodedUrlHash);
     }, []);
 
+    useEffect(() => {
+        if (name) {
+            const encodedUrlHash = encodeURIComponent(name);
+            window.location.hash = encodedUrlHash;
+        }
+    }, [name]);
+
     const handleExit = () => {
-        if ( visible ) 
+        if (visible)
             toggleVisibility();
     };
 
@@ -43,20 +51,29 @@ const Details: React.FC<EntityProps> = ({ }) => {
 
     return (
         <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
-            <button className={styles.closeButton} onClick={handleExit}>X</button>
-            <div className={styles.detailsContainer}>
-                <h2 className={styles.title}>{entity.title.split(/\\|\//).pop()}</h2>
+            <button className={styles.closeButton} onClick={handleExit}>
+                {/** react icons x or close icons */}
+                <MdClose />
+            </button>
+            <div className={styles.contentContainer}>
+                <div className={styles.leftContainer}>
+                    <div className={styles.detailsContainer}>
+                        <h2 className={styles.title}>{entity.title.split(/\\|\//).pop()}</h2>
+                    </div>
+                    <div className={styles.tagsContainer}>
+                        <Tags tags={entity.tags} />
+                    </div>
+                    <div className={styles.socialMediaContainer}>
+                        <ListSocials metadata={entity} />
+                    </div>
+                    {entity.description && <Markdown content={entity.description} active={true} />}
+                    {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
+                </div>
+                {relations && <Graph graphData={relations} />}
             </div>
-            <div className={styles.tagsContainer}>
-                <Tags tags={entity.tags} />
-            </div>
-            <div className={styles.socialMediaContainer}>
-                <ListSocials metadata={entity} />
-            </div>
-            {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
-            {entity.description && <Markdown content={entity.description} active={true} />}
-            { relations && <Graph graphData={relations} />}
+            <div className={styles.mapContainer}>
             {entity.location && <Map location={entity.location} />}
+            </div>
         </div>
     );
 };

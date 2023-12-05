@@ -4,18 +4,15 @@
     position: relative;
     overflow: hidden;
   
-    padding: 0.42rem;
     border: 1px dashed rgb(var(--light-rgb));
-    
-    .map {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+
+  margin: 1rem 0;
 }
 
 .map {
-  padding: 0.42rem;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

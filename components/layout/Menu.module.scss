@@ -87,7 +87,15 @@
   .menuLink {
     // ittalic font
     font-style: italic;
-    // underline
-    text-decoration: underline;
   }
+}
+
+
+.icon {
+  width: 2rem;
+  // center the icon horizontally
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }

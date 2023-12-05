@@ -24,6 +24,7 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     let network: Network | null = null;
 
     const defaultOptions: Options = {
+      // default zoom 2x
       physics: {
         stabilization: false,
       },
@@ -31,20 +32,20 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
       edges: {
         smooth: false,
         color: '#ffffff',
-        width: 0.5,
+        width: 1,
         arrows: {
           to: {
             enabled: true,
-            scaleFactor: 0.5,
+            scaleFactor: 1,
           },
         },
       },
       nodes: {
         shape: 'dot',
-        size: 10,
+        size: 20,
         opacity: 1,
         font: {
-          size: 10,
+          size: 20,
           color: '#ffffff',
         },
         color: {
@@ -101,21 +102,6 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
   }, [edges, nodes, options, events, getNetwork]);
 
   const identifier = uuidv4(); // Generate a unique identifier
-
-  // on resize, update the network
-
-  useEffect(() => {
-    const handleResize = () => {
-      // reload the page if the window is resized
-      window.location.reload();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return <div className={styles.graphContainer} id={identifier} ref={container}></div>;
 };

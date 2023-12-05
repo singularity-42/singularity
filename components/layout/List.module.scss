@@ -1,26 +1,30 @@
 // styles/CreativesList.module.scss
-.table {
-  .thead {
-    display: none;
-  }
- }
 
- .entity {
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   width: 100%;
-   height: 80%;
-   padding: 0.42rem;
- }
- 
+.thead {
+  display: none;
+}
+
+.tbody {
+  overflow-y: auto;
+}
+
+.entity {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+  padding: 0.42rem;
+}
+
+
 @keyframes fadeIn {
   to {
     opacity: 1;
   }
- }
+}
 
- .fadeIn {
+.fadeIn {
   opacity: 0;
   animation: fadeInAnimation 0.5s ease-in-out forwards;
 }

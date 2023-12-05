@@ -11,6 +11,7 @@
     padding: 20px;
     // background-color: #f9f9f9;
     border-radius: 5px;
+    text-align: left;
 
     color: rgb(var(--light-rgb));
     transition: color 0.2s ease-in-out;
@@ -41,15 +42,23 @@
 .list {
     list-style-type: disc;
     margin-left: 24px;
+
+    // text align left
+    text-align: left;
 }
 
+.p {
+    text-align: left;
+}
 
 .tr {
     border-bottom: 1px solid rgba(var(--secondary-rgb), 0.2);
+    text-align: left;
 }
 
 .td {
     padding: 0 0.77rem;
+    text-align: left;
 }
 
 .h1 {
