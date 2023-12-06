@@ -11,6 +11,7 @@ import Graph from '../content/Graph';
 import { useDetails } from '@/hooks/provider/DetailsProvider';
 import useRelation from '@/hooks/useRelations';
 import { MdClose } from 'react-icons/md';
+import SpotifyTrack from '../content/SpotifyTrack';
 
 interface EntityProps {
 }
@@ -48,6 +49,8 @@ const Details: React.FC<EntityProps> = ({ }) => {
     if (!visible) return null;
     if (loading) return null;
 
+    const { metadata } = entity as any;
+
 
     return (
         <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
@@ -66,6 +69,11 @@ const Details: React.FC<EntityProps> = ({ }) => {
                     <div className={styles.socialMediaContainer}>
                         <ListSocials metadata={entity} />
                     </div>
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0xWjH1Z0Fv43ZB0dGvZa1v?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    {metadata && metadata.spotiytrack && <div className={styles.spotifyContainer}>
+                        {metadata.spotifytrack}
+                        <SpotifyTrack track={metadata.spotiytrack} />
+                    </div>}
                     {entity.description && <Markdown content={entity.description} active={true} />}
                     {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
                 </div>

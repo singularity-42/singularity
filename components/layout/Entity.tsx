@@ -5,6 +5,7 @@ import Markdown from "../content/Markdown";
 import Tags from "./Tags";
 import HoverLink from "../content/HoverLink";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
+import Gallery from "../content/Gallery";
 
 interface EntityProps {
   entity: any;
@@ -93,6 +94,7 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 )}
             </div> 
             */}
+            {entity.metadata.instagram && <Gallery name={entity.metadata.instagram} />}
     </div>
   );
 };
