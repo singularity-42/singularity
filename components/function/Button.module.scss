@@ -12,7 +12,7 @@
     justify-content: center;
     margin: 1em;
     border: rgb(var(--light-rgb)) solid 1px;
-    font-size: 42%;
+    font-size: var(--font-size);
     width: 40px;
     height: 40px;
     white-space: nowrap;

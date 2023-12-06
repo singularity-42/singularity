@@ -55,7 +55,7 @@
 
 .menuLink {
   background-color: rgb(var(--light-rgb));
-  width: 21rem;
+  width: 42%;
   padding-right: 5rem;
   text-decoration: none;
   padding-left: 1rem;
@@ -63,7 +63,7 @@
   display: flex;
   align-items: right;
   justify-content: right;
-  font-size: 1.5rem;
+  font-size: var(--heading-font-size);
   font-weight: bold;
   text-transform: uppercase;
   text-align: right;
@@ -75,6 +75,27 @@
   transition: all 0.3s ease;
   color: rgb(var(--secondary-rgb));
   transform: translateX(1rem);
+
+  
+  // animation icon spin and scale 
+  .icon {
+    animation: spin 0.42s ease-in-out forwards;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  42% {
+    transform: rotate(42deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .notSelected {
@@ -92,6 +113,7 @@
 
 
 .icon {
+  margin-left: 1rem;
   width: 2rem;
   // center the icon horizontally
   display: flex;

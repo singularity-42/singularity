@@ -20,7 +20,7 @@
 .title {
     // Add styles for the title
     // Example:
-    font-size: 24px;
+    font-size: var(--heading-font-size);
     margin-bottom: 10px;
     color: rgb(var(--light-rgb));
     text-align: start;

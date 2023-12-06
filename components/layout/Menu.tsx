@@ -13,10 +13,11 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const { visible, toggleVisibility } = useDetails();
+  const [lastClicked, setLastClicked] = React.useState("");
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (str: string) => {
     if (visible) toggleVisibility();
-
+    setLastClicked(str);
     // wait 420ms and then close the menu
     setTimeout(() => {
       onClose();
@@ -66,7 +67,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
           let innerText = page.replace("/", "");
           return (
             <li key={index} className={`${styles.menuItem} ${getCurrentPage(page)}`}>
-              <Link href={page} className={styles.menuLink} onClick={handleLinkClick}>
+              <Link href={page} className={styles.menuLink} onClick={() => handleLinkClick(page)}>
                 {innerText}
                 <div className={styles.icon}>
                   {pageIcons[page]}

@@ -14,6 +14,9 @@
   --secondary-rgb: 222, 84, 84; /* #de5454 */
 
   --tertiary-rgb: 64, 168, 168; /* #40a8a8 */
+
+  --font-size: 16px;
+  --heading-font-size: 2.5rem;
 }
 
 * {

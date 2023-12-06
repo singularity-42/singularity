@@ -7,7 +7,7 @@
 
 
 
-    font-size: 2rem;
+    font-size: var(--heading-font-size);
     font-weight: 900;
     color: rgb(var(--color-sub));
     text-decoration: none;
@@ -18,7 +18,7 @@
     transform: translateX(0);
 
     @media (max-width: 260px) {
-        font-size: 12vw;
+        font-size: var(--heading-font-size);
     }
 }
 

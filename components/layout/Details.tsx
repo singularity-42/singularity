@@ -69,7 +69,7 @@ const Details: React.FC<EntityProps> = ({ }) => {
                     {entity.description && <Markdown content={entity.description} active={true} />}
                     {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
                 </div>
-                {relations && <Graph graphData={relations} />}
+                {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
             </div>
             <div className={styles.mapContainer}>
             {entity.location && <Map location={entity.location} />}

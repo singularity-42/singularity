@@ -63,9 +63,6 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
       if (entity.path) {
         let path = entity.path.split(/\\|\//);
         let folderPath = path.slice(0, path.length - 1).join("\\");
-        if (path.length == 1 || folders.includes(folderPath)) {
-          visibleEntities.push(entity);
-        }
         if (!pathFolders.includes(folderPath) && path.length > 1) {
           // check if folder should be visible by selected folders
           let folderPath = path.slice(0, path.length - 1).join("\\");
@@ -82,6 +79,9 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
 
           pathFolders.push(folderPath);
         }
+        if (path.length == 1 || folders.includes(folderPath)) {
+          visibleEntities.push(entity);
+        }
       }
     });
 
@@ -89,44 +89,38 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
       visibleEntities = entities;
     }
 
-    visibleEntities.sort((a: any, b: any) => {
-      if (a.path < b.path) return -1;
-      else if (a.path > b.path) return 1;
-      else return 0;
-    });
+// if there is only one folder, open it
+if (pathFolders.length === 1 && !folders.includes(pathFolders[0])) {
+  setFolders(pathFolders);
+}
 
-    // if there is only one folder, open it
-    if (pathFolders.length === 1 && !folders.includes(pathFolders[0])) {
-      setFolders(pathFolders);
-    }
-
-    setLocalEntities(visibleEntities);
+setLocalEntities(visibleEntities);
   }, [entities, folders]);
 
-  return (
-    <div className={styles.table}>
-      <div className={styles.thead}>{/* Header content */}</div>
-      <div className={styles.tbody}>
-        {localEntities?.map((entity: any, index: number) =>
-          entity.isFolder || false ? (
-            <div 
-              key={index + "folder"}
+return (
+  <div className={styles.table}>
+    <div className={styles.thead}>{/* Header content */}</div>
+    <div className={styles.tbody}>
+      {localEntities?.map((entity: any, index: number) =>
+        entity.isFolder || false ? (
+          <div
+            key={index + "folder"}
             className={styles.entity}>
-              <Parent
-                title={entity.metadata.title}
-                onFolderClick={onFolderClick}
-                selected={folders.includes(entity?.metadata?.title as never)}
-              />
-            </div>
-          ) : (
-            <div key={index} className={`${styles.entity} ${folders.includes(entity.path.split(/\\|\//).slice(0, entity.path.split(/\\|\//).length - 1).join("\\")) ? styles.inFolder : ""}`}>
-              <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
-            </div>
-          )
-        )}
-      </div>
+            <Parent
+              title={entity.metadata.title}
+              onFolderClick={onFolderClick}
+              selected={folders.includes(entity?.metadata?.title as never)}
+            />
+          </div>
+        ) : (
+          <div key={index} className={`${styles.entity} ${folders.includes(entity.path.split(/\\|\//).slice(0, entity.path.split(/\\|\//).length - 1).join("\\")) ? styles.inFolder : ""}`}>
+            <Entity entity={entity} onTagClick={onTagClick} selected={selected} />
+          </div>
+        )
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default List;
