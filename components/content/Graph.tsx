@@ -102,8 +102,8 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
 
   return (
     <div className={styles.graphContainer}>
-      <h5 className={styles.graphTitle}>Connections</h5>
       <div className={styles.graph} id={identifier} ref={container}/>
+      <h5 className={styles.graphTitle}>Connections</h5>
     </div>
   );
 };

@@ -2,10 +2,10 @@
   position: fixed;
   text-align: left;
 
-  top: 5.8rem;
-  right: 0.8rem;
+  top: 7rem;
+  right: 1.5rem;
 
-  scale: 2;
+  scale: 4.2;
   cursor: pointer;
   color: rgb(var(--light-rgb));
 
@@ -77,6 +77,7 @@
 
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));
+  border-radius: 0.42rem;
 }
 
 .entityContainer:hover {
@@ -150,15 +151,12 @@
 
   .popup {
     padding: 1rem;
+    padding-top: 2rem;
     top: 4rem;
     left: 0;
     width: 100vw;
     height: calc(100vh - 4rem);
 
-    .closeButton {
-      top: 0vh;
-      right: 0rem;
-    }
   }
 }
 
@@ -175,6 +173,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  min-height: 20h;
 }
 
 // on mobile all vertical below each other
@@ -202,4 +201,20 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+.rightContainer {
+  padding-top: 3rem;	
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.subtitle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
 }

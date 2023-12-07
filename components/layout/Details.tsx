@@ -51,8 +51,6 @@ const Details: React.FC<EntityProps> = ({}) => {
 
   const { metadata } = entity as any;
 
-  console.log("entity", entity);
-
   return (
     <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
       <button className={styles.closeButton} onClick={handleExit}>
@@ -63,6 +61,7 @@ const Details: React.FC<EntityProps> = ({}) => {
         <div className={styles.leftContainer}>
           <div className={styles.detailsContainer}>
             <h2 className={styles.title}>{entity.title.split(/\\|\//).pop()}</h2>
+            <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
           </div>
           <div className={styles.tagsContainer}>
             <Tags tags={entity.tags} viewOnly={true} />
@@ -74,7 +73,9 @@ const Details: React.FC<EntityProps> = ({}) => {
           {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
           {/* {entity.address && <div className={styles.addressContainer}>{entity.address}</div>} */}
         </div>
-        {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
+        <div className={styles.rightContainer}>
+          {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
+        </div>
       </div>
       {entity.location && (
         <div className={styles.mapContainer}>
@@ -82,9 +83,9 @@ const Details: React.FC<EntityProps> = ({}) => {
         </div>
       )}
       <div className={styles.embedContainer}>
-        {entity && entity.spotifytrack && <SpotifyTrack track={entity.spotifytrack} />}
-        {entity && entity.soundcloudtrack && <SoundcloudTrack track={entity.soundcloudtrack} />}
-        {entity && entity.instagrampost && <InstagramPost post={entity.instagrampost} />}
+        {entity && (entity as any).spotifytrack && <SpotifyTrack track={(entity as any).spotifytrack } />}
+        {entity && (entity as any).soundcloudtrack && <SoundcloudTrack track={(entity as any).soundcloudtrack} />}
+        {entity && (entity as any).instagrampost && <InstagramPost post={(entity as any).instagrampost} />}
       </div>
     </div>
   );

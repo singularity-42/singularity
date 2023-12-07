@@ -11,11 +11,12 @@
   right: -42vw;
   top: 4rem;
   overflow: hidden;
-  background-color: rgb(var(--dark-rgb));
   z-index: 100 !important;
   // make sure the menu is on top of everything
   width: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  background-color: rgb(var(--light-rgb));
 }
 
 .menu.show {
@@ -54,8 +55,6 @@
 }
 
 .menuLink {
-  background-color: rgb(var(--light-rgb));
-  width: 50%;
   padding-right: 5rem;
   text-decoration: none;
   padding-left: 1rem;
@@ -71,7 +70,6 @@
 }
 
 .menuLink:hover {
-  background-color: rgb(var(--light-rgb));
   transition: all 0.3s ease;
   color: rgb(var(--secondary-rgb));
   transform: translateX(1rem);
@@ -99,7 +97,6 @@
 }
 
 .notSelected {
-  background-color: rgb(var(--dark-rgb));
   transition: all 0.3s ease;
   color: rgb(var(--light-rgb));
 }

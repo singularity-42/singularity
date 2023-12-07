@@ -8,6 +8,7 @@ export enum OrderType {
 
 export interface Entity {
     title: string;
+    folder: string;
     tags: string[];
     address?: string;
     location?: string;
