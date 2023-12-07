@@ -1,25 +1,22 @@
 :root {
   --font-mono: monospace;
 
-  /* https://coolors.co/101010-3c3c3c-f3f3f3-ffffff-420000-ff4242 */
+  --light: #dedede;
+  --light-rgb: 222, 222, 222; /* #dedede */
 
-  /* #ffffff */
-  --light-rgb: 255, 255, 255;
+  --dark: #0a0a0a;
+  --dark-rgb: 10, 10, 10;
 
-  /* #101010 */
-  --dark-rgb: 16, 16, 16;
+  /* Removing smoke and shaded variables */
 
-  /* #f3f3f3 */
-  --smoke-rgb: 243, 243, 243;
+  --primary-rgb: 255, 42, 42; /* #ff2a2a */
 
-  /* #3c3c3c */
-  --shaded-rgb: 60, 60, 60;
+  --secondary-rgb: 222, 84, 84; /* #de5454 */
 
-  /* #420000 */
-  --primary-rgb: 66, 0, 0;
+  --tertiary-rgb: 64, 168, 168; /* #40a8a8 */
 
-  /* #ff4242 */
-  --secondary-rgb: 255, 66, 66;
+  --font-size: 16px;
+  --heading-font-size: 2.5rem;
 }
 
 * {

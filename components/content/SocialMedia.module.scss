@@ -5,7 +5,7 @@
     align-items: center;
     padding: 0.1rem;
     border-radius: 0.5rem;
-    font-size: 0.42rem;
+    font-size: var(--font-size);
     font-weight: bold;
     color: rgb(var(--light-rgb));
 
@@ -18,7 +18,7 @@
 
 
 .username {
-    font-size: 1rem;
+    font-size: var(--font-size);
     font-weight: normal;
 }
 

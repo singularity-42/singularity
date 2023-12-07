@@ -14,7 +14,15 @@ interface HoverLinkProps {
 
 const HoverLink: React.FC<HoverLinkProps> = ({ name = '', href = '', children }) => {
 
-    const { setName, toggleVisibility } = useDetails(); 
+    const [ actualName, setActualName ] = useState<string>(name);
+    const { setName, toggleVisibility, visible } = useDetails(); 
+
+    useEffect(() => {
+        // name is a path to a file so we need to convert it to a file name
+        const path = name.split(/\\|\//);
+        const fileName = path[path.length - 1];
+        setActualName(fileName);
+    }, [name]);
 
     return (
             <button
@@ -25,7 +33,11 @@ const HoverLink: React.FC<HoverLinkProps> = ({ name = '', href = '', children })
                         return;
                     }
                     setName(name);
-                    window.history.pushState({}, '', `${window.location.pathname}#${name}`);
+                    if (!visible) {
+                    window.history.pushState({}, '', `${window.location.pathname}#${actualName}`);
+                    }else{
+                        window.history.pushState({}, '', `${window.location.pathname}`);
+                    }
                     toggleVisibility();
                 }}
             >

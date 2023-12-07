@@ -38,7 +38,7 @@
 
 .button {
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: var(--font-size);
   font-weight: 500;
   padding: 0.5rem;
   display: flex;
@@ -54,7 +54,7 @@
   &:hover {
     color: rgb(var(--secondary-rgb));
     transform: scale(1.1);
-    background-color: rgba(var(--smoke-rgb), 0.8);
+    background-color: rgba(var(--light-rgb), 0.8);
   }
 
   width: 2rem;

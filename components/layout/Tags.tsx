@@ -6,9 +6,10 @@ interface TagsProps {
   tags: string[];
   onTagClick?: (tag: string) => void;
   selected?: string[];
+  viewOnly?: boolean;
 }
 
-const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected }) => {
+const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => { 
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,14 +70,24 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected }) => {
 
   return (
     <div className={styles.tags} ref={containerRef}>
-      {tags.map((tag, index) => (
+      {tags.map((tag, index) => {
+        if (viewOnly) {
+          return (
+            <Tag
+              key={index}
+              tag={tag}
+              viewOnly={true}
+            />
+          );
+        }else
+        return (
         <Tag
           key={index}
           tag={tag}
           onClick={handleTagClick}
           selected={selected && selected.includes(tag)}
-        />
-      ))}
+        />)
+      })}
     </div>
   );
 };

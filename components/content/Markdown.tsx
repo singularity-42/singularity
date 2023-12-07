@@ -43,7 +43,9 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
             const children = node?.children;
 
             if (!children) {
-              return <td {...props}></td>;
+              return <td {...props}
+                key={(children as any)?.value}
+              ></td>;
             }
 
             let row = children.map((child: any) => {
@@ -52,18 +54,20 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (!isElement) {
                 return child.value;
               } else {
-                return <HoverLink name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>;
+                return <HoverLink 
+                key={child?.children[0]?.value || ''}
+                name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>;
               }
             });
 
-            return <td className={styles.td} {...props}>{row}</td>;
+            return <td className={styles.td} {...props} key={row.join('')}>{row}</td>;
           },
           a: ({ node, ...props }) => {
             const { href, children } = props;
 
             if (href?.startsWith('http')) {
               return (
-                <a href={href} target="_blank" rel="noopener noreferrer">
+                <a href={href} target="_blank" rel="noopener noreferrer" className={styles.link}>
                   {children}
                 </a>
               );
@@ -86,7 +90,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <h1 {...props}>{newChildren}</h1>;
+            return <h1 {...props} className={styles.h1}>{newChildren}</h1>;
           },
           h2: ({ node, ...props }) => {
             let children = node?.children as any;
@@ -96,7 +100,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <h2 {...props}>{newChildren}</h2>;
+            return <h2 {...props} className={styles.h2}>{newChildren}</h2>;
           },
           h3: ({ node, ...props }) => {
             let children = node?.children as any;
@@ -106,7 +110,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <h3 {...props}>{newChildren}</h3>;
+            return <h3 {...props} className={styles.h3}>{newChildren}</h3>;
           },
           h4: ({ node, ...props }) => {
             let children = node?.children as any;
@@ -116,7 +120,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <h4 {...props}>{newChildren}</h4>;
+            return <h4 {...props} className={styles.h4}>{newChildren}</h4>;
           },
           p: ({ node, ...props }) => {
             let children = node?.children as any;
@@ -134,7 +138,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               else if (child?.children[0]?.value) newChildren.push(<span key={i}>{child?.children[0]?.value}</span>);
               else newChildren.push(<span key={i}>{child}</span>);
             }
-            return <p {...props}>{newChildren}</p>;
+            return <p {...props} className={styles.p}>{newChildren}</p>;
           },
           li: ({ node, ...props }) => {
             let children = node?.children as any;
@@ -144,7 +148,9 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <li style={{ marginLeft: '1rem' }} {...props}>{newChildren}</li>;
+            return <li className={styles.li} {...props} 
+              key={newChildren.join('')}
+            >{newChildren}</li>;
           },
         }}
       >

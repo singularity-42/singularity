@@ -7,4 +7,4 @@ play_store:
 tags:
   - communication
 ---
-All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+All-in-One-Sprach- und Text-Chat für Gamer, der kostenlos und sicher ist und sowohl auf Ihrem Desktop als auch auf Ihrem Telefon funktioniert.

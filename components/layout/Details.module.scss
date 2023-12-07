@@ -1,163 +1,220 @@
 .closeButton {
-    position: relative;
-    width: 100%;
-    text-align: right;
+  position: fixed;
+  text-align: left;
 
-    cursor: pointer;
-    color: rgb(var(--light-rgb));
+  top: 7rem;
+  right: 1.5rem;
 
-    font-size: 24px;
-    // reset all button styles
-    border: none;
-    background: none;
-    outline: none;
+  scale: 4.2;
+  cursor: pointer;
+  color: rgb(var(--light-rgb));
 
+  font-size: var(--font-size);
 
-    &:hover {
-        color: rgb(var(--secondary-rgb));
-    }
+  // reset all button styles
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
 }
 
-
-
 .popup {
-    opacity: 0;
-    position: fixed;
-    top: 10vh;
-    left: 10vw;
-    width: 80vw;
-    height: 80vh;
-    color: rgb(var(--light-rgb));
-    overflow-y: scroll;
-    overflow-x: hidden;
+  opacity: 0;
+  position: fixed;
+  height: calc(100vh - 5rem);
+  bottom: 0;
+  width: 100vw;
+  color: rgb(var(--light-rgb));
+  overflow-x: hidden;
 
-    z-index: 2;
-    padding: 2rem;
+  z-index: 2;
+  padding: 2rem;
+  background-color: rgb(var(--dark-rgb));
+
+  &.show {
+    border: 1px solid rgb(var(--light-rgb));
+    opacity: 1;
     background-color: rgb(var(--dark-rgb));
+    animation: fadeIn 0.3s ease-in-out forwards;
+  }
 
-    &.show {
-        border: 1px solid rgb(var(--light-rgb));
-        opacity: 1;
-        background-color: rgb(var(--dark-rgb));
-        animation: fadeIn 0.3s ease-in-out forwards;
-    }
-    
-    &.hide {
-        border: 1px solid #0000;
-        display: none;
-        opacity: 0;
-        animation: fadeOut 0.3s ease-in-out forwards;
-    }
+  &.hide {
+    border: 1px solid #0000;
+    display: none;
+    opacity: 0;
+    animation: fadeOut 0.3s ease-in-out forwards;
+  }
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    100% {
-        opacity: 0;
-    }    
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 // Entity.module.scss
 .entityContainer {
-    // border: 1px solid #ccc;
-    //pretter stylistic border maybe dottet
-    // border: 1px dashed #ccc;
+  // border: 1px solid #ccc;
+  //pretter stylistic border maybe dottet
+  // border: 1px dashed #ccc;
 
-    padding: 0.42rem;
-    border: 1px dashed rgb(var(--smoke-rgb));
+  padding: 0.42rem;
+  border: 1px dashed rgb(var(--light-rgb));
+  border-radius: 0.42rem;
 }
 
 .entityContainer:hover {
-    border: 1px solid rgb(var(--light-rgb));
+  border: 1px solid rgb(var(--light-rgb));
+}
+
+@media (max-width: 768px) {
+  .entityContainer {
+    border: none;
+  }
 }
 
 .title {
-    font-size: 24px;
+  font-size: var(--heading-font-size);
 }
 
 .entityMarkdown {
-    color: rgb(var(--light-rgb));
-    padding: 1rem;
-    transition: color 0.2s ease-in-out;
+  color: rgb(var(--light-rgb));
+  padding: 1rem;
+  transition: color 0.2s ease-in-out;
 }
 
 .detailsContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .socialMediaLink {
-    padding-top: 10rem;
-    margin-right: 10px;
-    text-decoration: none;
+  padding-top: 10rem;
+  margin-right: 10px;
+  text-decoration: none;
 }
 
 .socialMediaLink:hover {
-    color: rgb(var(--light-rgb));
-    text-decoration: underline;
+  color: rgb(var(--light-rgb));
+  text-decoration: underline;
 }
 
 // should be all on left next to each other horizontally
 .socialMediaContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
 }
 
 .tagsContainer {
-    // flex center horizontally
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
+  // flex center horizontally
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 .mapContainer {
-    margin: 1rem;
-    position: relative;
-    width: 95vw;
+  width: 100%;
+  height: 42vh;
+  position: relative;
+  padding: 4rem;
+  margin: 1rem 0;
 }
 
 // on mobile tags Container should be vertical
 
 @media (max-width: 768px) {
-    .tagsContainer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .tagsContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .popup {
+    padding: 1rem;
+    padding-top: 2rem;
+    top: 4rem;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 4rem);
 
-    .popup {
-        padding: 1rem;
-        top: 4rem;
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - 4rem);
-
-        .closeButton {
-            top: 0vh;
-            right: 0rem;
-        }
-    }
+  }
 }
 
 .descriptionContainer {
-    color: rgb(var(--light-rgb));
-    padding: 1rem;
-    transition: color 0.2s ease-in-out;
+  color: rgb(var(--light-rgb));
+  padding: 1rem;
+
+  transition: color 0.2s ease-in-out;
+}
+
+// onmobile all vertical below each other
+// on desktop all horizontal next to each other, in 2x width grid
+.contentContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  min-height: 20h;
+}
+
+// on mobile all vertical below each other
+@media (max-width: 768px) {
+  .contentContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.spotifyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.embedContainer {
+  padding: 1rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  // 2 columns
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightContainer {
+  padding-top: 3rem;	
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.subtitle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+
 }

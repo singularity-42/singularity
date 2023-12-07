@@ -1,0 +1,24 @@
+.parent {
+  padding: 0.42rem;
+  border: 1px dashed rgb(var(--light-rgb));
+  width: 100%;
+  font-size: var(--heading-font-size);
+  transition: border-color 0.3s ease-in-out; /* Add transition for smooth effect */
+  height: 4.2rem;
+  z-index: 5;
+  &:hover {
+      border: 1px solid rgb(var(--light-rgb)); /* Change border color on hover */
+  }
+
+  // items next to each other horizontally
+  display: flex;
+  align-items: center;
+  // center items vertically
+
+  gap: 0.42rem;
+}
+
+.selected {
+  border: 1px solid rgb(var(--light-rgb));
+  background-color: rgba(var(--light-rgb), 0.1);
+}

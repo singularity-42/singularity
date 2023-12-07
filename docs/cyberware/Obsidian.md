@@ -10,4 +10,4 @@ tags:
   - notes
   - structure
 ---
-A knowledge base that works on local Markdown files.
+Eine Wissensdatenbank, die mit lokalen Markdowndateien arbeitet.

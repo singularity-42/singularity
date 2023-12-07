@@ -12,7 +12,7 @@
     justify-content: center;
     margin: 1em;
     border: rgb(var(--light-rgb)) solid 1px;
-    font-size: 42%;
+    font-size: var(--font-size);
     width: 40px;
     height: 40px;
     white-space: nowrap;
@@ -63,7 +63,7 @@
 }
 
 .round:hover {
-    background-color: rgba(var(--smoke-rgb), 0.8);
+    background-color: rgba(var(--light-rgb), 0.8);
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

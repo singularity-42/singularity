@@ -5,14 +5,14 @@
 
 .tagFilter {
     padding: 20px;
-    border: 1px solid var(--smoke-rgb);
+    border: 1px solid var(--light-rgb);
     border-radius: 5px;
     max-width: 300px;
     margin-bottom: 20px;
   
     h3 {
       margin-bottom: 10px;
-      font-size: 18px;
+      font-size: var(--font-size);
       color: rgb(var(--dark-rgb));
     }
   }

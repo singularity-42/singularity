@@ -1,1 +1,0 @@
-Die [[AJZ Garten]] lädt zu spontanen Jam-Sessions ein, während die [[AJZ Großer Saal]] lokale Bands und vielfältige musikalische Klänge präsentiert. Die [[AJZ St. Etienne]] verschmilzt elektronische Beats mit Synthesizer-Improvisationen zu einer einzigartigen Klanglandschaft.

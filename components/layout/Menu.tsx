@@ -4,6 +4,7 @@ import Link from "next/link";
 import UserInfo from "../function/UserInfo";
 import { usePathname } from 'next/navigation';
 import { useDetails } from "@/hooks/provider/DetailsProvider";
+import { MdGroups, MdOutlineCalendarMonth, MdPages, MdPerson } from "react-icons/md";
 
 interface MenuProps {
   open: boolean;
@@ -12,10 +13,11 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const { visible, toggleVisibility } = useDetails();
-  
-  const handleLinkClick = () => {
+  const [lastClicked, setLastClicked] = React.useState("");
+
+  const handleLinkClick = (str: string) => {
     if (visible) toggleVisibility();
-    
+    setLastClicked(str);
     // wait 420ms and then close the menu
     setTimeout(() => {
       onClose();
@@ -28,19 +30,19 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const getCurrentPage = (path: string) => {
     // const currentPath = window.location.pathname;
     const pathname = usePathname();
-    return pathname === path ? styles.currentSelected : styles.theBox;
+    return pathname === path ? styles.selected : styles.notSelected;
   };
 
   let isMenuOpen = open === true ? styles.show : "";
 
-  
+
   const pages = [
     "/collaborations",
     "/collectives",
-    "/cyberware",
+    //"/cyberware",
     "/concepts",
-    "/creatives",  
-    "/change",
+    "/creatives",
+    //"/change",
     // "/creations",
     //   "/creators",
     // "/canvas",
@@ -51,32 +53,30 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
     // "/comedy",
   ];
 
+  const pageIcons: { [key: string]: JSX.Element } = {
+    "/collaborations": <MdOutlineCalendarMonth />,
+    "/collectives": <MdGroups />,
+    "/concepts": <MdPages />,
+    "/creatives": <MdPerson />,
+  };
+
   return (
     <ul className={`${styles.menu} ${isMenuOpen}`}>
-       {
-        pages
-        // .sort((a, b) => 
-        //   {
-        //     if (a.length > b.length) {
-        //       return -1;
-        //     }
-        //     if (a.length < b.length) {
-        //       return 1;
-        //     }
-        //     return 0;
-        //   }
-        // )
-        .map((page, index) => {
+      {
+        pages.map((page, index) => {
           let innerText = page.replace("/", "");
           return (
             <li key={index} className={`${styles.menuItem} ${getCurrentPage(page)}`}>
-              <Link href={page} className={styles.menuLink} onClick={handleLinkClick}>
+              <Link href={page} className={styles.menuLink} onClick={() => handleLinkClick(page)}>
                 {innerText}
+                <div className={styles.icon}>
+                  {pageIcons[page]}
+                </div>
               </Link>
             </li>
           )
         })
-       }
+      }
     </ul>
   );
 };

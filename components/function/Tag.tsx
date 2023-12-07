@@ -14,9 +14,10 @@ interface TagProps {
     tag: string;
     onClick?: (tag: string) => void;
     selected?: boolean;
+    viewOnly?: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ tag, onClick, selected }) => {
+const Tag: React.FC<TagProps> = ({ tag, onClick, selected, viewOnly }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -34,13 +35,13 @@ const Tag: React.FC<TagProps> = ({ tag, onClick, selected }) => {
     };
 
     return (
-        <div
-            className={`${styles.tag} ${selected ? styles.selected : ''} ${isHovered ? styles.hovered : ''}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleClick}
-        >
-            {tag}
+      <div
+      className={`${styles.tag} ${selected ? styles.selected : ''} ${isHovered ? styles.hovered : ''} ${viewOnly ? styles.viewOnly : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+      >
+          {viewOnly ? '#' : ''}{tag}
         </div>
     );
 };

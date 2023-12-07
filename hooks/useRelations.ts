@@ -21,12 +21,12 @@ const useRelation = (name: string) => {
                 return;
             }
 
+
             try {
                 // Construct the API URL properly
                 const url = `${process.env.NEXT_PUBLIC_API_URL}`+`relations?name=${name}`;
                 // Fetch data from the API
                 const response = await axios.get(url);
-                console.log(response.data);
                 // Assuming the API returns data in the expected format
                 setRelation(response.data);
             } catch (error) {

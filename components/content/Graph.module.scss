@@ -1,11 +1,32 @@
 .graphContainer {
-    position: relative;
     width: 100%;
-    height: 30%;
+    height: 100%;
     color: rgb(var(--light-rgb));
+    border: 1px dashed rgb(var(--light-rgb));
+    border-radius: 0.42rem;
+}
 
+@media (max-width: 768px) {
+  .graphContainer {
+    margin-top: 0;
+  }
+}
 
-    padding: 0.42rem;
-    border: 1px dashed rgb(var(--smoke-rgb));
-    
+.graph {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.graphTitle {
+  position: relative;
+  top: -1.8rem;
+  left: 0.2rem;
+  font-size: 1.5rem;
 }

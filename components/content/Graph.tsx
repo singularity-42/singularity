@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
-import { DataSet, Network, Node, Edge, Options } from 'vis-network';
-import { v4 as uuidv4 } from 'uuid';
-import styles from './Graph.module.scss';
-import { useDetails } from '@/hooks/provider/DetailsProvider';
+import React, { useRef, useEffect } from "react";
+import { DataSet, Network, Node, Edge, Options } from "vis-network";
+import { v4 as uuidv4 } from "uuid";
+import styles from "./Graph.module.scss";
+import { useDetails } from "@/hooks/provider/DetailsProvider";
 
 interface GraphProps {
   graphData: { nodes: Node[]; edges: Edge[] };
@@ -24,41 +24,41 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     let network: Network | null = null;
 
     const defaultOptions: Options = {
+      // default zoom 2x
       physics: {
         stabilization: false,
       },
       autoResize: false,
       edges: {
         smooth: false,
-        color: '#ffffff',
-        width: 0.5,
+        color: "#ffffff",
+        width: 1,
         arrows: {
           to: {
             enabled: true,
-            scaleFactor: 0.5,
+            scaleFactor: 1,
           },
         },
       },
       nodes: {
-        shape: 'dot',
-        size: 10,
+        shape: "dot",
+        size: 20,
         opacity: 1,
         font: {
-          size: 10,
-          color: '#ffffff',
+          size: 20,
+          color: "#ffffff",
         },
         color: {
-          border: '#ffffff',
-          background: '#ffffff',
+          border: "#ffffff",
+          background: "#ffffff",
           highlight: {
-            background: '#420000',
-            border: '#ffffff',
+            background: "#420000",
+            border: "#ffffff",
           },
         },
         borderWidth: 2,
         shadow: true,
       },
-
     };
 
     const mergedOptions = { ...defaultOptions, ...options };
@@ -73,7 +73,7 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
       }
 
       // Add onClick event to nodes
-      network.on('doubleClick', (properties) => {
+      network.on("doubleClick", (properties) => {
         if (properties.nodes && properties.nodes.length > 0) {
           const clickedNodeId = properties.nodes[0];
           const clickedNode = nodes.find((node) => node.id === clickedNodeId);
@@ -81,10 +81,8 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
           // Check if a node is clicked and trigger the onClick event
           if (clickedNode) {
             // Perform actions or trigger the onClick event with the clicked node data
-            console.log('doubleClick node:', clickedNode);
             // Call the event handler provided in props, if available
-            if (clickedNode.label)
-              setName(clickedNode.label);
+            if (clickedNode.label) setName(clickedNode.label);
             if (events && events.onClick) {
               events.onClick(clickedNode);
             }
@@ -92,7 +90,6 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
         }
       });
     }
-
 
     if (getNetwork && network) {
       getNetwork(network);
@@ -103,7 +100,12 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
 
   const identifier = uuidv4(); // Generate a unique identifier
 
-  return <div className={styles.graphContainer} id={identifier} ref={container}></div>;
+  return (
+    <div className={styles.graphContainer}>
+      <div className={styles.graph} id={identifier} ref={container}/>
+      <h5 className={styles.graphTitle}>Connections</h5>
+    </div>
+  );
 };
 
 export default Graph;

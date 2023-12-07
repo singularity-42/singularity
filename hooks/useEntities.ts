@@ -14,7 +14,6 @@ const useEntities = (type: string, filter: string[]) => {
       setPreviousType(type);
     }else return;
 
-    console.log('useEntities: ', type, filter);
     const fetchEntities = async () => {
       try {
         // http://localhost:3000/api/entity
