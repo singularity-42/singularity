@@ -1,8 +1,27 @@
 .graphContainer {
-    position: relative;
     width: 100%;
     height: 100%;
     color: rgb(var(--light-rgb));
     border: 1px dashed rgb(var(--light-rgb));
-    
+}
+
+@media (max-width: 768px) {
+  .graphContainer {
+    margin-top: 0;
+  }
+}
+
+.graph {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.graphTitle {
+  position: relative;
+  top: -20px;
 }

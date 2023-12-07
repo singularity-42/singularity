@@ -94,7 +94,6 @@ const Entity: React.FC<EntityProps> = ({ entity, onTagClick, selected }) => {
                 )}
             </div> 
             */}
-            {entity.metadata.instagram && <Gallery name={entity.metadata.instagram} />}
     </div>
   );
 };

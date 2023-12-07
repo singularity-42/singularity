@@ -105,7 +105,7 @@ return (
         entity.isFolder || false ? (
           <div
             key={index + "folder"}
-            className={styles.entity}>
+            className={`${styles.entity} ${styles.folder}`} >
             <Parent
               title={entity.metadata.title}
               onFolderClick={onFolderClick}

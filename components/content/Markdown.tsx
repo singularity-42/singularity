@@ -148,7 +148,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               if (child?.type === 'element') newChildren.push(<HoverLink key={i} name={child?.children[0]?.value || ''}>{child?.children[0]?.value || ''}</HoverLink>);
               else newChildren.push(<span key={i}>{child.value}</span>);
             }
-            return <li style={{ marginLeft: '2rem' }} {...props}
+            return <li className={styles.li} {...props} 
               key={newChildren.join('')}
             >{newChildren}</li>;
           },

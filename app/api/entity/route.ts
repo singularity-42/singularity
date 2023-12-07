@@ -19,7 +19,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     });
 
     const extractMetadata = (metadataString: string | undefined, title: string = '') => {
-        if (!metadataString || !metadataString.includes('\n')) {
+      
+      if (!metadataString || !metadataString.includes('\n')) {
             return { title,
               error: 'No metadata found'
             };
@@ -63,7 +64,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         let metadata = extractMetadata(metadataString, entity_name || '');
 
         let description = file.content.split('---')[2];
-
+        // get first folder name
+        console.log(file.file);
         metadata = {
             ...metadata,
             description

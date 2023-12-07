@@ -29,3 +29,12 @@
       color: rgb(var(--light-rgb));
     }
 }
+
+
+.viewOnly {
+  cursor: default;
+  &:hover {
+    transform: none;
+    background-color: rgba(var(--light-rgb), 0.2);
+  }
+}

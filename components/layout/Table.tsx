@@ -75,9 +75,7 @@ const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.Counte
   return (
     <div className={styles.table}>
       <div
-        style={{
-          height: "4.2rem", // TODO: fix this and find better spacer solution
-        }}
+        className={styles.description}
       />
       <Filter currentVisibleTags={currentVisibleTags} />
       <List entities={entities} onTagClick={handleTagClick} selected={filter} />
