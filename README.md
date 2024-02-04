@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Singularity Technical Documentation
 
-## Getting Started
+## Overview:
 
-First, run the development server:
+Singularity is a decentralized community focused on Collaborations, Concepts, Collectives, and Creatives (4C). All documentation is stored as Markdown files, managed in Obsidian, and editable under the /docs branch in this Git repository. Visualizations and organizational structures are dynamic and interconnected in an Obsidian graph-like manner.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Website Preview](https://github.com/singularity-42/singularity/assets/15168847/07b7a7ff-244f-43da-899e-82d2eae706cb)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Singularity App Network System:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+We are currently developing a Singularity App Network System that will revolutionize the 4C experience. Here's a sneak peek into what it will offer:
 
-## Learn More
+1. **Download Singularity App:**
+   - Soon, you will be able to download the Singularity App from your app store.
 
-To learn more about Next.js, take a look at the following resources:
+2. **Event Management:**
+   - Scan flyers, add events, and seamlessly connect with friends using NFC, WiFi, or Bluetooth.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Artist Profiles and Collectives:**
+   - Create and manage artist profiles, connect with collectives, and showcase your creative endeavors.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. **Event Publication Workflow:**
+   - Add new events locally and automatically inform relevant collectives via email.
+   - Events will be published for all users upon collective approval.
 
-## Deploy on Vercel
+### Be Part of the Beta Testing:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Get an exclusive preview of the Singularity App by participating in our beta testing phase. Here's how you can register:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Send an email to 42@drumni.com expressing your interest in participating in the beta testing. You'll be among the first to experience the Singularity App before its official launch.
+
+## Stay Tuned:
+
+Exciting developments are underway! Stay tuned for the official launch of the Singularity App and the enhanced community interaction system. Get ready to immerse yourself in the world of 4C like never before.
+
+For more details and updates, visit our website: [singularity.2n40.eu](185.170.115.191:3000)
+
+**Contact:**
+Singularity Team
+Email: 42@drumni.com (temporary)
+
+We appreciate your interest and look forward to shaping the 4C experience together!
