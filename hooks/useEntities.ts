@@ -40,7 +40,13 @@ const useEntities = (type: string, filter: string[]) => {
     fetchEntities();
   }, [type, filter]);
 
-
+  // map entites with propetiy index and number them
+  if (entities) {
+    entities.map((entity, index) => {
+      entity.index = index;
+      return entity;
+    });
+  }
   return entities;
 };
 

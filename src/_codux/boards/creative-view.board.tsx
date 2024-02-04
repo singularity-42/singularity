@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBoard } from '@wixc3/react-board';
-import Entity from '../../../components/layout/Entity';
+import EntityRow from '../../../components/layout/components/EntityRow';
 
 
 const entity = {
@@ -13,7 +13,7 @@ const entity = {
 export default createBoard({
     name: 'Entity View',
     Board: () => <div>
-        <Entity entity={entity as any} />
+        <EntityRow entity={entity as any} />
     </div>,
     isSnippet: true,
     environmentProps: {
