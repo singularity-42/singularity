@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    // background: rgb(var(--dark-rgb));
+    // glassy background
+    background: rgba(var(--dark-rgb), 0.5);
+    padding: 0 0.96rem;
+    width: 100%;
+    margin-top: 0;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+
+@media (max-width: 768px) {
+   
+}

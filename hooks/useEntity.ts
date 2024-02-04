@@ -7,6 +7,7 @@ const useEntity = (name: string) => {
     const [entity, setEntity] = useState<Entity>({
         title: '',
         tags: [],
+        folder: '',
         description: '',
     }
     );
@@ -35,6 +36,7 @@ const useEntity = (name: string) => {
                     {
                         title: '',
                         tags: [],
+                        folder: '',
                         description: '',
                     }
                 );

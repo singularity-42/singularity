@@ -1,0 +1,41 @@
+/* TagFilter.module.scss */
+.entityFilter {
+  color: rgb(var(--dark-rgb));
+}
+
+.tagFilter {
+    padding: 20px;
+    border: 1px solid var(--light-rgb);
+    border-radius: 5px;
+    max-width: 300px;
+    margin-bottom: 20px;
+  
+    h3 {
+      margin-bottom: 10px;
+      font-size: var(--font-size);
+      color: rgb(var(--dark-rgb));
+    }
+  }
+  .filterContainer {
+    padding: 1rem;
+    margin: 0.42rem;
+    border-radius: 20px;
+
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .filterTitle {
+    font-size: var(--font-size);
+    //bold
+    font-weight: bold;
+    //  all caps
+    text-transform: uppercase;
+    // cnetre text
+    text-align: center;
+    // center vertically
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

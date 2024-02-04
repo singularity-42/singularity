@@ -1,0 +1,100 @@
+.menu {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: right 0.3s ease, width 0.3s ease;
+  right: -42vw;
+  top: 5rem;
+  overflow: hidden;
+  z-index: 100 !important;
+  width: 0;
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px); /* Apply the glass effect */
+  background-color: rgba(var(--dark-rgb), 0.2); /* Slightly transparent background */
+}
+
+.menu.show {
+  width: 100%;
+  right: 0rem;
+  transition: right 0.3s ease, width 0.3s ease;
+}
+
+.menuItem {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  position: relative;
+  width: 100%;
+  right: -3rem;
+  transition-delay: calc(0.2s * 4.2);
+}
+
+.menuLink {
+  padding-right: 5rem;
+  text-decoration: none;
+  padding-left: 1rem;
+  color: rgba(var(--light-rgb), 0.8);
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  font-size: var(--heading-font-size);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: right;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+    transform: translateX(1rem);
+  }
+}
+
+.menuLink:hover .icon {
+  animation: spin 0.42s ease-in-out forwards;
+  transform: scale(1.2);
+}
+
+.selected .menuLink {
+  font-style: italic;
+}
+
+.icon {
+  margin-left: 1rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  42% {
+    transform: rotate(42deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+// on mobile make font smaller
+
+@media (max-width: 768px) {
+  .menuLink {
+    font-size: 1.6rem;
+    
+  }
+
+  .menu {
+    backdrop-filter: blur(0px);
+    background-color: rgba(var(--dark-rgb), 0.8);
+  }  
+}

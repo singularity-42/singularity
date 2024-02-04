@@ -1,6 +1,6 @@
 
-import Title from '@/components/content/Title';
-import Table from '@/components/layout/Table';
+import Title from '@/components/base/Title';
+import Table from '@/components/view/Table';
 import React from 'react';
 
 const ChangePage: React.FC = () => {

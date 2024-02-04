@@ -4,7 +4,6 @@ instagram: ajz_talschock
 mail: info@ajz-chemnitz.de
 tel: 490371449870
 tags:
-  - bands
   - social
   - culture
   - youth
