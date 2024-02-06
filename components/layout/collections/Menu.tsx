@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useDetails } from "@/hooks/provider/DetailsProvider";
 import { MdGroups, MdOutlineCalendarMonth, MdOutlineEditNote, MdPages, MdPerson } from "react-icons/md";
-import { TYPE_DESCRIPTIONS } from "@/app/defaults";
+import { TYPE_DESCRIPTIONS } from "@/types";
 
 interface MenuProps {
   open: boolean;
