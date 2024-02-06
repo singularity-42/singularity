@@ -20,7 +20,6 @@
 
 .selected {
   border: 1px solid rgb(var(--light-rgb));
-  background-color: rgba(var(--light-rgb), 0.1);
 }
 
 // Entity.module.scss
@@ -125,12 +124,8 @@
 
 .date {
   font-size: var(--heading-font-size);
-  color: rgba(var(--secondary-rgb), 0.42);
   transition: color 0.042s ease-in-out;
   
-  &:hover {
-      color: rgba(var(--secondary-rgb), 1);
-  }
 }
 
 .dateContainer {
@@ -147,5 +142,5 @@
   text-transform: uppercase;
   margin: 0.42rem;
   padding: 0.2rem;
-  color: rgba(var(--light-rgb), 1);
+  color: rgb(var(--light-rgb));
 }

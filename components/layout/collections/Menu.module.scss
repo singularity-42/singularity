@@ -5,13 +5,13 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  padding-left: 3rem;
   transition: right 0.3s ease, width 0.3s ease;
   right: -42vw;
-  top: 5rem;
+  top: 3rem;
   overflow: hidden;
   z-index: 100 !important;
   width: 0;
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px); /* Apply the glass effect */
   background-color: rgba(var(--dark-rgb), 0.2); /* Slightly transparent background */
 }
@@ -36,7 +36,6 @@
   padding-right: 5rem;
   text-decoration: none;
   padding-left: 1rem;
-  color: rgba(var(--light-rgb), 0.8);
   display: flex;
   align-items: right;
   justify-content: right;
@@ -94,7 +93,8 @@
   }
 
   .menu {
-    backdrop-filter: blur(0px);
+    top:  3rem;
+    backdrop-filter: none;
     background-color: rgba(var(--dark-rgb), 0.8);
   }  
 }

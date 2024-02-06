@@ -1,29 +1,15 @@
 // Card.module.scss
 .card {
-  background: rgba(255, 255, 255, 0.1); /* Glass-like background */
   height: 100%;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-
-
-  // border: 0.12rem solid rgba(var(--light-rgb), 0.2);
   box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
-  background: rgba(var(--dark-rgb), 0.5); /* Background color with transparency */
-  // border: 1px solid rgba(255, 255, 255, 0.2); /* Border with transparency */
   border-radius: 12px; /* Rounded corners for a modern look */
-  overflow: hidden; /* Ensure rounded corners apply to child elements */
-  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
-  // shadow in on black background
-  // box-shadow: 0 4px 8px rgba(var(--dark-rgb), 0.1);
   transition: transform 0.3s ease-in-out;
 
   &:hover {
     transform: scale(1.02); /* Scale on hover for a subtle interactive effect */
-       // Adjust styles for hover state
-    // Change background color, border color, and other styles as needed
-    background: rgba(var(--dark-rgb), 0.8);
-    // border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 0 4px 8px rgba(var(--dark-rgb), 0.2);
  
   }
@@ -45,14 +31,21 @@
   background-repeat: no-repeat;
   border-radius: 8px;
   // mix-blend-mode: difference;
-  opacity: 0.1;
+  opacity: 0.69;
   transition: opacity 0.3s ease-in-out;
 
   filter: invert(1);
+  opacity: 0.2;
 
   &:hover {
     opacity: 1;
   }
+}
+
+.noImage {
+  filter: invert(1);
+  opacity: 0.2;
+
 }
 
 .titleContainer {
@@ -69,7 +62,17 @@
   margin: 0;
 }
 
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 .socialMediaContainer {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
   // Styling for the container of social media tags
   // Adjust spacing, alignment, and other styles as needed
 }
@@ -90,3 +93,15 @@
 }
 
 // Additional styles for folder-specific content
+
+.description {
+  // color: mix colors var(--light-rgb) var(--dark-rgb) var(--tertiary-rgb);
+  color: rgba(var(--light-rgb), 0.8);
+  // margin-top: 8px;
+
+  // overflow scroll
+  overflow: scroll;
+  max-height: 30vh;
+  padding-bottom: 5vh;
+  // height: 42%;
+}

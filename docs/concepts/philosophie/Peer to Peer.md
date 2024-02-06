@@ -1,8 +1,7 @@
 ---
-
+tags:
+  - philosophie
 ---
-
-### Peer-To-Peer mit flachen Hierarchien
 
 - Teilnehmende sind Ebenbürtig
 - werden als Individuen wahrgenommen

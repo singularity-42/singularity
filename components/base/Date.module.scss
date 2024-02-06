@@ -1,0 +1,48 @@
+
+.dateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: var(--heading-font-size);
+    width: 99vw;;
+    height: 3rem; /* Adjust the height as needed */
+    background-color: rgba(var(--dark-rgb), 0.4); /* Transparent dark background */
+    z-index: 1000; /* Ensure it's above other elements */
+    margin: 0.42rem 0.42rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(var(--dark-rgb), 0.42);
+    // glassy border
+    // backdrop-filter: blur(10px);
+  }
+  
+  .formattedDate {
+    font-size: var(--text-font-size);
+    color: rgba(var(--light-rgb), 0.42);
+    display: flex;
+  }
+  
+  /* Additional styles for the formatted date */
+  .dayOfWeek {
+    font-size: calc(var(--heading-font-size) * 1.2);
+    margin-right: 10px;
+  }
+  
+  .date {
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+  }
+  
+  .day {
+    font-size: var(--text-font-size);
+  }
+  
+  .month {
+    font-size: var(--text-font-size);
+  }
+  
+  .year {
+    font-size: var(--text-font-size);
+  }

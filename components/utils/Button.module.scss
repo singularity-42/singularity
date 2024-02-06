@@ -11,33 +11,26 @@
     align-items: center;
     justify-content: center;
     margin: 1em;
-    border: rgb(var(--light-rgb)) solid 1px;
+    border: none; /* Remove border */
     font-size: var(--font-size);
     width: 40px;
     height: 40px;
-    white-space: nowrap;
-    background-color: transparent;
+    background-color: rgba(var(--light-rgb), 0.1); /* Semi-transparent background */
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-
-    // alt text should be centered and all in caps
+    border-radius: 12px; /* Add border-radius for rounded corners */
     img {
         object-fit: contain;
         object-position: center;
-        // all in caps
         text-transform: uppercase;
-
-        // text is a bit to way up, so we move it down a bit but only if alt text is present
+        margin-top: 2px; /* Adjust the vertical alignment of text */
     }
-
-
 }
 
 .button:hover {
-    background-color: rgba(var(--color-sub-rgb), 0.8);
+    background-color: rgba(var(--color-sub-rgb), 0.8); /* Darker background on hover */
     transform: translateY(1px);
-    box-shadow: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle box shadow on hover */
 }
-
 
 .button > img {
     filter: var(--filter);
@@ -45,25 +38,25 @@
 
 /* Square Button Styles */
 .square {
-    border-radius: 8px; /* Adjust the value to change the roundness of the corners */
-}
-
-.square:hover {
-    background-color: rgba(var(--color-sub-rgb), 0.8);
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
 /* Round Button Styles */
 .round {
-    background-color: rgba(var(--primary-rgb), 0.8);
-    border: var(--border);
     border-radius: 50%;
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle box shadow */
 }
 
-.round:hover {
-    background-color: rgba(var(--light-rgb), 0.8);
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Circle Button Styles */
+.circle {
+    border-radius: 50%;
+    background-color: rgba(var(--color-sub-rgb), 0.8);
+    padding: 8px; /* Add padding for a circular appearance */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle box shadow */
 }
+
+.circle:hover {
+    transform: scale(1.05);
+}
+
+/* Rest of your code remains unchanged */

@@ -20,6 +20,23 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
   const { edges, nodes } = graphData;
   const { setName } = useDetails();
 
+  const mergeDuplicateNodes = (nodeArray: Node[]): Node[] => {
+    const idMap = new Map<string, Node>(); 
+    for (const node of nodeArray as Node[]) {
+      if (!idMap.has(node.id as string)) {
+        idMap.set(node.id as string, node);
+      } else {
+        // Merge duplicate node by updating the properties
+        const existingNode = idMap.get(node.id as string);
+        if (existingNode) {
+          idMap.set(node.id as string, { ...existingNode, ...node });
+        }
+      }
+    }
+    return Array.from(idMap.values());
+  };
+
+  // Inside the useEffect block
   useEffect(() => {
     let network: Network | null = null;
 
@@ -65,7 +82,23 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     const mergedOptions = { ...defaultOptions, ...options };
 
     if (container.current) {
-      network = new Network(container.current, { edges, nodes }, mergedOptions);
+      // Destroy the previous network instance if it exists
+      if (network) {
+        (network as Network)?.destroy();
+      }
+
+      // Merge duplicate nodes
+      const mergedNodes = mergeDuplicateNodes(nodes);
+
+      // Check for duplicate node IDs before creating the network instance
+      const uniqueNodeIds = new Set(mergedNodes.map((node) => node.id));
+      if (uniqueNodeIds.size !== mergedNodes.length) {
+        console.error("Duplicate node IDs detected. Please ensure each node has a unique ID.");
+        return;
+      }
+
+      // Create a new network instance
+      network = new Network(container.current, { edges, nodes: mergedNodes }, mergedOptions);
 
       if (events) {
         for (const eventName of Object.keys(events)) {
@@ -75,18 +108,11 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
 
       // Add onClick event to nodes
       network.on("doubleClick", (properties) => {
-        if (properties.nodes && properties.nodes.length > 0) {
-          const clickedNodeId = properties.nodes[0];
-          const clickedNode = nodes.find((node) => node.id === clickedNodeId);
-
-          // Check if a node is clicked and trigger the onClick event
-          if (clickedNode) {
-            // Perform actions or trigger the onClick event with the clicked node data
-            // Call the event handler provided in props, if available
-            if (clickedNode.label) setName(clickedNode.label);
-            if (events && events.onClick) {
-              events.onClick(clickedNode);
-            }
+        if (properties.nodes.length > 0) {
+          const nodeId = properties.nodes[0];
+          const node = mergedNodes.find((n) => n.id === nodeId);
+          if (node) {
+            setName(node.label as string);
           }
         }
       });
@@ -103,7 +129,7 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
 
   return (
     <div className={styles.graphContainer}>
-      <div className={styles.graph} id={identifier} ref={container}/>
+      <div className={styles.graph} id={identifier} ref={container} />
       <h5 className={styles.graphTitle}>Connections</h5>
     </div>
   );

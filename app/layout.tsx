@@ -5,12 +5,17 @@ import Header from '@/components/layout/components/Header';
 import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
 import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 import Background from '@/components/base/Background';
+import Impressum from '@/components/base/Impressum';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Singularity',
   description: '42',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+  }
 }
 
 export default function RootLayout({
@@ -27,6 +32,7 @@ return (
           <TooltipProvider>
             <Header />
             {children}
+            <Impressum />
           </TooltipProvider>
         </DetailsProvider>
       </body>

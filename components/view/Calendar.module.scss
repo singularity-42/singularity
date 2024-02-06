@@ -1,0 +1,16 @@
+.calendar {
+    padding-top: 3rem;
+    height: 100%;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.description {
+  height: 4.2rem;
+}

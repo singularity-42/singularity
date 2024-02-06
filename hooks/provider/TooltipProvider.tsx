@@ -18,7 +18,7 @@ interface TooltipProviderProps {
 
 // Create a provider component for the tooltip context
 export const TooltipProvider: React.FC<TooltipProviderProps> = ({ children }: TooltipProviderProps) => {
-    const [tooltip, setTooltip] = useState("42");
+    const [tooltip, setTooltip] = useState("Loading...");
 
     const tooltipContextValue: TooltipContextInterface = {
         tooltip,
