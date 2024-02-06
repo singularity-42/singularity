@@ -15,7 +15,6 @@ const Cards: React.FC<CardsProps> = ({ entities, onTagClick, selectedFolders }) 
         <div key={index} className={styles.cardWrapper}>
           {entity.isFolder ? (
             <>  </>
-            // <Card data={entity} isFolder={true} isSelected={selectedFolders.includes(entity.folder.metadata.title)} onTagClick={onTagClick} />
           ) : (
             <Card data={entity} onTagClick={onTagClick} />
           )}

@@ -152,6 +152,16 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active }) => {
               key={newChildren.join('')}
             >{newChildren}</li>;
           },
+          ul: ({ node, ...props }) => {
+            return <ul className={styles.ul} {...props} 
+              key={(node?.children as any)?.join('')}
+            ></ul>;
+          },
+          ol: ({ node, ...props }) => {
+            return <ol className={styles.ol} {...props} 
+              key={(node?.children as any)?.join('')}
+            ></ol>;
+          },
         }}
       >
         {content}

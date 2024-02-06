@@ -11,10 +11,10 @@
     position: relative;
     display: inline;
 
-    color: rgba(var(--secondary-rgb), 0.4);
+    color: rgb(var(--tertiary-rgb));
     transition: color 0.2s ease-in-out;
     &:hover {
-        color: rgba(var(--secondary-rgb), 1);
+        color: rgb(var(--secondary-rgb));
         text-decoration: underline;
     }
     &:hover {

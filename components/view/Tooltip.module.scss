@@ -1,14 +1,26 @@
 .tooltip {
     display: inline-block;
     padding: 0.42rem;
-    padding-left: 0.42*3rem;
+    padding-left: calc(0.42 * 3rem);
     position: relative;
     top: 0;
-    width: 100%;
-    transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out; /* Add left property to transition */
+    left: 0;
+    max-width: 90vw;
+    transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out;
+
+    .name {
+        width: 100%;
+    // center the text
+    text-align: center;        
+    }
 
     &.changing {
-        animation: fadeOutLeft 0.3s ease-in-out forwards; /* Apply fadeOutLeft animation when changing */
+        animation: fadeOutLeft 0.3s ease-in-out forwards;
+    }
+
+    /* Additional styles for mobile view */
+    @media (max-width: 768px) {
+        display: none;
     }
 }
 
@@ -19,46 +31,23 @@
     }
     to {
         opacity: 0;
-        left: -1rem; /* Adjust the distance to fade out */
+        left: -1rem;
     }
 }
 
-/* Add this class when tooltip is changing */
 .tooltip.changing {
     opacity: 0;
-    left: 1rem; /* Adjust the distance to fade in */
-    animation: fadeInLeft 0.3s ease-in-out forwards; /* Apply fadeInLeft animation when changing */
+    left: 1rem;
+    animation: fadeInLeft 0.3s ease-in-out forwards;
 }
 
 @keyframes fadeInLeft {
     from {
         opacity: 0;
-        left: 1rem; /* Adjust the distance to fade in */
+        left: 1rem;
     }
     to {
         opacity: 1;
         left: 0;
     }
 }
-
-@media (max-width: 768px) {
-    .tooltip {
-      display: flex;
-      gap: 0.5rem; /* Increase the gap for more spacing */
-      background: rgba(var(--dark-rgb), 0.8); /* Adjust the background color and transparency */
-      mix-blend-mode: difference;
-      position: fixed;
-      top: 95vh;
-      white-space: nowrap !important;
-      left: 0;
-      width: max-content;
-      padding: 0.5rem 2rem;
-      margin: 0 1rem;
-      border-radius: 20px; /* Add border-radius for a rounded appearance */
-    }
-  
-    .tooltip > div {
-      flex: 1; /* Distribute available space evenly among child divs */
-    }
-  }
-  

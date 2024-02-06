@@ -62,11 +62,11 @@ const Details: React.FC<EntityProps> = () => {
             <h2 className={styles.title}>{entity.title.split(/\\|\//).pop()}</h2>
             <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
           </div>
-          <div className={styles.tagsContainer}>
-            <Tags tags={entity.tags} viewOnly={true} />
-          </div>
           <div className={styles.socialMediaContainer}>
             <Socials metadata={entity} />
+          </div>
+          <div className={styles.tagsContainer}>
+            <Tags tags={entity.tags} viewOnly={true} />
           </div>
           {metadata && metadata.instagram && <Gallery name={metadata.instagram} />}
           {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
@@ -85,6 +85,7 @@ const Details: React.FC<EntityProps> = () => {
         {entity && (entity as any).soundcloudtrack && <SoundcloudTrack track={(entity as any).soundcloudtrack} />}
         {entity && (entity as any).instagrampost && <InstagramPost post={(entity as any).instagrampost} />}
       </div>
+      
     </div>
  );
 };

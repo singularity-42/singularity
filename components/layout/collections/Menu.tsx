@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
-import UserInfo from "../../utils/UserInfo";
 import { usePathname } from 'next/navigation';
 import { useDetails } from "@/hooks/provider/DetailsProvider";
-import { MdGroups, MdOutlineCalendarMonth, MdPages, MdPerson } from "react-icons/md";
+import { MdGroups, MdOutlineCalendarMonth, MdOutlineEditNote, MdPages, MdPerson } from "react-icons/md";
+import { TYPE_DESCRIPTIONS } from "@/app/defaults";
 
 interface MenuProps {
   open: boolean;
@@ -24,40 +24,28 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
     }, 420);
   };
 
-
-
-
   const getCurrentPage = (path: string) => {
     // const currentPath = window.location.pathname;
     const pathname = usePathname();
+    // collaborations is also availbe for / root as selected in dev and prod for some versions TODO: fix this and add real home page
+    if (pathname === "/" && path === "/collaborations") return styles.selected;
     return pathname === path ? styles.selected : styles.notSelected;
   };
 
   let isMenuOpen = open === true ? styles.show : "";
 
-
-  const pages = [
-    "/collaborations",
-    "/collectives",
-    //"/cyberware",
-    "/concepts",
-    "/creatives",
-    //"/change",
-    // "/creations",
-    //   "/creators",
-    // "/canvas",
-    // "/culture",
-    // "/curation",
-    // "/cats",
-    // "/coffe",
-    // "/comedy",
-  ];
-
+  const pages = Object.keys(TYPE_DESCRIPTIONS).map((type: string) => {
+    return `/${type}`;
+  });
+ 
   const pageIcons: { [key: string]: JSX.Element } = {
     "/collaborations": <MdOutlineCalendarMonth />,
     "/collectives": <MdGroups />,
     "/concepts": <MdPages />,
     "/creatives": <MdPerson />,
+    // "/contact": <MdPerson />,
+    "/changes": <MdOutlineEditNote />,
+    
   };
 
   return (

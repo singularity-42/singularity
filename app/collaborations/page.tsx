@@ -1,10 +1,10 @@
 import React from 'react';
-import Table from '@/components/view/Table';
 import { OrderType } from '@/types';
+import Calendar from '@/components/view/Calendar';
 
 const collaborationPage: React.FC = () => {
   return (
-      <Table type='collaborations' orderType={OrderType.Alphabetical} />
+      <Calendar type="collaborations" orderType={OrderType.CounterAlphabetical} />
       
   );
 };

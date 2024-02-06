@@ -1,12 +1,14 @@
 .popup {
+  --space: 2rem;
+  --top-space: calc(1rem + var(--space));
   opacity: 0;
   position: fixed;
-  height: 85vh;
-  top: 5vh;
-  width: 95vw;
-  padding: 2.5vw;
-  margin: 2.5vw;
-  border-radius: 0.42rem 0.42rem 1rem 1rem;
+  height: calc(100vh - var(--space) * 2 - var(--top-space));
+  top: var(--top-space);
+  width: calc(100vw - var(--space) * 2);
+  padding: var(--space);
+  margin: var(--space);
+  border-radius: 1rem 1rem 1rem 1rem;
 
   overflow-x: hidden;
   z-index: 2;
@@ -22,11 +24,26 @@
   }
 
   &.hide {
-    border: 1px solid rgba(0, 0, 0, 0);
+    border: 1px solid var(--dark-color);
     /* Transparent border */
     display: none;
     opacity: 0;
     animation: fadeOut 0.3s ease-in-out forwards;
+  }
+
+
+  &.appear {
+    animation: fadeInBackground 3s ease-in-out forwards;
+  }
+
+  @keyframes fadeInBackground {
+    0% {
+      background-color: rgba(var(--dark-rgb), 0.8);
+    }
+
+    100% {
+      background-color: transparent;
+    }
   }
 }
 
@@ -58,7 +75,7 @@
   transform: scale(1.2);
   /* Slightly smaller scale */
   cursor: pointer;
-  color: rgba(var(--light-rgb), 0.8);
+  color: var(--light-color);
   /* Slightly transparent color */
   font-size: 1.2rem;
   border: none;
@@ -172,13 +189,7 @@
   }
 
   .popup {
-    padding: 1rem;
-    padding-top: 2rem;
-    top: 4rem;
-    left: 0;
-    width: calc(100vw - 2rem);
-    height: calc(100vh - 8rem);
-
+    top: var(--top-space);
   }
 }
 
@@ -195,7 +206,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  min-height: 20h;
+  padding: 1rem;
+  overflow: hidden;
 }
 
 // on mobile all vertical below each other
@@ -227,6 +239,7 @@
 
 .rightContainer {
   padding-top: 3rem;
+  padding-right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

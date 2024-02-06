@@ -13,6 +13,7 @@ export interface Entity {
     address?: string;
     location?: string;
     description?: string;
+    content?: string;
 }
 
 export interface Relation {

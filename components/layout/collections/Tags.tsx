@@ -2,9 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import styles from './Tags.module.scss';
 import Tag from '../../utils/Tag';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-
 interface TagsProps {
   tags: string[];
   onTagClick?: (tag: string) => void;
@@ -12,7 +9,7 @@ interface TagsProps {
   viewOnly?: boolean;
 }
 
-const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => { 
+const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => {  
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,8 +18,8 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => 
 
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
-    const tagBubbleWidth = 80; // Adjust the tag bubble width
-    const tagBubbleHeight = 80; // Adjust the tag bubble height
+    const tagBubbleWidth =  80;
+    const tagBubbleHeight =  80;
 
     const updateTagBubblePositions = () => {
       tags.forEach((tag, index) => {
@@ -34,10 +31,9 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => 
         let newX = currentX + xOffset;
         let newY = currentY + yOffset;
 
-        // Ensure tag bubble stays within the container box
-        if (newX < 0) newX = 0;
+        if (newX <  0) newX =  0;
         if (newX + tagBubbleWidth > containerWidth) newX = containerWidth - tagBubbleWidth;
-        if (newY < 0) newY = 0;
+        if (newY <  0) newY =  0;
         if (newY + tagBubbleHeight > containerHeight) newY = containerHeight - tagBubbleHeight;
 
         if (!tagBubble) return;
@@ -47,7 +43,7 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => 
       });
     };
 
-    const intervalId = setInterval(updateTagBubblePositions, 1000 / 60); // Adjust the interval duration as needed
+    const intervalId = setInterval(updateTagBubblePositions,  1000 /  60);
 
     return () => {
       clearInterval(intervalId);
@@ -61,39 +57,27 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly }) => 
   };
 
   const getRandomOffset = () => {
-    const minOffset = 50; // Adjust the minimum offset value
-    const maxOffset = 40; // Adjust the maximum offset value
-    return Math.floor(Math.random() * (maxOffset - minOffset + 1) + minOffset);
+    const minOffset =  50;
+    const maxOffset =  40;
+    return Math.floor(Math.random() * (maxOffset - minOffset +  1) + minOffset);
   };
 
-  if (!tags || tags.length === 0) {
+  if (!tags || tags.length ===  0) {
     return null;
   }
 
-
   return (
-    <TransitionGroup className={styles.tags}>
-    {tags.map((tag, index) => (
-      <CSSTransition key={tag} timeout={500} classNames="fade">
-         {viewOnly ? (
-            <Tag
-              key={index}
-              tag={tag}
-              viewOnly={true}
-            />
-          ) : (
-            <Tag
-              key={index}
-              tag={tag}
-              onClick={handleTagClick}
-              selected={selected && selected.includes(tag)}
-            />
-          )}
-        </CSSTransition>
+    <div ref={containerRef} className={styles.tags}>
+      {tags.map((tag, index) => (
+        <Tag
+          key={tag}
+          tag={tag}
+          onClick={!viewOnly ? handleTagClick : undefined}
+          selected={selected && selected.includes(tag)}
+        />
       ))}
-    </TransitionGroup>
- );
+    </div>
+  );
 };
-
 
 export default Tags;

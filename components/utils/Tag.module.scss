@@ -8,15 +8,13 @@
     // padding: 0.42rem;
     padding: 0.2rem;
     font-weight: bold;
-    color: rgba(var(--light-rgb), 1);
+    color: rgb(var(--light-rgb));
     transition: transform 0.3s ease;
     position: static;
     border-radius: 4.2px;
     cursor: pointer;
     background: rgba(var(--dark-rgb), 0.2);
     transition: background-color 0.3s ease;
-
-    // background-color: rgba(var(--light-rgb), 0.5);
     border: none;
     
     

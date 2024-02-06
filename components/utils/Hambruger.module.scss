@@ -1,11 +1,12 @@
 .hamburger {
     display: block;
     position: relative;
-    width: 30px;
+    width: 11rem;
     height: 22.5px;
     z-index: 3;
     cursor: pointer;
 
+    transition: all 0.25s ease-in-out;
     // if display smaller than 768px (mobile) remove hamburger
 
     // on hover change hamburger color animation
