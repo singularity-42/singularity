@@ -2,7 +2,7 @@
 const nextConfig = {
 // add cdninstagram.com add allowd for images
     images: {
-        domains: ['cdninstagram.com', 'localhost'],
+        domains: ['cdninstagram.com'],
     },  
 
 }

@@ -105,3 +105,10 @@
   padding-bottom: 5vh;
   // height: 42%;
 }
+
+@media (max-width: 768px) {
+  // card should be a bit smaller idk it is not spacing with the right side
+  .card {
+    width: 100%;
+  }
+}
