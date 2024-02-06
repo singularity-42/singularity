@@ -9,7 +9,7 @@ import { useTooltip } from "@/hooks/provider/TooltipProvider";
 import { OrderType } from "@/types";
 import { FilterProvider, useFilter } from "@/hooks/provider/FilterProvider";
 import Cards from "../layout/collections/Cards";
-import { TYPE_DESCRIPTIONS } from "@/app/defaults";
+import { TYPE_DESCRIPTIONS } from "@/types";
 
 interface TableProps {
   type: string;
