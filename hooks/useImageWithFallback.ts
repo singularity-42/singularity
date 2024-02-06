@@ -8,7 +8,7 @@ const useImageWithFallback = (name: string): UseImageWithFallbackResult => {
   const [imgSrc, setImgSrc] = useState<string>('');
 
   useEffect(() => {
-    const imageUrl = `http://localhost:3000/api/collection?name=${encodeURIComponent(name)}`;
+    const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}collection?name=${encodeURIComponent(name)}`;
     const img = new Image();
 
     img.src = imageUrl;
