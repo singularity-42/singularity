@@ -16,7 +16,6 @@ const useEntities = (type: string, filter: string[]) => {
 
     const fetchEntities = async () => {
       try {
-        // http://localhost:3000/api/entity
         let filter_string = filter ? filter.join(',') : '';
         if (filter_string === '') {
           filter_string = '';
@@ -30,7 +29,6 @@ const useEntities = (type: string, filter: string[]) => {
         if (filter_string.length > 0)
           url = `${url}&${entity_filter_string}`
 
-        // let url = 'http://localhost:3000/api/entities?entity_type='creative'&filter='artist, album''
         const response = await axios.get(url);
         setEntities(response.data);
       } catch (error) {
