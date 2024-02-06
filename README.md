@@ -28,16 +28,16 @@ We are currently developing a Singularity App Network System that will revolutio
 
 Get an exclusive preview of the Singularity App by participating in our beta testing phase. Here's how you can register:
 
-Send an email expressing your interest in participating in the beta testing. You'll be among the first to experience the Singularity App before its official launch.
+Send an email to 42@drumni.com expressing your interest in participating in the beta testing. You'll be among the first to experience the Singularity App before its official launch.
 
 ## Stay Tuned:
 
 Exciting developments are underway! Stay tuned for the official launch of the Singularity App and the enhanced community interaction system. Get ready to immerse yourself in the world of 4C like never before.
 
-For more details and updates, visit our website: [singularity.2n40.eu](https://singularity.2n40.eu/)
+For more details and updates, visit our website: [singularity.2n40.eu](185.170.115.191:3000)
 
 **Contact:**
 Singularity Team
-Email: [info@singularity.2n40.eu](mailto:info@singularity.2n40.eu)
+Email: 42@drumni.com (temporary)
 
 We appreciate your interest and look forward to shaping the 4C experience together!
