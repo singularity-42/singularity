@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/react-dom": "^18.2.18",
     "axios": "^1.6.1",
     "fs": "^0.0.1-security",
     "glob": "^10.3.10",
@@ -29,6 +28,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-dom": "^18.2.18",
     "@wixc3/react-board": "^2.3.0",
     "typescript": "^5"
   }
