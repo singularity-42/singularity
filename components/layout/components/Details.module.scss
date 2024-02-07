@@ -69,6 +69,25 @@
   }
 }
 
+
+.backButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: 3rem;
+  transform: scale(1.2);
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+}
+
 .entityContainer {
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));

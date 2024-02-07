@@ -1,7 +1,7 @@
 "use client"
 
 import Details from '@/components/layout/components/Details';
-import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
 
 // Define the context interface
 interface DetailsContextInterface {
@@ -9,6 +9,8 @@ interface DetailsContextInterface {
     setName: Dispatch<SetStateAction<string>>;
     toggleVisibility: () => void;
     visible: boolean;
+    goBack: () => string | null;
+    history: string[];
 }
 
 // Create the context
@@ -24,6 +26,20 @@ export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: De
     const [name, setName] = useState<string>('');
     const [visible, setVisible] = useState<boolean>(false);
 
+    const [history, setHistory] = useState<string[]>([]);
+    const addToHistory = (link: string) => {
+        setHistory([...history, link]);
+    };
+
+    const goBack = () => {
+        if (history.length >  0) {
+            const lastLink = history.pop();
+            setHistory([...history]);
+            return lastLink || '';
+        }
+        return null;
+    };
+
     const toggleVisibility = () => {
         setVisible(!visible);
     };
@@ -33,6 +49,8 @@ export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: De
         setName,
         toggleVisibility,
         visible,
+        goBack,
+        history,
     };
 
     return (
@@ -48,8 +66,10 @@ export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: De
 
 export const useDetails = () => {
     const context = React.useContext(DetailsContext);
+
     if (context === undefined) {
         throw new Error('useDetails must be used within a DetailsProvider');
     }
+
     return context;
 };

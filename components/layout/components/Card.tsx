@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback, useMemo } from "react";
 import styles from "./Card.module.scss";
 import { MdFolderOpen } from 'react-icons/md';
@@ -19,18 +21,14 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
   const { setName, toggleVisibility } = useDetails();
 
   const handleClick = useCallback(() => {
-    if (isFolder) {
       toggleVisibility();
       setName(data.metadata.title);
-    } else {
-      toggleVisibility();
-      setName(data.metadata.title);
-    }
-  }, [isFolder, data, toggleVisibility, setName]);
+  }, [setName, toggleVisibility, data]);
 
   const { title, tags } = data.metadata;
   const { imgSrc } = useImageWithFallback(title);
   const { folder } = data || {};
+
   return isFolder ? (
     <div className={`${styles.card} ${isSelected ? styles.selected : ""}`}>
       <div className={styles.content} onClick={() => onTagClick && onTagClick(folder.metadata.title)}>
@@ -84,16 +82,12 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
           </div>
         )}
         <div className={styles.description}>
-          <Markdown content={data.content} active={true} />
+          <Markdown content={data.content.length > 420 ? `${data.content.substring(0, 420)}...` : data.content} active={true} />
         </div>
 
         <div className={styles.socialMediaContainer}>
           <Socials metadata={data.metadata} />
         </div>
-
-        {/* // link to location */}
-
-  
 
       </div>
     </div>
