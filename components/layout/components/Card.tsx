@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
           data.metadata.location && data.metadata.location.match(/[a-zA-Z]/) && (
             <div className={styles.location}>
               <HoverLink name={data.metadata.location.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}>
-                at {data.metadata.location.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}
+                {data.metadata.location.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}
               </HoverLink>
             </div>
           )
