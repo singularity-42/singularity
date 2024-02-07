@@ -35,20 +35,20 @@ const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.
     setCurrentVisibleTags(tags ?? []);
   }, [entities]);
 
-  useEffect(() => {
-    switch (orderType) {
-      case OrderType.Alphabetical:
-        entities?.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
-        break;
-      case OrderType.Random:
-        entities?.sort(() => Math.random() - 0.5);
-        break;
-      case OrderType.CounterAlphabetical:
-        entities?.sort((a, b) => b.metadata.title.localeCompare(a.metadata.title));
-        break;
-    }
-  }, [orderType]);
 
+  useEffect(() => {
+    if (entities) {
+      entities.sort((a, b) => {
+        const dateA = new Date(a.path.split("\\").slice(0, 3).join("/"));
+        const dateB = new Date(b.path.split("\\").slice(0, 3).join("/"));
+  
+        // Sort in descending order (newest to oldest)
+        return dateB.getTime() - dateA.getTime();
+      });
+    }
+  }
+  , [entities]);
+  
   const handleTagClick = (tag: string) => {
     if (tag.length < 1) return;
 

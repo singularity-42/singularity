@@ -2,12 +2,9 @@
 subtitle: Ihr macht die Musik!
 tags:
   - umsonst
-  - jam
-  - jazz
-  - musik
-start: 20
-end: open
-location: "[[Lokomov]]"
+  - 20doors
+  - OPENend
+location: "[[Weltecho]]"
 ---
 Eintritt Frei!
 

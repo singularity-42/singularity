@@ -1,7 +1,7 @@
 ---
 website: https://singularity.2n40.eu/
 instagram: singularity.kms
-mail: info@singularity.2n40.eu
+mail: 42@drumni.com
 ---
 ## Singularity ist:
 - eine Suchmaschine für Veranstaltungen

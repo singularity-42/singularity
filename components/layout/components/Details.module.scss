@@ -1,3 +1,6 @@
+
+@import '../../../styles/Animations';
+
 .popup {
   --space: 2rem;
   --top-space: calc(1rem + var(--space));
@@ -8,75 +11,54 @@
   width: calc(100vw - var(--space) * 2);
   padding: var(--space);
   margin: var(--space);
-  border-radius: 1rem 1rem 1rem 1rem;
-
-  overflow-x: hidden;
+  border-radius: 1rem;
   z-index: 2;
   backdrop-filter: blur(10px);
-  /* Apply the glass effect */
   background-color: rgba(var(--dark-rgb), 0.8);
-  /* Semi-transparent background */
+  overflow-y: auto;
+  border-top-right-radius: 4.2px;
+  border-bottom-right-radius: 4.2px;
+
+
+  
+  @media (max-width: 768px) {
+    // no space to border
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    // padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+  }
 
   &.show {
-    border: 1px solid rgba(var(--light-rgb), 0.5);
+    // border: 1px solid rgba(var(--light-rgb), 0.5);
     opacity: 1;
     animation: fadeIn 0.3s ease-in-out forwards;
   }
 
   &.hide {
     border: 1px solid var(--dark-color);
-    /* Transparent border */
     display: none;
     opacity: 0;
     animation: fadeOut 0.3s ease-in-out forwards;
   }
 
-
   &.appear {
     animation: fadeInBackground 3s ease-in-out forwards;
   }
-
-  @keyframes fadeInBackground {
-    0% {
-      background-color: rgba(var(--dark-rgb), 0.8);
-    }
-
-    100% {
-      background-color: transparent;
-    }
-  }
 }
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.closeButton {
+.closeButtonContainer {
   position: fixed;
   text-align: left;
   top: 1.5rem;
   right: 1.5rem;
   transform: scale(1.2);
-  /* Slightly smaller scale */
   cursor: pointer;
   color: var(--light-color);
-  /* Slightly transparent color */
   font-size: 1.2rem;
   border: none;
   background: none;
@@ -87,44 +69,16 @@
   }
 }
 
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-// Entity.module.scss
 .entityContainer {
-  // border: 1px solid #ccc;
-  //pretter stylistic border maybe dottet
-  // border: 1px dashed #ccc;
-
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));
   border-radius: 0.42rem;
-}
 
-.entityContainer:hover {
-  border: 1px solid rgb(var(--light-rgb));
-}
+  &:hover {
+    border: 1px solid rgb(var(--light-rgb));
+  }
 
-@media (max-width: 768px) {
-  .entityContainer {
+  @media (max-width: 768px) {
     border: none;
   }
 }
@@ -134,29 +88,32 @@
 }
 
 .entityMarkdown {
-
   padding: 1rem;
   transition: color 0.2s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding: 0;
+    width: 30%;
+  }
 }
 
 .detailsContainer {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  
 }
 
 .socialMediaLink {
   padding-top: 10rem;
   margin-right: 10px;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.socialMediaLink:hover {
-
-  text-decoration: underline;
-}
-
-// should be all on left next to each other horizontally
 .socialMediaContainer {
   display: flex;
   justify-content: flex-start;
@@ -165,7 +122,6 @@
 }
 
 .tagsContainer {
-  // flex center horizontally
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,42 +134,28 @@
   position: relative;
   padding: 4rem;
   margin: 1rem 0;
-}
 
-// on mobile tags Container should be vertical
-
-@media (max-width: 768px) {
-  .tagsContainer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .popup {
-    top: var(--top-space);
+  @media (max-width: 768px) {
+    padding: 0;
+    margin: 0;
   }
 }
 
 .descriptionContainer {
-
   padding: 1rem;
-
   transition: color 0.2s ease-in-out;
 }
 
-// onmobile all vertical below each other
-// on desktop all horizontal next to each other, in 2x width grid
 .contentContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  padding: 1rem;
-  overflow: hidden;
-}
+  // padding: 1rem;
 
-// on mobile all vertical below each other
-@media (max-width: 768px) {
-  .contentContainer {
+  @media (max-width: 768px) {
+    padding: 0;
     grid-template-columns: 1fr;
+    width: 100%;
   }
 }
 
@@ -225,31 +167,53 @@
 }
 
 .embedContainer {
-  padding: 1rem;
   width: 100%;
   position: relative;
-  overflow: hidden;
   display: flex;
-  // 2 columns
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 }
 
-.rightContainer {
-  padding-top: 3rem;
+.graphContainer {
+  padding-top: 1rem;
   padding-right: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    padding: 0;
+    width: 100%;
+  }
 }
 
 .subtitle {
   position: absolute;
   top: 1rem;
   left: 1rem;
+}
 
+@media (max-width: 768px) {
+  .tagsContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .popup {
+    top: var(--top-space);
+  }
+
+  .contentContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .entityContainer {
+    border: none;
+  }
+
+  .leftContainer {
+    width: 90vw;
+  }
 }

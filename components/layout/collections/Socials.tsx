@@ -3,10 +3,10 @@ import styles from './Socials.module.scss';
 import SocialMediaTag, { SocialMedia } from '../../base/SocialMedia';
 
 interface ListSocialsProps {
-    metadata: any;
+    metadata?: any;
 }
 
-const Socials: React.FC<ListSocialsProps> = ({ metadata }) => {
+const Socials: React.FC<ListSocialsProps> = ({ metadata = {} }) => {
     return <div className={styles.listSocials}>
         {
             Object.keys(metadata).map((key, index) => {

@@ -5,18 +5,29 @@ import Header from '@/components/layout/components/Header';
 import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
 import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 import Background from '@/components/base/Background';
-import Impressum from '@/components/base/Impressum';
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Singularity',
   description: '42',
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
-  }
-}
+  abstract: "The Singularity is a collection of creative concepts, collectives, and collaborations.",
+  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Chemnitz"],
+  applicationName: "Singularity",
+  authors: [
+    {
+      name: "Singularity",
+      url: "https://singularity.2n40.eu",
+    },
+    {
+      name: "Drumni",
+      url: "https://github.com/drumni",
+    }
+  ],
+  robots: "index, follow",
+ 
+};
 
 export default function RootLayout({
   children,
@@ -32,7 +43,7 @@ return (
           <TooltipProvider>
             <Header />
             {children}
-            <Impressum />
+            {/* <Impressum /> */}
           </TooltipProvider>
         </DetailsProvider>
       </body>

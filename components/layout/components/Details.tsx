@@ -53,7 +53,7 @@ const Details: React.FC<EntityProps> = () => {
 
  return (
     <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
-      <button className={styles.closeButton} onClick={handleExit}>
+      <button className={styles.closeButtonContainer} onClick={handleExit}>
         <MdClose />
       </button>
       <div className={styles.contentContainer}>
@@ -71,15 +71,15 @@ const Details: React.FC<EntityProps> = () => {
           {metadata && metadata.instagram && <Gallery name={metadata.instagram} />}
           {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
         </div>
-        <div className={styles.rightContainer}>
+        <div className={styles.graphContainer}>
           {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
         </div>
       </div>
-      {entity.location && (
+      {/* {entity.location && (
         <div className={styles.mapContainer}>
           <Map location={entity.location} />
         </div>
-      )}
+      )} */}
       <div className={styles.embedContainer}>
         {entity && (entity as any).spotifytrack && <SpotifyTrack track={(entity as any).spotifytrack } />}
         {entity && (entity as any).soundcloudtrack && <SoundcloudTrack track={(entity as any).soundcloudtrack} />}

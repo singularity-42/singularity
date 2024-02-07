@@ -103,3 +103,35 @@
     margin-bottom: 2rem;
     // padding-left: 24px;
 }
+
+
+@media (max-width: 768px) {
+    .markdown {
+        padding: 10px;
+        width: 80vw;
+        margin: 0 0;
+    }
+    .h1 {
+        font-size: calc(var(--heading-font-size) * 1.1);
+    }
+    .h2 {
+        font-size: calc(var(--heading-font-size) * 0.9);
+    }
+    .h3 {
+        font-size: calc(var(--heading-font-size) * 0.8);
+    }
+    .h4 {
+        font-size: calc(var(--heading-font-size) * 0.7);
+    }
+    .li {
+        margin-left: 1rem;
+    }
+    .ul {
+        margin-bottom: 1rem;
+    }
+    .ol {
+        margin-bottom: 1rem;
+    }
+
+    // make max with smaller
+}

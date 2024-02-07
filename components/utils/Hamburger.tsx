@@ -4,14 +4,16 @@ import React, { useState } from "react";
 import styles from "./Hambruger.module.scss";
 
 interface HambugerProps {
-  menuOpen: boolean;
-  onClick: () => void;
+  menuOpen?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-const Hambuger: React.FC<HambugerProps> = ({ menuOpen, onClick }) => {
+const Hambuger: React.FC<HambugerProps> = ({ menuOpen = false, onClick, disabled = false }) => {
 
   const handleMenuClick = () => {
-    onClick();
+    if (disabled) return;
+    if (onClick) onClick();
   };
 
 

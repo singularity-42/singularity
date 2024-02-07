@@ -41,7 +41,9 @@ const Tag: React.FC<TagProps> = ({ tag, onClick, selected, viewOnly }) => {
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
         >
-            {viewOnly ? '#' : ''}{tag}
+            {/* {viewOnly ? '#' : ''}{tag.replace(/_/g, ' ')} replace '"' */}
+            {/* {viewOnly ? '#' : ''}{tag.replace('"' , '')} use regex... */}
+            {viewOnly ? '#' : ''}{tag.replace(/"/g, '')}
         </div>
     );
 };
