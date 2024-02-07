@@ -4,11 +4,8 @@ instagram: ajz_talschock
 mail: info@ajz-chemnitz.de
 tel: 490371449870
 tags:
-  - social
-  - culture
-  - youth
-  - education
-  - participation
+  - konzerte
+  - jugend
 relations: 
 location: 50.86087380031375, 12.92308532958822
 address: Chemnitztalstraße 54, 09114 Chemnitz, Germany

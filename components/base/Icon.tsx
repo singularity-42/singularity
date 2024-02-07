@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from '@/styles/Icon.module.scss';
+import styles from './Icon.module.scss';
 
 // Icons are inside public/icons
 const ICON_PATH = "/icons";

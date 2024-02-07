@@ -12,7 +12,7 @@ const ChangePage: React.FC = () => {
   const { setTooltip } = useTooltip();
 
   useEffect(() => {
-    setTooltip('changes - Änderungen, an Singularity, können auf GitHub vorgenommen werden.');
+    setTooltip('changes - Änderungen mit Geschichte');
   }, [setTooltip]);
 
   return (
@@ -20,13 +20,7 @@ const ChangePage: React.FC = () => {
       {/* In Future is this the place to change information about the <Title /> will be made. */}
       <div className={styles.infoContainer}>
         <span>
-          <b className={styles.coloredText}>Du</b> kannst{" "}
-          <Title />&nbsp;verändern, indem du die&nbsp;
-          <HoverLink href="https://github.com/singularity-42/singularity/tree/docs/docs" name="Dokumentation" openInNewTab={true} >
-            Dokumentation
-          </HoverLink>
-          &nbsp;
-          auf GitHub bearbeitest.
+          <b className={styles.coloredText}>Du</b> kannst{" "}<Title /> auf <HoverLink href="https://github.com/singularity-42/singularity/tree/docs" name="GitHub" openInNewTab={true} >GitHub</HoverLink> <b><i>verändern</i></b> und bald auch in der App!
         </span>
       </div>
     </div>

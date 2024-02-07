@@ -36,3 +36,17 @@
 .stop-animation .background {
   animation-play-state: paused;
 }
+
+
+@media (max-width: 768px) {
+  .background {
+    background-image: linear-gradient(33deg, rgb(var(--light-rgb)), rgb(0, 0, 0)),
+    radial-gradient(90% 100% at calc(42% + var(--cursor-x)) calc(0% + var(--cursor-y)), rgb(var(--light-rgb)), rgb(var(--dark-rgb))),
+    radial-gradient(100% 100% at calc(80% + var(--cursor-x)) calc(0% + var(--cursor-y)), rgb(250, 255, 000), rgb(119, 89, 89)),
+    radial-gradient(142% 212% at calc(100% + var(--cursor-x)) calc(0% + var(--cursor-y)), rgb(020, 175, 125), rgb(var(--tertiary-rgb))),
+    radial-gradient(100% 100% at calc(100% + var(--cursor-x)) calc(42% + var(--cursor-y)), rgb(var(--secondary-rgb)), rgb(var(--tertiary-rgb))),
+      linear-gradient(192deg, rgb(var(--secondary-rgb)), rgb(120, 086, 255));
+    background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+  }
+
+}

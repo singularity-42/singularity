@@ -1,8 +1,5 @@
 ---
-<<<<<<< Updated upstream
-=======
 subtitle: Ihr macht die Musik!
->>>>>>> Stashed changes
 tags:
   - umsonst
   - 20doors

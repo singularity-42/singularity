@@ -4,7 +4,7 @@ import styles from './Loading.module.scss';
 const Loading = () => {
     return (
         <div className={styles.loadingContainer}>
-            <img src="/Logo.png" alt="Favicon" className={styles.faviconRotating} />
+            <img src="/singularity.png" alt="42" className={styles.faviconRotating} />
         </div>
     );
 };

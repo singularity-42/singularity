@@ -17,6 +17,8 @@
     transition: background-color 0.3s ease;
     border: none;
     
+    // no text wrapping
+    white-space: nowrap;
     
     &:hover {
       background-color: rgba(var(--light-rgb), 0.2);

@@ -39,7 +39,6 @@ const Background = () => {
       const delta = now - lastLoop;
       frameCount++;
       if (delta >= 1000) {
-        setFps(Math.round((frameCount / (delta / 1000))));
         frameCount = 0;
         lastLoop = now;
       }
@@ -47,14 +46,6 @@ const Background = () => {
     };
     loop();
   }, []);
-
-  useEffect(() => {
-    if (fps < 60) {
-      document.documentElement.classList.add('stop-animation');
-    } else {
-      document.documentElement.classList.remove('stop-animation');
-    }
-  }, [fps]);
 
   // Simulate loading completion after a delay
   useEffect(() => {
@@ -71,7 +62,6 @@ const Background = () => {
   return (
     <>
       <div className={`${styles.background} ${shouldFadeIn ? styles.fadeIn : ''}`} />
-      <div className={styles.fpsCounter}>{fps} FPS</div>
     </>
   );
 };

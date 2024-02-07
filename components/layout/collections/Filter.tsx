@@ -51,7 +51,7 @@ const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
         <div className={styles.filter}>
             <div className={styles.filterContainer}>
                 <p className={styles.filterTitle}>Filter by:</p>
-                {((shownTags || []).sort((a, b) => a.localeCompare(b)) || []).map((tag, index) => (
+                {((shownTags || []).map((tag) => tag.replace(/"/gm, '')).sort((a, b) => a.localeCompare(b)) || []).map((tag, index) => (
                     // <div
                     //     key={tag}
                     //     className={`${styles.tag} ${selectedFilters.includes(tag) ? styles.selected : ''}`}

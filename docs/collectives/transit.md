@@ -6,7 +6,6 @@ facebook: https://www.facebook.com/transit.chemnitz
 tel: 37128269115
 tags:
   - club
-relations: 
 location: 50.830613735661586, 12.939564584215244
 address: Reichenhainer Straße 1 09111 Chemnitz, Germany
 ---
