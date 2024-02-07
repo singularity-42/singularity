@@ -41,8 +41,8 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const pageIcons: { [key: string]: JSX.Element } = {
     "/collaborations": <MdOutlineCalendarMonth />,
     "/collectives": <MdGroups />,
-    // "/concepts": <MdPages />,
     "/creatives": <MdPerson />,
+    "/concepts": <MdPages />,
     // "/contact": <MdPerson />,
     "/changes": <MdOutlineEditNote />,
     

@@ -10,7 +10,7 @@ import Socials from "../collections/Socials";
 import Graph from "../../view/Graph";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
 import useRelation from "@/hooks/useRelations";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdUndo } from "react-icons/md";
 import SpotifyTrack from "../../base/SpotifyTrack";
 import Gallery from "../../base/Gallery";
 import SoundcloudTrack from "../../base/SoundcloudTrack";
@@ -19,7 +19,7 @@ import InstagramPost from "../../base/InstagramPost";
 interface EntityProps {}
 
 const Details: React.FC<EntityProps> = () => {
- const { name, setName, visible, toggleVisibility } = useDetails();
+ const { name, setName, visible, toggleVisibility, goBack } = useDetails();
  const { relations } = useRelation(name);
  const { entity, loading, error } = useEntity(name);
 
@@ -27,6 +27,13 @@ const Details: React.FC<EntityProps> = () => {
     setName("");
     if (visible) toggleVisibility();
  }, [visible, toggleVisibility]);
+
+ const handleBack = useCallback(() => {
+    const lastLink = goBack();
+    if (lastLink) {
+      setName(lastLink);
+    }
+  }, [goBack, setName]);
 
  useEffect(() => {
     if (name) {
@@ -56,6 +63,9 @@ const Details: React.FC<EntityProps> = () => {
       <button className={styles.closeButtonContainer} onClick={handleExit}>
         <MdClose />
       </button>
+     {/* {  <button className={styles.backButtonContainer} onClick={handleBack}>
+        <MdUndo />
+      </button> } */}
       <div className={styles.contentContainer}>
         <div className={styles.leftContainer}>
           <div className={styles.detailsContainer}>

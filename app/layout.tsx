@@ -5,7 +5,6 @@ import Header from '@/components/layout/components/Header';
 import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
 import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 import Background from '@/components/base/Background';
-import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Singularity',
   description: '42',
   abstract: "The Singularity is a collection of creative concepts, collectives, and collaborations.",
-  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Chemnitz"],
+  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Change", "Chemnitz"],
   applicationName: "Singularity",
   authors: [
     {
@@ -43,7 +42,6 @@ return (
           <TooltipProvider>
             <Header />
             {children}
-            {/* <Impressum /> */}
           </TooltipProvider>
         </DetailsProvider>
       </body>

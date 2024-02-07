@@ -98,7 +98,10 @@
   overflow: scroll;
   max-height: 30vh;
   padding-bottom: 5vh;
-  // height: 42%;
+  overflow-y: hidden;
+  // ... existing styles
+  backdrop-filter: blur(10px);
+  mask-image: linear-gradient(to top, transparent, black);
 }
 
 @media (max-width: 768px) {
