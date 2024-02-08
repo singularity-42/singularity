@@ -3,9 +3,6 @@ website: https://singularity.2n40.eu/
 instagram: singularity.kms
 mail: 42@drumni.com
 ---
-
-Wir sind eine Suchmaschine für Veranstaltungen.
-Wir sind ein Magazin, dass in Subkulturen eintaucht.
 Wir ermöglichen offene Kommunikation für kreative Köpfe.
 
 Wir freuen uns darauf, zu erleben und zu gestalten!

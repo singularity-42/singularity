@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Singularity',
-  description: '42',
-  abstract: "The Singularity is a collection of creative concepts, collectives, and collaborations.",
+  description: 'The Singularity is a collection of creative, concepts, collectives, and collaborations.',
+  abstract: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
   keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Change", "Chemnitz"],
   applicationName: "Singularity",
   authors: [
