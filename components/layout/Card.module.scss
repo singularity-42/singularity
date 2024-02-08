@@ -40,7 +40,7 @@
   opacity: 0.42;
   transition: opacity 0.3s ease-in-out;
 
-  filter: invert(1) grayscale(1) contrast(1.2) brightness(0.42);
+  filter: contrast(1.2) brightness(0.42);
 
   &:hover {
     opacity: 1;
