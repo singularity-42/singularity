@@ -16,19 +16,19 @@ import EmbedTrackSoundcloud from "../base/EmbedTrackSoundcloud";
 import EmbedPostInstagram from "../base/EmbedPostInstagram";
 import Loading from "../base/Loading";
 
-interface EntityProps {}
+interface EntityProps { }
 
 const Details: React.FC<EntityProps> = () => {
- const { name, setName, visible, toggleVisibility, goBack } = useDetails();
- const { relations } = useRelation(name);
- const { entity, loading, error } = useEntity(name);
+  const { name, setName, visible, toggleVisibility, goBack } = useDetails();
+  const { relations } = useRelation(name);
+  const { entity, loading, error } = useEntity(name);
 
- const handleExit = useCallback(() => {
+  const handleExit = useCallback(() => {
     setName("");
     if (visible) toggleVisibility();
- }, [visible, toggleVisibility]);
+  }, [visible, toggleVisibility]);
 
- const handleBack = useCallback(() => {
+  const handleBack = useCallback(() => {
     const lastLink = goBack();
     if (lastLink) {
       setName(lastLink);
@@ -44,44 +44,44 @@ const Details: React.FC<EntityProps> = () => {
       }).then(() => {
         console.log('Thanks for sharing!');
       })
-      .catch(console.error);
+        .catch(console.error);
     }
   }, [entity]);
 
- useEffect(() => {
+  useEffect(() => {
     if (name) {
       if (!visible) toggleVisibility();
     }
- }, [name, visible, toggleVisibility]);
+  }, [name, visible, toggleVisibility]);
 
- useEffect(() => {
-   const hash = window.location.hash;
-   let decodedUrlHash = decodeURIComponent(hash).replace("#", "");
+  useEffect(() => {
+    const hash = window.location.hash;
+    let decodedUrlHash = decodeURIComponent(hash).replace("#", "");
     setName(decodedUrlHash);
- }, []);
+  }, []);
 
   useEffect(() => {
     if (loading) return;
-    if (!entity?.title && !entity?.content && visible){
-     setName("")
-     toggleVisibility()
+    if (!entity?.title && !entity?.content && visible) {
+      setName("")
+      toggleVisibility()
     }
-  
+
   }, [entity, visible, loading]);
 
- useEffect(() => {
+  useEffect(() => {
     if (name) {
       const encodedUrlHash = encodeURIComponent(name);
       window.location.hash = encodedUrlHash;
     }
- }, [name]);
+  }, [name]);
 
- return (
+  return (
     <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
       <button className={styles.closeButtonContainer} onClick={handleExit}>
         <MdClose />
       </button>
-     {/* {  <button className={styles.backButtonContainer} onClick={handleBack}>
+      {/* {  <button className={styles.backButtonContainer} onClick={handleBack}>
         <MdUndo />
       </button> } */}
       <button className={styles.shareButtonContainer} onClick={hanleShare}>
@@ -89,16 +89,17 @@ const Details: React.FC<EntityProps> = () => {
       </button>
       <div className={styles.contentContainer}>
         <div className={styles.leftContainer}>
+          {!loading && (<>
           <div className={styles.detailsContainer}>
-            <h2 className={styles.title}>{(entity.title || name).split(/\\|\//).pop()}</h2>
+            <h2 className={styles.title}>{(entity.title || '').split(/\\|\//).pop()}</h2>
             <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
           </div>
-          <div className={styles.socialMediaContainer}>
-            <Socials metadata={entity} />
-          </div>
-          <div className={styles.tagsContainer}>
-            {!loading && <Tags tags={entity.tags || []} viewOnly={true} />}
-          </div>
+            <div className={styles.socialMediaContainer}>
+              <Socials metadata={entity} />
+            </div>
+            <div className={styles.tagsContainer}>
+              <Tags tags={entity.tags || []} viewOnly={true} />
+            </div></>)}
           {loading && <Loading />}
           {!loading && entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
         </div>
@@ -107,13 +108,13 @@ const Details: React.FC<EntityProps> = () => {
         </div>}
       </div>
       {!loading && <div className={styles.embedContainer}>
-        {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack } />}
+        {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack} />}
         {entity && (entity as any).soundcloudtrack && <EmbedTrackSoundcloud track={(entity as any).soundcloudtrack} />}
         {entity && (entity as any).instagrampost && <EmbedPostInstagram post={(entity as any).instagrampost} />}
       </div>}
-      
+
     </div>
- );
+  );
 };
 
 export default Details;
