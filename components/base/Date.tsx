@@ -1,8 +1,7 @@
 // DateComponent.tsx
 import React from "react";
 import styles from "./Date.module.scss"; // Adjust the path based on your project structure
-import DaysUntil from "../utils/DaysUntil";
-import Hambuger from "../utils/Hamburger";
+import Until from "./Until";
 
 interface DateComponentProps {
   date: string; // Assuming the date is a string in the format "YYYY\\MM\\DD\\title.md"
@@ -27,7 +26,7 @@ const DateComponent: React.FC<DateComponentProps> = ({ date }) => {
         <div className={styles.year}>{currentDate.getFullYear()}</div>
       </div>
       <div className={styles.styledHamburger}>
-      <DaysUntil date={`${currentDate.getFullYear()}-${month}-${day}`} />
+      <Until date={`${currentDate.getFullYear()}-${month}-${day}`} />
         {/* <Hambuger disabled={true} /> */}
       </div>
     </div>

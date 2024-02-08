@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { OrderType } from '@/types';
-import Calendar from '@/components/view/Calendar';
+import Calendar from '@/components/layout/Calendar';
 
 import { useEffect } from 'react';
 

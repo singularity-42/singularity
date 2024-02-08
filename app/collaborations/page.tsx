@@ -1,6 +1,6 @@
 import React from 'react';
 import { OrderType } from '@/types';
-import Calendar from '@/components/view/Calendar';
+import Calendar from '@/components/layout/Calendar';
 
 const collaborationPage: React.FC = () => {
   return (

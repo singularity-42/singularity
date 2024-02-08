@@ -1,6 +1,6 @@
 "use client"
 
-import Details from '@/components/layout/components/Details';
+import Details from '@/components/layout/Details';
 import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
 
 // Define the context interface

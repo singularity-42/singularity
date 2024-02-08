@@ -1,10 +1,16 @@
 /* Modern Apple Clean Glassy Look */
 .loadingContainer {
+    position:  absolute; /* Position the container */
+    top:  0; /* Top edge */
+    left:  0; /* Left edge */
     margin:  0;
-    height:  100vh; /* Full viewport height */
     display: flex; /* Flex container for centering */
     justify-content: center; /* Horizontally centered */
     align-items: center; /* Vertically centered */
+    overflow: hidden; /* Hide overflowing content */
+    height: 100%; /* Full viewport height */
+    width: 100%; /* Full viewport width */ 
+    
   }
   
   .faviconRotating {

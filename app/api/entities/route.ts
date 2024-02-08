@@ -63,9 +63,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
   
     let dateTagStrings: string[] = [];
-    if (diffDays == 0) dateTagStrings.push("heute");
-    if (diffDays == 1) dateTagStrings.push("morgen");
-    if (diffDays == 2) dateTagStrings.push("übermorgen");
+    // if (diffDays == 0) dateTagStrings.push("heute");
+    // if (diffDays == 1) dateTagStrings.push("morgen");
+    // if (diffDays == 2) dateTagStrings.push("übermorgen");
     
     // check if its weekend "wochenende" (fr, sa, so)
     if (dateObject.getDay() == 5) dateTagStrings.push("wochenende");
@@ -77,6 +77,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     if (dateObject.getDay() == 2) dateTagStrings.push("wochentag");
     if (dateObject.getDay() == 3) dateTagStrings.push("wochentag");
     if (dateObject.getDay() == 4) dateTagStrings.push("wochentag");
+
+    // check if in the past "vergangenheit"
+    if (timeDiff < 0 && diffDays != 0) dateTagStrings.push("vergangenheit");
+
+
 
     return dateTagStrings;
   }
