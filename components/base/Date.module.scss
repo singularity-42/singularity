@@ -3,20 +3,37 @@
     display: flex;
     align-items: center;
     justify-content: left;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: var(--heading-font-size);
-    width: 99vw;;
-    height: 3rem; /* Adjust the height as needed */
-    background-color: rgba(var(--dark-rgb), 0.4); /* Transparent dark background */
     z-index: 1000; /* Ensure it's above other elements */
-    margin: 0.42rem 0.42rem;
+
+    font-size: var(--heading-font-size);
+    font-family: "Helvetica Neue", sans-serif;
+
+    width: 97vw;;
+    height: 3rem; /* Adjust the height as needed */
+
+
     padding: 1rem;
-    border-radius: 10px;
+    margin: 0.42rem 0.42rem;
+
+    // border-radius: 10px;
     box-shadow: 0 0 10px rgba(var(--dark-rgb), 0.42);
-    // glassy border
-    // backdrop-filter: blur(10px);
+    background-color: rgba(var(--dark-rgb), 0.42); /* Transparent dark background */
+
+   // white border top and bottom
+    border-top: 2px solid rgba(var(--light-rgb), 0.42);
+    border-bottom: 2px solid rgba(var(--light-rgb), 0.42);
   }
   
+
+// place styled hamburger o right nd
+.styledHamburger {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+    gap: 0.42rem;
+}
+
   .formattedDate {
     font-size: var(--text-font-size);
     color: rgba(var(--light-rgb), 0.42);
@@ -45,4 +62,15 @@
   
   .year {
     font-size: var(--text-font-size);
+  }
+
+  @media (max-width: 768px) {
+    .dateContainer {
+      // padding: 0rem;
+      margin: 0rem;
+      width: 100%;
+
+    border-radius: 0px;
+    box-shadow: 0 0 0 rgba(var(--dark-rgb), 0.42);
+    }
   }

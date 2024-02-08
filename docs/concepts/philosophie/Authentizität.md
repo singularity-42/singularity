@@ -2,4 +2,4 @@
 tags:
   - philosophie
 ---
-Dankbarkeit vorleben und als Vorbild dienen
+Dankbarkeit vorleben und als Vorbild dienen.

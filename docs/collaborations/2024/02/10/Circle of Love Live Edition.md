@@ -1,12 +1,9 @@
 ---
-subtitle: 
 tags:
+  - 8-10€
+  - 22doors
+  
   - soul
-  - club
-  - love
-entry: 8-10€
-start: 22
-end: open
 location: "[[transit]]"
 ---
 We gather again to the circle of love !

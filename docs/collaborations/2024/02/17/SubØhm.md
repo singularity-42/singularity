@@ -1,16 +1,14 @@
 ---
-subtitle: 
 tags:
-  - musik
+  - 13-15€
+  - 10€VK
+  - 22doors
+  
   - hardtechno
   - techno
-  - creative
   - trance
   - hardtrance
-entry: 13-15€ (VK 10€)
-start: 22
-end: open
-relation: "[[transit]]"
+location: "[[transit]]"
 ---
 We are back with our first SubØhm in 2024. This time we have a local line up with guest acts from Leipzig.
 

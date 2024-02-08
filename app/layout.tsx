@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/layout/components/Header';
+import Header from '@/components/layout/Header';
 import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
 import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 import Background from '@/components/base/Background';
@@ -11,12 +11,23 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Singularity',
-  description: '42',
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
-  }
-}
+  description: 'The Singularity is a collection of creative, concepts, collectives, and collaborations.',
+  abstract: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
+  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Change", "Chemnitz"],
+  applicationName: "Singularity",
+  authors: [
+    {
+      name: "Singularity",
+      url: "https://singularity.2n40.eu",
+    },
+    {
+      name: "Drumni",
+      url: "https://github.com/drumni",
+    }
+  ],
+  robots: "index, follow",
+ 
+};
 
 export default function RootLayout({
   children,
@@ -32,8 +43,8 @@ return (
           <TooltipProvider>
             <Header />
             {children}
-            <Impressum />
           </TooltipProvider>
+          <Impressum />
         </DetailsProvider>
       </body>
     </html>

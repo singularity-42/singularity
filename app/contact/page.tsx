@@ -1,8 +1,8 @@
 "use client";
 
 import Title from '@/components/base/Title';
-import Markdown from '@/components/view/Markdown';
-import Table from '@/components/view/Table';
+import Markdown from '@/components/layout/Markdown';
+import Table from '@/components/layout/Table';
 import useEntity from '@/hooks/useEntity';
 import React from 'react';
 

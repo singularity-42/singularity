@@ -1,14 +1,22 @@
 ---
 website: https://singularity.2n40.eu/
 instagram: singularity.kms
-mail: info@singularity.2n40.eu
+mail: 42@drumni.com
 ---
-## Singularity ist:
-- eine Suchmaschine für Veranstaltungen
-- ein Magazin, dass in Subkulturen eintaucht
-- und bald auch ein Forum, dass offene Kommunikation für kreative Köpfe ermöglicht.
+Wir ermöglichen offene Kommunikation für kreative Köpfe.
 
 Wir freuen uns darauf, zu erleben und zu gestalten!
 
-
 Singularity Team
+
+## Impressum
+
+**Betreiber der Website:**
+
+- Name: Wir sind eine Open Source Community (Singularity)
+- Rechtsform: Nicht eingetragen oder gegründet
+- Adresse: Nicht vorhanden
+- E-Mail-Adresse: 42@drumni.com
+- Telefonnummer: Nicht vorhanden
+- Ansprechpartner: [[Drumnicorn]]
+
