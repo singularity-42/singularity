@@ -16,12 +16,12 @@
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
   // filter: blur(0.5px);
   // Initial opacity set to 0 for the fade-in effect
-  // opacity: 0;
-  transition: opacity 1s ease-in-out;
+  opacity:  0; /* Start with fully transparent */
+  transition: opacity  1s ease-in-out; /* Transition for opacity */
 }
 
 .fadeIn {
-  opacity: 1;
+  opacity:  1; /* Fully visible after transition */
 }
 
 .fpsCounter {

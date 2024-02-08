@@ -1,4 +1,4 @@
-import Table from '@/components/view/Table';
+import Table from '@/components/layout/Table';
 import React from 'react';
 
 const ConceptPage: React.FC = () => {

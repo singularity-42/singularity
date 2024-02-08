@@ -3,7 +3,7 @@ subtitle: Ihr macht die Musik!
 tags:
   - umsonst
   - 20doors
-  - OPENend
+  
   - jam
 location: "[[Lokomov]]"
 ---

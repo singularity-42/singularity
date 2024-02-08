@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Table from '@/components/view/Table';
+import Table from '@/components/layout/Table';
 
 const CreativesPage: React.FC = () => {
   return (

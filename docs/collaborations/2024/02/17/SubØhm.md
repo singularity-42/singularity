@@ -3,7 +3,7 @@ tags:
   - 13-15€
   - 10€VK
   - 22doors
-  - OPENend
+  
   - hardtechno
   - techno
   - trance

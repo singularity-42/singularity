@@ -1,0 +1,28 @@
+.socialMediaTag {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    border-radius: 0.5rem;
+    font-size: var(--font-size);
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+    background-color: rgba(var(--dark-rgb), 0.8);
+    
+
+    // filter: opacity(0.8);
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    
+    gap: 0.2rem;
+    padding: 0.42rem;
+}
+
+.username {
+    font-size: var(--font-size);
+    font-weight: normal;
+}

@@ -49,10 +49,10 @@ const Background = () => {
 
   // Simulate loading completion after a delay
   useEffect(() => {
-    const delay = 2000; // Adjust the delay duration as needed
+    const delay =  2000; // Adjust the delay duration as needed
     const timeout = setTimeout(() => {
       setIsLoaded(true);
-      setShouldFadeIn(true);
+      setShouldFadeIn(true); // Trigger the fade-in effect
     }, delay);
 
     // Cleanup the timeout on component unmount

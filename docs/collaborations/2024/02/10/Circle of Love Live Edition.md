@@ -2,7 +2,7 @@
 tags:
   - 8-10€
   - 22doors
-  - OPENend
+  
   - soul
 location: "[[transit]]"
 ---
