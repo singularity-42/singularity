@@ -11,7 +11,6 @@ const load = (name) => {
         let { metadata, markdown } = extract(content);
         return { metadata, markdown, content };
     } else {
-        console.log(`File ${name} not found`);
         return null;
     }
 };

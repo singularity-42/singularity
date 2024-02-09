@@ -160,12 +160,16 @@ const sendDeleteConfirmation = async (bot, chatId, entityName) => {
     await bot.sendMessage(chatId, `${entityName}${i18n.de.hasBeenDeleted}`);
 }
 
+const sendUpdate = async (bot, chatId, entityName, changes, root = "Singularity") => {
+    await bot.sendMessage(chatId, `[${root.toUpperCase()}] ${entityName} ${i18n.de.hasBeenUpdated}\n${changes}`);
+}
 
 const i18n = {
     en: {
+        hasBeenUpdated: ' has been updated',
         hasBeenDeleted: ' has been deleted',
         delete: 'Delete',
-        help: 'Singularity Bot\nhttps://singularity.2n40.eu/\n\n/create [entity] [name] (date) - create an entity, either "creative", "concept", "collective" or "collaboration"  (date is only for collaborations)\n/confirm [telegramId] [name] - confirm a user to edit an entity\n/change [name] - edit an entity\n/check - check your confirmed entities and gets your telegram id',
+        help: 'Singularity Bot\nhttps://singularity.2n40.eu/\n\n/create [entity] [name] (date) - create an entity, either "creative", "concept", "collective" or "collaboration"  (date is only for collaborations)\n/confirm [telegramId] [name] - confirm a user to edit an entity\n/change [name] - edit an entity\n/check - check your confirmed entities and gets your telegram id\n/contact [message] - send a message to the Singularity group',
         whatTypeOfEntity: 'What type of entity is ',
         changes: 'Changes:',
         noChanges: 'No changes',
@@ -199,9 +203,10 @@ const i18n = {
         fileCreated: 'File has been created: ',
     },
     de: {
+        hasBeenUpdated: ' wurde aktuallisiert',
         hasBeenDeleted: ' wurde gelöscht',
         delete: 'Löschen',
-        help: 'Singularity Bot\nhttps://singularity.2n40.eu/\n\n/create [entity] [name] (date) - erstelle eine Entität, entweder "creative", "concept", "collective" oder "collaboration"  (date ist nur für collaborations)\n/confirm [telegramId] [name] - bestätige einen Benutzer, um eine Entität zu bearbeiten\n/change [name] - bearbeite eine Entität\n/check - überprüfe deine bestätigten Entitäten und erhalte deine Telegramm-ID',
+        help: 'Singularity Bot\nhttps://singularity.2n40.eu/\n\n/create [entity] [name] (date) - erstelle eine Entität, entweder "creative", "concept", "collective" oder "collaboration"  (date ist nur für collaborations)\n/confirm [telegramId] [name] - bestätige einen Benutzer, um eine Entität zu bearbeiten\n/change [name] - bearbeite eine Entität\n/check - überprüfe deine bestätigten Entitäten und erhalte deine Telegramm-ID\n/contact [message] - sende eine Nachricht an die Singularity-Gruppe',
         whatTypeOfEntity: 'Was für eine Art von Entität ist ',
         changes: 'Änderungen:',
         noChanges: 'Keine Änderungen',
@@ -247,6 +252,7 @@ module.exports = {
     sendCantConfirmYourself,
     sendConfirmedQuestion,
     sendEditMenu,
+    sendUpdate,
     sendMetadata,
     sendChange,
     sendChangeInformation,

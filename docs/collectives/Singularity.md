@@ -4,8 +4,6 @@ instagram: singularity.kms
 mail: 42@drumni.com
 confirmed:
   - "763457573"
-  - "946063626"
-  - "0"
 tags:
   - communication
   - soul
