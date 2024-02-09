@@ -15,26 +15,4 @@ soundcloudtrack: "1472096302"
 instagrampost: 
 confirmed:
   - "763457573"
-  - "0"
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

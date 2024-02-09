@@ -86,7 +86,7 @@ const onMessage = async (bot, msg) => {
 
         const chatId = msg.chat.id;
         const entityName = msg.reply_to_message.text.match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
-
+        
         const value = msg.text;
         const file = load(entityName);
         if (!file || file == null) sendFileNotFoundError(bot, chatId, entityName);
@@ -129,17 +129,39 @@ const onMessage = async (bot, msg) => {
         });
 
         await sendChangeInformation(bot, chatId, changes);
+
+        if (!file || file == null)  return sendFileNotFoundError(bot, chatId, entityName);
+
         sendConfirmedQuestion(bot, chatId, entityName, netFile.content);
     }
 }
 
 const onConfirmed = async (bot, msg) => {
     const chatId = msg.chat.id;
-    const entityName = msg.text.match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
+    // const entityName = msg.text.match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
+    // const newContext = msg.text.split('\n').slice(1).join('\n');
+    // const entityName = "";
+    // const newContext = "";
+    /*Bist du sicher, dass du [Etwas Cooles]?
+
+---
+mail: 
+location: 
+tags:
+connections:  "[[Singularity]]"
+confirmed:
+  - "763457573"
+---
+
+Coming Soon!
+
+/home/roggen/Documents/GitHub/singularity/docs/**.md
+[]
+*/
+    const entityName = msg.text.split('\n')[0].match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
     const newContext = msg.text.split('\n').slice(1).join('\n');
     const file = load(entityName);
-
-    if (!file) sendFileNotFoundError(bot, chatId, entityName);
+    if (!file || file == null)  return sendFileNotFoundError(bot, chatId, entityName);
 
     let hasConfirmed = check(file.metadata, 'confirmed', chatId);
     if (!hasConfirmed) {
@@ -161,11 +183,16 @@ const onConfirmed = async (bot, msg) => {
 
 const onCreate = async (bot, msg, match) => {
     const chatId = msg.chat.id;
-    const entityDate = match[3];
-    const entityName = match[2];
+    // /create collaboration Nicer Test 12.12.2024
+    // const entityName = match[2]; Nice Test
+    // const entityDate = match[3]; 12.12.2024
+    // use combination with regex
+    let _entityName = msg.text.split(' ').slice(2).join(' ');
+    const entityDate = msg.text.split(' ').slice(-1)[0];
+    const entityName = _entityName.replace(entityDate, '').trim();
+
     const entityType = match[1];
     const telegramId = msg.from.id;
-    console.log(entityType, entityName, entityDate, telegramId);
 
     const minimumConfirmed = 1;
     const countConfirmed = deepSearch('confirmed', telegramId);

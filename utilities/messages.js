@@ -142,7 +142,7 @@ const sendHelp = async (bot, chatId) => {
     /change [name] - edit an entity
     /check - check your confirmed entities and gets your telegram id
 */
-    await bot.sendMessage(chatId, i18n.de.help);
+    await bot.sendMessage(chatId, ` ${i18n.de.help}`);
 }
 
 const sendConfirmedFiles = async (bot, chatId, files) => {
@@ -207,6 +207,7 @@ const i18n = {
         hasBeenDeleted: ' wurde gelöscht',
         delete: 'Löschen',
         help: 'Singularity Bot\nhttps://singularity.2n40.eu/\n\n/create [entity] [name] (date) - erstelle eine Entität, entweder "creative", "concept", "collective" oder "collaboration"  (date ist nur für collaborations)\n/confirm [telegramId] [name] - bestätige einen Benutzer, um eine Entität zu bearbeiten\n/change [name] - bearbeite eine Entität\n/check - überprüfe deine bestätigten Entitäten und erhalte deine Telegramm-ID\n/contact [message] - sende eine Nachricht an die Singularity-Gruppe',
+        alias: '\nAlias: \n /create creative = /crea \n /create concept = /con \n /create collective = /cole \n /create collaboration = /cola',
         whatTypeOfEntity: 'Was für eine Art von Entität ist ',
         changes: 'Änderungen:',
         noChanges: 'Keine Änderungen',
