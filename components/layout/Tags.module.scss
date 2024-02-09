@@ -1,37 +1,24 @@
 .tags {
     position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-
+    width:  100%;
+    height:  100%;
+    margin:  0 auto;
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
     align-items: left;
-    gap: 0.42rem;
-
-    padding: 0.42rem;
-
-    // no overflow
+    gap:  0.42rem;
+    padding:  0.42rem;
     overflow-y: hidden;
     overflow-x: auto;
-}
-
-.fade-enter {
-    opacity: 0;
-   }
-   
-   .fade-enter-active {
-    opacity: 1;
-    transition: opacity 500ms;
-   }
-   
-   .fade-exit {
-    opacity: 1;
-   }
-   
-   .fade-exit-active {
-    opacity: 0;
-    transition: opacity 500ms;
-   }
-   
+  }
+  
+  .fade-enter {
+    opacity:  0;
+  }
+  
+  .fade-enter-active {
+    opacity:  1;
+    transition: opacity  500ms;
+  }
+  

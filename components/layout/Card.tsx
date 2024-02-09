@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Card.module.scss";
 import { MdFolderOpen } from 'react-icons/md';
 import Tags from "../layout/Tags";
@@ -9,6 +9,7 @@ import { useDetails } from "@/hooks/provider/DetailsProvider";
 import useImageWithFallback from "@/hooks/useImageWithFallback";
 import Markdown from "@/components/layout/Markdown";
 import Socials from "../layout/Socials";
+import Image from "next/legacy/image";
 
 interface CardProps {
   data: any; // Replace 'any' with the actual type for your data
@@ -20,10 +21,11 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelected = false }) => {
   const { folder, content } = data || {};
   const { title, tags, location } = data.metadata || {};
-  
+
   const { imgSrc } = useImageWithFallback(title);
   const { setName, toggleVisibility } = useDetails();
   const [isScrolling, setScrolling] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const handleClick = useCallback(() => {
     toggleVisibility();
@@ -46,9 +48,20 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
     </div>
   );
 
+
   const renderCardContent = () => (
-    <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
-       <div className={styles.bgOverlay} style={{ backgroundImage: `url(${imgSrc})`, backgroundSize: "cover" }} />
+    <div className={`${styles.card} ${loaded ? styles.loaded : ""}`} onClick={handleClick} onContextMenu={handleContextMenu}>
+      <div className={styles.imageContainer}>
+        {imgSrc && <Image
+          src={imgSrc}
+          alt={title}
+          layout='fill'
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          objectFit='cover'
+          quality={100}
+          onLoadingComplete={() => setLoaded(true)}
+        />}
+      </div>
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>{title}</h2>
@@ -58,21 +71,21 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
             <Link name={location.replace(/[\[\]"]+/g, "")}>{location.replace(/[\[\]"]+/g, "")}</Link>
           </div>
         )}
-       {tags && tags.length > 0 && (
+        {tags && tags.length > 0 && (
           <div className={styles.tagsContainer}>
             <Tags tags={tags} onTagClick={onTagClick} />
           </div>
         )}
-       {content && (
-        <div className={`${styles.description} ${isScrolling ? styles.scrollable : ""}`}>
-          <Markdown content={data.content} active={isScrolling} />
-        </div>
+        {content && (
+          <div className={`${styles.description} ${isScrolling ? styles.scrollable : ""}`}>
+            <Markdown content={data.content} active={isScrolling} />
+          </div>
         )}
         {data.metadata && (
           <div className={styles.socialMediaContainer}>
             <Socials metadata={data.metadata} />
-        </div>
-        )} 
+          </div>
+        )}
       </div>
     </div>
   );

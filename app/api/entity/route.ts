@@ -65,7 +65,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         let metadata = extractMetadata(metadataString, entity_name || '');
 
         let description = file.content.split('---')[2];
-        
+
         // get first folder name
         let paths = file.file.split(/\\|\//);
         paths.shift();

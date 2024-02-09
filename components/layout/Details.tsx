@@ -89,30 +89,27 @@ const Details: React.FC<EntityProps> = () => {
       </button>
       <div className={styles.contentContainer}>
         <div className={styles.leftContainer}>
-          {!loading && (<>
-          <div className={styles.detailsContainer}>
-            <h2 className={styles.title}>{(entity.title || '').split(/\\|\//).pop()}</h2>
-            <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
-          </div>
+          {!loading ? (<>
+            <div className={styles.detailsContainer}>
+              <h2 className={styles.title}>{(entity.title || '').split(/\\|\//).pop()}</h2>
+              <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
+            </div>
             <div className={styles.socialMediaContainer}>
               <Socials metadata={entity} />
             </div>
             <div className={styles.tagsContainer}>
               <Tags tags={entity.tags || []} viewOnly={true} />
-            </div></>)}
-          {loading && <Loading />}
-          {!loading && entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
+            </div>
+            {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
+            {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack} />}
+            {entity && (entity as any).soundcloudtrack && <EmbedTrackSoundcloud track={(entity as any).soundcloudtrack} />}
+            {entity && (entity as any).instagrampost && <EmbedPostInstagram post={(entity as any).instagrampost} />}
+          </>) : <Loading />}
         </div>
         {!loading && <div className={styles.graphContainer}>
           {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
         </div>}
       </div>
-      {!loading && <div className={styles.embedContainer}>
-        {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack} />}
-        {entity && (entity as any).soundcloudtrack && <EmbedTrackSoundcloud track={(entity as any).soundcloudtrack} />}
-        {entity && (entity as any).instagrampost && <EmbedPostInstagram post={(entity as any).instagrampost} />}
-      </div>}
-
     </div>
   );
 };
