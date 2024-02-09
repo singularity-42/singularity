@@ -1,5 +1,5 @@
 // DateComponent.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Date.module.scss"; // Adjust the path based on your project structure
 import Until from "./Until";
 
@@ -16,9 +16,14 @@ const DateComponent: React.FC<DateComponentProps> = ({ date }) => {
   const month = currentDate.getMonth() + 1; // Months are zero-based
   const dayOfWeek = getDayOfWeek(currentDate);
   const formattedDateOutput = getFormattedDate(dayOfWeek, day, month);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
-    <div className={styles.dateContainer}>
+    <div className={`${styles.dateContainer} ${isVisible ? styles.visible : ''}`}>
       <div className={styles.dayOfWeek}>{dayOfWeek}</div>
       <div className={styles.formattedDate}>
         <div className={styles.day}>{day}.</div>

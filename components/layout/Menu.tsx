@@ -12,11 +12,11 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
-  const { visible, toggleVisibility } = useDetails();
+  const { visible, toggleVisibility, setName } = useDetails();
   const [lastClicked, setLastClicked] = React.useState("");
 
   const handleLinkClick = (str: string) => {
-    if (visible) toggleVisibility();
+    if (visible){ setName(''); toggleVisibility();}
     setLastClicked(str);
     // wait 420ms and then close the menu
     setTimeout(() => {

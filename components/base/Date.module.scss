@@ -1,76 +1,87 @@
-
 .dateContainer {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    z-index: 1000; /* Ensure it's above other elements */
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  z-index: 1000;
+  /* Ensure it's above other elements */
 
-    font-size: var(--heading-font-size);
-    font-family: "Helvetica Neue", sans-serif;
+  font-size: var(--heading-font-size);
+  font-family: "Helvetica Neue", sans-serif;
 
-    width: 97vw;;
-    height: 3rem; /* Adjust the height as needed */
+  width: 97vw;
+  ;
+  height: 0rem;
 
 
-    padding: 1rem;
-    margin: 0.42rem 0.42rem;
+  padding: 1rem;
+  margin: 0.42rem 0.42rem;
 
-    // border-radius: 10px;
-    box-shadow: 0 0 10px rgba(var(--dark-rgb), 0.42);
-    background-color: rgba(var(--dark-rgb), 0.42); /* Transparent dark background */
+  // border-radius: 10px;
+  box-shadow: 0 0 10px rgba(var(--dark-rgb), 0.42);
+  background-color: rgba(var(--dark-rgb), 0.42);
+  /* Transparent dark background */
 
-   // white border top and bottom
-    border-top: 2px solid rgba(var(--light-rgb), 0.42);
-    border-bottom: 2px solid rgba(var(--light-rgb), 0.42);
-  }
-  
+  // white border top and bottom
+  border-top: 2px solid rgba(var(--light-rgb), 0.42);
+  border-bottom: 2px solid rgba(var(--light-rgb), 0.42);
+
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.42s ease-in-out, height 0.42s ease-in-out;
+
+
+}
+
+.visible {
+  opacity: 1;
+  height: 3rem;
+
+}
+
 
 // place styled hamburger o right nd
 .styledHamburger {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: right;
-    gap: 0.42rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+  gap: 0.42rem;
 }
 
-  .formattedDate {
-    font-size: var(--text-font-size);
-    color: rgba(var(--light-rgb), 0.42);
-    display: flex;
-  }
-  
-  /* Additional styles for the formatted date */
-  .dayOfWeek {
-    font-size: calc(var(--heading-font-size) * 1.2);
-    margin-right: 10px;
-  }
-  
-  .date {
-    display: inline-block;
+.formattedDate {
+  font-size: var(--text-font-size);
+  color: rgba(var(--light-rgb), 0.42);
+  display: flex;
+}
+
+/* Additional styles for the formatted date */
+.dayOfWeek {
+  font-size: calc(var(--heading-font-size) * 1.2);
+  margin-right: 10px;
+}
+
+.date {
+  display: inline-block;
+  width: 100%;
+  align-items: center;
+}
+
+.day {
+  font-size: var(--text-font-size);
+}
+
+.month {
+  font-size: var(--text-font-size);
+}
+
+.year {
+  font-size: var(--text-font-size);
+}
+
+@media (max-width: 768px) {
+  .dateContainer {
+    margin: 0rem;
     width: 100%;
-    align-items: center;
-  }
-  
-  .day {
-    font-size: var(--text-font-size);
-  }
-  
-  .month {
-    font-size: var(--text-font-size);
-  }
-  
-  .year {
-    font-size: var(--text-font-size);
-  }
-
-  @media (max-width: 768px) {
-    .dateContainer {
-      // padding: 0rem;
-      margin: 0rem;
-      width: 100%;
-
     border-radius: 0px;
     box-shadow: 0 0 0 rgba(var(--dark-rgb), 0.42);
-    }
   }
+}

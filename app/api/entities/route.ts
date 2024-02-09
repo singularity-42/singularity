@@ -108,7 +108,12 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
         let content = file.content.split("---")[2] || "";
         if (content.length === 0) {
-          content = file.content;
+          if (file.content.includes("---")) {
+            let _content = file.content.split("---");
+            content = _content[_content.length - 1];
+          }else{
+            content = file.content;
+          }
         }
         return {
           path: file.path,
