@@ -50,8 +50,8 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
 
 
   const renderCardContent = () => (
-    <div className={`${styles.card} ${loaded ? styles.loaded : ""}`} onClick={handleClick} onContextMenu={handleContextMenu}>
-      <div className={styles.imageContainer}>
+    <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
+      <div className={`${styles.imageContainer} ${loaded ? styles.loaded : ""}`}>
         {imgSrc && <Image
           src={imgSrc}
           alt={title}
