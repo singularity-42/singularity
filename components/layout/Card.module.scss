@@ -17,15 +17,10 @@
     box-shadow: 0 4px 8px rgba(var(--dark-rgb), 0.2);
   }
   
-  opacity: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.42s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 
-.loaded {
-  opacity: 1;
-  transition: opacity 0.42s ease-in-out;
-}
 
 
 
@@ -45,11 +40,15 @@
   background-repeat: no-repeat;
   // border-radius: 8px;
   // mix-blend-mode: difference;
+  transition: opacity 0.42s ease-in-out;
+  
+  opacity: 0;
+  filter: contrast(1.2) brightness(0.42);
+  
+}
+.loaded {
   opacity: 0.42;
   transition: opacity 0.42s ease-in-out;
-
-  filter: contrast(1.2) brightness(0.42);
-
 }
 
 .noImage {
