@@ -20,8 +20,6 @@ bot.onText(/^\/contact (.+)/, async (msg, match) => onUpdate(bot, "Singularity",
 bot.onText(/^\/change\s+(.+)$/, async (msg, match) => onChange(bot, msg, match));
 bot.onText(/^\/check/, async (msg, match) => onCheck(bot, msg, match));
 
-
-
 bot.onText(/^\/start/, async (msg, match) => sendHelp(bot, msg.chat.id));
 bot.onText(/^\/help/, async (msg, match) => sendHelp(bot, msg.chat.id));
 bot.on('callback_query', async (callbackQuery) => onCallbackQuery(bot, callbackQuery));
