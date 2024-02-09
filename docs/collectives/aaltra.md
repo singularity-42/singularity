@@ -8,7 +8,7 @@ tel:
 tags:
   - bar
   - konzerte
-relations: 
+connections: 
 location: 
 address:
 ---

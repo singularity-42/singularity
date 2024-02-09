@@ -6,7 +6,7 @@ tel: 490371449870
 tags:
   - konzerte
   - jugend
-relations: 
+connections: 
 location: 50.86087380031375, 12.92308532958822
 address: Chemnitztalstraße 54, 09114 Chemnitz, Germany
 ---

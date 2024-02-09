@@ -10,7 +10,7 @@ tags:
   - hardgroove
   - producer
 soundcloud: nidardo
-relations:
+connections:
   - "[[reset]]"
   - "[[reiz]]"
 ---
