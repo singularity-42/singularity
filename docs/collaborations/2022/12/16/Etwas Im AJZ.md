@@ -2,14 +2,15 @@
 tags:
   - 23doors
   - 5end
-  - 5-10€
+  - 510€
   - techno
-  - "garage uk"
-  - "dubstep uk"
+  - garageuk
+  - dubstepuk
   - dub
   - jungle
   - breakbeat
 location: "[[AJZ]]"
+confirmed:
 ---
 ### Timetable Toiletten
 

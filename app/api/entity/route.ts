@@ -40,6 +40,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
                 if (item[0] === '-') {
                     const item_ = item.replace('-', '').trim();
                     const list_key = Object.keys(metadata).pop() || '';
+                    if (list_key == 'confirmed') return; 
                     const _list = metadata[list_key] || [];
                     _list.push(item_);
                     metadata[list_key] = _list;

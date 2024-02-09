@@ -9,7 +9,7 @@ tags:
   - cofunding
   - culture
   - urbaninterventions
-relations: "[[Klub Solitaer]]"
+connections: "[[Klub Solitaer]]"
 location: 50.830613735661586, 12.939564584215244
 address: Augustustburger Str. 102, 09126 Chemnitz, Germany
 ---
