@@ -76,7 +76,15 @@ const onChange = async (bot, msg, match) => {
     await bot.sendMessage(chatId, file.content);
 
     let hasConfirmed = check(file.metadata, 'confirmed', chatId);
-    if (hasConfirmed) sendEditMenu(bot, chatId, entityName);
+
+    // todo chan change related to confirmations
+
+    //while look if user has 3 confirmations
+    const minimumConfirmed = 3;
+    const countConfirmed = deepSearch('confirmed', chatId);
+    const hasMinimumConfirmed = countConfirmed >= minimumConfirmed;
+
+    if (hasConfirmed || hasMinimumConfirmed) sendEditMenu(bot, chatId, entityName);
     else sendConfirmedError(bot, chatId, entityName);
 }
 
