@@ -1,6 +1,6 @@
 const { load, extract, save, deepSearch, deepList, intract, deepListFiles } = require("./file");
 const { check, edit } = require("./metadata");
-const { sendFileNotFoundError, sendEditMenu, sendConfirmedError, sendChangeInformation, sendConfirmedQuestion, isEditMenu, sendCreateMenu, sendCantConfirmYourself, sendIsConfirmed, sendIsUnconfirmed, sendTelegramId, sendFileAlreadyExists, sendYouNeedAtLeast, sendFileCreated, sendConfirmedFiles, sendCantConfirmAMoreConfirmed, sendDeleteConfirmation } = require("./messages");
+const { sendFileNotFoundError, sendEditMenu, sendConfirmedError, sendChangeInformation, sendConfirmedQuestion, isEditMenu, sendCreateMenu, sendCantConfirmYourself, sendIsConfirmed, sendIsUnconfirmed, sendTelegramId, sendFileAlreadyExists, sendYouNeedAtLeast, sendFileCreated, sendConfirmedFiles, sendCantConfirmAMoreConfirmed, sendDeleteConfirmation, sendUpdate } = require("./messages");
 
 const onCallbackQuery = async (bot, callbackQuery) => {
     switch (callbackQuery.data) {
@@ -26,6 +26,7 @@ const onDelete = async (bot, callbackQuery) => {
         return;
     }
     save(entityName, null);
+    await onUpdate(bot, entityName, 'deleted');
     sendDeleteConfirmation(bot, chatId, entityName);
 }
 
@@ -58,6 +59,7 @@ const onConfirm = async (bot, msg, match) => {
     let newFile = { ...file };
     newFile.metadata = edit(file.metadata, 'confirmed', telegramId);
     save(entityName, newFile);
+    await onUpdate(bot, entityName, newFile.content);
     const isConfirmed = check(newFile.metadata, 'confirmed', telegramId);
     if (isConfirmed) sendIsConfirmed(bot, chatId, telegramId, entityName);
     else sendIsUnconfirmed(bot, chatId, telegramId, entityName);
@@ -153,6 +155,7 @@ const onConfirmed = async (bot, msg) => {
     file.content = netFile.content;
 
     save(entityName, file);
+    await onUpdate(bot, entityName, file.content);
     sendEditMenu(bot, chatId, entityName);
 }
 
@@ -183,6 +186,7 @@ const onCreate = async (bot, msg, match) => {
     let markdown = '\n42';
     let content = intract(metadata, markdown);
     save(entityName, { metadata, markdown, content }, entityDate, entityType);
+    await onUpdate(bot, entityName, content);
     sendFileCreated(bot, chatId, entityName);
     await bot.sendMessage(chatId, content);
     sendEditMenu(bot, chatId, entityName);
@@ -195,4 +199,29 @@ const onCheck = async (bot, msg, match) => {
     await sendConfirmedFiles(bot, chatId, confirmed);
 }
 
-module.exports = { onCheck, onCreate, onConfirm, onChange, onCallbackQuery, onMessage};
+
+// send all confirmed form "Singularity" a message of new saved file
+const onUpdate = async (bot, name, content) => {
+    let rootEntity = "Singularity";
+    let rootFile = load(rootEntity);
+    if (!rootFile) return;
+
+    // get all confirmed from rootEntity
+    let rootConfirmed = rootFile.metadata.confirmed;
+    if (!rootConfirmed) return;
+    rootConfirmed.forEach(telegramId => {
+        sendUpdate(bot, telegramId, name, content);
+    });
+
+    // and now load all confirmed from name and send them a message
+    let file = load(name);
+    if (!file) return;
+    let confirmed = file.metadata.confirmed;
+    if (!confirmed) return;
+    confirmed.forEach(telegramId => {
+        if (!rootConfirmed.includes(telegramId))
+            sendUpdate(bot, telegramId, name, content);
+    });
+}
+
+module.exports = { onUpdate, onCheck, onCreate, onConfirm, onChange, onCallbackQuery, onMessage};
