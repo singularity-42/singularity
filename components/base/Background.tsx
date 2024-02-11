@@ -8,10 +8,16 @@ const Background = () => {
   const [fps, setFps] = useState(60);
   const [isLoaded, setIsLoaded] = useState(false);
   const [shouldFadeIn, setShouldFadeIn] = useState(false); // Added state to control fade-in
+  const [targetPos, setTargetPos] = useState({ x:  0, y:  0 });
+
+
+  
 
   const handlePointerMove = (e: PointerEvent) => {
     setPos({ x: e.clientX, y: e.clientY });
+    setTargetPos({ x: e.clientX, y: e.clientY });
   };
+  
 
   useEffect(() => {
     const moveHandler = (e: PointerEvent) => handlePointerMove(e);
@@ -20,14 +26,27 @@ const Background = () => {
   }, []);
 
   useEffect(() => {
-    const lerpFactor = 0.42;
+    const intervalId = setInterval(() => {
+      setTargetPos((prevTargetPos) => ({
+        x: prevTargetPos.x + (pos.x - prevTargetPos.x) *  0.1,
+        y: prevTargetPos.y + (pos.y - prevTargetPos.y) *  0.1,
+      }));
+    },  1000 / fps); // Adjust the frequency based on your desired fps
+  
+    return () => clearInterval(intervalId);
+  }, [fps, pos]);  
+
+  useEffect(() => {
+    const lerpFactor =  0.1; // Reduzierter Faktor für eine langsamere Bewegung
     lerpPos.current = {
       x: lerp(lerpPos.current.x, pos.x, lerpFactor),
       y: lerp(lerpPos.current.y, pos.y, lerpFactor),
     };
     document.documentElement.style.setProperty('--cursor-x', `${lerpPos.current.x}px`);
     document.documentElement.style.setProperty('--cursor-y', `${lerpPos.current.y}px`);
-  }, [pos]);
+  }, [targetPos]);
+  
+  
 
   const lerp = (start: number, end: number, t: number) => start * (1 - t) + end * t;
 
