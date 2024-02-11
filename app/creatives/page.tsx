@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Table from '@/components/layout/Table';
+import CardsFiltered from '@/components/layout/CardsFiltered';
 
 const CreativesPage: React.FC = () => {
   return (
-      <Table type='creatives' />
+      <CardsFiltered type='creatives' />
   );
 };
 

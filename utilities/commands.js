@@ -146,26 +146,6 @@ const onMessage = async (bot, msg) => {
 
 const onConfirmed = async (bot, msg) => {
     const chatId = msg.chat.id;
-    // const entityName = msg.text.match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
-    // const newContext = msg.text.split('\n').slice(1).join('\n');
-    // const entityName = "";
-    // const newContext = "";
-    /*Bist du sicher, dass du [Etwas Cooles]?
-
----
-mail: 
-location: 
-tags:
-connections:  "[[Singularity]]"
-confirmed:
-  - "763457573"
----
-
-Coming Soon!
-
-/home/roggen/Documents/GitHub/singularity/docs/**.md
-[]
-*/
     const entityName = msg.text.split('\n')[0].match(/\[([^)]+)\]/)[1].replace(/\[|\]/g, '');
     const newContext = msg.text.split('\n').slice(1).join('\n');
     const file = load(entityName);
@@ -191,10 +171,6 @@ Coming Soon!
 
 const onCreate = async (bot, msg, match) => {
     const chatId = msg.chat.id;
-    // /create collaboration Nicer Test 12.12.2024
-    // const entityName = match[2]; Nice Test
-    // const entityDate = match[3]; 12.12.2024
-    // use combination with regex
     let _entityName = msg.text.split(' ').slice(2).join(' ');
     const entityDate = msg.text.split(' ').slice(-1)[0];
     const entityName = _entityName.replace(entityDate, '').trim();

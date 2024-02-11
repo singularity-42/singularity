@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import * as glob from 'glob';
-
-
     
 function getContentTypeBasedOnExtension(name: string): string {
     const extension = name.split('.').pop()?.toLowerCase();
@@ -19,9 +17,6 @@ function getContentTypeBasedOnExtension(name: string): string {
     }
   }
   
-  
-  
-
 export const GET = async (req: NextRequest, res: NextResponse) => {
     let entity_name = req.nextUrl.searchParams.get('name');
 

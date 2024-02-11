@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import styles from "./Table.module.scss";
+import styles from "./CardsFiltered.module.scss";
 import useEntities from "@/hooks/useEntities";
 import Loading from "../base/Loading";
 import { useTooltip } from "@/hooks/provider/TooltipProvider";
@@ -11,13 +11,13 @@ import Cards from "./Cards";
 import { TYPE_DESCRIPTIONS } from "@/types";
 import Filter from "../base/Filter";
 
-interface TableProps {
+interface CardsFilteredProps {
   type: string;
   orderType?: OrderType;
   maxColumns?: number;
 }
 
-const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
   const { filter, setFilter } = useFilter();
   const entities = useEntities(type, filter);
   const { setTooltip } = useTooltip();
@@ -76,12 +76,12 @@ const TableContent: React.FC<TableProps> = ({ type, orderType = OrderType.Counte
   );
 };
 
-const Table: React.FC<TableProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
+const CardsFiltered: React.FC<CardsFilteredProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
   return (
     <FilterProvider>
-      <TableContent type={type} orderType={orderType} />
+      <CardsFilteredContent type={type} orderType={orderType} />
     </FilterProvider>
   );
 };
 
-export default Table;
+export default CardsFiltered;

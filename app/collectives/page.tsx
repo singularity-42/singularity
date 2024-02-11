@@ -1,10 +1,10 @@
-import Table from '@/components/layout/Table';
+import CardsFiltered from '@/components/layout/CardsFiltered';
 import React from 'react';
 
 const CollectivePage: React.FC = () => {
   return (
     <div>
-      <Table type='collectives' />
+      <CardsFiltered type='collectives' />
     </div>
   );
 };
