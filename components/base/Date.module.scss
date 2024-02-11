@@ -22,8 +22,8 @@
   /* Transparent dark background */
 
   // white border top and bottom
-  border-top: 2px solid rgba(var(--light-rgb), 0.42);
-  border-bottom: 2px solid rgba(var(--light-rgb), 0.42);
+  // border-top: 2px solid rgba(var(--light-rgb), 0.42);
+  // border-bottom: 2px solid rgba(var(--light-rgb), 0.1);
 
   opacity: 0;
   transition: transform 0.3s ease-in-out, opacity 0.42s ease-in-out, height 0.42s ease-in-out;

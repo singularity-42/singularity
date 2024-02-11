@@ -2,7 +2,7 @@
 tags:
   - 23doors
   - 5end
-  - 510€
+  - 5-10€
   - techno
   - garageuk
   - dubstepuk

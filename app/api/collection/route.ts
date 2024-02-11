@@ -25,9 +25,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         entity_name = decodeURIComponent(entity_name);
     }
 
-    const entityImages = glob.sync(`./docs/collection/${entity_name}.**`);
+    const entityImages = glob.sync(`./docs/collections/images/${entity_name}.**`);
     let newRandomImageIndex = Math.floor(Math.random() * 7);
-    let imagePath = `./public/glass/00${newRandomImageIndex}.jpg`;;
+    let imagePath = `./public/template/00${newRandomImageIndex}.jpg`;;
     if (entityImages.length === 0) {
     }else {
         imagePath = entityImages[0];
