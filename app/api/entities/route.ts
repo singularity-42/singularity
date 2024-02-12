@@ -3,14 +3,12 @@ import * as glob from "glob";
 
 import { NextRequest, NextResponse } from "next/server";
 
-// URL: /api/entities&entity_type=events&filter=wochenende,vergangenheit
 export const GET = async (req: NextRequest, res: NextResponse) => {
   let entity_type = req.nextUrl.searchParams.get("entity_type");
   let filter = req.nextUrl.searchParams.get("filter");
   const entityFiles = glob.sync(`./docs/${entity_type}/**/*.md`);
   const entities = entityFiles.map((file) => {
     const content = fs.readFileSync(file, "utf8");
-    // use regex to split the path at \\ or / depending on OS
     let pathList = file.split(/\\|\//);
     pathList.shift();
     pathList.shift();

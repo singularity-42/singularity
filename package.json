@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/node-telegram-bot-api": "^0.64.2",
     "axios": "^1.6.1",
     "fs": "^0.0.1-security",
     "glob": "^10.3.10",
@@ -22,6 +23,7 @@
     "react-social-media-embed": "^2.3.8",
     "remark-gfm": "^4.0.0",
     "sass": "^1.69.5",
+    "supports-color": "^9.4.0",
     "vis-data": "^7.1.9",
     "vis-network": "^9.1.9"
   },
@@ -29,10 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18.2.18",
-    "@wixc3/react-board": "^2.3.0",
-    "dotenv": "^16.4.1",
     "node-telegram-bot-api": "^0.64.0",
-    "supports-color": "^9.4.0",
     "typescript": "^5"
   }
 }

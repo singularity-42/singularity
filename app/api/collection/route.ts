@@ -20,7 +20,6 @@ function getContentTypeBasedOnExtension(name: string): string {
 export const GET = async (req: NextRequest, res: NextResponse) => {
     let entity_name = req.nextUrl.searchParams.get('name');
 
-    // entity decode from url
     if (entity_name) {
         entity_name = decodeURIComponent(entity_name);
     }
@@ -42,8 +41,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
             'Content-Type': contentType,
         },
     });
-
-
 }
 
 
