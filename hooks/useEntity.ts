@@ -14,6 +14,10 @@ const useEntity = (name: string) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    const update = (entity: Entity) => {
+        setEntity(entity);
+    }
+
     useEffect(() => {
         setLoading(true);
         const fetchEntity = async () => {
@@ -52,7 +56,8 @@ const useEntity = (name: string) => {
     return {
         entity, 
         loading, 
-        error
+        error,
+        update
     };
 }
 

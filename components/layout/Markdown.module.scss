@@ -135,3 +135,20 @@
 
     // make max with smaller
 }
+
+
+.textarea {
+    height: 30vh;
+    padding: 0px;
+    border-radius: 5px;
+    border: 1px solid rgba(var(--secondary-rgb), 0.2);
+    background-color: rgba(var(--secondary-rgb), 0.1);
+    color: rgb(var(--light-rgb));
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    margin-bottom: 20px;
+    transition: color 0.2s ease-in-out;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+}

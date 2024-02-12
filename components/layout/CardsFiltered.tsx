@@ -19,7 +19,7 @@ interface CardsFilteredProps {
 
 const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
   const { filter, setFilter } = useFilter();
-  const entities = useEntities(type, filter);
+  const { entities } = useEntities(type, filter);
   const { setTooltip } = useTooltip();
 
   const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-
+  user-select: none;
   padding: 1.3rem 2.6rem;
 }
 

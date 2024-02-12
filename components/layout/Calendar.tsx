@@ -19,8 +19,7 @@ interface CalendarProps {
 
 const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
   const { filter, setFilter } = useFilter();
-  const entities = useEntities(type, filter);
-
+  const { entities, loading, error } = useEntities(type, filter);
   const { setTooltip } = useTooltip();
 
   const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
@@ -35,13 +34,13 @@ const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.
       const updatedDatedEntities: { [date: string]: any[] } = {};
 
       entities.forEach((entity) => {
-        if (entity.metadata.tags.includes("vergangenheit")) 
+        if (entity.metadata.tags.includes("vergangenheit"))
           if (!filter.includes("vergangenheit"))
-            if (!filter.some((f) => entity.metadata.tags.includes(f))) 
+            if (!filter.some((f) => entity.metadata.tags.includes(f)))
               return;
-            
 
-        const date = entity.path.split("\\").slice(0,  3).join("/");
+
+        const date = entity.path.split("\\").slice(0, 3).join("/");
         if (updatedDatedEntities[date]) {
           updatedDatedEntities[date].push(entity);
         } else {
@@ -68,7 +67,7 @@ const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.
   }, [entities]);
 
   const handleTagClick = (tag: string) => {
-    if (tag.length <  1) return;
+    if (tag.length < 1) return;
 
     if (filter.includes(tag)) {
       setFilter(filter.filter((t) => t !== tag));
@@ -81,33 +80,35 @@ const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.
     const dateA = new Date(a);
     const dateB = new Date(b);
 
-    if (dateA > dateB) return  1;
+    if (dateA > dateB) return 1;
     if (dateA < dateB) return -1;
-    return  0;
-  }
+    return 0;
+  };
 
   const sortedDates = useMemo(() => {
     return Object.keys(datedEntities).sort(sortByDate);
   }, [datedEntities]);
 
-  if (!entities) return <Loading />;
-  else
-    return (
-      <div className={styles.calendar}>
-        <Filter currentVisibleTags={currentVisibleTags} />
-        {sortedDates.map((date, index) => (
-          <div key={date} className={styles.calendarItem}>
-            <div className={styles.dateInfo}>
-              <DateComponent date={date} />
-            </div>
-            <Cards entities={datedEntities[date]} onTagClick={handleTagClick} />
+  if (loading) return <Loading />;
+  if (error) return <p>Error: {error}</p>;
+  if (!entities) return null;
+
+  return (
+    <div className={styles.calendar}>
+      <Filter currentVisibleTags={currentVisibleTags} />
+      {sortedDates.map((date, index) => (
+        <div key={date} className={styles.calendarItem}>
+          <div className={styles.dateInfo}>
+            <DateComponent date={date} />
           </div>
-        ))}
-      </div>
-    );
+          <Cards entities={datedEntities[date]} onTagClick={handleTagClick} />
+        </div>
+      ))}
+    </div>
+  );
 };
 
-const Calendar: React.FC<CalendarProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns =  1 }) => {
+const Calendar: React.FC<CalendarProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
   return (
     <FilterProvider>
       <CalendarContent type={type} orderType={orderType} />

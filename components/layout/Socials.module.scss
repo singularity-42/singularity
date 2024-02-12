@@ -12,6 +12,21 @@
     animation: fadeIn 0.5s ease-in-out forwards;
 
 }
+.addSocialInput
+{
+    font-size: var(--heading-font-size);
+    width: 100%;
+    border: 1px solid rgba(var(--secondary-rgb), 0.2);
+    border-radius: 5px;
+    background-color: rgba(var(--secondary-rgb), 0.1);
+    color: rgb(var(--light-rgb));
+    text-align: left;
+    // place in center
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 0.2s ease-in-out;
+}
 
 
 @keyframes fadeIn {

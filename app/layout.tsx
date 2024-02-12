@@ -6,6 +6,7 @@ import { TooltipProvider } from '@/hooks/provider/TooltipProvider';
 import { DetailsProvider } from '@/hooks/provider/DetailsProvider';
 import Background from '@/components/base/Background';
 import Impressum from '@/components/base/Impressum';
+import AuthProvider from '@/hooks/provider/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     }
   ],
   robots: "index, follow",
- 
+
 };
 
 export default function RootLayout({
@@ -35,17 +36,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-return (
-  <html suppressHydrationWarning={true}>
-    <body className={inter.className}>
-       <Background />
+  return (
+    <html suppressHydrationWarning={true}>
+      <body className={inter.className}>
+        <Background />
+          <AuthProvider>
         <DetailsProvider>
-          <TooltipProvider>
-            <Header />
-            {children}
-          </TooltipProvider>
-          <Impressum />
+            <TooltipProvider>
+              <Header />
+              {/* {children} */}
+            </TooltipProvider>
+            <Impressum />
         </DetailsProvider>
+          </AuthProvider>
       </body>
     </html>
   )

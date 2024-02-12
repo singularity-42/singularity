@@ -3,6 +3,7 @@ import * as glob from "glob";
 
 import { NextRequest, NextResponse } from "next/server";
 
+// URL: /api/entities&entity_type=events&filter=wochenende,vergangenheit
 export const GET = async (req: NextRequest, res: NextResponse) => {
   let entity_type = req.nextUrl.searchParams.get("entity_type");
   let filter = req.nextUrl.searchParams.get("filter");
