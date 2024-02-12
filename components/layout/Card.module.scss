@@ -80,11 +80,8 @@
 .socialMediaContainer {
   position: absolute;
   bottom: 16px;
-  left: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: calc(100% - 32px);
-  // Styling for the container of social media tags
-  // Adjust spacing, alignment, and other styles as needed
 }
 
 .original {
@@ -104,7 +101,7 @@
   // margin-top: 8px;
 
   // overflow scroll
-  overflow: scroll;
+  overflow: auto;
   max-height: 30vh;
   padding-bottom: 5vh;
   overflow-y: hidden;

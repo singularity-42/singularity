@@ -1,5 +1,32 @@
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
 
-@import '../../styles/Animations';
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInBackground {
+  0% {
+      background-color: rgba(var(--dark-rgb), 0.8);
+  }
+
+  100% {
+      background-color: transparent;
+  }
+}
 
 .popup {
   --space: 2rem;

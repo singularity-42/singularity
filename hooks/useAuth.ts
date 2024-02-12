@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthContext } from "./provider/AuthProvider";
 
-// useAuth is a custom hook to consume the authentication context
+// useAuth is a custom hook to consume the Credentials context
 export const useAuth = () => {
     const context = React.useContext(AuthContext);
 

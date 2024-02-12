@@ -1,19 +1,18 @@
 "use client";
 
-import Authentication from '@/components/layout/Authentication';
+import Credentials from '@/components/layout/Credentials';
 // Import necessary dependencies
-import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, useEffect, useCallback } from 'react';
 
 // Define the context interface
 interface AuthContextInterface {
-    coveredCredentials: string[];
-    addCredentials: (entityName: string) => void;
-    removeCredentials: (entityName: string) => void;
+  addCredentials: (entityName: string) => void;
+  removeCredentials: (entityName: string) => void;
+  toggleOverlay: () => void;
+  checkFormat: (str: string) => boolean;
+  visible: boolean;
 
-    toggleOverlay: () => void;
-    visible: boolean;
-    loading: boolean;
-    error: string;
+  coveredCredentials: string[];
 }
 
 // Create the context
@@ -25,47 +24,45 @@ interface AuthProviderProps {
     children: React.ReactNode;
 }
 
-// Create a provider component for the authentication context
+// Create a provider component for the Credentials context
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }: AuthProviderProps) => {
     const [visible, setOverlayVisible] = useState<boolean>(false);
     const [credentials, setCredentials] = useState<string[]>([]);
     const [coveredCredentials, setCoveredCredentials] = useState<string[]>([]);
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
+    const removeCredentials = useCallback((credential: string) => {
+        setCredentials(credentials.filter((item) => item !== credential));
+    }, [credentials]);
 
-    const addCredentials = (entityName: string) => {
-        setCredentials([...credentials, entityName]);
-    };
-
-    const removeCredentials = (entityName: string) => {
-        setCredentials(credentials.filter((item) => item !== entityName));
-    };
+    const addCredentials = useCallback((credential: string) => {
+      setCredentials([...credentials, credential]);
+    }, [credentials]);
 
     const toggleOverlay = () => {
         setOverlayVisible(!visible);
     };
 
     useEffect(() => {
-        if (credentials.length > 3) {
-            setCoveredCredentials(credentials.slice(3));
-        }
+      let _credentials = credentials;
+      // map all credentials from 123-456-678 to 123-XXX-XXX
+      _credentials = _credentials.map((item) => {
+        return item.replace(/\d(?=\d{4})/g, "*");
+      });
+      setCoveredCredentials(_credentials);
     }, [credentials]); 
 
     const value = {
-        coveredCredentials,
-        addCredentials,
-        removeCredentials,
+      addCredentials,
+      removeCredentials,
+      toggleOverlay,
+      visible,
 
-        toggleOverlay,
-        visible,
-        loading,
-        error,
+      coveredCredentials,
     };
 
     return (
         <AuthContext.Provider value={value}>
-            <Authentication />
+            <Credentials />
             {children}
         </AuthContext.Provider>
     );

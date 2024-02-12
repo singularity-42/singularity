@@ -31,9 +31,7 @@ export const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     collectives: "Gruppen, die gemeinsam inspirierende Inhalte erstellen.",
     creatives: "Inhaltsschöpfer, die ihre Vorstellungskraft in die Tat umsetzen.",
     concepts: "Ideen, die unseren Content formen.",
-    // contact: "Kontaktinformationen für die Singularität.",
-    changes: "Veränderungen in Bezug auf die Singularität.",
-    // cyberware: "Werkzeuge und Dienstleistungen, die unser#e Singularität antreiben.",
+    changes: "Veränderungen mit Geschichte.",
 };
 
 // types.ts
@@ -53,6 +51,15 @@ export interface LoadResult extends FileContent {
 }
 
 export interface SaveFile extends FileContent {}
+
+export interface Change {
+  type: string;
+  key: string;
+  value: string;
+}
+
+// Results
+
 
 export interface DeepSearchResult {
   count: number;
@@ -86,10 +93,4 @@ export interface GetPathResult {
 
 export interface DeepListFilesResult {
   result: string[];
-}
-
-export interface Change {
-  type: string;
-  key: string;
-  value: string;
 }
