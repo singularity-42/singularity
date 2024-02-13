@@ -11,9 +11,9 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
     edges: [],
   };
 
-  const entityName = req.nextUrl.searchParams.get('name');
+  const fileName = req.nextUrl.searchParams.get('name');
   const depth = req.nextUrl.searchParams.get('depth') || 3;
-  const entityFiles = glob.sync(`./docs/**/*.md`);
+  const fileFiles = glob.sync(`./docs/**/*.md`);
   const existingNodes = new Map<string, number>(); // To track existing node labels and their IDs
   const nodes: Node[] = [];
   const edges: Edge[] = [];
@@ -61,13 +61,13 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
     }
   };
 
-  for (const file of entityFiles) {
+  for (const file of fileFiles) {
     const content = fs.readFileSync(file, 'utf8');
     const fileName = file.split(/\\|\//).slice(-1)[0].split('.md')[0];
     const mainNodeId = nodes.length + 1;
 
     if (!existingNodes.has(fileName)) {
-      if (entityName === fileName) {
+      if (fileName === fileName) {
         nodes.push({
           id: 0,
           label: fileName,
@@ -85,7 +85,7 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
 
         extractNodesAndEdges(content, mainNodeId, depth as number);
 
-      } else if (entityName && content.includes(entityName)) {
+      } else if (fileName && content.includes(fileName)) {
         nodes.push({
           id: mainNodeId,
           label: fileName,
@@ -114,7 +114,7 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
   }
 
   relation = {
-    title: entityName || '',
+    title: fileName || '',
     nodes: nodes,
     edges: edges,
   };

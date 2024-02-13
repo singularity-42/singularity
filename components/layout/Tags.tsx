@@ -7,23 +7,14 @@ interface TagsProps {
   tags: string[];
   onTagClick?: (tag: string) => void;
   selected?: string[];
-  viewOnly?: boolean;
   editing?: boolean;
   onChange?: (tags: string[]) => void;
 }
 
-const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly, editing, onChange }) => {
+const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, editing, onChange }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [tagAnimationClass, setTagAnimationClass] = useState('');
   const [addingTag, setAddingTag] = useState(false);
   const [newTagName, setNewTagName] = useState('');
-
-  useEffect(() => {
-    if (tags.length) {
-      setTagAnimationClass('fade-enter');
-      setTimeout(() => setTagAnimationClass('fade-enter-active'), 420);
-    }
-  }, []);
 
   const handleTagClick = (tag: string) => {
     if (editing) {
@@ -69,7 +60,7 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly, editi
   }
 
   return (
-    <div ref={containerRef} className={`${styles.tags} ${tagAnimationClass}`}>
+    <div ref={containerRef} className={styles.tags} >
       {tags.map((tag, index) => (
         <Tag
           key={tag}
@@ -78,7 +69,7 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, viewOnly, editi
           selected={selected && selected.includes(tag)}
         />
       ))}
-      {editing &&( addingTag ? (
+      { editing && ( addingTag ? (
             <input
               className = { styles.tagInput }
               type = "text"

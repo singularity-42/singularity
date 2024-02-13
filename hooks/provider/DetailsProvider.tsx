@@ -1,16 +1,16 @@
 "use client"
 
 import Details from '@/components/layout/Details';
-import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 
 // Define the context interface
 interface DetailsContextInterface {
     name: string;
-    setName: Dispatch<SetStateAction<string>>;
+    setName: (name: string) => void;
     toggleVisibility: () => void;
     visible: boolean;
     editing: boolean;
-    setEditing: Dispatch<SetStateAction<boolean>>;
+    setEditing: (editing: boolean) => void;
 }
 
 // Create the context

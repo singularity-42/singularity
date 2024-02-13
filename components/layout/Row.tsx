@@ -22,7 +22,7 @@ const Row: React.FC<RowProps> = ({ isFolder = false, isSelected = false, data, o
       onFolderClick && onFolderClick(data.title);
     } else {
       toggleVisibility();
-      setName(data.entity.metadata.title);
+      setName(data.file.name);
     }
   };
 
@@ -37,12 +37,12 @@ const Row: React.FC<RowProps> = ({ isFolder = false, isSelected = false, data, o
       </div>
     );
   } else {
-    const { entity } = data;
-    const { title, tags } = entity.metadata;
-    const content = entity.content;
+    const { file } = data;
+    const { title, tags } = file.metadata;
+    const content = file.content;
 
     return (
-      <div className={styles.entityContainer} onClick={handleClick}>
+      <div className={styles.fileContainer} onClick={handleClick}>
         <div className={styles.socialMediaContainer}>
           <h2 className={styles.title}>
           {(() => {
@@ -66,12 +66,12 @@ const Row: React.FC<RowProps> = ({ isFolder = false, isSelected = false, data, o
           <Tags tags={tags} onTagClick={onTagClick} />
         </div>
 
-        {entity.metadata.original && (
+        {file.metadata.original && (
           <div className={styles.original}>
             ORIGINAL:{" "}
-            <Link name={entity.metadata.original.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}>
+            <Link name={file.metadata.original.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}>
               {" "}
-              {entity.metadata.original.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}{" "}
+              {file.metadata.original.replaceAll("[", "").replaceAll("]", "").replaceAll('"', "")}{" "}
             </Link>
           </div>
         )}

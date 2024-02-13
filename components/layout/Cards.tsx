@@ -3,16 +3,16 @@ import styles from "./Cards.module.scss";
 import Card from "./Card";
 
 interface CardsProps {
-  entities: any[];
+  files: any[];
   onTagClick?: (tag: string) => void;
 }
 
-const Cards: React.FC<CardsProps> = ({ entities, onTagClick }) => {
+const Cards: React.FC<CardsProps> = ({ files, onTagClick }) => {
   return (
     <div className={styles.cardGrid}>
-      {entities.map((entity: any, index: number) => (
+      {files.map((file: any, index: number) => (
         <div key={`card-${index}`} className={styles.cardWrapper}>
-          <Card data={entity} onTagClick={onTagClick} />
+          <Card file={file} onTagClick={onTagClick} />
         </div>
       ))}
     </div>

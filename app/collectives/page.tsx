@@ -4,7 +4,7 @@ import React from 'react';
 const CollectivePage: React.FC = () => {
   return (
     <div>
-      <CardsFiltered type='collectives' />
+      <CardsFiltered category='collectives' />
     </div>
   );
 };

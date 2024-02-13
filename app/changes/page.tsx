@@ -4,7 +4,7 @@ import CardsFiltered from "@/components/layout/CardsFiltered";
 const ChangePage: React.FC = () => {
   return (
     <div>
-      <CardsFiltered type="changes" />
+      <CardsFiltered category="changes" />
     </div>
   );
 };

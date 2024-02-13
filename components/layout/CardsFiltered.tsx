@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./CardsFiltered.module.scss";
-import useEntities from "@/hooks/useEntities";
+import useFiles from "@/hooks/useFiles";
 import Loading from "../base/Loading";
 import { useTooltip } from "@/hooks/provider/TooltipProvider";
 import { OrderType } from "@/types";
@@ -12,40 +12,40 @@ import { TYPE_DESCRIPTIONS } from "@/types";
 import Filter from "../base/Filter";
 
 interface CardsFilteredProps {
-  type: string;
+  category: string;
   orderType?: OrderType;
   maxColumns?: number;
 }
 
-const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ category, orderType = OrderType.CounterAlphabetical }) => {
   const { filter, setFilter } = useFilter();
-  const { entities } = useEntities(type, filter);
+  const { files } = useFiles(category, filter);
   const { setTooltip } = useTooltip();
 
   const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
 
   useEffect(() => {
-    setTooltip(`${type} - ${TYPE_DESCRIPTIONS[type]}`);
-  }, [type]);
+    setTooltip(`${category} - ${TYPE_DESCRIPTIONS[category]}`);
+  }, [category]);
 
   useEffect(() => {
-    let tags = entities?.map((entity) => entity.metadata.tags);
+    let tags = files?.map((file) => file.metadata.tags);
     // flatten tags
     tags = tags?.reduce((acc, val) => acc.concat(val), []);
     // remove empty tags
     setCurrentVisibleTags(tags ?? []);
-  }, [entities]);
+  }, [files]);
 
   useEffect(() => {
     switch (orderType) {
       case OrderType.Alphabetical:
-        entities?.sort((a, b) => a.metadata.title.localeCompare(b.metadata.title));
+        files?.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case OrderType.Random:
-        entities?.sort(() => Math.random() - 0.5);
+        files?.sort(() => Math.random() - 0.5);
         break;
       case OrderType.CounterAlphabetical:
-        entities?.sort((a, b) => b.metadata.title.localeCompare(a.metadata.title));
+        files?.sort((a, b) => b.name.localeCompare(a.name));
         break;
     }
   }, [orderType]);
@@ -60,7 +60,7 @@ const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ type, orderType = 
     }
   };
 
-  if (!entities) {
+  if (!files) {
     return <Loading />;
   }
 
@@ -70,16 +70,15 @@ const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ type, orderType = 
         className={styles.description}
       />
       <Filter currentVisibleTags={currentVisibleTags} />
-      {/* <List entities={entities} onTagClick={handleTagClick} selected={filter} /> */}
-      <Cards entities={entities} onTagClick={handleTagClick}/>
+      <Cards files={files} onTagClick={handleTagClick}/>
     </div>
   );
 };
 
-const CardsFiltered: React.FC<CardsFilteredProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
+const CardsFiltered: React.FC<CardsFilteredProps> = ({ category: type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
   return (
     <FilterProvider>
-      <CardsFilteredContent type={type} orderType={orderType} />
+      <CardsFilteredContent category={type} orderType={orderType} />
     </FilterProvider>
   );
 };

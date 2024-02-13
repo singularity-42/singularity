@@ -10,15 +10,15 @@ export const sendCantConfirmYourself = async (bot: TelegramBot, chatId: string):
     await bot.sendMessage(chatId, `${i18n.de.cantConfirmYourself}`);
 };
 
-export const sendFileNotFoundError = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
-    await bot.sendMessage(chatId, `${i18n.de.errorFileNotFound}${entityName}`);
+export const sendFileNotFoundError = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
+    await bot.sendMessage(chatId, `${i18n.de.errorFileNotFound}${fileName}`);
 };
 
-export const sendConfirmedError = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
-    await bot.sendMessage(chatId, `${i18n.de.errorConfirmed}${entityName}`);
+export const sendConfirmedError = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
+    await bot.sendMessage(chatId, `${i18n.de.errorConfirmed}${fileName}`);
 };
 
-export const sendEditMenu = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
+export const sendEditMenu = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
     const deleteButtonOptions = {
         reply_markup: JSON.stringify(
             {
@@ -34,7 +34,7 @@ export const sendEditMenu = async (bot: TelegramBot, chatId: string, entityName:
         ),
     };
 
-    await bot.sendMessage(chatId, `${i18n.de.editMenu} [${entityName}]\n${i18n.de.editMenuOptions}`, deleteButtonOptions);
+    await bot.sendMessage(chatId, `${i18n.de.editMenu} [${fileName}]\n${i18n.de.editMenuOptions}`, deleteButtonOptions);
 };
 
 export const isEditMenu = (text: string): boolean => {
@@ -55,11 +55,11 @@ export const sendChangeInformation = async (bot: TelegramBot, chatId: string, ch
         return;
     }
     for (let change of changes) {
-        await bot.sendMessage(chatId, `${i18n.de.changes}: ${change.type} ${change.key} ${change.value}`);
+        await bot.sendMessage(chatId, `${i18n.de.changes}: ${change.type} ${change.key} ${change.post}`);
     }
 };
 
-export const sendConfirmedQuestion = async (bot: TelegramBot, chatId: string, entityName: string, newContext: string): Promise<void> => {
+export const sendConfirmedQuestion = async (bot: TelegramBot, chatId: string, fileName: string, newContext: string): Promise<void> => {
     const options = {
         reply_markup: JSON.stringify(
             {
@@ -75,10 +75,10 @@ export const sendConfirmedQuestion = async (bot: TelegramBot, chatId: string, en
         ),
     };
 
-    await bot.sendMessage(chatId, `${i18n.de.sureWantToEdit}[${entityName}]?\n\n${newContext}`, options);
+    await bot.sendMessage(chatId, `${i18n.de.sureWantToEdit}[${fileName}]?\n\n${newContext}`, options);
 };
 
-export const sendCreateMenu = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
+export const sendCreateMenu = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
     const options = {
         reply_markup: JSON.stringify(
             {
@@ -106,7 +106,7 @@ export const sendCreateMenu = async (bot: TelegramBot, chatId: string, entityNam
         ),
     };
 
-    await bot.sendMessage(chatId, `${i18n.de.whatTypeOfEntity}[${entityName}]?`, options);
+    await bot.sendMessage(chatId, `${i18n.de.whatTypeOfEntity}[${fileName}]?`, options);
 };
 
 export const sendIsConfirmed = async (bot: TelegramBot, chatId: string, count: number, element: string): Promise<void> => {
@@ -121,16 +121,16 @@ export const sendTelegramId = async (bot: TelegramBot, chatId: string, telegramI
     await bot.sendMessage(chatId, `${i18n.de.yourId}${telegramId}`);
 };
 
-export const sendFileAlreadyExists = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
-    await bot.sendMessage(chatId, `${i18n.de.fileAlreadyExists}${entityName}`);
+export const sendFileAlreadyExists = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
+    await bot.sendMessage(chatId, `${i18n.de.fileAlreadyExists}${fileName}`);
 };
 
-export const sendFileCreated = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
-    await bot.sendMessage(chatId, `${i18n.de.fileCreated}${entityName}`);
+export const sendFileCreated = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
+    await bot.sendMessage(chatId, `${i18n.de.fileCreated}${fileName}`);
 };
 
-export const sendCantConfirmAMoreConfirmed = async (bot: TelegramBot, chatId: string, entityName: string, moreConfirmed: number, ownConfirmed: number): Promise<void> => {
-    await bot.sendMessage(chatId, `${i18n.de.cantConfirmAMoreConfirmed}${entityName} ${moreConfirmed} >= ${ownConfirmed}`);
+export const sendCantConfirmAMoreConfirmed = async (bot: TelegramBot, chatId: string, fileName: string, moreConfirmed: number, ownConfirmed: number): Promise<void> => {
+    await bot.sendMessage(chatId, `${i18n.de.cantConfirmAMoreConfirmed}${fileName} ${moreConfirmed} >= ${ownConfirmed}`);
 };
 
 export const sendHelp = async (bot: TelegramBot, message: TelegramBot.Message): Promise<void> => {
@@ -149,12 +149,12 @@ export const sendConfirmedFiles = async (bot: TelegramBot, chatId: string, files
     await bot.sendMessage(chatId, string);
 };
 
-export const sendDeleteConfirmation = async (bot: TelegramBot, chatId: string, entityName: string): Promise<void> => {
-    await bot.sendMessage(chatId, `${entityName}${i18n.de.hasBeenDeleted}`);
+export const sendDeleteConfirmation = async (bot: TelegramBot, chatId: string, fileName: string): Promise<void> => {
+    await bot.sendMessage(chatId, `${fileName}${i18n.de.hasBeenDeleted}`);
 };
 
-export const sendUpdate = async (bot: TelegramBot, chatId: string, entityName: string, changes: string ) => {
-  await bot.sendMessage(chatId, `${entityName}${i18n.de.hasBeenUpdated}${changes}`);
+export const sendUpdate = async (bot: TelegramBot, chatId: string, fileName: string, changes: string ) => {
+  await bot.sendMessage(chatId, `${fileName}${i18n.de.hasBeenUpdated}${changes}`);
 };
 
 const i18n = {
@@ -162,8 +162,8 @@ const i18n = {
       hasBeenUpdated: ' has been updated!',
       hasBeenDeleted: ' has been deleted.',
       delete: 'Delete',
-      help: 'Welcome to Singularity Bot! 😎\n\n/create [entity] [name] (date) - Create an entity like "creative," "concept," "collective," or "collaboration" (date only for collaborations).\n/confirm [telegramId] [name] - Confirm a user to edit an entity.\n/change [name] - Edit an entity.\n/check - Check your confirmed entities and get your Telegram ID.\n/contact [message] - Send a message to the Singularity group.',
-      whatTypeOfEntity: 'What type of entity is ',
+      help: 'Welcome to Singularity Bot! 😎\n\n/create [file] [name] (date) - Create an file like "creative," "concept," "collective," or "collaboration" (date only for collaborations).\n/confirm [telegramId] [name] - Confirm a user to edit an file.\n/change [name] - Edit an file.\n/check - Check your confirmed files and get your Telegram ID.\n/contact [message] - Send a message to the Singularity group.',
+      whatTypeOfEntity: 'What type of file is ',
       changes: 'Changes:',
       noChanges: 'No changes made!',
       noFiles: 'No files found.',
@@ -188,7 +188,7 @@ const i18n = {
       cantConfirmYourself: "Sorry, you can't confirm yourself.",
 
       youNeedAtLeast: 'You need at least ',
-      confirmedToConfirm: ' confirmed entities to confirm another user.',
+      confirmedToConfirm: ' confirmed files to confirm another user.',
       hasBeenConfirmed: ' has been confirmed for ',
       hasBeenUnconfirmed: ' has been unconfirmed for ',
       yourId: 'Your Telegram ID is ',
@@ -199,7 +199,7 @@ const i18n = {
       hasBeenUpdated: ' wurde aktualisiert!',
       hasBeenDeleted: ' wurde gelöscht.',
       delete: 'Löschen',
-      help: 'Willkommen beim Singularity Bot! 😎\n\n/create [entity] [name] (date) - Erstelle eine Entität wie "creative," "concept," "collective," oder "collaboration" (date nur für collaborations).\n/confirm [telegramId] [name] - Bestätige einen Benutzer, um eine Entität zu bearbeiten.\n/change [name] - Bearbeite eine Entität.\n/check - Überprüfe deine bestätigten Entitäten und erhalte deine Telegramm-ID.\n/contact [message] - Sende eine Nachricht an die Singularity-Gruppe.',
+      help: 'Willkommen beim Singularity Bot! 😎\n\n/create [file] [name] (date) - Erstelle eine Entität wie "creative," "concept," "collective," oder "collaboration" (date nur für collaborations).\n/confirm [telegramId] [name] - Bestätige einen Benutzer, um eine Entität zu bearbeiten.\n/change [name] - Bearbeite eine Entität.\n/check - Überprüfe deine bestätigten Entitäten und erhalte deine Telegramm-ID.\n/contact [message] - Sende eine Nachricht an die Singularity-Gruppe.',
       alias: '\nAlias: \n /create creative = /crea \n /create concept = /con \n /create collective = /cole \n /create collaboration = /cola',
       whatTypeOfEntity: 'Was für eine Art von Entität ist ',
       changes: 'Änderungen:',

@@ -7,7 +7,7 @@ Der Telegram Bot (@SingularityCommunicationBot) ist die aktuelle Schnittstelle, 
 ### Befehle
 #### /check
 Überprüft ob du Berechtigungen hast um Änderungen an der Website vorzunehmen und gibt deine Telegram ID zurück.
-#### /create [entity] [name] (date)
+#### /create [file] [name] (date)
 Erstellt eine Entität, entweder "creative", "concept", "collective" oder "collaboration" (date ist nur für collaborations im Format DD.MM.YYYY)
 #### /confirm [telegramId] [name]
 Bestätigt einen Benutzer, um eine Entität zu bearbeiten

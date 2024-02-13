@@ -131,7 +131,7 @@
   }
 }
 
-.entityContainer {
+.fileContainer {
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));
   border-radius: 0.42rem;
@@ -168,7 +168,7 @@
   font-family: var(--font-family);
 }
 
-.entityMarkdown {
+.fileMarkdown {
   padding: 1rem;
   transition: color 0.2s ease-in-out;
 
@@ -290,7 +290,7 @@
     grid-template-columns: 1fr;
   }
 
-  .entityContainer {
+  .fileContainer {
     border: none;
   }
 

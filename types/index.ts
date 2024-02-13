@@ -6,16 +6,6 @@ export enum OrderType {
     CounterAlphabetical = "CounterAlphabetical"
 }
 
-export interface Entity {
-    title?: string;
-    tags?: string[];
-    folder?: string;
-    address?: string;
-    location?: string;
-    description?: string;
-    content?: string;
-}
-
 export interface Relation {
     title: string;
     nodes: Node[];
@@ -41,9 +31,12 @@ export interface Metadata {
 }
 
 export interface FileContent {
+  name: string;
   metadata: Metadata;
   markdown: string;
-  content: string;
+  category: string | null;
+  path: string | null;
+  date: string | null;
 }
 
 export interface LoadResult extends FileContent {
@@ -55,42 +48,6 @@ export interface SaveFile extends FileContent {}
 export interface Change {
   type: string;
   key: string;
-  value: string;
-}
-
-// Results
-
-
-export interface DeepSearchResult {
-  count: number;
-}
-
-export interface DeepListResult {
-  values: string[];
-}
-
-export interface DeepListFilesResult {
-  result: string[];
-}
-
-export interface ExtractResult extends FileContent {}
-
-export interface InexactResult {
-  inexactContent: string;
-}
-
-export interface GetFilesResult {
-  files: string[];
-}
-
-export interface DeleteResult {
-  deleted: boolean;
-}
-
-export interface GetPathResult {
-  path: string | false;
-}
-
-export interface DeepListFilesResult {
-  result: string[];
+  post: string;
+  past: string;
 }

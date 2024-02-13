@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import styles from "./Details.module.scss";
 import Markdown from "./Markdown";
 import Tags from "./Tags";
-import useEntity from "@/hooks/useEntity";
+import useFile from "@/hooks/useFile";
 import Socials from "./Socials";
 import Graph from "./Graph";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
@@ -15,22 +15,19 @@ import EmbedTrackSoundcloud from "../base/EmbedTrackSoundcloud";
 import EmbedPostInstagram from "../base/EmbedPostInstagram";
 import Loading from "../base/Loading";
 import { useAuth } from "@/hooks/useAuth";
+import { FileContent } from "@/types";
 
-interface EntityProps { }
+interface DetailsProps { }
 
-const Details: React.FC<EntityProps> = () => {
-  const { name, setName, visible, toggleVisibility, goBack, editing, setEditing } = useDetails();
+const Details: React.FC<DetailsProps> = () => {
+  const { name, setName, visible, toggleVisibility, editing, setEditing } = useDetails();
   const { relations } = useRelation(name);
-  const { entity, loading, error, update } = useEntity(name);
-  const { isAuthenticated, authName, toggleOverlay, overlayVisible } = useAuth();
+  const { file, loading, error, update, save} = useFile(name);
 
   const handleEdit = useCallback(() => {
     if (editing) {
-      if(isAuthenticated && authName === name)
-        setEditing(false);
-      else if (!overlayVisible)
-        toggleOverlay();
-
+      save();
+      setEditing(false);
     }
     else setEditing(true);
   }, [editing]);
@@ -41,32 +38,42 @@ const Details: React.FC<EntityProps> = () => {
     if (visible) toggleVisibility();
   }, [visible, toggleVisibility]);
 
-  const handleBack = useCallback(() => {
-    const lastLink = goBack();
-    if (lastLink) {
-      setName(lastLink);
-    }
-  }, [goBack, setName]);
-
   const handleShare = useCallback(() => {
-    if (navigator.share) {
+    if (navigator.share && file) {
       navigator.share({
-        title: entity.title,
-        text: entity.description,
+        title: file.name,
+        text: file.markdown,
         url: window.location.href
       }).then(() => {
         console.log('Thanks for sharing!');
       })
         .catch(console.error);
     }
-  }, [entity]);
+  }, [file]);
 
-  useEffect(() => {
-    if (name) {
-      if (!visible) toggleVisibility();
-    }
-  }, [name, visible, toggleVisibility]);
 
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      // update({ ...file, name: e.target.value });
+      let newName = e.target.value;
+      let newFile = { ...file, name: newName } as FileContent;
+      update(newFile);
+    };
+
+    const handleTagsChange = (tags: string[]) => {
+      let newFile = { ...file, metadata: { ...file?.metadata, tags } } as FileContent;
+      update(newFile);
+    };
+
+    const handleMarkdownChange = (markdown: string) => {
+      let newFile = { ...file, markdown } as FileContent;
+      update(newFile);
+    };
+
+    const handleSocialsChange = (metadata: any) => {
+      let newFile = { ...file, metadata } as FileContent;
+      update(newFile);
+    };
+    
   useEffect(() => {
     const hash = window.location.hash;
     let decodedUrlHash = decodeURIComponent(hash).replace("#", "");
@@ -75,12 +82,12 @@ const Details: React.FC<EntityProps> = () => {
 
   useEffect(() => {
     if (loading) return;
-    if (!entity?.title && !entity?.content && visible) {
+    if (!file?.name && visible) {
       setName("")
       toggleVisibility()
     }
 
-  }, [entity, visible, loading]);
+  }, [file, visible, loading]);
 
   useEffect(() => {
     if (name) {
@@ -107,22 +114,22 @@ const Details: React.FC<EntityProps> = () => {
             <div className={styles.detailsContainer}>
               {
                 editing ? 
-                <input className={styles.titleInput} type="text" value={entity.title} onChange={(e) => update({ ...entity, title: e.target.value })} /> 
-                : <h2 className={styles.title}>{(entity.title || '').split(/\\|\//).pop()}</h2>
+                <input className={styles.titleInput} type="text" value={file?.name} onChange={handleTitleChange} />
+                : <h2 className={styles.title}>{(file?.name || '').split(/\\|\//).pop()}</h2>
               }
-              <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
+              <h4 className={styles.subtitle}>{file?.category || ''}</h4>
             </div>
             <div className={styles.socialMediaContainer}>
-              <Socials metadata={entity} editing={editing} onChange={(metadata: any) => update({ ...entity, ...metadata })} />
+              <Socials metadata={file?.metadata} editing={editing} onChange={handleSocialsChange} />
             </div>
             <div className={styles.tagsContainer}>
-              <Tags tags={entity.tags || []} viewOnly={true} editing={editing} onChange={(tags: string[]) => update({ ...entity, tags })} />
+              <Tags tags={(file?.metadata.tags as string[]) || []} editing={editing} onChange={handleTagsChange} />
             </div>
-            {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} editing={editing} onChange={(content: string) => update({ ...entity, description: content })} />}
+            {file?.markdown && file?.markdown.length > 4.2 && <Markdown content={file.markdown} active={true} editing={editing} onChange={handleMarkdownChange} />}
 
-            {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack} />}
-            {entity && (entity as any).soundcloudtrack && <EmbedTrackSoundcloud track={(entity as any).soundcloudtrack} />}
-            {entity && (entity as any).instagrampost && <EmbedPostInstagram post={(entity as any).instagrampost} />}
+            {file && (file as any).spotifytrack && <EmbedTrackSpotify track={(file as any).spotifytrack} />}
+            {file && (file as any).soundcloudtrack && <EmbedTrackSoundcloud track={(file as any).soundcloudtrack} />}
+            {file && (file as any).instagrampost && <EmbedPostInstagram post={(file as any).instagrampost} />}
           </>) : <Loading />}
         </div>
         {!loading && <div className={styles.graphContainer}>

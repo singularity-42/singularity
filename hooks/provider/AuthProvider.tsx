@@ -6,8 +6,8 @@ import React, { createContext, useState, Dispatch, SetStateAction, useEffect, us
 
 // Define the context interface
 interface AuthContextInterface {
-  addCredentials: (entityName: string) => void;
-  removeCredentials: (entityName: string) => void;
+  addCredentials: (fileName: string) => void;
+  removeCredentials: (fileName: string) => void;
   toggleOverlay: () => void;
   checkFormat: (str: string) => boolean;
   visible: boolean;

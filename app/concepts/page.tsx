@@ -3,7 +3,7 @@ import React from 'react';
 
 const ConceptPage: React.FC = () => {
   return (
-      <CardsFiltered type='concepts' />
+      <CardsFiltered category='concepts' />
   );
 };
 

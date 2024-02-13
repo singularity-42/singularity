@@ -4,7 +4,7 @@ import CardsFiltered from '@/components/layout/CardsFiltered';
 
 const CreativesPage: React.FC = () => {
   return (
-      <CardsFiltered type='creatives' />
+      <CardsFiltered category='creatives' />
   );
 };
 
