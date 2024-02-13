@@ -6,10 +6,10 @@ export enum OrderType {
     CounterAlphabetical = "CounterAlphabetical"
 }
 
-export interface Relation {
-    title: string;
-    nodes: Node[];
-    edges: Edge[];
+export interface Connection {
+  title: string;
+  nodes: Node[];
+  edges: Edge[];
 }
 
 export interface I18nMessages {

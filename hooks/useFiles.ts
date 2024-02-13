@@ -40,14 +40,15 @@ const useFiles = (category: string, filter: string[] = [], name?: string): UseFi
 
         const response = await axios.get(url);
         let _files = response.data;
+
         _files.map((file: any, index: number) => {
           file.index = index;
           return file;
         });
-        // filter by name
-        if (name && name.length > 0) {
-          _files = _files.filter((file: any) => file.name.toLowerCase().includes(name.toLowerCase()));
-        }
+        // // filter by name
+        // if (name && name.length > 0) {
+        //   _files = _files.filter((file: any) => file.name.toLowerCase().includes(name.toLowerCase()));
+        // }
         setFiles(_files);
       } catch (error) {
         setError('Error fetching files');

@@ -9,6 +9,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     let fileName = req.nextUrl.searchParams.get('name') || '';
 
     if (fileName) fileName = decodeURIComponent(fileName) || '';
+    
     let file: FileContent = loadFile(fileName);
 
     return new Response(JSON.stringify(file), {

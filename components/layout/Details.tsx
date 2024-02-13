@@ -8,7 +8,7 @@ import useFile from "@/hooks/useFile";
 import Socials from "./Socials";
 import Graph from "./Graph";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
-import useRelation from "@/hooks/useRelations";
+import useConnection from "@/hooks/useConnection";
 import { MdClose, MdEdit, MdSave, MdShare } from "react-icons/md";
 import EmbedTrackSpotify from "../base/EmbedTrackSpotify";
 import EmbedTrackSoundcloud from "../base/EmbedTrackSoundcloud";
@@ -21,7 +21,7 @@ interface DetailsProps { }
 
 const Details: React.FC<DetailsProps> = () => {
   const { name, setName, visible, toggleVisibility, editing, setEditing } = useDetails();
-  const { relations } = useRelation(name);
+  const { connection: relations } = useConnection(name);
   const { file, loading, error, update, save} = useFile(name);
 
   const handleEdit = useCallback(() => {
@@ -45,7 +45,6 @@ const Details: React.FC<DetailsProps> = () => {
         text: file.markdown,
         url: window.location.href
       }).then(() => {
-        console.log('Thanks for sharing!');
       })
         .catch(console.error);
     }
@@ -73,29 +72,35 @@ const Details: React.FC<DetailsProps> = () => {
       let newFile = { ...file, metadata } as FileContent;
       update(newFile);
     };
-    
-  useEffect(() => {
-    const hash = window.location.hash;
-    let decodedUrlHash = decodeURIComponent(hash).replace("#", "");
-    setName(decodedUrlHash);
-  }, []);
 
-  useEffect(() => {
-    if (loading) return;
-    if (!file?.name && visible) {
-      setName("")
-      toggleVisibility()
-    }
-
-  }, [file, visible, loading]);
-
-  useEffect(() => {
-    if (name) {
-      const encodedUrlHash = encodeURIComponent(name);
-      window.location.hash = encodedUrlHash;
-    }
-  }, [name]);
-
+    useEffect(() => {
+      if (name) {
+        if (!visible) toggleVisibility();
+      }
+    }, [name, visible, toggleVisibility]);
+  
+    useEffect(() => {
+      const hash = window.location.hash;
+      let decodedUrlHash = decodeURIComponent(hash).replace("#", "");
+      setName(decodedUrlHash);
+    }, []);
+  
+    useEffect(() => {
+      if (loading) return;
+      if (!file?.name && visible) {
+        setName("")
+        toggleVisibility()
+      }
+  
+    }, [file, visible, loading]);
+  
+    useEffect(() => {
+      if (name) {
+        const encodedUrlHash = encodeURIComponent(name);
+        window.location.hash = encodedUrlHash;
+      }
+    }, [name]);
+  
   return (
     <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
       <button className={styles.closeButtonContainer} onClick={handleExit}>

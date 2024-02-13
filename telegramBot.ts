@@ -13,8 +13,6 @@ if (!botToken) {
 
 const bot = new TelegramBot(botToken, { polling: true });
 
-console.log('Bot is running...');
-
 bot.onText(/^\/create\s+(creative|collection|concept|collaboration)\s+(.+)$/, async (msg, match) => onCreate(bot, msg));
 bot.onText(/^\/create\s+(collaboration)\s+(.+)\s+(.+)$/, async (msg, match) => onCreate(bot, msg));
 bot.onText(/^\/confirm\s+(\d+)\s+(.+)$/, async (msg, match) => onConfirm(bot, msg));

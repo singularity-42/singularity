@@ -2,31 +2,42 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as glob from "glob";
-import { deserializeMetadata, checkMetadataKeyValue, serializeMetadata, extractMetadataMarkdown, inexactMetadataMarkdown } from "./metadata";
 import {
-  Metadata,
-  FileContent,
-  LoadResult,
-  SaveFile,
-  Change,
-} from "@/types";
+  deserializeMetadata,
+  checkMetadataKeyValue,
+  serializeMetadata,
+  extractMetadataMarkdown,
+  inexactMetadataMarkdown,
+  editMetadataKeyValue,
+} from "./metadata";
+import { Metadata, FileContent, LoadResult, SaveFile, Change } from "@/types";
 
 const loadFile = (name: string): LoadResult => {
   const files = getFiles(name);
   if (files.length > 0) {
     let file_path = files[0];
-    let content = fs.readFileSync(file_path).toString();
+    let content = '';
+    try {
+      content = fs.readFileSync(file_path).toString();
+    }catch {
+      console.error("file not found");
+    }
     let { metadata, markdown } = extractMetadataMarkdown(content);
     let { category, date, name } = getCategoryDateName(file_path);
-    return { metadata, markdown, content, name, category, path: file_path, date};
+    return { metadata, markdown, content, name, category, path: file_path, date };
   } else {
-    return { metadata: {}, markdown: "", content: "", name, category: "", path: null, date: null};
+    return { metadata: {}, markdown: "", content: "", name, category: "", path: null, date: null };
   }
 };
 
 // just list paths
 // const loadFiles
-const loadFiles = (category: string, filter: string[] = [], date: string | null = null, limit: number = 0): FileContent[] => {
+const loadFiles = (
+  category: string | null = null, // null for all categories
+  filter: string[] = [],
+  date: string | null = null,
+  limit: number = 0
+): FileContent[] => {
   let files = getFiles();
   if (date) {
     files = files.filter((file) => file.includes(getFileDatePath(date)));
@@ -34,49 +45,46 @@ const loadFiles = (category: string, filter: string[] = [], date: string | null 
   if (category) {
     files = files.filter((file) => file.includes(category));
   }
+
   if (limit > 0) {
     files = files.slice(0, limit);
   }
   let file_contents: FileContent[] = [];
-  
-  files.forEach((file_path, index) => {
+
+  let hasAllFilterTags = (metadata: Metadata, filters: string[]) => {
+    return filters.every((filter) => metadata[filter]);
+  };
+
+  files.forEach((file_path) => {
     let content = fs.readFileSync(file_path).toString();
-    let { category, name, date } = getCategoryDateName(file_path);
     let { metadata, markdown } = extractMetadataMarkdown(content);
-    let file_content: FileContent = { metadata, markdown, name, category, path: file_path, date};
-    if (filter.length > 0){
-      let isInFilter = true;
-      filter.forEach((key) => {
-        if (!metadata.tags.includes(key)) {
-          isInFilter = false;
-        }
-      });
-      if (!isInFilter) {
-        return;
-      }
-    }
-
-      file_contents.push(file_content);
+    let { category, name, date } = getCategoryDateName(file_path);
+    let file_content: FileContent = { metadata, markdown, name, category, path: file_path, date };
+    if (!hasAllFilterTags(metadata, filter) && filter.length !== 0) return;
+    file_contents.push(file_content);
   });
-
+  
   return file_contents;
-}
+};
 
-const getCategoryDateName = (file_path: string): { category: string, date: string, name: string} => {
-    let local_path = file_path.replace(getDocsDir(), "");
+const getCategoryDateName = (file_path: string): { category: string; date: string; name: string } => {
+  let localPath = file_path.replace(getDocsDir(), "");
 
+  let result = {
+    category: localPath.split(/(?:\/|\\)([^\/\\]+)/)[1],
+    date: localPath
+      .split(/(?:\/|\\)(\d+)(?:\/|\\)(\d+)(?:\/|\\)(\d+)/)
+      .filter((value) => {
+        return !isNaN(Number(value));
+      })
+      .filter((v: string) => v.length > 0)
+      .reverse()
+      .join("-"),
+      name: localPath.split(/(?:\/|\\)([^\/\\]+)\.md$/)[1],
+  };
 
-    let result = {
-      category: local_path.split("/")[1],
-      // filter out every not number
-      date: local_path.split("/").filter( (value) => { 
-        return !isNaN(Number(value))
-      }).filter((v: string) => v.length > 0).reverse().join("-"),
-      name: local_path.split("/").slice(-1)[0].replace(".md", ""),
-    };
-
-    return result;
-}
+  return result;
+};
 
 const getChanges = (oldFile: FileContent, newFile: FileContent): Change[] => {
   const changes: Change[] = [];
@@ -95,20 +103,18 @@ const getChanges = (oldFile: FileContent, newFile: FileContent): Change[] => {
     }
   };
 
-  const compareLines = (line: string, index: number) => {
-    const post = ((newFile.markdown || '').split("\n")[index] || "").toString();
-    const past = ((oldFile.markdown || '').split("\n")[index] || "").toString();
-
+  const compareLines = (post: string, past: string, type: string, key: string) => {
     if (post !== past) {
       changes.push({
-        type: "markdown",
-        key: `line_${index + 1}`,
+        type,
+        key,
         post,
         past,
       });
     }
   };
 
+  // Compare metadata
   Object.keys(newFile.metadata).forEach(compareMetadata);
   Object.keys(oldFile.metadata).forEach((key) => {
     if (newFile.metadata[key] === undefined) {
@@ -116,21 +122,25 @@ const getChanges = (oldFile: FileContent, newFile: FileContent): Change[] => {
     }
   });
 
-  (newFile.markdown || '').split("\n").forEach(compareLines);
-  (oldFile.markdown || '').split("\n").forEach((line, index) => {
-    if (!(newFile.markdown || '').split("\n").includes(line)) {
-      compareLines(line, index);
-    }
-  });
+  // Compare markdown lines
+  const newLines = (newFile.markdown || "").split(/\r?\n|\r/);
+  const oldLines = (oldFile.markdown || "").split(/\r?\n|\r/);
+  const maxLines = Math.max(newLines.length, oldLines.length);
+
+  for (let index = 0; index < maxLines; index++) {
+    const post = newLines[index] || "";
+    const past = oldLines[index] || "";
+
+    compareLines(post, past, "markdown", `line_${index + 1}`);
+  }
 
   return changes;
 };
-
-
-const saveFile = (name: string, file: SaveFile, date: string | null = null, category: string | null = null): void => {
-  let file_path = getFilePath(name, date, category);
+const saveFile = (file: FileContent): void => {
+  let file_path = file.path ? file.path : getFilePath(file.name, file.date, file.category);
+  
   if (file_path) {
-    let folder_path = file_path.split("/").slice(0, -1).join("/");
+    let folder_path = file_path.split(/[\/\\]/).slice(0, -1).join("/");
     if (!fs.existsSync(folder_path)) {
       fs.mkdirSync(folder_path, { recursive: true });
     }
@@ -140,7 +150,7 @@ const saveFile = (name: string, file: SaveFile, date: string | null = null, cate
       return;
     }
 
-    let content = inexactMetadataMarkdown(file.metadata, file.markdown).inexactContent;
+    let content = inexactMetadataMarkdown(file.metadata, file.markdown);
     fs.writeFileSync(file_path, content);
   }
 };
@@ -168,18 +178,23 @@ const getFilePath = (name: string, date: string | null = null, category: string 
 };
 
 const getDocsDir = (): string => {
-  if (__dirname.includes('.next')) return  path.join(__dirname, "..", "..", "..", "..", "..", "docs").toString();
+  if (__dirname.includes(".next")) return path.join(__dirname, "..", "..", "..", "..", "..", "docs").toString();
   return path.join(__dirname, "..", "docs").toString();
-}
-
-const getFiles = (name: string = "*"): string[] => {
-  let file_path = path.join(getDocsDir(), "**", `${name}`);
-  file_path = file_path.endsWith(".md") ? file_path : file_path + ".md";
-  let files = glob.sync(file_path, { nocase: true });
-  return files.length < 0 ? [file_path.replace("**/", "")] : files;
 };
 
-const deepSearchFiles = (key: string, value: string): number  => {
+const getFiles = (name: string = "**"): string[] => {
+  let filePath = path.join(getDocsDir(), '**', `${name}.md`);
+  // normalize path for windows or linux
+  filePath = filePath.replace(/\\/g, "/");
+  filePath = filePath.replace(/\/\//g, "");
+  let files = glob.sync(filePath, {
+    nocase: true,
+  });
+
+  return files.length > 0 ? files : [filePath.replace("**/", "")];
+};
+
+const deepSearchFiles = (key: string, value: string): number => {
   let count = 0;
   for (let file of getFiles()) {
     let content = fs.readFileSync(file).toString();
@@ -239,10 +254,32 @@ const deleteFile = (name: string): boolean => {
   }
 };
 
-// const editFile 
+const generateChangesFile = (file: FileContent, name: string): FileContent => {
+  let changeFileContent = file;
+  changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'cancel', '0');
+  changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'confirmed', '0');
+  let date_time_today = new Date().toISOString().split("T")[0]; // as YYYY-MM-DD-HH-MM-SS 
+  changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'changed', date_time_today);
+  changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'original', name);  
+  let oldCategory = changeFileContent.category || '';
+  changeFileContent.category = 'changes';
+  changeFileContent.path = (changeFileContent.path || '').replace(oldCategory, changeFileContent.category);
+  console.log(changeFileContent.path);
+  return changeFileContent;
+}
 
 export {
-  deepListAllFiles, deepListFiles, loadFiles,
-  loadFile, saveFile, deleteFile, getChanges,
-  getFilePath, getFiles, extractMetadataMarkdown, inexactMetadataMarkdown, deepSearchFiles
+  generateChangesFile,
+  deepListAllFiles,
+  deepListFiles,
+  loadFiles,
+  loadFile,
+  saveFile,
+  deleteFile,
+  getChanges,
+  getFilePath,
+  getFiles,
+  extractMetadataMarkdown,
+  inexactMetadataMarkdown,
+  deepSearchFiles,
 };

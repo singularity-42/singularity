@@ -1,5 +1,5 @@
 // metadata.ts
-import { ExtractResult, InexactResult, Metadata } from "@/types";
+import { Metadata } from "@/types";
 
 const displayMetadata = (metadata: Metadata): string => {
   let metadataString = '';
@@ -96,7 +96,11 @@ const updateMetadataKeyValue = (metadata: Metadata, key: string, value: string):
   return metadata;
 };
 
-const extractMetadataMarkdown = (content: string): ExtractResult => {
+const extractMetadataMarkdown = (content: string): {
+  metadata: Metadata;
+  markdown: string;
+  content: string;
+} => {
   let sections = content.split("---");
   if (sections.length < 3) return { metadata: {}, markdown: "", content };
 
@@ -108,8 +112,8 @@ const extractMetadataMarkdown = (content: string): ExtractResult => {
   return { metadata, markdown, content };
 };
 
-const inexactMetadataMarkdown = (metadata: Metadata, markdown: string): InexactResult => {
-  return { inexactContent: `---\n${serializeMetadata(metadata)}---${markdown}` };
+const inexactMetadataMarkdown = (metadata: Metadata, markdown: string): string => {
+  return `---\n${serializeMetadata(metadata)}---${markdown}` ;
 };
 
 export { inexactMetadataMarkdown, extractMetadataMarkdown, displayMetadata, editMetadataKeyValue, checkMetadataKeyValue, removeMetadataKeyValue, updateMetadataKeyValue, serializeMetadata, deserializeMetadata };
