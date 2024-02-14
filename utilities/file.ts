@@ -242,7 +242,7 @@ export const getFilePath = (name: string, date: string | null = null, category: 
 };
 
 export const getDocsDir = (): string => {
-  if (__dirname.includes("chucks"))return path.join(__dirname, "..", "..", "..", "docs").toString();
+  if (__dirname.includes("server") && !__dirname.includes("app"))return path.join(__dirname, "..", "..", "..", "docs").toString();
   else if (__dirname.includes("app")) return path.join(__dirname, "..", "..", "..", "..", "..", "docs").toString();
   return path.join(__dirname, "..", "docs").toString();
 };
