@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Loading.module.scss';
 
 interface LoadingProps {
-  loading: boolean;
+  loading?: boolean;
 }
 
 const Loading: React.FC<LoadingProps> = ({ loading = true }) => {
