@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-// add cdninstagram.com add allowd for images
     images: {
         domains: ['cdninstagram.com', 'singularity.2n40.eu'],
     },  
-
 }
+
+if (process.env.NODE_ENV !== 'production') nextConfig.images.domains.push('localhost')
 
 module.exports = nextConfig

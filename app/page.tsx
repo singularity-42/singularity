@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 export default function Home() {
   return (
-    <Calendar type="collaborations" orderType={OrderType.CounterAlphabetical} />
+    <Calendar category="collaborations" orderType={OrderType.CounterAlphabetical} />
     
   );
 }

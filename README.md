@@ -1,5 +1,7 @@
 # Singularity Technical Documentation
 
+> Singularity © 2022 by Drumnicorn is licensed under CC BY 4.0 
+
 ## Overview:
 
 Singularity is a decentralized community focused on Collaborations, Concepts, Collectives, and Creatives (4C). All documentation is stored as Markdown files, managed in Obsidian, and editable under the /docs branch in this Git repository. Visualizations and organizational structures are dynamic and interconnected in an Obsidian graph-like manner.
@@ -41,3 +43,4 @@ Singularity Team
 Email: 42@drumni.com (temporary)
 
 We appreciate your interest and look forward to shaping the 4C experience together!
+

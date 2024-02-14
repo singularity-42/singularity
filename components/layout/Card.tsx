@@ -12,59 +12,34 @@ import Socials from "../layout/Socials";
 import Image from "next/legacy/image";
 
 interface CardProps {
-  data: any; // Replace 'any' with the actual type for your data
+  file: any; // Replace 'any' with the actual type for your data
   onTagClick?: (tag: string) => void;
-  isFolder?: boolean;
-  isSelected?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelected = false }) => {
-  const { folder, content } = data || {};
-  const { title, tags, location } = data.metadata || {};
+const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
+  const { name, metadata, category, markdown } = file || {};
+  const { tags, location } = metadata || {};
 
-  const { imgSrc } = useImageWithFallback(title);
+  // const { imgSrc } = useImageWithFallback(name);
   const { setName, toggleVisibility } = useDetails();
   const [isScrolling, setScrolling] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const handleClick = useCallback(() => {
     toggleVisibility();
-    setName(title);
-  }, [setName, toggleVisibility, title]);
+    setName(name);
+  }, [setName, toggleVisibility, name]);
 
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     setScrolling(!isScrolling);
   };
 
-  const renderFolderContent = () => (
-    <div className={`${styles.card} ${isSelected ? styles.selected : ""}`}>
-      <div className={styles.content} onClick={() => onTagClick && onTagClick(folder.metadata.title)}>
-        <div className={styles.title}>{folder.metadata.title.split(/\\|\//).pop().toUpperCase()}</div>
-        <div className={styles.icon}>
-          <MdFolderOpen />
-        </div>
-      </div>
-    </div>
-  );
-
-
   const renderCardContent = () => (
     <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
-      <div className={`${styles.imageContainer} ${loaded ? styles.loaded : ""}`}>
-        {imgSrc && <Image
-          src={imgSrc}
-          alt={title}
-          layout='fill'
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          objectFit='cover'
-          quality={100}
-          onLoadingComplete={() => setLoaded(true)}
-        />}
-      </div>
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2 className={styles.title}>{name}</h2>
         </div>
         {location && location.match(/[a-zA-Z]/) && (
           <div className={styles.location}>
@@ -76,21 +51,21 @@ const Card: React.FC<CardProps> = ({ data, onTagClick, isFolder = false, isSelec
             <Tags tags={tags} onTagClick={onTagClick} />
           </div>
         )}
-        {content && (
+        {markdown && (
           <div className={`${styles.description} ${isScrolling ? styles.scrollable : ""}`}>
-            <Markdown content={data.content} active={isScrolling} />
+            <Markdown content={markdown} active={isScrolling} />
           </div>
         )}
-        {data.metadata && (
+        {file.metadata && (
           <div className={styles.socialMediaContainer}>
-            <Socials metadata={data.metadata} />
+            <Socials metadata={file.metadata} />
           </div>
         )}
       </div>
     </div>
   );
 
-  return isFolder ? renderFolderContent() : renderCardContent();
+  return renderCardContent();
 };
 
 export default Card;

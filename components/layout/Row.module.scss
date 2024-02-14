@@ -23,7 +23,7 @@
 }
 
 // Entity.module.scss
-.entityContainer {
+.fileContainer {
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));
   width: 100%;
@@ -40,11 +40,11 @@
   width: 50vw;
 }
 
-.entityContainer:hover {
+.fileContainer:hover {
   border: 1px solid rgb(var(--light-rgb));
 }
 
-.entityMarkdown {
+.fileMarkdown {
   
   padding: 1rem;
   transition: color 0.2s ease-in-out;

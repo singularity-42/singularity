@@ -4,55 +4,85 @@ import React, { useEffect, useState, useCallback } from "react";
 import styles from "./Details.module.scss";
 import Markdown from "./Markdown";
 import Tags from "./Tags";
-import EmbedMapOpenStreet from "../base/EmbedMapOpenStreet";
-import useEntity from "@/hooks/useEntity";
+import useFile from "@/hooks/useFile";
 import Socials from "./Socials";
 import Graph from "./Graph";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
-import useRelation from "@/hooks/useRelations";
-import { MdClose, MdShare, MdUndo } from "react-icons/md";
+import useConnection from "@/hooks/useConnection";
+import { MdClose, MdEdit, MdLink, MdSave, MdShare } from "react-icons/md";
 import EmbedTrackSpotify from "../base/EmbedTrackSpotify";
 import EmbedTrackSoundcloud from "../base/EmbedTrackSoundcloud";
 import EmbedPostInstagram from "../base/EmbedPostInstagram";
 import Loading from "../base/Loading";
+import { useAuth } from "@/hooks/useAuth";
+import { FileContent } from "@/types";
 
-interface EntityProps { }
+interface DetailsProps { }
 
-const Details: React.FC<EntityProps> = () => {
-  const { name, setName, visible, toggleVisibility, goBack } = useDetails();
-  const { relations } = useRelation(name);
-  const { entity, loading, error } = useEntity(name);
+const Details: React.FC<DetailsProps> = () => {
+  const { name, setName, visible, toggleVisibility, editing, setEditing } = useDetails();
+  const { connection } = useConnection(name);
+  const { file, loading, error, update, save } = useFile(name);
+  const [graphVisible, setGraphVisible] = useState(false);
+
+  const handleToggleGraph = () => {
+    setGraphVisible(!graphVisible);
+  };
+
+  const handleEdit = () => {
+    if (editing) {
+      save();
+      setEditing(false);
+    }
+    else setEditing(true);
+  };
 
   const handleExit = useCallback(() => {
     setName("");
+    setEditing(false);
     if (visible) toggleVisibility();
   }, [visible, toggleVisibility]);
 
-  const handleBack = useCallback(() => {
-    const lastLink = goBack();
-    if (lastLink) {
-      setName(lastLink);
-    }
-  }, [goBack, setName]);
-
-  const hanleShare = useCallback(() => {
-    if (navigator.share) {
+  const handleShare = useCallback(() => {
+    if (navigator.share && file) {
       navigator.share({
-        title: entity.title,
-        text: entity.description,
+        title: file.name,
+        text: file.markdown,
         url: window.location.href
       }).then(() => {
-        console.log('Thanks for sharing!');
       })
         .catch(console.error);
     }
-  }, [entity]);
+  }, [file]);
+
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // update({ ...file, name: e.target.value });
+    let newName = e.target.value;
+    let newFile = { ...file, name: newName } as FileContent;
+    update(newFile);
+  };
+
+  const handleTagsChange = (tags: string[]) => {
+    let newFile = { ...file, metadata: { ...file?.metadata, tags } } as FileContent;
+    update(newFile);
+  };
+
+  const handleMarkdownChange = (markdown: string) => {
+    let newFile = { ...file, markdown } as FileContent;
+    update(newFile);
+  };
+
+  const handleSocialsChange = (metadata: any) => {
+    let newFile = { ...file, metadata } as FileContent;
+    update(newFile);
+  };
 
   useEffect(() => {
     if (name) {
       if (!visible) toggleVisibility();
     }
-  }, [name, visible, toggleVisibility]);
+  }, [name, visible]);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -60,14 +90,14 @@ const Details: React.FC<EntityProps> = () => {
     setName(decodedUrlHash);
   }, []);
 
-  useEffect(() => {
-    if (loading) return;
-    if (!entity?.title && !entity?.content && visible) {
-      setName("")
-      toggleVisibility()
-    }
+  // useEffect(() => {
+  //   if (loading) return;
+  //   if (!file?.name && visible) {
+  //     setName("")
+  //     toggleVisibility()
+  //   }
 
-  }, [entity, visible, loading]);
+  // }, [file, visible, loading]);
 
   useEffect(() => {
     if (name) {
@@ -77,38 +107,44 @@ const Details: React.FC<EntityProps> = () => {
   }, [name]);
 
   return (
-    <div className={`${styles.popup} ${visible ? styles.show : styles.hide}`}>
+    <div className={`${styles.popup} ${visible ? styles.show : styles.hide} ${loading ? styles.loading : ""}`}>
       <button className={styles.closeButtonContainer} onClick={handleExit}>
         <MdClose />
       </button>
-      {/* {  <button className={styles.backButtonContainer} onClick={handleBack}>
-        <MdUndo />
-      </button> } */}
-      <button className={styles.shareButtonContainer} onClick={hanleShare}>
+      <button className={styles.shareButtonContainer} onClick={handleShare}>
         <MdShare />
+      </button>
+      <button className={styles.editButtonContainer} onClick={handleEdit}>
+        {editing ? <MdSave /> : <MdEdit />}
       </button>
       <div className={styles.contentContainer}>
         <div className={styles.leftContainer}>
-          {!loading ? (<>
-            <div className={styles.detailsContainer}>
-              <h2 className={styles.title}>{(entity.title || '').split(/\\|\//).pop()}</h2>
-              <h4 className={styles.subtitle}>{entity.folder || ''}</h4>
-            </div>
-            <div className={styles.socialMediaContainer}>
-              <Socials metadata={entity} />
-            </div>
-            <div className={styles.tagsContainer}>
-              <Tags tags={entity.tags || []} viewOnly={true} />
-            </div>
-            {entity.description && entity.description.length > 4.2 && <Markdown content={entity.description} active={true} />}
-            {entity && (entity as any).spotifytrack && <EmbedTrackSpotify track={(entity as any).spotifytrack} />}
-            {entity && (entity as any).soundcloudtrack && <EmbedTrackSoundcloud track={(entity as any).soundcloudtrack} />}
-            {entity && (entity as any).instagrampost && <EmbedPostInstagram post={(entity as any).instagrampost} />}
-          </>) : <Loading />}
+          <div className={styles.detailsContainer}>
+            {
+              editing ?
+                <input className={styles.titleInput} type="text" value={file?.name} onChange={handleTitleChange} />
+                : <h2 className={styles.title}>{(file?.name || '').split(/\\|\//).pop()}</h2>
+            }
+            <h4 className={styles.subtitle}>{file?.category || ''}</h4>
+          </div>
+          {/* Date */}
+          <div className={styles.dateContainer}>
+            {file && file?.date && <div>{file.date.replace("-", ".")}</div>}
+          </div>
+          <div className={styles.socialMediaContainer}>
+            <Socials metadata={file?.metadata} editing={editing} onChange={handleSocialsChange} />
+          </div>
+          <div className={styles.tagsContainer}>
+            <Tags tags={file?.metadata.tags as string[]} editing={editing} onChange={handleTagsChange} />
+          </div>
+          {file?.markdown && <Markdown content={file.markdown} active={true} editing={editing} onChange={handleMarkdownChange} />}
+          {file && (file as any).spotifytrack && <EmbedTrackSpotify track={(file as any).spotifytrack} />}
+          {file && (file as any).soundcloudtrack && <EmbedTrackSoundcloud track={(file as any).soundcloudtrack} />}
+          {file && (file as any).instagrampost && <EmbedPostInstagram post={(file as any).instagrampost} />}
         </div>
-        {!loading && <div className={styles.graphContainer}>
-          {relations && relations.edges.length > 1 ? <Graph graphData={relations} /> : null}
-        </div>}
+        <div className={styles.graphContainer}>
+          {<Graph graphData={connection} />}
+        </div>
       </div>
     </div>
   );

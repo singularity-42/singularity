@@ -21,6 +21,6 @@ Betreiber der Website:
 - Name: Wir sind eine Open Source Community (Singularity)
 - Rechtsform: Nicht eingetragen oder gegründet
 - Adresse: Nicht vorhanden
-- E-Mail-Adresse: singularity@2n40.eu
+- E-Mail-Adresse: 42@drumni.com
 - Telefonnummer: Nicht vorhanden
 - Ansprechpartner: [[Drumnicorn]]

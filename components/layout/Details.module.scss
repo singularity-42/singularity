@@ -1,7 +1,41 @@
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+  }
 
-@import '../../styles/Animations';
+  100% {
+      opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInBackground {
+  0% {
+      background-color: rgba(var(--dark-rgb), 0.8);
+  }
+
+  100% {
+      background-color: transparent;
+  }
+}
+
+.loading {
+  // blur all 
+  filter: blur(4.2px);
+}
 
 .popup {
+  // filter: blur(0);
+  transition: filter 0.3s ease-in-out;
   --space: 2rem;
   --top-space: calc(1rem + var(--space));
   opacity: 0;
@@ -18,8 +52,6 @@
   overflow-y: auto;
   border-top-right-radius: 4.2px;
   border-bottom-right-radius: 4.2px;
-
-
   
   @media (max-width: 768px) {
     // no space to border
@@ -70,6 +102,7 @@
 }
 
 
+
 .shareButtonContainer {
   position: fixed;
   text-align: left;
@@ -88,7 +121,45 @@
   }
 }
 
-.entityContainer {
+
+.editButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: calc(4.2rem + (4.2rem - 1.5rem));
+  transform: scale(1.2);
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+}
+
+.graphButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: 9.5rem;
+  transform: scale(1.2);
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+}
+
+
+.fileContainer {
   padding: 0.42rem;
   border: 1px dashed rgb(var(--light-rgb));
   border-radius: 0.42rem;
@@ -106,7 +177,49 @@
   font-size: var(--heading-font-size);
 }
 
-.entityMarkdown {
+// if is input
+.titleInput {
+  font-size: var(--heading-font-size);
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(var(--secondary-rgb), 0.1);
+  color: rgb(var(--light-rgb));
+  // place in center
+  transition: color 0.2s ease-in-out;
+  padding: 0;
+  font-weight: bold;
+  margin: -0.1rem 0;
+  // remove default element style
+  box-shadow: none;
+  border: none;
+  height: 2rem;
+  font-family: var(--font-family);
+
+  color: rgb(var(--light-rgb));
+  transition: transform 0.3s ease;
+  position: static;
+  border-radius: 4.2px;
+  cursor: pointer;
+  background: rgba(var(--dark-rgb), 0.2);
+  transition: background-color 0.3s ease;
+  border: none;
+
+  // no text wrapping
+  white-space: nowrap;
+
+  // place left#
+  text-align: left;
+
+  &:hover {
+    background-color: rgba(var(--light-rgb), 0.2);
+  }
+
+  &.selected {
+    background-color: rgb(var(--secondary-rgb));
+  }
+}
+
+.fileMarkdown {
   padding: 1rem;
   transition: color 0.2s ease-in-out;
 
@@ -228,7 +341,7 @@
     grid-template-columns: 1fr;
   }
 
-  .entityContainer {
+  .fileContainer {
     border: none;
   }
 

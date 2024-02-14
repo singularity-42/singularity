@@ -42,9 +42,17 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     const defaultOptions: Options = {
       // default zoom 2x
       physics: {
-        enabled: false,
-        repulsion: {
-          nodeDistance:  150 // Increase this value to increase the distance between nodes
+        enabled: true,
+        barnesHut: {
+          gravitationalConstant: -2000, // Adjust this to make nodes stay closer or farther away
+          centralGravity:  0.3, // Adjust this to make nodes stay closer or farther away
+        },
+        stabilization: {
+          enabled: true,
+          iterations:  1000,
+          updateInterval:  100,
+          onlyDynamicEdges: false,
+          fit: true
         }
       },
       autoResize: true,

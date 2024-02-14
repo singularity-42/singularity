@@ -6,7 +6,7 @@
   box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   /* Rounded corners for a modern look */
-  
+  background: rgba(var(--dark-rgb), 0.42);
   &.scrollable {
     overflow: scroll;
   }
@@ -80,11 +80,8 @@
 .socialMediaContainer {
   position: absolute;
   bottom: 16px;
-  left: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: calc(100% - 32px);
-  // Styling for the container of social media tags
-  // Adjust spacing, alignment, and other styles as needed
 }
 
 .original {
@@ -104,7 +101,7 @@
   // margin-top: 8px;
 
   // overflow scroll
-  overflow: scroll;
+  overflow: auto;
   max-height: 30vh;
   padding-bottom: 5vh;
   overflow-y: hidden;

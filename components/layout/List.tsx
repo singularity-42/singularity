@@ -5,32 +5,32 @@ import Error from "./Error";
 import Row from "./Row";
 
 interface ListProps {
-  entities: any;
+  files: any;
   onTagClick?: (tag: string) => void;
   selected?: string[];
 }
 
-const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
+const List: React.FC<ListProps> = ({ files, onTagClick, selected }) => {
   useEffect(() => {
-    const entityElements = document.querySelectorAll(`.${styles.entity}`);
+    const fileElements = document.querySelectorAll(`.${styles.file}`);
 
-    // Apply fade-in animation to each entity with a delay
-    entityElements.forEach((entity: Element, index: number) => {
-      const htmlEntity = entity as HTMLElement;
-      htmlEntity.style.opacity = "0";
-      htmlEntity.style.animation = `${styles.fadeIn} 0.5s ease-in-out forwards`;
-      htmlEntity.style.animationDelay = `${index * 0.1}s`;
+    // Apply fade-in animation to each file with a delay
+    fileElements.forEach((file: Element, index: number) => {
+      const htmlFileContent = file as HTMLElement;
+      htmlFileContent.style.opacity = "0";
+      htmlFileContent.style.animation = `${styles.fadeIn} 0.5s ease-in-out forwards`;
+      htmlFileContent.style.animationDelay = `${index * 0.1}s`;
     });
-  }, [entities]);
+  }, [files]);
 
-  if (!entities) {
+  if (!files) {
     return <Loading />;
   }
 
-  if (entities.length === 0) {
+  if (files.length === 0) {
     return (
       <Error
-        error="No entities found"
+        error="No files found"
         onClick={() => {
           // Reload the page
           window.location.reload();
@@ -39,7 +39,7 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
     );
   }
 
-  const [localEntities, setLocalEntities] = React.useState<any[]>([]);
+  const [localFiles, setLocalFiles] = React.useState<any[]>([]);
   const [folders, setFolders] = React.useState<string[]>([]);
 
   const onFolderClick = (folder: string) => {
@@ -53,15 +53,15 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
   };
 
   useEffect(() => {
-    let visibleEntities: any[] = [];
+    let visibleFiles: any[] = [];
     let pathFolders: string[] = [];
 
-    entities.forEach((entity: any) => {
-      if (entity.path) {
-        let path = entity.path.split(/\\|\//);
+    files.forEach((file: any) => {
+      if (file.path) {
+        let path = file.path.split(/\\|\//);
         let folderPath = path.slice(0, path.length - 1).join("\\");
         if (!pathFolders.includes(folderPath) && path.length > 1) {
-          visibleEntities.push({
+          visibleFiles.push({
             isFolder: true,
             metadata: {
               title: folderPath,
@@ -72,13 +72,13 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
           pathFolders.push(folderPath);
         }
         if (path.length === 1 || folders.includes(folderPath)) {
-          visibleEntities.push(entity);
+          visibleFiles.push(file);
         }
       }
     });
 
     if (pathFolders.length === 0) {
-      visibleEntities = entities;
+      visibleFiles = files;
     }
 
     // if there is only one folder, open it
@@ -86,35 +86,35 @@ const List: React.FC<ListProps> = ({ entities, onTagClick, selected }) => {
       setFolders(pathFolders);
     }
 
-    setLocalEntities(visibleEntities);
-  }, [entities, folders]);
+    setLocalFiles(visibleFiles);
+  }, [files, folders]);
 
   return (
     <div className={styles.table}>
       <div className={styles.thead}>{/* Header content */}</div>
       <div className={styles.tbody}>
-        {localEntities?.map((entity: any, index: number) =>
-          entity.isFolder ? (
-            <div key={index + "folder"} className={`${styles.entity} ${styles.folder}`}>
+        {localFiles?.map((file: any, index: number) =>
+          file.isFolder ? (
+            <div key={index + "folder"} className={`${styles.file} ${styles.folder}`}>
               <Row
                 isFolder={true}
-                data={{ folder: entity }}
+                data={{ folder: file }}
                 onFolderClick={onFolderClick}
-                isSelected={folders.includes(entity?.metadata?.title as never) ? true : false}
+                isSelected={folders.includes(file?.metadata?.title as never) ? true : false}
               />
             </div>
           ) : (
             <div
               key={index}
-              className={`${styles.entity} ${
-                folders.includes(entity.path.split(/\\|\//).slice(0, entity.path.split(/\\|\//).length - 1).join("\\"))
+              className={`${styles.file} ${
+                folders.includes(file.path.split(/\\|\//).slice(0, file.path.split(/\\|\//).length - 1).join("\\"))
                   ? styles.inFolder
                   : ""
               }`}
             >
               <Row
                 isFolder={false}
-                data={{ entity }}
+                data={{ file }}
                 onTagClick={onTagClick}
               />
             </div>

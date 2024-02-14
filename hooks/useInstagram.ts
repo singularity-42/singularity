@@ -8,7 +8,7 @@ const useInstagram = (name: string) => {
 
     useEffect(() => {
         setLoading(true);
-        const fetchEntity = async () => {
+        const fetchFileContent = async () => {
             
             if (!name) {
                 return;
@@ -31,7 +31,7 @@ const useInstagram = (name: string) => {
 
 
 
-        fetchEntity();
+        fetchFileContent();
     }, [name]);
 
     return {

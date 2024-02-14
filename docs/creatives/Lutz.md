@@ -10,5 +10,7 @@ spotify:
 bandcamp: 
 apple: 
 youtube: 
-twitter:
+twitter: 
+connections:
+  - "[[reiz]]"
 ---

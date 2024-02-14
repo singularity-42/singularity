@@ -1,6 +1,20 @@
 import React from 'react';
-import styles from './Social.module.scss';
-import SocialIcon from './SocialIcon';
+import { IconContext } from 'react-icons';
+import {
+    FaEnvelope,
+    FaMapMarkerAlt,
+    FaPhone,
+    FaInstagram,
+    FaYoutube,
+    FaSoundcloud,
+    FaSpotify,
+    //   FaBeatport,
+    FaBandcamp,
+    FaTelegramPlane,
+    FaTwitter,
+    FaFacebook
+} from 'react-icons/fa';
+import { MdAdd, MdWeb } from 'react-icons/md';
 
 export enum SocialMedia {
     website = 'website',
@@ -11,65 +25,82 @@ export enum SocialMedia {
     youtube = 'youtube',
     soundcloud = 'soundcloud',
     spotify = 'spotify',
+    facebook = 'facebook',
     beatport = 'beatport',
     bandcamp = 'bandcamp',
     telegram = 'telegram',
     twitter = 'twitter',
+    add = 'add'
 }
+
+import styles from './Social.module.scss';
+
+const getSocialMediaIcon = (socialMedia: SocialMedia) => {
+    switch (socialMedia) {
+        case SocialMedia.website:
+            return <MdWeb />;
+        case SocialMedia.instagram:
+            return <FaInstagram />;
+        case SocialMedia.youtube:
+            return <FaYoutube />;
+        case SocialMedia.soundcloud:
+            return <FaSoundcloud />;
+        case SocialMedia.spotify:
+            return <FaSpotify />;
+        case SocialMedia.bandcamp:
+            return <FaBandcamp />;
+        case SocialMedia.telegram:
+            return <FaTelegramPlane />;
+        case SocialMedia.facebook:
+            return <FaFacebook />;
+        case SocialMedia.twitter:
+            return <FaTwitter />;
+        case SocialMedia.mail:
+            return <FaEnvelope />;
+        case SocialMedia.address:
+            return <FaMapMarkerAlt />;
+        case SocialMedia.tel:
+            return <FaPhone />;
+        case SocialMedia.add:
+            return <MdAdd />;
+        default:
+            return null;
+    }
+};
 
 interface SocialMediaTagProps {
     socialMedia: SocialMedia;
     username: string;
+    onClick?: (e: React.MouseEvent) => void;
 }
 
-const getSocialMediaUrl = (socialMedia: SocialMedia, username: string) => {
-    switch (socialMedia) {
-        case SocialMedia.website:
-            return `https://${username}`;
-        case SocialMedia.instagram:
-            return 'https://www.instagram.com/' + username;
-        case SocialMedia.youtube:
-            return 'https://www.youtube.com/' + username;
-        case SocialMedia.soundcloud:
-            return 'https://soundcloud.com/' + username;
-        case SocialMedia.spotify:
-            return 'https://open.spotify.com/artist/' + username;
-        case SocialMedia.beatport:
-            return 'https://www.beatport.com/artist/' + username;
-        case SocialMedia.bandcamp:
-            return 'https://' + username;
-        case SocialMedia.telegram:
-            return 'https://t.me/' + username;
-        case SocialMedia.twitter:
-            return 'https://twitter.com/' + username;
-        case SocialMedia.mail:
-            return 'mailto:' + username;
-        case SocialMedia.address:
-            return 'https://maps.google.com/?q=' + username;
-        case SocialMedia.tel:
-            return 'tel:' + username;
-        default:
-            return '';
-    }
-};
+const Social: React.FC<SocialMediaTagProps> = ({ socialMedia, username, onClick }) => {
+    if (!username) return null;
 
-const Social: React.FC<SocialMediaTagProps> = ({ socialMedia, username }) => {
-    if (!username) {
-        return null;
-    }
-
-    const socialMediaUrl = getSocialMediaUrl(socialMedia, username);
+    const Icon = getSocialMediaIcon(socialMedia);
+    if (!Icon) return null;
+    let url = '';
+    if (username?.startsWith('http') || username?.startsWith('www'))
+        url = username;
+    else
+        url = `https://www.${socialMedia}.com/${username}`;
 
     const handleSocialMediaClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        window.open(socialMediaUrl);
-    }
+
+        if (onClick)
+            onClick(e);
+        else
+            window.open(url);
+    };
 
     return (
-        <div className={styles.socialMediaTag + ' ' + styles[socialMedia]} onClick={handleSocialMediaClick}>
-            <SocialIcon name={socialMedia} size='2rem' />
-        </div>
+        <IconContext.Provider value={{ size: '2rem' }}>
+            <div className={styles.socialMediaTag} onClick={handleSocialMediaClick}>
+                {Icon}
+            </div>
+        </IconContext.Provider>
     );
 };
 

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
 import styles from "./Calendar.module.scss";
-import useEntities from "@/hooks/useEntities";
+import useFiles from "@/hooks/useFiles";
 import Loading from "../base/Loading";
 import { useTooltip } from "@/hooks/provider/TooltipProvider";
 import { OrderType } from "@/types";
@@ -12,63 +12,56 @@ import DateComponent from "../base/Date";
 import Filter from "../base/Filter";
 
 interface CalendarProps {
-  type: string;
+  category: string;
   orderType?: OrderType;
   maxColumns?: number;
 }
 
-const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.CounterAlphabetical }) => {
+const CalendarContent: React.FC<CalendarProps> = ({ category, orderType = OrderType.CounterAlphabetical }) => {
   const { filter, setFilter } = useFilter();
-  const entities = useEntities(type, filter);
-
+  const { files, loading, error } = useFiles(category, filter);
   const { setTooltip } = useTooltip();
 
   const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
-  const [datedEntities, setDatedEntities] = useState<{ [date: string]: any[] }>({});
+  const [datedFiles, setDatedFiles] = useState<{ [date: string]: any[] }>({});
 
   useEffect(() => {
-    setTooltip(`${type} - ${TYPE_DESCRIPTIONS[type]}`);
-  }, [type]);
+    setTooltip(`${category} - ${TYPE_DESCRIPTIONS[category]}`);
+  }, [category]);
 
   useEffect(() => {
-    if (entities) {
-      const updatedDatedEntities: { [date: string]: any[] } = {};
+    if (files) {
+      const updatedDatedFiles: { [date: string]: any[] } = {};
 
-      entities.forEach((entity) => {
-        if (entity.metadata.tags.includes("vergangenheit")) 
-          if (!filter.includes("vergangenheit"))
-            if (!filter.some((f) => entity.metadata.tags.includes(f))) 
-              return;
-            
-
-        const date = entity.path.split("\\").slice(0,  3).join("/");
-        if (updatedDatedEntities[date]) {
-          updatedDatedEntities[date].push(entity);
+      files.forEach((file) => {
+        let date = file.date.split("-").reverse().join(".")
+        if (updatedDatedFiles[date]) {
+          updatedDatedFiles[date].push(file);
         } else {
-          updatedDatedEntities[date] = [entity];
+          updatedDatedFiles[date] = [file];
         }
       });
 
-      Object.keys(updatedDatedEntities).forEach((date) => {
-        updatedDatedEntities[date].sort((a, b) => {
+      Object.keys(updatedDatedFiles).forEach((date) => {
+        updatedDatedFiles[date].sort((a, b) => {
           if (orderType === OrderType.CounterAlphabetical) {
-            return a.metadata.title.localeCompare(b.metadata.title);
+            return a.name.localeCompare(b.name);
           } else {
-            return b.metadata.title.localeCompare(a.metadata.title);
+            return b.name.localeCompare(a.name);
           }
         });
       });
 
-      setDatedEntities(updatedDatedEntities);
+      setDatedFiles(updatedDatedFiles);
 
-      let tags = entities.map((entity) => entity.metadata.tags);
+      let tags = files.map((file) => file.metadata.tags);
       tags = tags.reduce((acc, val) => acc.concat(val), []);
       setCurrentVisibleTags(tags || []);
     }
-  }, [entities]);
+  }, [files]);
 
   const handleTagClick = (tag: string) => {
-    if (tag.length <  1) return;
+    if (tag.length < 1) return;
 
     if (filter.includes(tag)) {
       setFilter(filter.filter((t) => t !== tag));
@@ -81,36 +74,38 @@ const CalendarContent: React.FC<CalendarProps> = ({ type, orderType = OrderType.
     const dateA = new Date(a);
     const dateB = new Date(b);
 
-    if (dateA > dateB) return  1;
+    if (dateA > dateB) return 1;
     if (dateA < dateB) return -1;
-    return  0;
-  }
+    return 0;
+  };
 
   const sortedDates = useMemo(() => {
-    return Object.keys(datedEntities).sort(sortByDate);
-  }, [datedEntities]);
+    return Object.keys(datedFiles).sort(sortByDate);
+  }, [datedFiles]);
 
-  if (!entities) return <Loading />;
-  else
-    return (
-      <div className={styles.calendar}>
-        <Filter currentVisibleTags={currentVisibleTags} />
-        {sortedDates.map((date, index) => (
-          <div key={date} className={styles.calendarItem}>
-            <div className={styles.dateInfo}>
-              <DateComponent date={date} />
-            </div>
-            <Cards entities={datedEntities[date]} onTagClick={handleTagClick} />
+  if (loading) return <Loading />;
+  if (error) return <p>Error: {error}</p>;
+  if (!files) return null;
+
+  return (
+    <div className={styles.calendar}>
+      <Filter currentVisibleTags={currentVisibleTags} />
+      {sortedDates.map((date, index) => (
+        <div key={date} className={styles.calendarItem}>
+          <div className={styles.dateInfo}>
+            <DateComponent date={date} />
           </div>
-        ))}
-      </div>
-    );
+          <Cards files={datedFiles[date]} onTagClick={handleTagClick} />
+        </div>
+      ))}
+    </div>
+  );
 };
 
-const Calendar: React.FC<CalendarProps> = ({ type, orderType = OrderType.CounterAlphabetical, maxColumns =  1 }) => {
+const Calendar: React.FC<CalendarProps> = ({ category: type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
   return (
     <FilterProvider>
-      <CalendarContent type={type} orderType={orderType} />
+      <CalendarContent category={type} orderType={orderType} />
     </FilterProvider>
   );
 };
