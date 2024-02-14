@@ -1,32 +1,29 @@
-import { Connection, buildNodesAndEdges, addMissingEdges } from '@/utilities/connections';
+import { Connection, buildNodesAndEdges, findConnections } from '@/utilities/connections';
 import { NextRequest, NextResponse } from 'next/server';
-import { loadFiles } from '@/utilities/file';
+import { loadFile } from '@/utilities/file';
 
 export const GET = async (req: NextRequest, res: NextResponse): Promise<Response> => {
   let relation: Connection = {
     nodes: [],
     edges: [],
   };
-
   const fileName = req.nextUrl.searchParams.get('name');
-  const depth = req.nextUrl.searchParams.get('depth') || 3;
-  const fileFiles = loadFiles();
-  const existingNodes = new Map<string, number>(); // To track existing node labels and their IDs
-  const nodes = relation.nodes;
-  const edges = relation.edges;
 
-  for (const file of fileFiles) {
-    const { nodes: newNodes, edges: newEdges } = buildNodesAndEdges(file, existingNodes, nodes, edges, depth as number);
-    nodes.push(...newNodes);
-    edges.push(...newEdges);
+  if (!fileName){ 
+    return new Response(JSON.stringify(relation), { status: 400 })};
+
+  let credentials = (req.headers.get("Authorization")?.split(' ')[1] || '').split(':') || [];
+  
+  const file = loadFile(credentials, fileName);
+  if (!file) {
+    return new Response(JSON.stringify(relation), { status: 404 });
   }
-
-  addMissingEdges(nodes, edges);
+  const connection = findConnections(file, credentials);
 
   relation = {
-    title: fileName || '',
-    nodes,
-    edges,
+    title: file.name,
+    nodes: connection.nodes,
+    edges: connection.edges,
   };
 
   return new Response(JSON.stringify(relation), {

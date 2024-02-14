@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FileContent } from '@/types';
+import { useAuth } from './useAuth';
 
 
 const useFile = (name: string) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    const { credentials, addCredentials} = useAuth();
     const [file, setFile] = useState<FileContent | null>(null);
     const update = (file: FileContent) => {
         setFile(file);
@@ -18,14 +20,17 @@ const useFile = (name: string) => {
             try {
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}` + `changes`, file, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Dusk ${credentials.join(':')}`
                     }
                 });
                 if (response.status !== 200) {
                     setError('Error saving file');
                     return;
                 }
-                const savedFileContent: FileContent = response.data;
+                const savedFileContent: FileContent = response.data.file;
+                const newCredentials: string = response.data.credentials;
+                addCredentials(newCredentials);
                 setFile(savedFileContent);
                 if (savedFileContent.name !== '')
                     setError(null);
@@ -45,7 +50,10 @@ const useFile = (name: string) => {
             if (!name) return;
             setLoading(true);
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}` + `file?name=${name}`);
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}` + `file?name=${name}`, { headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Dusk ${credentials.join(':')}`
+                }});
                 setFile(response.data);
             } catch (error) {
                 setError((error as string) || 'Unknown error');
@@ -55,7 +63,7 @@ const useFile = (name: string) => {
         };
 
         fetchFileContent();
-    }, [name]);
+    }, [name, credentials]);
 
     return {
         file,

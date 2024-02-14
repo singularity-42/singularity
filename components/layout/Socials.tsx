@@ -25,9 +25,10 @@ const Socials: React.FC<ListSocialsProps> = ({ metadata = {}, editing, onChange 
         setAddingSocial(true);
     };
 
-    const handleSocialLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNewSocialLink(event.target.value);
+    const handleSocialLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewSocialLink(e.target.value);
     };
+
 
     const handleSocialLinkBlur = () => {
         setAddingSocial(false);
@@ -35,10 +36,18 @@ const Socials: React.FC<ListSocialsProps> = ({ metadata = {}, editing, onChange 
 
     const handleSocialLinkKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
+            console.log(newSocialLink, "sadasd");
             if (newSocialLink) {
                 const url = new URL(newSocialLink);
-                const rootDomain = url.hostname;
+                let rootDomainParts = url?.hostname?.split('.') || [];
+                // we want from www.text.com -> text
+                if (rootDomainParts.length > 2) {
+                    rootDomainParts = rootDomainParts.slice(1);
+                }
+                const rootDomain = rootDomainParts[0];
+                console.log(rootDomain, "rootDomain");
                 const updatedMetadata = { ...metadata, [rootDomain]: newSocialLink };
+                console.log(updatedMetadata);
                 if (onChange) {
                     onChange(updatedMetadata);
                 }
@@ -50,9 +59,12 @@ const Socials: React.FC<ListSocialsProps> = ({ metadata = {}, editing, onChange 
 
     return (
         <div className={styles.listSocials}>
-            {Object.keys(metadata).map((key, index) => (
-                <Social key={`${index}`} socialMedia={key as SocialMedia} username={metadata[key]} onClick={ editing ? () => handleAddSocialClickRemove(key as SocialMedia) : undefined } />
+            {Object.keys(metadata || {}).map((key, index) => (
+                <Social key={`${index}`} socialMedia={key as SocialMedia} username={metadata[key] || ''} onClick={ editing ? () => handleAddSocialClickRemove(key as SocialMedia) : undefined } />
             ))}
+            {
+
+            }
             {editing && (
                 <>
                     {addingSocial ? (

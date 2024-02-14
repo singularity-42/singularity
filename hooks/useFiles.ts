@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './useAuth';
 
 interface UseFilesResult {
   files: any[] | null;
@@ -14,7 +15,9 @@ const useFiles = (category: string, filter: string[] = [], name?: string): UseFi
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [previousFilter, setPreviousFilter] = useState<string[]>([]);
+  const { credentials } = useAuth();
 
+  // fetch files
   useEffect(() => {
     if (category && filter !== previousFilter) {
       setPreviousFilter(filter);
@@ -38,17 +41,18 @@ const useFiles = (category: string, filter: string[] = [], name?: string): UseFi
           url = `${url}&${file_filter_string}`;
         }
 
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Dusk ${credentials.join(':')}`,
+          },
+        });
         let _files = response.data;
 
         _files.map((file: any, index: number) => {
           file.index = index;
           return file;
         });
-        // // filter by name
-        // if (name && name.length > 0) {
-        //   _files = _files.filter((file: any) => file.name.toLowerCase().includes(name.toLowerCase()));
-        // }
+
         setFiles(_files);
       } catch (error) {
         setError('Error fetching files');
@@ -57,7 +61,7 @@ const useFiles = (category: string, filter: string[] = [], name?: string): UseFi
       }
     };
     fetchFiles();
-  }, [category, filter, name]);
+  }, [category, filter, name, credentials]);
 
   return { files, loading, error };
 };

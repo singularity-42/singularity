@@ -1,7 +1,7 @@
 // metadata.ts
 import { Metadata } from "@/types";
 
-const displayMetadata = (metadata: Metadata): string => {
+export const displayMetadata = (metadata: Metadata): string => {
   let metadataString = '';
   for (let key in metadata) {
       metadataString += `**${key}:** ${metadata[key]}\n`;
@@ -9,7 +9,7 @@ const displayMetadata = (metadata: Metadata): string => {
   return metadataString;
 };
 
-const deserializeMetadata = (metadataString: string): Metadata => {
+export const deserializeMetadata = (metadataString: string): Metadata => {
   const metadataLines = metadataString.split('\n').filter(line => line.trim() !== '');
 
   let metadata: Metadata = {};
@@ -38,7 +38,7 @@ const deserializeMetadata = (metadataString: string): Metadata => {
   return metadata;
 };
 
-const serializeMetadata = (metadata: Metadata): string => {
+export const serializeMetadata = (metadata: Metadata): string => {
   let metadataString = '';
   for (let key in metadata) {
       if (Array.isArray(metadata[key])) {
@@ -53,7 +53,7 @@ const serializeMetadata = (metadata: Metadata): string => {
   return metadataString;
 };
 
-const editMetadataKeyValue = (metadata: Metadata, key: string, value: string): Metadata => {
+export const editMetadataKeyValue = (metadata: Metadata, key: string, value: string): Metadata => {
   let newMetadata: Metadata = { ...metadata };
   if (Array.isArray(newMetadata[key])) {
       if ((newMetadata[key] as string[]).map(item => item.toString()).includes(value.toString())) {
@@ -69,7 +69,7 @@ const editMetadataKeyValue = (metadata: Metadata, key: string, value: string): M
   return newMetadata;
 };
 
-const checkMetadataKeyValue = (metadata: Metadata, key: string, value: string): boolean => {
+export const checkMetadataKeyValue = (metadata: Metadata, key: string, value: string): boolean => {
   if (!metadata) return false;
   if (!metadata[key]) return false;
   if (Array.isArray(metadata[key])) {
@@ -78,7 +78,7 @@ const checkMetadataKeyValue = (metadata: Metadata, key: string, value: string): 
   return metadata[key] === value;
 };
 
-const removeMetadataKeyValue = (metadata: Metadata, key: string, value: string | null = null): Metadata => {
+export const removeMetadataKeyValue = (metadata: Metadata, key: string, value: string | null = null): Metadata => {
   if (Array.isArray(metadata[key])) {
       if (value) {
           metadata[key] = (metadata[key] as string[]).filter(item => item !== value);
@@ -91,12 +91,12 @@ const removeMetadataKeyValue = (metadata: Metadata, key: string, value: string |
   return metadata;
 };
 
-const updateMetadataKeyValue = (metadata: Metadata, key: string, value: string): Metadata => {
+export const updateMetadataKeyValue = (metadata: Metadata, key: string, value: string): Metadata => {
   metadata[key] = value;
   return metadata;
 };
 
-const extractMetadataMarkdown = (content: string): {
+export const extractMetadataMarkdown = (content: string): {
   metadata: Metadata;
   markdown: string;
   content: string;
@@ -112,8 +112,6 @@ const extractMetadataMarkdown = (content: string): {
   return { metadata, markdown, content };
 };
 
-const inexactMetadataMarkdown = (metadata: Metadata, markdown: string): string => {
+export const inexactMetadataMarkdown = (metadata: Metadata, markdown: string): string => {
   return `---\n${serializeMetadata(metadata)}---${markdown}` ;
 };
-
-export { inexactMetadataMarkdown, extractMetadataMarkdown, displayMetadata, editMetadataKeyValue, checkMetadataKeyValue, removeMetadataKeyValue, updateMetadataKeyValue, serializeMetadata, deserializeMetadata };

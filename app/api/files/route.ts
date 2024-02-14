@@ -7,10 +7,12 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest, res: NextResponse) => {
   let category = req.nextUrl.searchParams.get("category") || "";
   let filter = req.nextUrl.searchParams.get("filter") || "";
-  let date = req.nextUrl.searchParams.get("date") || "";
+  // let date = req.nextUrl.searchParams.get("date") || ""; TODO: Use date as filter
   let filters = filter.split(",") || [];
   filters = filters.filter((filter) => filter !== "");
-  let files = loadFiles(category, filters) || [];
+  let credentials = (req.headers.get("Authorization")?.split(' ')[1] || '').split(':') || [];
+  
+  let files = loadFiles(category, filters, credentials) || [];
 
   if (category.includes("collaborations"))
     files = files.filter((file: any) => {

@@ -1,11 +1,13 @@
+"use client";
+
 import { useAuth } from '@/hooks/useAuth';
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Credentials.module.scss';
-import { MdAdd, MdClose } from 'react-icons/md';
+import { MdAdd, MdClose, MdLock } from 'react-icons/md';
 
 // Credentials component
 const Credentials: React.FC = () => {
-  const { toggleOverlay, visible, coveredCredentials, addCredentials, removeCredentials } = useAuth();
+  const { toggleOverlay, visible, credentials, addCredentials, removeCredentials } = useAuth();
   const [newCredential, setNewCredential] = useState('');
 
   const handleAddCredential = useCallback(() => {
@@ -13,7 +15,12 @@ const Credentials: React.FC = () => {
     setNewCredential('');
   }, [newCredential]);
 
-  return (
+  return (<>
+    <div className={styles.credentialsButtonContainer}>
+      <button className={styles.credentialsButton} onClick={toggleOverlay}>
+        <MdLock />
+      </button>
+    </div>
     <div className={`${styles.overlay} ${visible ? styles.visible : ''}`}>
       <div className={styles.Credentials}>
         <div className={styles.header}>
@@ -22,7 +29,7 @@ const Credentials: React.FC = () => {
         </div>
 
         <div className={styles.Credentials__content}>
-          {coveredCredentials.map((credential) => (
+          {credentials.map((credential) => (
             <div key={credential} className={styles.Credentials__credential}>
               <span>{credential}</span>
               <button onClick={() => removeCredentials(credential)}><MdClose /></button>
@@ -31,7 +38,7 @@ const Credentials: React.FC = () => {
 
           <div className={styles.Credentials__credential}>
             <input
-            // className={`${!hasFormat ? styles.invalid : ''}`}
+              // className={`${!hasFormat ? styles.invalid : ''}`}
               type="text"
               placeholder="XXX-XXX-XXX"
               value={newCredential}
@@ -42,6 +49,7 @@ const Credentials: React.FC = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
 
 // Define the context interface
 interface FilterContextInterface {
@@ -16,22 +16,37 @@ interface FilterProviderProps {
     children: React.ReactNode;
 }
 
-// Create a provider component for the filter context
 export const FilterProvider: React.FC<FilterProviderProps> = ({ children }: FilterProviderProps) => {
     const [filter, setFilter] = useState<string[]>([]);
-
+  
+    // TODO: Update the URL when the filter changes
+    //  - code works for update when filter selected but is buggy
+    //  - code should work when open url with filter selected, currently not working
+    // useEffect(() => {
+    //   const queryParams = new URLSearchParams();
+  
+    //   if (filter.length > 0) {
+    //     queryParams.set('filter', filter.join(','));
+    //   }
+  
+    //   const queryString = queryParams.toString();
+    //   const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+  
+    //   window.history.replaceState(null, '', newUrl);
+    // }, [filter]);
+  
     const filterContextValue: FilterContextInterface = {
-        filter,
-        setFilter,
+      filter,
+      setFilter,
     };
-
+  
     return (
-        <FilterContext.Provider value={filterContextValue}>
-            {children}
-        </FilterContext.Provider>
+      <FilterContext.Provider value={filterContextValue}>
+        {children}
+      </FilterContext.Provider>
     );
-};
-
+  };
+  
 // useFilter is a custom hook to consume the filter context
 export const useFilter = () => {
     const context = React.useContext(FilterContext);

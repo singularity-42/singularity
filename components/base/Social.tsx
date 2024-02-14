@@ -11,7 +11,8 @@ import {
     //   FaBeatport,
     FaBandcamp,
     FaTelegramPlane,
-    FaTwitter
+    FaTwitter,
+    FaFacebook
 } from 'react-icons/fa';
 import { MdAdd, MdWeb } from 'react-icons/md';
 
@@ -24,12 +25,15 @@ export enum SocialMedia {
     youtube = 'youtube',
     soundcloud = 'soundcloud',
     spotify = 'spotify',
+    facebook = 'facebook',
     beatport = 'beatport',
     bandcamp = 'bandcamp',
     telegram = 'telegram',
     twitter = 'twitter',
     add = 'add'
 }
+
+import styles from './Social.module.scss';
 
 const getSocialMediaIcon = (socialMedia: SocialMedia) => {
     switch (socialMedia) {
@@ -47,6 +51,8 @@ const getSocialMediaIcon = (socialMedia: SocialMedia) => {
             return <FaBandcamp />;
         case SocialMedia.telegram:
             return <FaTelegramPlane />;
+        case SocialMedia.facebook:
+            return <FaFacebook />;
         case SocialMedia.twitter:
             return <FaTwitter />;
         case SocialMedia.mail:
@@ -69,26 +75,29 @@ interface SocialMediaTagProps {
 }
 
 const Social: React.FC<SocialMediaTagProps> = ({ socialMedia, username, onClick }) => {
-    if (!username) {
-        return null;
-    }
+    if (!username) return null;
 
     const Icon = getSocialMediaIcon(socialMedia);
+    if (!Icon) return null;
+    let url = '';
+    if (username?.startsWith('http') || username?.startsWith('www'))
+        url = username;
+    else
+        url = `https://www.${socialMedia}.com/${username}`;
 
     const handleSocialMediaClick = (e: React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
 
-        if (onClick) {
+        if (onClick)
             onClick(e);
-        } else {
-            window.open(`https://www.${socialMedia}.com/${username}`);
-        }
+        else
+            window.open(url);
     };
 
     return (
         <IconContext.Provider value={{ size: '2rem' }}>
-            <div className={`socialMediaTag ${socialMedia}`} onClick={handleSocialMediaClick}>
+            <div className={styles.socialMediaTag} onClick={handleSocialMediaClick}>
                 {Icon}
             </div>
         </IconContext.Provider>

@@ -55,13 +55,9 @@ const Tags: React.FC<TagsProps> = ({ tags, onTagClick, selected, editing, onChan
     }
   };
 
-  if (!tags || tags.length === 0) {
-    return null;
-  }
-
   return (
     <div ref={containerRef} className={styles.tags} >
-      {tags.map((tag, index) => (
+      {(tags || []).map((tag, index) => (
         <Tag
           key={tag}
           tag={tag}

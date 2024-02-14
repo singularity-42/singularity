@@ -32,7 +32,7 @@ export const sendEditMenu = async (bot: TelegramBot, chatId: string, fileName: s
                 ],
             }
         ),
-    };
+    } as any;
 
     await bot.sendMessage(chatId, `${i18n.de.editMenu} [${fileName}]\n${i18n.de.editMenuOptions}`, deleteButtonOptions);
 };
@@ -73,7 +73,7 @@ export const sendConfirmedQuestion = async (bot: TelegramBot, chatId: string, fi
                 ],
             }
         ),
-    };
+    } as any;
 
     await bot.sendMessage(chatId, `${i18n.de.sureWantToEdit}[${fileName}]?\n\n${newContext}`, options);
 };
@@ -104,7 +104,7 @@ export const sendCreateMenu = async (bot: TelegramBot, chatId: string, fileName:
                 ],
             }
         ),
-    };
+    } as any; 
 
     await bot.sendMessage(chatId, `${i18n.de.whatTypeOfEntity}[${fileName}]?`, options);
 };

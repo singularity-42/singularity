@@ -7,6 +7,7 @@ import { DetailsProvider } from "@/hooks/provider/DetailsProvider";
 import Background from "@/components/base/Background";
 import Impressum from "@/components/base/Impressum";
 import AuthProvider from "@/hooks/provider/AuthProvider";
+import Credentials from "@/components/layout/Credentials";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <TooltipProvider>
               <Header />
               {children}
+              <Credentials />
             </TooltipProvider>
             <Impressum />
           </DetailsProvider>

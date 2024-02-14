@@ -3,7 +3,8 @@ import fs from 'fs';
 import * as glob from 'glob';
 import { FileContent } from '@/types';
 import { inexactMetadataMarkdown } from './metadata';
-import { loadFile } from './file';
+import { getFilePaths, loadFile } from './file';
+import exp from 'constants';
 
 export interface Connection {
   title?: string;
@@ -11,115 +12,192 @@ export interface Connection {
   edges: Edge[];
 }
 
-export const extractNodesAndEdges = (
-  content: string,
-  sourceNodeId: number,
-  existingNodes: Map<string, number>,
-  nodes: Node[],
-  edges: Edge[],
-  depth: number
-): Connection => {
-  const matches = content.match(/\[\[(.*?)\]\]/g);
+export const getOutgoingFiles = (file: FileContent, credentials: string[]): FileContent[] => {
+  let files: FileContent[] = [];
 
-  if (matches) {
-    matches.forEach(match => {
-      const nodeName = match.replace('[[', '').replace(']]', '');
-      const nodeId = nodes.length + 1;
+  let content = inexactMetadataMarkdown(file.metadata, file.markdown);
+  let matches = content.match(/\[\[(.*?)\]\]/g) || [];
 
-      if (!existingNodes.has(nodeName)) {
-        nodes.push({
-          id: nodeId,
-          label: nodeName,
-          title: `Node: ${nodeId}, Name: ${nodeName}`,
-        });
+  matches.forEach(matchValue => {
+    if (matchValue == null || matchValue.length === 0) return;
+    const nodeName = matchValue.replace('[[', '').replace(']]', '');
+    const node = loadFile(credentials, nodeName);
+    if (node) {
+      files.push(node);
+    }
+  });
 
-        edges.push({
-          from: sourceNodeId,
-          to: nodeId,
-        });
+  files = files.filter((file, index, self) =>
+    index === self.findIndex((t) => (
+      t.name === file.name
+    ))
+  );
 
-        existingNodes.set(nodeName, nodeId);
-      }
+  return files;
+}
 
-      edges.push({
-        from: sourceNodeId,
-        to: existingNodes.get(nodeName) || 0,
-      });
+export const getIncomingFiles = (file: FileContent, credentials: string[]): FileContent[] => {
+  let files: FileContent[] = [];
+  let allFiles = getFilePaths();
 
-      if (depth > 0) {
-        const file = loadFile(nodeName);
-        if (file) {
-          let content = inexactMetadataMarkdown(file.metadata, file.markdown);
-          const result = extractNodesAndEdges(content, nodeId, existingNodes, nodes, edges, depth - 1);
-          nodes = result.nodes;
-          edges = result.edges;
-        }
-      }
-    });
-  }
+  allFiles = allFiles.filter(filePath => {
+    return !filePath.includes('concepts');
+  });
 
-  return { nodes, edges } as Connection;
-};
+  allFiles.forEach(filePath => {
+    let otherFile = loadFile(credentials, undefined, filePath);
+    if (!otherFile) return;
+    let outgoingFiles = getOutgoingFiles(otherFile, credentials);
+    if (outgoingFiles.find(outgoingFile => outgoingFile.name === file.name)) {
+      files.push(otherFile);
+    }
+  });
+
+  files = files.filter((file, index, self) =>
+    index === self.findIndex((t) => (
+      t.name === file.name
+    ))
+  );
+
+  return files;
+}
 
 export const buildNodesAndEdges = (
   file: FileContent,
-  existingNodes: Map<string, number>,
-  nodes: Node[],
-  edges: Edge[],
-  depth: number
+  credentials: string[]
 ): Connection => {
-  const mainNodeId = nodes.length + 1;
-  let content = inexactMetadataMarkdown(file.metadata, file.markdown);
-  const result: Connection = { nodes, edges };
+  let connection: Connection = { edges: [], nodes: [] };
+  let nodes = connection.nodes;
+  let edges = connection.edges;
+  let existingNodes = new Map<string, number>();
 
-  if (!existingNodes.has(file.name)) {
-    if (file.name === file.name) {
-      nodes.push({
-        id: 0,
-        label: file.name,
-        title: `Node: 1, Name: ${file.name}`,
-        color: {
-          background: '#ff4242',
-          border: '#ff4242',
-          highlight: {
-            background: '#420000',
-            border: '#ffffff',
-          },
-        },
-        borderWidth: 3,
-      });
-
-      const extractResult = extractNodesAndEdges(content, mainNodeId, existingNodes, nodes, edges, depth);
-      result.nodes = extractResult.nodes;
-      result.edges = extractResult.edges;
-    } else if (file.name && content.includes(file.name)) {
-      nodes.push({
-        id: mainNodeId,
-        label: file.name,
-        title: `Node: ${mainNodeId}, Name: ${file.name}`,
-      });
-
-      edges.push({
-        from: 0,
-        to: mainNodeId,
-      });
-
-      existingNodes.set(file.name, mainNodeId);
-    }
+  if (file.name === file.name) {
+    nodes.push(generateNode(file, 0));
+    existingNodes.set(file.name, 0);
   }
 
-  return result;
+  let outgoingFiles = getOutgoingFiles(file, credentials);
+  let incomingFiles = getIncomingFiles(file, credentials);
+
+  if (outgoingFiles.length > 0) {
+    outgoingFiles.forEach(outgoingFile => {
+      const outgoingNodeId = nodes.length + 1;
+      if (!existingNodes.has(outgoingFile.name)) {
+        nodes.push(generateNode(outgoingFile, outgoingNodeId));
+        existingNodes.set(outgoingFile.name, outgoingNodeId);
+      }
+
+      edges.push(generateEdge(existingNodes.get(file.name) || 0, existingNodes.get(outgoingFile.name) || 0));
+    });
+  }
+
+  if (incomingFiles.length > 0) {
+    incomingFiles.forEach(incomingFile => {
+      const incomingNodeId = nodes.length + 1;
+      if (!existingNodes.has(incomingFile.name)) {
+        nodes.push(generateNode(incomingFile, incomingNodeId));
+        existingNodes.set(incomingFile.name, incomingNodeId);
+      }
+
+      edges.push(generateEdge(existingNodes.get(incomingFile.name) || 0, existingNodes.get(file.name) || 0));
+    });
+  }
+
+  return connection;
 };
 
-export const addMissingEdges = (nodes: Node[], edges: Edge[]): Connection => {
-  for (const node of nodes) {
-    if (node.id !== 0) {
-      edges.push({
-        from: 0,
-        to: node.id,
+const getColorBackground = (category: string): string => {
+  switch (category) {
+    case 'concepts':
+      return '#424242';
+    case 'creatives':
+      return '#ff2a2a';
+    case 'collectives':
+      return '#de5454';
+    case 'collaborations':
+      return '#40a8a8';
+    default:
+      return '#42424280';
+  }
+};
+
+
+export const generateNode = (file: FileContent, id: number): Node => {
+  return {
+    id,
+    label: file.name,
+    title: `Node: ${id}, Name: ${file.name}`,
+
+    color: {
+      background: id == 0 ? '#ffffff' : getColorBackground(file.category || ''),
+      border: '#00000000',
+      highlight: {
+        background: '#420000',
+        border: '#ffffff',
+      },
+    },
+    borderWidth: 3,
+    fixed: id == 0 ? true : false,
+  } as Node;
+
+};
+
+export const generateEdge = (from: number, to: number): Edge => {
+  return {
+    from,
+    to,
+  };
+}
+
+export const findConnections = (
+  file: FileContent,
+  credentials: string[],
+  depth: number = 2
+): Connection => {
+  let connection: Connection = { edges: [], nodes: [] };
+  let nodes = connection.nodes;
+  let edges = connection.edges;
+  let existingNodes = new Map<string, number>();
+
+  const traverse = (currentFile: FileContent, currentDepth: number) => {
+    if (currentDepth <= 0) return;
+
+    let outgoingFiles = getOutgoingFiles(currentFile, credentials);
+    let incomingFiles = getIncomingFiles(currentFile, credentials);
+
+    if (outgoingFiles.length > 0) {
+      outgoingFiles.forEach(outgoingFile => {
+        const outgoingNodeId = nodes.length + 1;
+        if (!existingNodes.has(outgoingFile.name)) {
+          nodes.push(generateNode(outgoingFile, outgoingNodeId));
+          existingNodes.set(outgoingFile.name, outgoingNodeId);
+        }
+
+        edges.push(generateEdge(existingNodes.get(currentFile.name) || 0, existingNodes.get(outgoingFile.name) || 0));
+        traverse(outgoingFile, currentDepth - 1);
       });
     }
+
+    if (incomingFiles.length > 0) {
+      incomingFiles.forEach(incomingFile => {
+        const incomingNodeId = nodes.length + 1;
+        if (!existingNodes.has(incomingFile.name)) {
+          nodes.push(generateNode(incomingFile, incomingNodeId));
+          existingNodes.set(incomingFile.name, incomingNodeId);
+        }
+
+        edges.push(generateEdge(existingNodes.get(incomingFile.name) || 0, existingNodes.get(currentFile.name) || 0));
+        traverse(incomingFile, currentDepth - 1);
+      });
+    }
+  };
+
+  if (file.name === file.name) {
+    nodes.push(generateNode(file, 0));
+    existingNodes.set(file.name, 0);
   }
 
-  return { nodes, edges } as Connection;
+  traverse(file, depth);
+
+  return connection;
 };

@@ -1,9 +1,9 @@
 ---
 tags:
-  - 8-10€
   - 22doors
-  
   - soul
+  - 8€
+  - 10€
 location: "[[transit]]"
 ---
 We gather again to the circle of love !

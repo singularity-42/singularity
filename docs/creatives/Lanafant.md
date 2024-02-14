@@ -5,4 +5,5 @@ mail:
 tel: 
 tags:
   - artist
+connections: "[[reiz]]"
 ---

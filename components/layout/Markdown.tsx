@@ -125,7 +125,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active, editing, onChange 
   };
 
   return (
-    <div className={`${styles.markdown} ${active ? styles.active : ''}`}>
+    <div className={`${styles.markdown}`}>
       {editing ? (
         <textarea
           className={styles.textarea}

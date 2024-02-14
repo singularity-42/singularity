@@ -1,5 +1,6 @@
 .active {
     color: rgb(var(--light-rgb)) !important;
+
     .anchor {
         color: rgb(var(--secondary-rgb)) !important;
     }
@@ -13,10 +14,11 @@
     border-radius: 5px;
     text-align: left;
 
-    
+
     transition: color 0.2s ease-in-out;
+
     &:hover {
-        
+
         .anchor {
             color: rgb(var(--secondary-rgb));
         }
@@ -111,24 +113,31 @@
         width: 80vw;
         margin: 0 0;
     }
+
     .h1 {
         font-size: calc(var(--heading-font-size) * 1.1);
     }
+
     .h2 {
         font-size: calc(var(--heading-font-size) * 0.9);
     }
+
     .h3 {
         font-size: calc(var(--heading-font-size) * 0.8);
     }
+
     .h4 {
         font-size: calc(var(--heading-font-size) * 0.7);
     }
+
     .li {
         margin-left: 1rem;
     }
+
     .ul {
         margin-bottom: 1rem;
     }
+
     .ol {
         margin-bottom: 1rem;
     }
@@ -138,7 +147,8 @@
 
 
 .textarea {
-    height: 100vh;
+    height: 60vh;
+    width: 100%;
     padding: 0px;
     border-radius: 5px;
     border: 1px solid rgba(var(--secondary-rgb), 0.2);
@@ -148,7 +158,27 @@
     font-family: var(--font-family);
     margin-bottom: 20px;
     transition: color 0.2s ease-in-out;
-    width: 100%;
     margin: 0;
+    margin-bottom: 1.5rem;
     text-align: left;
+
+    color: rgb(var(--light-rgb));
+    transition: transform 0.3s ease;
+    position: static;
+    border-radius: 4.2px;
+    cursor: pointer;
+    background: rgba(var(--dark-rgb), 0.2);
+    transition: background-color 0.3s ease;
+    border: none;
+
+    // place left#
+    text-align: left;
+
+    &:hover {
+        background-color: rgba(var(--light-rgb), 0.2);
+    }
+
+    &.selected {
+        background-color: rgb(var(--secondary-rgb));
+    }
 }

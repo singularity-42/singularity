@@ -22,10 +22,11 @@
   transition: opacity 500ms;
 }
 
+// }
+
+// all combined use just last
 .tagInput {
   height: 100%;
-  margin: 0 auto;
-  padding: 0.42rem;
   border: 1px solid rgba(var(--secondary-rgb), 0.2);
   border-radius: 5px;
   background-color: rgba(var(--secondary-rgb), 0.1);
@@ -42,8 +43,8 @@
   }
 
   // display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
   // width: 200px;
   cursor: pointer;
   font-size: var(--font-size);
@@ -58,19 +59,19 @@
   background: rgba(var(--dark-rgb), 0.2);
   transition: background-color 0.3s ease;
   border: none;
-  
+
   // no text wrapping
   white-space: nowrap;
-  
+
   // place left#
   text-align: left;
-  
+
   &:hover {
     background-color: rgba(var(--light-rgb), 0.2);
   }
 
   &.selected {
     background-color: rgb(var(--secondary-rgb));
-    
+
   }
 }

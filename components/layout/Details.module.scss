@@ -28,7 +28,14 @@
   }
 }
 
+.loading {
+  // blur all 
+  filter: blur(4.2px);
+}
+
 .popup {
+  // filter: blur(0);
+  transition: filter 0.3s ease-in-out;
   --space: 2rem;
   --top-space: calc(1rem + var(--space));
   opacity: 0;
@@ -95,23 +102,6 @@
 }
 
 
-.editButtonContainer {
-  position: fixed;
-  text-align: left;
-  top: 1.5rem;
-  right: 7.5rem;
-  transform: scale(1.2);
-  cursor: pointer;
-  color: var(--light-color);
-  font-size: 1.2rem;
-  border: none;
-  background: none;
-  outline: none;
-
-  &:hover {
-    color: rgb(var(--secondary-rgb));
-  }
-}
 
 .shareButtonContainer {
   position: fixed;
@@ -130,6 +120,44 @@
     color: rgb(var(--secondary-rgb));
   }
 }
+
+
+.editButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: calc(4.2rem + (4.2rem - 1.5rem));
+  transform: scale(1.2);
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+}
+
+.graphButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: 9.5rem;
+  transform: scale(1.2);
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+}
+
 
 .fileContainer {
   padding: 0.42rem;
@@ -166,6 +194,29 @@
   border: none;
   height: 2rem;
   font-family: var(--font-family);
+
+  color: rgb(var(--light-rgb));
+  transition: transform 0.3s ease;
+  position: static;
+  border-radius: 4.2px;
+  cursor: pointer;
+  background: rgba(var(--dark-rgb), 0.2);
+  transition: background-color 0.3s ease;
+  border: none;
+
+  // no text wrapping
+  white-space: nowrap;
+
+  // place left#
+  text-align: left;
+
+  &:hover {
+    background-color: rgba(var(--light-rgb), 0.2);
+  }
+
+  &.selected {
+    background-color: rgb(var(--secondary-rgb));
+  }
 }
 
 .fileMarkdown {

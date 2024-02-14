@@ -10,7 +10,13 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     if (fileName) fileName = decodeURIComponent(fileName) || '';
     
-    let file: FileContent = loadFile(fileName);
+    let credentials = (req.headers.get("Authorization")?.split(' ')[1] || '').split(':') || [];
+  
+    let file = loadFile(credentials, fileName);
+
+    if( file == null) return new Response("File not found", {
+        status: 404,
+    });
 
     return new Response(JSON.stringify(file), {
         headers: {
