@@ -1,24 +1,77 @@
 .tags {
-    position: relative;
-    width:  100%;
-    height:  100%;
-    margin:  0 auto;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
-    align-items: left;
-    gap:  0.42rem;
-    padding:  0.42rem;
-    overflow-y: hidden;
-    overflow-x: auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: left;
+  gap: 0.42rem;
+  padding: 0.42rem;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+// }
+
+// all combined use just last
+.tagInput {
+  height: 100%;
+  border: 1px solid rgba(var(--secondary-rgb), 0.2);
+  border-radius: 5px;
+  background-color: rgba(var(--secondary-rgb), 0.1);
+  color: rgb(var(--secondary-rgb));
+  text-align: left;
+  // place in center
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: rgb(var(--light-rgb));
   }
-  
-  .fade-enter {
-    opacity:  0;
+
+  // display: flex;
+  justify-content: left;
+  align-items: left;
+  // width: 200px;
+  cursor: pointer;
+  font-size: var(--font-size);
+  // padding: 0.42rem;
+  padding: 0.2rem;
+  font-weight: bold;
+  color: rgb(var(--light-rgb));
+  transition: transform 0.3s ease;
+  position: static;
+  border-radius: 4.2px;
+  cursor: pointer;
+  background: rgba(var(--dark-rgb), 0.2);
+  transition: background-color 0.3s ease;
+  border: none;
+
+  // no text wrapping
+  white-space: nowrap;
+
+  // place left#
+  text-align: left;
+
+  &:hover {
+    background-color: rgba(var(--light-rgb), 0.2);
   }
-  
-  .fade-enter-active {
-    opacity:  1;
-    transition: opacity  500ms;
+
+  &.selected {
+    background-color: rgb(var(--secondary-rgb));
+
   }
-  
+}

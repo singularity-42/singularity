@@ -12,6 +12,58 @@
     animation: fadeIn 0.5s ease-in-out forwards;
 
 }
+.addSocialInput
+{
+    height: 100%;
+    border: 1px solid rgba(var(--secondary-rgb), 0.2);
+    border-radius: 5px;
+    background-color: rgba(var(--secondary-rgb), 0.1);
+    color: rgb(var(--secondary-rgb));
+    text-align: left;
+    // place in center
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 0.2s ease-in-out;
+  
+    &:hover {
+      color: rgb(var(--light-rgb));
+    }
+  
+    // display: flex;
+    justify-content: left;
+    align-items: left;
+    // width: 200px;
+    cursor: pointer;
+    font-size: var(--font-size);
+    // padding: 0.42rem;
+    padding: 0.2rem;
+    font-weight: bold;
+    color: rgb(var(--light-rgb));
+    transition: transform 0.3s ease;
+    position: static;
+    border-radius: 4.2px;
+    cursor: pointer;
+    background: rgba(var(--dark-rgb), 0.2);
+    transition: background-color 0.3s ease;
+    border: none;
+  
+    // no text wrapping
+    white-space: nowrap;
+  
+    // place left#
+    text-align: left;
+  
+    &:hover {
+      background-color: rgba(var(--light-rgb), 0.2);
+    }
+  
+    &.selected {
+      background-color: rgb(var(--secondary-rgb));
+    }
+    padding: 0.42rem 0.2rem;
+    margin-left: 0.42rem;
+}
 
 
 @keyframes fadeIn {

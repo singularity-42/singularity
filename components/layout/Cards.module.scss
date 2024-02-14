@@ -2,13 +2,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-
-  padding: 1.111rem 2.222rem;
+  user-select: none;
+  padding: 1.3rem 2.6rem;
 }
 
 @media (max-width: 768px) {
   .cardGrid {
-    padding: 0.42rem;
+    padding: 1rem;
     // gap: 0.42rem;
   }
 }
@@ -18,7 +18,7 @@
 
 }
 
-.entityCard {
+.fileCard {
   padding: 16px;
   /* Adjust padding as needed */
 }

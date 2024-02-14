@@ -4,7 +4,7 @@ import Calendar from '@/components/layout/Calendar';
 
 const collaborationPage: React.FC = () => {
   return (
-      <Calendar type="collaborations" orderType={OrderType.CounterAlphabetical} />
+      <Calendar category="collaborations" orderType={OrderType.CounterAlphabetical} />
       
   );
 };

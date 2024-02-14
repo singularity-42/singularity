@@ -1,16 +1,16 @@
 "use client"
 
 import Details from '@/components/layout/Details';
-import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 
 // Define the context interface
 interface DetailsContextInterface {
     name: string;
-    setName: Dispatch<SetStateAction<string>>;
+    setName: (name: string) => void;
     toggleVisibility: () => void;
     visible: boolean;
-    goBack: () => string | null;
-    history: string[];
+    editing: boolean;
+    setEditing: (editing: boolean) => void;
 }
 
 // Create the context
@@ -25,20 +25,7 @@ interface DetailsProviderProps {
 export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: DetailsProviderProps) => {
     const [name, setName] = useState<string>('');
     const [visible, setVisible] = useState<boolean>(false);
-
-    const [history, setHistory] = useState<string[]>([]);
-    const addToHistory = (link: string) => {
-        setHistory([...history, link]);
-    };
-
-    const goBack = () => {
-        if (history.length >  0) {
-            const lastLink = history.pop();
-            setHistory([...history]);
-            return lastLink || '';
-        }
-        return null;
-    };
+    const [editing, setEditing] = useState(false);
 
     const toggleVisibility = () => {
         setVisible(!visible);
@@ -49,8 +36,8 @@ export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: De
         setName,
         toggleVisibility,
         visible,
-        goBack,
-        history,
+        editing,
+        setEditing,
     };
 
     return (

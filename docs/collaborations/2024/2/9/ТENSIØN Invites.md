@@ -3,9 +3,10 @@ subtitle: "ТENSIØN Invites: Jun.Choi"
 tags:
   - 23doors
   - 5end
-  - 8-10€
   - club
   - techno
+  - 8€
+  - 10€
 location: "[[transit]]"
 ---
 Join us as we kick off a brand new series: TENSIØN Invites! In this exciting venture, we extend invitations to both up-and-coming talents and our DJ friends within the scene.

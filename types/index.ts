@@ -6,20 +6,14 @@ export enum OrderType {
     CounterAlphabetical = "CounterAlphabetical"
 }
 
-export interface Entity {
-    title?: string;
-    tags?: string[];
-    folder?: string;
-    address?: string;
-    location?: string;
-    description?: string;
-    content?: string;
+export interface Connection {
+  title: string;
+  nodes: Node[];
+  edges: Edge[];
 }
 
-export interface Relation {
-    title: string;
-    nodes: Node[];
-    edges: Edge[];
+export interface I18nMessages {
+  [key: string]: string;
 }
 
 export const TYPE_DESCRIPTIONS: { [key: string]: string } = {
@@ -27,8 +21,33 @@ export const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     collectives: "Gruppen, die gemeinsam inspirierende Inhalte erstellen.",
     creatives: "Inhaltsschöpfer, die ihre Vorstellungskraft in die Tat umsetzen.",
     concepts: "Ideen, die unseren Content formen.",
-    // contact: "Kontaktinformationen für die Singularität.",
-    changes: "Veränderungen in Bezug auf die Singularität.",
-    // cyberware: "Werkzeuge und Dienstleistungen, die unser#e Singularität antreiben.",
+    changes: "Veränderungen mit Geschichte.",
 };
 
+// types.ts
+
+export interface Metadata {
+  [key: string]: string | string[];
+}
+
+export interface FileContent {
+  name: string;
+  metadata: Metadata;
+  markdown: string;
+  category: string | null;
+  path: string | null;
+  date: string | null;
+}
+
+export interface LoadResult extends FileContent {
+  content: string;
+}
+
+export interface SaveFile extends FileContent {}
+
+export interface Change {
+  type: string;
+  key: string;
+  post: string;
+  past: string;
+}
