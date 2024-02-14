@@ -10,21 +10,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node-telegram-bot-api": "^0.64.2",
     "axios": "^1.6.1",
     "fs": "^0.0.1-security",
     "glob": "^10.3.10",
     "next": "14.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-google-recaptcha-v3": "^1.10.1",
     "react-graph-vis": "^1.0.7",
     "react-icons": "^4.12.0",
     "react-markdown": "^9.0.0",
     "react-social-media-embed": "^2.3.8",
     "remark-gfm": "^4.0.0",
     "sass": "^1.69.5",
-    "supports-color": "^9.4.0",
     "vis-data": "^7.1.9",
     "vis-network": "^9.1.9"
   },
@@ -32,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18.2.18",
+    "@types/node-telegram-bot-api": "^0.64.2",
     "node-telegram-bot-api": "^0.64.0",
     "typescript": "^5"
   }
