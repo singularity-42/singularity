@@ -1,7 +1,6 @@
 {
   "name": "singularity",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "auto": "node ./init.js",
     "dev": "next dev",

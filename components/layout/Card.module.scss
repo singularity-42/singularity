@@ -7,16 +7,17 @@
   border-radius: 12px;
   /* Rounded corners for a modern look */
   background: rgba(var(--dark-rgb), 0.42);
+
   &.scrollable {
     overflow: scroll;
   }
-  
+
   &:hover {
     transform: scale(1.042);
     /* Scale on hover for a subtle interactive effect */
     box-shadow: 0 4px 8px rgba(var(--dark-rgb), 0.2);
   }
-  
+
   transition: transform 0.3s ease-in-out;
 }
 
@@ -41,11 +42,12 @@
   // border-radius: 8px;
   // mix-blend-mode: difference;
   transition: opacity 0.42s ease-in-out;
-  
+
   opacity: 0;
   filter: contrast(1.2) brightness(0.42);
-  
+
 }
+
 .loaded {
   opacity: 0.42;
   transition: opacity 0.42s ease-in-out;
@@ -186,5 +188,44 @@
   &:hover {
 
     transform: scale(1.1);
+  }
+}
+
+
+.create {
+  // background-color: transparent;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  .titleContainer {
+    margin-bottom: none;
+    padding-bottom: none;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--light-rgb);
+    //center
+    text-align: center;
+
+  }
+
+  .description{
+    // in description is an svg small but it should be centered and large in the card
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    svg {
+      width: 20vh;
+      height: 20vh;
+      opacity: 0.42;
+    }
+ 
   }
 }
