@@ -15,6 +15,32 @@ const Credentials: React.FC = () => {
     setNewCredential('');
   }, [newCredential]);
 
+  let timeoutId: any = null;
+
+  const handleCopyCredential = useCallback((e: React.MouseEvent<HTMLSpanElement>, credential: string) => {
+    const target = e.target as HTMLSpanElement; // Cast to the correct type
+    if (target && target.textContent) {
+
+      navigator.clipboard.writeText(credential);
+
+      // Change the text for  2 seconds to indicate that the content was copied
+      target.textContent = 'Copied!';
+
+      // If a timeout is already set, clear it before setting a new one
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      // Set a new timeout and save its ID
+      timeoutId = setTimeout(() => {
+        if (target && target.textContent === 'Copied!') {
+          target.textContent = credential; // Reset the text after  2 seconds
+        }
+      }, 2000);
+    }
+  }, []);
+
+
   return (<>
     <div className={styles.credentialsButtonContainer}>
       <button className={styles.credentialsButton} onClick={toggleOverlay}>
@@ -30,7 +56,12 @@ const Credentials: React.FC = () => {
 
         <div className={styles.Credentials__content}>
           {credentials.map((credential) => (
-            <div key={credential} className={styles.Credentials__credential}>
+            <div
+              key={credential}
+              className={styles.Credentials__credential}
+              // copy content to clipboard on click
+              onClick={(e) => handleCopyCredential(e, credential)}
+            >
               <span>{credential}</span>
               <button onClick={() => removeCredentials(credential)}><MdClose /></button>
             </div>
@@ -43,6 +74,7 @@ const Credentials: React.FC = () => {
               placeholder="XXX-XXX-XXX"
               value={newCredential}
               onChange={(e) => setNewCredential(e.target.value)}
+
             />
             <button onClick={handleAddCredential}><MdAdd /></button>
           </div>
