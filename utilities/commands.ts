@@ -207,7 +207,7 @@ export const onCreate = async (bot: TelegramBot, msg: Message, credentials: stri
 
   let metadata = {
     mail: "",
-    location: "",
+    connections:  "",
     tags: [],
     connections: [],
     // confirmed: [msg.from.id],

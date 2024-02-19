@@ -51,3 +51,31 @@ export interface Change {
   post: string;
   past: string;
 }
+
+export interface Filter {
+  tags: string[];
+  name: string;
+  date: Date | null;
+  category: string;
+  connections: string[];
+}
+
+
+export const SITE_METADATA = {
+  title: "Singularity",
+  description: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
+  abstract: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
+  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Change", "Chemnitz"],
+  applicationName: "Singularity",
+  authors: [
+    {
+      name: "Singularity",
+      url: "https://singularity.2n40.eu",
+    },
+    {
+      name: "Drumni",
+      url: "https://github.com/drumni",
+    },
+  ],
+  robots: "index, follow",
+};

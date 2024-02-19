@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useEffect } from "react";
 import { DataSet, Network, Node, Edge, Options } from "vis-network";
 import styles from "./Graph.module.scss";
@@ -135,7 +137,9 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     // Additional logic for getNodes, getEdges
   }, [edges, nodes, options, events, getNetwork]);
 
-  const identifier = generateUUID(); // Generate a unique identifier
+  const identifier = "graph-container";
+
+  // Render the graph
 
   return (
     <div className={styles.graphContainer}>
@@ -144,12 +148,5 @@ const Graph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork })
     </div>
   );
 };
-
-function generateUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() *  16 |  0, v = c === 'x' ? r : (r &  0x3 |  0x8);
-    return v.toString(16);
-  });
-}
 
 export default Graph;

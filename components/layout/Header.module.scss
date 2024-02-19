@@ -10,9 +10,5 @@
     margin-top: 0;
     justify-content: space-between;
     z-index: 100;
-}
-
-
-@media (max-width: 768px) {
-   
+    height: var(--header-height);
 }

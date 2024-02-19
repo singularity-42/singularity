@@ -18,7 +18,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     files = files.filter((file: any) => {
       let date = new Date(file?.date.split("-").reverse());
       let now = new Date();
-      return date.getTime() >= now.getTime();
+      return date.getTime() >= now.getTime() - 1000 * 60 * 60 * 24;
     });
 
   return new Response(JSON.stringify(files), {

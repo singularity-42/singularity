@@ -1,11 +1,17 @@
-"use client"
-
+import { Filter } from '@/types';
 import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+
 
 // Define the context interface
 interface FilterContextInterface {
-    filter: string[];
-    setFilter: Dispatch<SetStateAction<string[]>>;
+  filter: Filter;
+  setFilterTags: (tags: string[]) => void;
+  setFilterName: (name: string) => void;
+  setFilterDate: (date: Date | null) => void;
+  setFilterCategory: (category: string) => void;
+  setFilterConnections: (connections: string[]) => void;
+
+  onFilterClick(filter: Filter): void;
 }
 
 // Create the context
@@ -13,47 +19,53 @@ const FilterContext = createContext<FilterContextInterface | undefined>(undefine
 
 // Define the props for the FilterProvider
 interface FilterProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const FilterProvider: React.FC<FilterProviderProps> = ({ children }: FilterProviderProps) => {
-    const [filter, setFilter] = useState<string[]>([]);
-  
-    // TODO: Update the URL when the filter changes
-    //  - code works for update when filter selected but is buggy
-    //  - code should work when open url with filter selected, currently not working
-    // useEffect(() => {
-    //   const queryParams = new URLSearchParams();
-  
-    //   if (filter.length > 0) {
-    //     queryParams.set('filter', filter.join(','));
-    //   }
-  
-    //   const queryString = queryParams.toString();
-    //   const newUrl = queryString ? `?${queryString}` : window.location.pathname;
-  
-    //   window.history.replaceState(null, '', newUrl);
-    // }, [filter]);
-  
-    const filterContextValue: FilterContextInterface = {
-      filter,
-      setFilter,
-    };
-  
-    return (
-      <FilterContext.Provider value={filterContextValue}>
-        {children}
-      </FilterContext.Provider>
-    );
+  const [filter, setFilter] = useState<Filter>({
+    tags: [],
+    name: '',
+    date: null,
+    category: '',
+    connections: [],
+  });
+
+  const setFilterTags = (tags: string[]) => setFilter((prev) => ({ ...prev, tags }));
+  const setFilterName = (name: string) => setFilter((prev) => ({ ...prev, name }));
+  const setFilterDate = (date: Date | null) => setFilter((prev) => ({ ...prev, date }));
+  const setFilterCategory = (category: string) => setFilter((prev) => ({ ...prev, category }));
+  const setFilterConnections = (connections: string[]) => setFilter((prev) => ({ ...prev, connections }));
+
+  const onFilterClick = (filter: Filter) => {
+    setFilter(filter);
   };
-  
+
+  const filterContextValue: FilterContextInterface = {
+    filter,
+    setFilterTags,
+    setFilterName,
+    setFilterDate,
+    setFilterCategory,
+    setFilterConnections,
+
+    onFilterClick
+  };
+
+  return (
+    <FilterContext.Provider value={filterContextValue}>
+      {children}
+    </FilterContext.Provider>
+  );
+};
+
 // useFilter is a custom hook to consume the filter context
 export const useFilter = () => {
-    const context = React.useContext(FilterContext);
-    if (context === undefined) {
-        throw new Error('useFilter must be used within a FilterProvider');
-    }
-    return context;
+  const context = React.useContext(FilterContext);
+  if (context === undefined) {
+    throw new Error('useFilter must be used within a FilterProvider');
+  }
+  return context;
 };
 
 export default FilterContext;

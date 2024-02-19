@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata as NextMetadata } from "next";
+
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { TooltipProvider } from "@/hooks/provider/TooltipProvider";
@@ -8,27 +8,17 @@ import Background from "@/components/base/Background";
 import Impressum from "@/components/base/Impressum";
 import AuthProvider from "@/hooks/provider/AuthProvider";
 import Credentials from "@/components/layout/Credentials";
+import {
+  Inter,
+  // for fallback simmilar
+  Kanit,
+} from 'next/font/google';
+import { SITE_METADATA } from "@/types";
 
-const inter = Inter({ subsets: ["latin"] });
+export const metadata: NextMetadata = SITE_METADATA;
+import localFont from 'next/font/local';
 
-export const metadata: Metadata = {
-  title: "Singularity",
-  description: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
-  abstract: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
-  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Change", "Chemnitz"],
-  applicationName: "Singularity",
-  authors: [
-    {
-      name: "Singularity",
-      url: "https://singularity.2n40.eu",
-    },
-    {
-      name: "Drumni",
-      url: "https://github.com/drumni",
-    },
-  ],
-  robots: "index, follow",
-};
+const inter = localFont( {src: './Inter.ttf'});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -39,7 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <DetailsProvider>
             <TooltipProvider>
               <Header />
-              {children}
+              <div className="container">
+                {children}
+              </div>
               <Credentials />
             </TooltipProvider>
             <Impressum />

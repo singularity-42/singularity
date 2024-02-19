@@ -9,7 +9,7 @@ tags:
   - dub
   - jungle
   - breakbeat
-location: "[[AJZ]]"
+connections:  "[[AJZ]]"
 confirmed:
 ---
 ### Timetable Toiletten

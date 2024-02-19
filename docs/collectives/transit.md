@@ -6,7 +6,6 @@ facebook: https://www.facebook.com/transit.chemnitz
 tel: 37128269115
 tags:
   - club
-location: 50.830613735661586, 12.939564584215244
 address: Reichenhainer Straße 1 09111 Chemnitz, Germany
 ---
 Zwischen 2 Bahnstrecken mitten in Chemnitz, wo Utopie und Macherinnen sich gute Nacht sagen, gemeinsam im Kreisverkehr Runden drehen, liegen wir - das transit.

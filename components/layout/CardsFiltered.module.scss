@@ -1,10 +1,7 @@
-.table {
+.filterCardsContainer {
     height: 100%;
     opacity: 0;
     animation: fadeIn 0.3s ease-in-out forwards;
-
-
-    
 }
 
 @keyframes fadeIn {

@@ -8,7 +8,6 @@ import {
     FaYoutube,
     FaSoundcloud,
     FaSpotify,
-    //   FaBeatport,
     FaBandcamp,
     FaTelegramPlane,
     FaTwitter,
@@ -26,7 +25,6 @@ export enum SocialMedia {
     soundcloud = 'soundcloud',
     spotify = 'spotify',
     facebook = 'facebook',
-    beatport = 'beatport',
     bandcamp = 'bandcamp',
     telegram = 'telegram',
     twitter = 'twitter',
@@ -79,11 +77,10 @@ const Social: React.FC<SocialMediaTagProps> = ({ socialMedia, username, onClick 
 
     const Icon = getSocialMediaIcon(socialMedia);
     if (!Icon) return null;
-    let url = '';
-    if (username?.startsWith('http') || username?.startsWith('www'))
-        url = username;
-    else
-        url = `https://www.${socialMedia}.com/${username}`;
+
+    const url = username.startsWith('http') || username.startsWith('www')
+        ? username
+        : `https://www.${socialMedia}.com/${username}`;
 
     const handleSocialMediaClick = (e: React.MouseEvent) => {
         e.stopPropagation();

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Loading.module.scss';
+import Image from 'next/image';
 
 interface LoadingProps {
   loading?: boolean;
@@ -19,7 +20,7 @@ const Loading: React.FC<LoadingProps> = ({ loading = true }) => {
 
   return (
     <div className={`${styles.loadingContainer} ${showLoading ? styles.show : ''}`}>
-      <img src="/singularity.png" alt="42" className={styles.faviconRotating} />
+      <Image src="/singularity.png" alt="42" className={styles.faviconRotating} width={500} height={500} priority  />
     </div>
   );
 };

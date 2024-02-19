@@ -8,7 +8,7 @@ tags:
   - hardtrance
   - 13€
   - 15€
-location: "[[transit]]"
+connections:  "[[transit]]"
 ---
 We are back with our first SubØhm in 2024. This time we have a local line up with guest acts from Leipzig.
 

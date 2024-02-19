@@ -10,15 +10,17 @@ import useImageWithFallback from "@/hooks/useImageWithFallback";
 import Markdown from "@/components/layout/Markdown";
 import Socials from "../layout/Socials";
 import Image from "next/legacy/image";
+import { FileContent } from "@/types";
+import Connections from "./Connections";
 
 interface CardProps {
-  file: any; // Replace 'any' with the actual type for your data
+  file: FileContent
   onTagClick?: (tag: string) => void;
 }
 
 const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
   const { name, metadata, category, markdown } = file || {};
-  const { tags, location } = metadata || {};
+  const { tags, connections } = metadata || {};
 
   // const { imgSrc } = useImageWithFallback(name);
   const { setName, toggleVisibility } = useDetails();
@@ -41,14 +43,14 @@ const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>{name}</h2>
         </div>
-        {location && location.match(/[a-zA-Z]/) && (
+        {connections && (
           <div className={styles.location}>
-            <Link name={location.replace(/[\[\]"]+/g, "")}>{location.replace(/[\[\]"]+/g, "")}</Link>
+            <Connections connections={typeof(connections) === "string" ? [connections] : connections} />
           </div>
         )}
         {tags && tags.length > 0 && (
           <div className={styles.tagsContainer}>
-            <Tags tags={tags} onTagClick={onTagClick} />
+            <Tags tags={typeof(tags) === "string" ? [tags] : tags} onTagClick={onTagClick} />
           </div>
         )}
         {markdown && (

@@ -4,7 +4,7 @@ tags:
   - umsonst
   - 20doors
   
-location: "[[Weltecho]]"
+connections:  "[[Weltecho]]"
 ---
 Eintritt Frei!
 

@@ -39,8 +39,8 @@ const Background = () => {
   useEffect(() => {
     const lerpFactor =  0.1; // Reduzierter Faktor für eine langsamere Bewegung
     lerpPos.current = {
-      x: lerp(lerpPos.current.x, pos.x, lerpFactor),
-      y: lerp(lerpPos.current.y, pos.y, lerpFactor),
+      x: Math.round(((lerpPos.current.x + (targetPos.x - lerpPos.current.x) * lerpFactor) * 10000) / 10000),
+      y: Math.round(((lerpPos.current.y + (targetPos.y - lerpPos.current.y) * lerpFactor) * 10000) / 10000),
     };
     document.documentElement.style.setProperty('--cursor-x', `${lerpPos.current.x}px`);
     document.documentElement.style.setProperty('--cursor-y', `${lerpPos.current.y}px`);

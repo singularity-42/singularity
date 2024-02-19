@@ -4,6 +4,6 @@ tags:
   - bergfest
   - 23doors
   
-location: "[[Atomino]]"
+connections:  "[[Atomino]]"
 ---
 Wöchentliche Bergfest-Party wird zur Konzert-Aftershow

@@ -31,10 +31,10 @@ const CardCreate: React.FC = () => {
     <div onClick={handleClick} onContextMenu={handleContextMenu} className={`${styles.card} ${styles.create}`} >
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.title}>&nbsp;</h2>
+          <h2 className={styles.title}>{filter.name || "NEW"}</h2>
         </div>
         <div className={styles.tagsContainer}>
-          <Tags tags={filter || []} />
+          <Tags tags={filter.tags || []} />
         </div>
         <div className={styles.description}>
           <MdAdd />

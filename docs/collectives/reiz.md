@@ -5,7 +5,7 @@ tags:
   - dnb
   - digitalart
   - events
-location: Chemnitz
+connections:  Chemnitz
 soundcloud: subohmxci
 ---
 chemnitz-based crew emphasizing forward-thinking techno, dnb, digital art and event experiences.

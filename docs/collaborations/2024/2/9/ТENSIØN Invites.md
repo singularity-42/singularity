@@ -7,7 +7,7 @@ tags:
   - techno
   - 8€
   - 10€
-location: "[[transit]]"
+connections:  "[[transit]]"
 ---
 Join us as we kick off a brand new series: TENSIØN Invites! In this exciting venture, we extend invitations to both up-and-coming talents and our DJ friends within the scene.
 

@@ -2,13 +2,12 @@
 
 import React from 'react';
 import { OrderType } from '@/types';
-import Calendar from '@/components/layout/Calendar';
 
 import { useEffect } from 'react';
+import CardsFiltered from '@/components/layout/CardsFiltered';
 
 export default function Home() {
   return (
-    <Calendar category="collaborations" orderType={OrderType.CounterAlphabetical} />
-    
+    <CardsFiltered calender category="collaborations" orderType={OrderType.CounterAlphabetical} />
   );
 }

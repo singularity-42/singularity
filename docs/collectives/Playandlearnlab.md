@@ -8,7 +8,6 @@ tags:
   - 3D
   - AR
   - workshop
-location: 50.83221756129794, 12.938954615087749
 address: Jakobstraße 42, 09130 Chemnitz, Germany
 connections:
   - "[[Calea]]"

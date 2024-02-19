@@ -1,7 +1,7 @@
 // RefactoredMarkdown.tsx
 
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 import styles from './Markdown.module.scss';
@@ -23,35 +23,29 @@ interface MarkdownProps {
 }
 
 const extractChildren = (children: any) => {
-  if (typeof children === 'string') {
-    return <span>{children}</span>;
-  }
-  
-  return children.map((child: any, i: number) => {
-    const linkRegex = /\[\[([^\]]+)\]\]/g;
-    const linkTemplate = (name: string) => <Link name={name} key={name}>{name}</Link>;
-    // check child.value for links
-    if (child?.value) {
-      const matches = child.value.match(linkRegex);
-      if (matches) {
-        const parts = child.value.split(linkRegex);
-        const newChildren = parts.map((part: string, i: number) => {
-          if (i % 2 === 0) {
-            return part;
-          }
-          const name = matches.shift();
-          return linkTemplate(name?.replace('[[', '').replace(']]', '') || '');
-        });
-        return newChildren;
-      }
-    }
+  let listChildren = children;
+  const linkRegex = /\[\[.+\]\]/g;
+  const hasLink = (str: string) => str ? str.match(linkRegex) : false;
+  const getLinkComponent = (str: string) => {
+    const name = str.replace('[[', '').replace(']]', '');
+    return <Link name={name}>{name}</Link>;
+  };
 
-    return (
-      <span key={i}>
-        {child?.type === 'element' ? child.children[0]?.value || '' : child.value}
-      </span>
-    );
-  });
+  console.log(typeof children, typeof children === 'string');
+
+  if (typeof children === 'string')
+    listChildren = children.split('\n').map((child: any) => child.trim());
+  else
+    listChildren = children.map((child: any) => child.value);
+
+  return listChildren.map((value: any) => {
+    if (hasLink(value)) return getLinkComponent(value);
+    return value
+  }).map((child: any, i: number) =>
+    <span key={i}>
+      {child}&nbsp;
+    </span>
+  );
 };
 
 
@@ -61,7 +55,7 @@ const renderHeader = (Tag: string) => ({ node, ...props }: any) => {
   return <Tag {...props} className={styles[Tag.toLowerCase()]}>{newChildren}</Tag>;
 };
 
-const renderParagraph = (node: any, props: any) => {
+const renderParagraph = (node: any, ...props: any) => {
   const children = node?.children as any;
   const newChildren = extractChildren(children);
   return <p {...props} className={styles.p}>{newChildren}</p>;
@@ -100,7 +94,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active, editing, onChange 
     // Render other cases as needed
   };
 
-  const customComponents = {
+  const customComponents: Partial<Components> = {
     td: ({ node, ...props }: any) => {
       const children = node?.children;
       if (!children) {
@@ -135,7 +129,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, active, editing, onChange 
       ) : (
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          components={customComponents as any}
+          components={customComponents as Partial<Components>}
         >
           {content}
         </ReactMarkdown>

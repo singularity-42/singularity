@@ -1,10 +1,10 @@
 import React from 'react';
 import { OrderType } from '@/types';
-import Calendar from '@/components/layout/Calendar';
+import CardsFiltered from '@/components/layout/CardsFiltered';
 
 const collaborationPage: React.FC = () => {
   return (
-      <Calendar category="collaborations" orderType={OrderType.CounterAlphabetical} />
+      <CardsFiltered calender category="collaborations" orderType={OrderType.CounterAlphabetical} />
       
   );
 };

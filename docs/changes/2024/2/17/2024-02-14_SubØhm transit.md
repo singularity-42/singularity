@@ -8,7 +8,7 @@ tags:
   - hardtrance
   - 13€
   - 15€
-location: "[[transit]]"
+connections:  "[[transit]]"
 cancel: 0
 confirmed:
   - "0"

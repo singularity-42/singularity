@@ -8,8 +8,7 @@ tel:
 tags:
   - bar
   - konzerte
-connections: 
-location: 
+connections:  
 address:
 ---
 Das aaltra liegt am Hang zwischen dem Kaßberg, dem bevölkerungsreichsten Stadtviertel Chemnitz', und dem Innenstadtring in einer Gründerzeitvilla, gemeinsam mit dem Kulturhaus Arthur e.V.

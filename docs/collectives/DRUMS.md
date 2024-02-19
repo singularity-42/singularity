@@ -4,8 +4,7 @@ instagram: _drums_official_
 mail: 
 tel: 
 tags: 
-connections: 
-location: 
+connections:  
 address: Chemnitz, Germany
 facebook: https://www.facebook.com/profile.php?id=100090596768017
 telegram: https://t.me/+_WWU9WwDlycyY2Fi

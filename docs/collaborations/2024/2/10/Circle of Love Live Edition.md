@@ -4,7 +4,7 @@ tags:
   - soul
   - 8€
   - 10€
-location: "[[transit]]"
+connections:  "[[transit]]"
 ---
 We gather again to the circle of love !
 
