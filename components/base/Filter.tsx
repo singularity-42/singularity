@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Filter.module.scss';
 import Tag from './Tag';
-import { Filter as FilterType } from '@/types';
+import { FileContent, Filter as FilterType } from '@/types';
 
 import { MdSearch } from 'react-icons/md';
 import { IoMdPricetag } from "react-icons/io";
@@ -11,58 +11,71 @@ import { BiSolidNetworkChart } from "react-icons/bi";
 
 
 interface FilterProps {
-  currentVisibleTags: string[];
+  files: FileContent[];
   filter: FilterType;
-  onFilterClick: (filter: FilterType) => void;
   setFilterName: (name: string) => void;
+  setFilterCategory: (category: string) => void;
+  setFilterDate: (date: Date) => void;
+  setFilterTags: (tags: string[]) => void;
+  setFilterConnections: (connections: string[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ filter, onFilterClick, setFilterName, currentVisibleTags }) => {
-  const [seenTags, setSeenTags] = useState<string[]>([]);
+const Filter: React.FC<FilterProps> = ({ files, filter, setFilterName, setFilterCategory, setFilterDate, setFilterTags, setFilterConnections }) => {
+ 
   const [costs, setCosts] = useState<string[]>([]);
   const [time, setTime] = useState<string[]>([]);
-  const [connections, setconnections] = useState<string[]>([]);
+  const [connections, setConnections] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
+    const currentVisibleTags = files
+      .map((file) => file.metadata.tags)
+      .flat()
+      .concat(files.map((file) => file.metadata.connections).flat());
+  
     const costsRegex = /(€|umsonst)/gm;
     const timeRegex = /(doors|close|day|morgen)/gm;
     const locationRegex = /(\[\[.*?\]\]|.*?\|\[\[.*?\]\])/gm;
-
-    const categorizedTags = seenTags.reduce((acc: any, tag: any) => {
-      let hasCostRegex = costsRegex.test(tag) || tag.includes('€');
-      let hasTimeRegex = timeRegex.test(tag);
-      let hasLocationRegex = locationRegex.test(tag) || (tag.includes('[[') && tag.includes(']]'));
-
-      if (hasCostRegex) {
-        !acc.costs.includes(tag) && acc.costs.push(tag);
-      } else if (hasTimeRegex) {
-        !acc.time.includes(tag) && acc.time.push(tag);
-      } else if (hasLocationRegex) {
-        !acc.connections.includes(tag) && acc.connections.push(tag.replace(/\[\[|\]\]/gm, ''));
-      } else {
-        !acc.tags.includes(tag) && acc.tags.push(tag);
-      }
-      return acc;
-    }, { costs: [], time: [], connections: [], tags: [] });
-
-    setCosts(categorizedTags.costs);
-    setTime(categorizedTags.time);
-    setconnections(categorizedTags.connections);
-    setTags(categorizedTags.tags);
-  }, [seenTags]);
+  
+    const categorizedTags = currentVisibleTags.reduce(
+      (acc: any, tag: any) => {
+        if (!tag) return acc;
+  
+        tag = tag.toLowerCase();
+        let hasCostRegex = costsRegex.test(tag) || tag.includes('€');
+        let hasTimeRegex = timeRegex.test(tag);
+        let hasConnectionRegex = locationRegex.test(tag) || (tag.includes('[[') && tag.includes(']]'));
+  
+        if (hasCostRegex) {
+          acc.costs.add(tag);
+        } else if (hasTimeRegex) {
+          acc.time.add(tag);
+        } else if (hasConnectionRegex) {
+          acc.connections.add(tag.replace(/\[\[|\]\]/gm, ''));
+        } else {
+          acc.tags.add(tag);
+        }
+        return acc;
+      },
+      { costs: new Set(), time: new Set(), connections: new Set(), tags: new Set() }
+    );
+  
+    setCosts(Array.from(categorizedTags.costs));
+    setTime(Array.from(categorizedTags.time));
+    setConnections(Array.from(categorizedTags.connections));
+    setTags(Array.from(categorizedTags.tags));
+  }, [files]);
 
   const handleTagClick = (tag: string) => {
-    let filter: FilterType = {
-      tags: [tag],
-      connections: [],
-      date: null,
-      name: '',
-      category: ''
-
-    };
-    onFilterClick(filter);
+    const tags = filter.tags.includes(tag) ? filter.tags.filter(t => t !== tag) : [...filter.tags, tag];
+    setFilterTags(tags);
   };
+
+  const handleConnectionClick = (location: string) => {
+    const connections = filter.connections.includes(location) ? filter.connections.filter(l => l !== location) : [...filter.connections, location];
+    setFilterConnections(connections);
+  };
+
 
   return (
     <div className={styles.filter}>
@@ -95,7 +108,7 @@ const Filter: React.FC<FilterProps> = ({ filter, onFilterClick, setFilterName, c
         {connections.length > 0 && <div className={styles.filterContainer}>
           <p className={styles.filterTitle}><BiSolidNetworkChart /></p>
           {connections.map((tag: string, index: number) => (
-            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
+            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleConnectionClick} selected={filter.tags.includes(tag)} />
           ))}
         </div>}
       </div>
