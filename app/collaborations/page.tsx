@@ -4,7 +4,7 @@ import CardsFiltered from '@/components/layout/CardsFiltered';
 
 const collaborationPage: React.FC = () => {
   return (
-      <CardsFiltered calender category="collaborations" orderType={OrderType.CounterAlphabetical} />
+      <CardsFiltered isCalender={true} category="collaborations" orderType={OrderType.CounterAlphabetical} />
       
   );
 };

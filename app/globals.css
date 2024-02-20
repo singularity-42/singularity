@@ -1,8 +1,8 @@
 :root {
   --font: Inter, Arial, Helvetica, sans-serif;
-  --font-size: 21px;
-  --heading-font-size: 42px;
-  --header-height: 4.2rem;
+  --font-size: 20px;
+  --heading-font-size: 1.5rem;
+  --header-height: 3rem;
 
 
   --light: #C4C4C4;

@@ -19,7 +19,7 @@ const CardCreate: React.FC = () => {
   const handleClick = useCallback(() => {
     toggleVisibility();
     // If you need to set a name for the create card, you can do it here
-    setName("New Card");
+    setName("");
   }, [setName, toggleVisibility]);
 
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -31,7 +31,7 @@ const CardCreate: React.FC = () => {
     <div onClick={handleClick} onContextMenu={handleContextMenu} className={`${styles.card} ${styles.create}`} >
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
-          <h2 className={styles.title}>{filter.name || "NEW"}</h2>
+          <h2 className={styles.title}>{filter.name || ""}</h2>
         </div>
         <div className={styles.tagsContainer}>
           <Tags tags={filter.tags || []} />

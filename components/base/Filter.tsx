@@ -2,16 +2,23 @@ import React, { useState, useEffect } from 'react';
 import styles from './Filter.module.scss';
 import Tag from './Tag';
 import { Filter as FilterType } from '@/types';
-import { useFilter } from '@/hooks/provider/FilterProvider';
+
+import { MdSearch } from 'react-icons/md';
+import { IoMdPricetag } from "react-icons/io";
+import { FaHashtag } from "react-icons/fa";
+import { IoTimeSharp } from "react-icons/io5";
+import { BiSolidNetworkChart } from "react-icons/bi";
+
 
 interface FilterProps {
   currentVisibleTags: string[];
+  filter: FilterType;
+  onFilterClick: (filter: FilterType) => void;
+  setFilterName: (name: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
-  const { filter, onFilterClick } = useFilter();
+const Filter: React.FC<FilterProps> = ({ filter, onFilterClick, setFilterName, currentVisibleTags }) => {
   const [seenTags, setSeenTags] = useState<string[]>([]);
-
   const [costs, setCosts] = useState<string[]>([]);
   const [time, setTime] = useState<string[]>([]);
   const [connections, setconnections] = useState<string[]>([]);
@@ -45,14 +52,6 @@ const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
     setTags(categorizedTags.tags);
   }, [seenTags]);
 
-
-  useEffect(() => {
-    const newSeenTags = [...seenTags, ...filter.tags, ...currentVisibleTags];
-    newSeenTags.filter((tag, index) => newSeenTags.indexOf(tag) === index);
-    setSeenTags(newSeenTags);
-  }, [filter.tags, currentVisibleTags]);
-
-
   const handleTagClick = (tag: string) => {
     let filter: FilterType = {
       tags: [tag],
@@ -68,32 +67,38 @@ const Filter: React.FC<FilterProps> = ({ currentVisibleTags }) => {
   return (
     <div className={styles.filter}>
       <div className={styles.filterSearchContainer}>
-        <input className={styles.filterSearch} type="text" placeholder="" autoFocus />
+        <p className={styles.filterTitle}><MdSearch /></p>
+        <input className={styles.filterSearch} type="text" placeholder="" autoFocus
+          onChange={(e) => setFilterName(e.target.value)}
+          value={filter.name}
+        />
       </div>
-      {costs.length > 0 && <div className={styles.filterContainer}>
-        <p className={styles.filterTitle}>Costs</p>
-        {costs.map((tag: string, index: number) => (
-          <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
-        ))}
-      </div>}
-      {time.length > 0 && <div className={styles.filterContainer}>
-        <p className={styles.filterTitle}>Time</p>
-        {time.map((tag: string, index: number) => (
-          <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
-        ))}
-      </div>}
-      {tags.length > 0 && <div className={styles.filterContainer}>
-        <p className={styles.filterTitle}>Tags</p>
-        {tags.map((tag: string, index: number) => (
-          <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
-        ))}
-      </div>}
-      {connections.length > 0 && <div className={styles.filterContainer}>
-        <p className={styles.filterTitle}>connections</p>
-        {connections.map((tag: string, index: number) => (
-          <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
-        ))}
-      </div>}
+      <div className={styles.filtersContainer}>
+        {costs.length > 0 && <div className={styles.filterContainer}>
+          <p className={styles.filterTitle}><IoMdPricetag /></p>
+          {costs.map((tag: string, index: number) => (
+            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
+          ))}
+        </div>}
+        {time.length > 0 && <div className={styles.filterContainer}>
+          <p className={styles.filterTitle}><IoTimeSharp /></p>
+          {time.map((tag: string, index: number) => (
+            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
+          ))}
+        </div>}
+        {tags.length > 0 && <div className={styles.filterContainer}>
+          <p className={styles.filterTitle}><FaHashtag /></p>
+          {tags.map((tag: string, index: number) => (
+            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
+          ))}
+        </div>}
+        {connections.length > 0 && <div className={styles.filterContainer}>
+          <p className={styles.filterTitle}><BiSolidNetworkChart /></p>
+          {connections.map((tag: string, index: number) => (
+            <Tag key={`${tag}-${index}`} tag={tag} onClick={handleTagClick} selected={filter.tags.includes(tag)} />
+          ))}
+        </div>}
+      </div>
     </div>
   );
 };

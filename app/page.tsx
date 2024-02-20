@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { OrderType } from '@/types';
 
@@ -8,6 +6,6 @@ import CardsFiltered from '@/components/layout/CardsFiltered';
 
 export default function Home() {
   return (
-    <CardsFiltered calender category="collaborations" orderType={OrderType.CounterAlphabetical} />
+    <CardsFiltered isCalender={true} category="collaborations" orderType={OrderType.CounterAlphabetical} />
   );
 }

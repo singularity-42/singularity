@@ -31,8 +31,6 @@ const extractChildren = (children: any) => {
     return <Link name={name}>{name}</Link>;
   };
 
-  console.log(typeof children, typeof children === 'string');
-
   if (typeof children === 'string')
     listChildren = children.split('\n').map((child: any) => child.trim());
   else

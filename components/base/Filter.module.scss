@@ -29,22 +29,57 @@
   flex-wrap: wrap;
 }
 
+.filtersContainer{  
+  display: flex;
+  // flex-direction: column;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+  // between items will be "|"
+  justify-content: center;
+  align-items: center;
+
+  .filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  // all sub items will have border right bot not the last
+  .filterContainer:not(:last-child) {
+    border-right: 3px solid rgba(var(--light-rgb), 0.6);
+    padding-right: 10px;
+  }
+
+}
+
 .filterSearchContainer {
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
   gap: 4px;
-  flex-wrap: wrap;
+
+
+
+  .filterTitle {
+    width: min-content;
+    border-radius: 10px;
+    background-color: rgba(var(--dark-rgb), 0.2);
+    border: 1px solid rgba(var(--dark-rgb), 0.1);
+    white-space: nowrap;
+    padding: 10px;
+  }
+
 
   .filterSearch {
     width: 100%;
-    margin-bottom: 10px;
     background-color: rgba(var(--dark-rgb), 0.2);
     border-radius: 10px;
     padding: 10px;
     outline: none;
     border: 1px solid rgba(var(--dark-rgb), 0.1);
-  
-  
-  
   
   }
 

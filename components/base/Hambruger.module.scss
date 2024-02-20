@@ -70,19 +70,22 @@
     opacity: 1;
     left: 0;
     transform: rotate(0deg);
-    transition: all 0.25s ease-in-out;
+    transition: top 0.25s ease-in 0.25s, opacity 0.5s ease-in, transform 0.25s ease-in 0.25s;
 }
 
 .hamburger.show span:nth-child(1) {
     top: 9px;
     transform: rotate(45deg);
+    transition: top 0.25s ease-in 0.25s, transform 0.25s ease-in 0.25s;
 }
 
 .hamburger.show span:nth-child(2) {
     opacity: 0;
+    transition: opacity 0.25s ease-in 0.25s;
 }
 
 .hamburger.show span:nth-child(3) {
     top: 9px;
     transform: rotate(-45deg);
+    transition: top 0.25s ease-in 0.25s, transform 0.25s ease-in 0.25s;
 }

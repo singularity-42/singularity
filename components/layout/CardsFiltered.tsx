@@ -15,16 +15,14 @@ import DateComponent from "../base/Date";
 interface CardsFilteredProps {
   category: string;
   orderType?: OrderType;
-  calender?: true;
-  maxColumns?: number;
+  isCalender?: boolean;
 }
 
-const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ category, orderType = OrderType.CounterAlphabetical, calender = false }) => {
+const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ category, orderType = OrderType.CounterAlphabetical, isCalender }) => {
   const { filter, setFilterTags } = useFilter();
   const { files, loading, error } = useFiles(category, filter.tags);
   const { setTooltip } = useTooltip();
 
-  const isCalender = typeof (calender) === "boolean" && calender;
   const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
   const [datedFiles, setDatedFiles] = useState<{ [date: string]: any[] }>({});
 
@@ -34,30 +32,21 @@ const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ category, orderTyp
 
   useEffect(() => {
     if (files) {
-      let tags = files?.map((file) => {
-        return file.metadata.tags
-      });
-
+      let tags = files?.map((file) => file.metadata.tags);
 
       if (isCalender) {
         const updatedDatedFiles: { [date: string]: any[] } = {};
 
         files.forEach((file) => {
           let date = file.date.split(/-/gm).reverse().join(".");
-          if (updatedDatedFiles[date]) {
-            updatedDatedFiles[date].push(file);
-          } else {
-            updatedDatedFiles[date] = [file];
-          }
+          if (updatedDatedFiles[date]) updatedDatedFiles[date].push(file);
+          else updatedDatedFiles[date] = [file];
         });
 
         Object.keys(updatedDatedFiles).forEach((date) => {
           updatedDatedFiles[date].sort((a, b) => {
-            if (orderType === OrderType.CounterAlphabetical) {
-              return a.name.localeCompare(b.name);
-            } else {
-              return b.name.localeCompare(a.name);
-            }
+            if (orderType === OrderType.CounterAlphabetical) return a.name.localeCompare(b.name);
+            else return b.name.localeCompare(a.name);
           });
         });
 
@@ -145,10 +134,10 @@ const CardsFilteredContent: React.FC<CardsFilteredProps> = ({ category, orderTyp
   }
 };
 
-const CardsFiltered: React.FC<CardsFilteredProps> = ({ category: type, orderType = OrderType.CounterAlphabetical, maxColumns = 1 }) => {
+const CardsFiltered: React.FC<CardsFilteredProps> = ({ category: type, orderType = OrderType.CounterAlphabetical, isCalender = false }) => {
   return (
     <FilterProvider>
-      <CardsFilteredContent category={type} orderType={orderType} />
+      <CardsFilteredContent category={type} orderType={orderType} isCalender={isCalender} />
     </FilterProvider>
   );
 };

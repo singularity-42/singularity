@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./Card.module.scss";
-import { MdFolderOpen } from 'react-icons/md';
 import Tags from "../layout/Tags";
-import Link from "../base/Link";
 import { useDetails } from "@/hooks/provider/DetailsProvider";
-import useImageWithFallback from "@/hooks/useImageWithFallback";
 import Markdown from "@/components/layout/Markdown";
 import Socials from "../layout/Socials";
-import Image from "next/legacy/image";
 import { FileContent } from "@/types";
 import Connections from "./Connections";
 
@@ -22,10 +18,8 @@ const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
   const { name, metadata, category, markdown } = file || {};
   const { tags, connections } = metadata || {};
 
-  // const { imgSrc } = useImageWithFallback(name);
   const { setName, toggleVisibility } = useDetails();
   const [isScrolling, setScrolling] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
   const handleClick = useCallback(() => {
     toggleVisibility();
