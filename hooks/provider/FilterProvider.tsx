@@ -1,17 +1,17 @@
+"use client"
+
 import { Filter } from '@/types';
-import React, { createContext, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, useEffect, useCallback } from 'react';
 
 
 // Define the context interface
 interface FilterContextInterface {
   filter: Filter;
-  setFilterTags: (tags: string[]) => void;
+  setFilterTag: (tag: string) => void;
   setFilterName: (name: string) => void;
-  setFilterDate: (date: Date | null) => void;
+  setFilterDate: (date: Date) => void;
   setFilterCategory: (category: string) => void;
   setFilterConnections: (connections: string[]) => void;
-
-  onFilterClick(filter: Filter): void;
 }
 
 // Create the context
@@ -22,38 +22,23 @@ interface FilterProviderProps {
   children: React.ReactNode;
 }
 
-export const FilterProvider: React.FC<FilterProviderProps> = ({ children }: FilterProviderProps) => {
-  const [filter, setFilter] = useState<Filter>({
-    tags: [],
-    name: '',
-    date: null,
-    category: '',
-    connections: [],
-  });
 
-  const setFilterTags = (tags: string[]) => setFilter((prev) => ({ ...prev, tags }));
+export const FilterProvider: React.FC<FilterProviderProps> = ({ children }) => {
+  const [filter, setFilter] = useState<Filter>({});
+
   const setFilterName = (name: string) => setFilter((prev) => ({ ...prev, name }));
-  const setFilterDate = (date: Date | null) => setFilter((prev) => ({ ...prev, date }));
-  const setFilterCategory = (category: string) => setFilter((prev) => ({ ...prev, category }));
+  const setFilterDate = (date: Date) => setFilter((prev) => ({ ...prev, date }));
   const setFilterConnections = (connections: string[]) => setFilter((prev) => ({ ...prev, connections }));
-
-  const onFilterClick = (filter: Filter) => {
-    setFilter(filter);
+  const setFilterTag = (tag: string) => {
+    const newTags = [...(filter.tags || []), tag];
+    setFilter((prev) => ({ ...prev, tags: newTags }));
   };
-
-  const filterContextValue: FilterContextInterface = {
-    filter,
-    setFilterTags,
-    setFilterName,
-    setFilterDate,
-    setFilterCategory,
-    setFilterConnections,
-
-    onFilterClick
+  const setFilterCategory = (category: string) => {
+    setFilter((prev) => ({ ...prev, category }));
   };
 
   return (
-    <FilterContext.Provider value={filterContextValue}>
+    <FilterContext.Provider value={{ filter, setFilterTag, setFilterName, setFilterDate, setFilterCategory, setFilterConnections }}>
       {children}
     </FilterContext.Provider>
   );

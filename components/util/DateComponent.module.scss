@@ -1,0 +1,117 @@
+.dateContainer {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  z-index: 1000;
+  /* Ensure it's above other elements */
+
+  font-size: var(--heading-font-size);
+  
+  width: 97vw;
+  ;
+  height: 0rem;
+
+
+  padding: 1rem;
+  margin: 0.42rem 0.42rem;
+
+  // border-radius: 10px;
+  box-shadow: 0 0 10px rgba(var(--dark-rgb), 0.42);
+  background-color: rgba(var(--dark-rgb), 0.42);
+  /* Transparent dark background */
+
+  // white border top and bottom
+  // border-top: 2px solid rgba(var(--light-rgb), 0.42);
+  // border-bottom: 2px solid rgba(var(--light-rgb), 0.1);
+
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.42s ease-in-out, height 0.42s ease-in-out;
+
+
+}
+
+.visible {
+  opacity: 1;
+  height: 3rem;
+
+}
+
+
+// place styled hamburger o right nd
+.styledHamburger {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+  gap: 0.42rem;
+}
+
+.formattedDate {
+  font-size: var(--text-font-size);
+  color: rgba(var(--light-rgb), 0.42);
+  display: flex;
+}
+
+/* Additional styles for the formatted date */
+.dayOfWeek {
+  font-size: calc(var(--heading-font-size) * 1.2);
+  margin-right: 10px;
+}
+
+.date {
+  display: inline-block;
+  width: 100%;
+  align-items: center;
+}
+
+.day {
+  font-size: var(--text-font-size);
+}
+
+.month {
+  font-size: var(--text-font-size);
+}
+
+.year {
+  font-size: var(--text-font-size);
+}
+
+@media (max-width: 768px) {
+  .dateContainer {
+    margin: 0rem;
+    width: 100%;
+    border-radius: 0px;
+    box-shadow: 0 0 0 rgba(var(--dark-rgb), 0.42);
+  }
+}
+
+
+.date {
+  font-size: var(--heading-font-size);
+  color: rgba(var(--secondary-rgb), 0.42);
+  transition: color 0.042s ease-in-out;
+  
+  &:hover {
+      color: rgb(var(--secondary-rgb));
+  }
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+}
+
+.daysUntil {
+  border-radius: 4px;	
+  // border: 1px solid rgb(var(--light-rgb));	
+
+  border-left: 2px solid rgba(var(--light-rgb), 1);
+  font-size: var(--font-size);
+  text-transform: uppercase;
+  margin: 0.42rem;
+  padding: 0.2rem;
+  padding-left: 0.42rem;
+  color: rgb(var(--light-rgb));
+}

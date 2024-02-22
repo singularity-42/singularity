@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Connection } from '@/types';
-import { useAuth } from './useAuth';
-
+import { useCredentials } from './provider/CredentialsProvider';
 
 const useConnection = (name: string) => {
     const [connection, setConnection] = useState<Connection>({
@@ -12,7 +11,7 @@ const useConnection = (name: string) => {
     }
     );
 
-    const { credentials } = useAuth();
+    const { credentials } = useCredentials();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 

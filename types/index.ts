@@ -53,11 +53,11 @@ export interface Change {
 }
 
 export interface Filter {
-  tags: string[];
-  name: string;
-  date: Date | null;
-  category: string;
-  connections: string[];
+  tags?: string[];
+  name?: string;
+  date?: Date;
+  category?: string;
+  connections?: string[];
 }
 
 
@@ -79,3 +79,11 @@ export const SITE_METADATA = {
   ],
   robots: "index, follow",
 };
+
+
+export enum ViewMode {
+  CardsCalender = "Calender",
+  CardsColl = "Column",
+  CardsCarousel = "Carousel",
+  CardsConnections = "Connection",
+}

@@ -1,11 +1,18 @@
+"use client"
 
-import React from 'react';
-import CardsFiltered from '@/components/layout/CardsFiltered';
+import React, { useEffect } from 'react';
+import { useFilter } from '@/hooks/provider/FilterProvider';
 
 const CreativesPage: React.FC = () => {
-  return (
-      <CardsFiltered category='creatives' />
-  );
+  const filter = 'creatives';
+  const { setFilterCategory } = useFilter();
+
+  useEffect(() => {
+    console.log('useEffect');
+    setFilterCategory(filter);
+  }, []);
+
+  return <></>;
 };
 
 export default CreativesPage;

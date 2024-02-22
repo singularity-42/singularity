@@ -47,8 +47,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   // get rid of first
 
 
-  console.log(newCredentials)
-
   changesFile.metadata = editMetadataKeyValue(changesFile.metadata, "credentials", newCredentials);
   saveFile(changesFile);
 

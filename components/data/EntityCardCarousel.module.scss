@@ -1,0 +1,35 @@
+.carousel {
+    overflow: hidden;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0 20px; /* Adjust padding as needed */
+  }
+  
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel__item {
+    display: inline-block;
+    width: 25%; /* Adjust width as needed */
+    scroll-snap-align: start;
+    margin-right: 20px; /* Adjust margin as needed */
+  }
+  
+  .carousel__item:last-child {
+    margin-right: 0;
+  }
+  
+  .carousel__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .carousel__button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+  }
+  

@@ -1,10 +1,11 @@
-import CardsFiltered from '@/components/layout/CardsFiltered';
+import { useFilter } from '@/hooks/provider/FilterProvider';
 import React from 'react';
 
 const ConceptPage: React.FC = () => {
-  return (
-      <CardsFiltered category='concepts' />
-  );
+  const filter = 'concepts';
+  const { setFilterCategory } = useFilter();
+  setFilterCategory(filter);
+  return <></>;
 };
 
 

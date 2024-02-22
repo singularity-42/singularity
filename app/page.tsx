@@ -1,11 +1,17 @@
-import React from 'react';
-import { OrderType } from '@/types';
+"use client"
 
-import { useEffect } from 'react';
-import CardsFiltered from '@/components/layout/CardsFiltered';
+import React, { useEffect } from 'react';
+import { useFilter } from '@/hooks/provider/FilterProvider';
 
 export default function Home() {
-  return (
-    <CardsFiltered isCalender={true} category="collaborations" orderType={OrderType.CounterAlphabetical} />
-  );
+  const filter = 'collaborations';
+  const { setFilterCategory } = useFilter();
+
+  useEffect(() => {
+    setFilterCategory(filter);
+  }, []);
+
+
+
+  return <></>;
 }

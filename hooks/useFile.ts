@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FileContent } from '@/types';
-import { useAuth } from './useAuth';
+import { useCredentials } from './provider/CredentialsProvider';
 
 
 const useFile = (name: string) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    const { credentials, addCredentials} = useAuth();
+    const { credentials, addCredentials} = useCredentials();
     const [file, setFile] = useState<FileContent | null>(null);
     const update = (file: FileContent) => {
         setFile(file);

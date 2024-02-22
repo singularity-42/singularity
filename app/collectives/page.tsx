@@ -1,12 +1,17 @@
-import CardsFiltered from '@/components/layout/CardsFiltered';
-import React from 'react';
+"use client"
+
+import { useFilter } from '@/hooks/provider/FilterProvider';
+import React, { useEffect } from 'react';
 
 const CollectivePage: React.FC = () => {
-  return (
-    <div>
-      <CardsFiltered category='collectives' />
-    </div>
-  );
+  const filter = 'collectives';
+  const { setFilterCategory } = useFilter();
+
+  useEffect(() => {
+    setFilterCategory(filter);
+  }, []);
+
+  return <></>;
 };
 
 export default CollectivePage;

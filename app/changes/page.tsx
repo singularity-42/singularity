@@ -1,12 +1,17 @@
-import React from "react";
-import CardsFiltered from "@/components/layout/CardsFiltered";
+"use client"
+
+import React, { useEffect } from "react";
+import { useFilter } from "@/hooks/provider/FilterProvider";
 
 const ChangePage: React.FC = () => {
-  return (
-    <div>
-      <CardsFiltered category="changes" />
-    </div>
-  );
+  const filter = 'changes';
+  const { setFilterCategory } = useFilter();
+
+  useEffect(() => {
+    setFilterCategory(filter);
+  }, []);
+
+  return <></>;
 };
 
 export default ChangePage;

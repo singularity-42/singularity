@@ -1,6 +1,5 @@
 "use client"
 
-import Details from '@/components/layout/Details';
 import React, { createContext, useState } from 'react';
 
 // Define the context interface
@@ -42,7 +41,6 @@ export const DetailsProvider: React.FC<DetailsProviderProps> = ({ children }: De
 
     return (
         <DetailsContext.Provider value={detailsContextValue}>
-            <Details />
             {children}
         </DetailsContext.Provider>
     );

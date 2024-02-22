@@ -1,12 +1,13 @@
+"use client"
+
 import React from 'react';
-import { OrderType } from '@/types';
-import CardsFiltered from '@/components/layout/CardsFiltered';
+import { useFilter } from '@/hooks/provider/FilterProvider';
 
 const collaborationPage: React.FC = () => {
-  return (
-      <CardsFiltered isCalender={true} category="collaborations" orderType={OrderType.CounterAlphabetical} />
-      
-  );
+  const filter = 'collaborations';
+  const { setFilterCategory } = useFilter();
+  setFilterCategory(filter);
+  return <></>;
 };
 
 export default collaborationPage;
