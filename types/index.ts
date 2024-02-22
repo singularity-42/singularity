@@ -24,6 +24,15 @@ export const TYPE_DESCRIPTIONS: { [key: string]: string } = {
     changes: "Veränderungen mit Geschichte.",
 };
 
+export enum CategoryType {
+    Collaboration = "collaborations",
+    Collective = "collectives",
+    Creative = "creatives",
+    Concept = "concepts",
+    Change = "changes",
+}
+
+
 // types.ts
 
 export interface Metadata {
@@ -56,7 +65,7 @@ export interface Filter {
   tags?: string[];
   name?: string;
   date?: Date;
-  category?: string;
+  category?: CategoryType;
   connections?: string[];
 }
 

@@ -8,7 +8,6 @@ import { useVisual } from "@/hooks/provider/VisualProvider";
 import { useFilter } from "@/hooks/provider/FilterProvider";
 import Filter from "../util/Filter";
 
-
 import EntityCardGrid from "./EntityCardGrid";
 import EntityCardCarousel from "./EntityCardCarousel";
 import EntityCardCalendar from "./EntityCardCalendar";
@@ -29,18 +28,15 @@ interface EntitiesProps {
 const Entities: React.FC<EntitiesProps> = ({
 }) => {
 
-  const { filter, setFilterTag, setFilterCategory, setFilterDate, setFilterName, setFilterConnections } = useFilter();
+  const { filter, setFilterTag, setFilterCategory, setFilterDate, setFilterName, setFilterConnection } = useFilter();
   const { files, loading, error } = useFiles(filter);
   const [name, setName] = useState<string>("");
   const { setTooltip, setMode, mode } = useVisual();
 
   useEffect(() => {
-    setFilterName(name);
   }, [name]);
 
   const handleTagClick = (tag: string) => tag && setFilterTag(tag);
-
-  if (error) return <p> Error: {error || "unknown"} </p>;
 
   const ViewComponent = {
     [ViewMode.CardsCalender]: EntityCardCalendar,
@@ -57,10 +53,8 @@ const Entities: React.FC<EntitiesProps> = ({
         setFilterTag={setFilterTag}
         setFilterCategory={setFilterCategory}
         setFilterDate={setFilterDate}
-        setFilterName={(name: string) => {
-          setName(name);
-        }}
-        setFilterConnections={setFilterConnections}
+        setFilterName={setFilterName}
+        setFilterConnection={setFilterConnection}
       />
 
       {/* {loading ? <Loading /> : ((

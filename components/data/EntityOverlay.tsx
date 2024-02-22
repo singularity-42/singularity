@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import styles from "./EntityDetailsOverlay.module.scss";
+import styles from "./EntityOverlay.module.scss";
 import Markdown from "./EntityMarkdown";
 import Tags from "./ListTags";
 import useFile from "@/hooks/useFile";
 import Socials from "./ListSocials";
 import EntityGraph from "./EntityGraph";
-import { useDetails } from "@/hooks/provider/DetailsProvider";
+import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
 import useConnection from "@/hooks/useConnection";
 import { MdClose, MdEdit, MdLink, MdSave, MdShare } from "react-icons/md";
 import EmbedTrackSpotify from "../content/EmbedTrackSpotify";
@@ -16,8 +16,8 @@ import { FileContent } from "@/types";
 
 interface DetailsProps { }
 
-const EntityDetailsOverlay: React.FC<DetailsProps> = () => {
-  const { name, setName, visible, toggleVisibility, editing, setEditing } = useDetails();
+const EntityOverlay: React.FC<DetailsProps> = () => {
+  const { name, setName, visible, toggleVisibility, editing, setEditing } = useEntitiy();
   const { connection } = useConnection(name);
   const { file, loading, error, update, save } = useFile(name);
   const [graphVisible, setGraphVisible] = useState(false);
@@ -126,7 +126,7 @@ const EntityDetailsOverlay: React.FC<DetailsProps> = () => {
           </div>
           {/* Date */}
           <div className={styles.dateContainer}>
-            {file && file?.date && <div>{file.date.replace("-", ".")}</div>}
+            {file && file?.date && <div>{file.date.replace(/\-/gm, ".")}</div>}
           </div>
           <div className={styles.socialMediaContainer}>
             <Socials metadata={file?.metadata} editing={editing} onChange={handleSocialsChange} />
@@ -146,4 +146,4 @@ const EntityDetailsOverlay: React.FC<DetailsProps> = () => {
   );
 };
 
-export default EntityDetailsOverlay;
+export default EntityOverlay;

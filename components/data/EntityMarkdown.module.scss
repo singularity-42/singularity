@@ -18,7 +18,6 @@
     transition: color 0.2s ease-in-out;
 
     &:hover {
-
         .anchor {
             color: rgb(var(--secondary-rgb));
         }
@@ -53,6 +52,8 @@
 .p {
     text-align: left;
     margin-bottom: 1rem;
+    // inline
+    display: inline;
 }
 
 .tr {
@@ -180,5 +181,12 @@
 
     &.selected {
         background-color: rgb(var(--secondary-rgb));
+    }
+
+
+
+    &:disabled
+    {
+        background: transparent;
     }
 }

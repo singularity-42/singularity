@@ -2,16 +2,17 @@
 
 import React, { useEffect } from "react";
 import { useFilter } from "@/hooks/provider/FilterProvider";
+import { CategoryType } from "@/types";
 
 const ChangePage: React.FC = () => {
-  const filter = 'changes';
   const { setFilterCategory } = useFilter();
 
   useEffect(() => {
-    setFilterCategory(filter);
+    setFilterCategory(CategoryType.Change);
   }, []);
 
-  return <></>;
+
+return <></>;
 };
 
 export default ChangePage;

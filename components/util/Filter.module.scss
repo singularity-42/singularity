@@ -67,7 +67,7 @@
     width: min-content;
     border-radius: 10px;
     background-color: rgba(var(--dark-rgb), 0.2);
-    border: 1px solid rgba(var(--dark-rgb), 0.1);
+    border: none;
     white-space: nowrap;
     padding: 10px;
   }
@@ -79,8 +79,18 @@
     border-radius: 10px;
     padding: 10px;
     outline: none;
-    border: 1px solid rgba(var(--dark-rgb), 0.1);
+    border: none;
+    transition: border 0.2s;
+
+    &:focus {
+      border: 1px solid rgba(var(--light-rgb), 0.6);
+    }
   
+  }
+
+  .filterSwapPossible {
+    border: 1px dotted rgba(var(--light-rgb), 0.6);
+    background-color: rgba(var(--light-rgb), 0.2);
   }
 
 

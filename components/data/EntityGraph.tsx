@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { DataSet, Network, Node, Edge, Options } from "vis-network";
 import styles from "./EntityGraph.module.scss";
-import { useDetails } from "@/hooks/provider/DetailsProvider";
+import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
 
 interface GraphProps {
   graphData: { nodes: Node[]; edges: Edge[] };
@@ -19,7 +19,7 @@ interface GraphProps {
 const EntityGraph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork }) => {
   const container = useRef<HTMLDivElement | null>(null);
   const { edges, nodes } = graphData;
-  const { setName } = useDetails();
+  const { setName } = useEntitiy();
 
   const mergeDuplicateNodes = (nodeArray: Node[]): Node[] => {
     const idMap = new Map<string, Node>(); 

@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useDetails } from "@/hooks/provider/DetailsProvider";
+import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
 import { MdGroups, MdOutlineCalendarMonth, MdOutlineEditNote, MdPages, MdPerson } from "react-icons/md";
-import { TYPE_DESCRIPTIONS } from "@/types";
+import { CategoryType, TYPE_DESCRIPTIONS } from "@/types";
 import { useFilter } from "@/hooks/provider/FilterProvider";
 
 interface MenuProps {
@@ -13,15 +13,17 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
-  const { visible, toggleVisibility, setName } = useDetails();
+  const { visible, toggleVisibility, setName } = useEntitiy();
   const [lastClicked, setLastClicked] = React.useState("");
   const { setFilterCategory } = useFilter();
 
   const handleLinkClick = (str: string) => {
     if (visible){ setName(''); toggleVisibility();}
     setLastClicked(str);
-    // wait 420ms and then close the menu
-    setFilterCategory(str.replace("/", ""));
+    // wait 420ms and then close the menu>
+    // setFilterCategory(str.replace("/", ""));
+    let category: CategoryType = str.replace("/", "") as CategoryType;
+    setFilterCategory(category);
     setTimeout(() => {
       onClose();
     }, 420);

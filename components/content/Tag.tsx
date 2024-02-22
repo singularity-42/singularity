@@ -6,9 +6,10 @@ interface TagProps {
     onClick?: (tag: string) => void;
     selected?: boolean;
     viewOnly?: boolean;
+    highlight?: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ tag, onClick, selected, viewOnly }) => {
+const Tag: React.FC<TagProps> = ({ tag, onClick, selected, viewOnly , highlight = false}) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -27,12 +28,12 @@ const Tag: React.FC<TagProps> = ({ tag, onClick, selected, viewOnly }) => {
 
     return (
         <div
-            className={`${styles.tag} ${selected ? styles.selected : ''} ${isHovered ? styles.hovered : ''} ${viewOnly ? styles.viewOnly : ''}`}
+            className={`${styles.tag} ${selected ? styles.selected : ''} ${isHovered ? styles.hovered : ''} ${viewOnly ? styles.viewOnly : ''} ${highlight ? styles.highlight : ''}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
         >
-            {viewOnly ? '#' : ''}{tag.replace(/"/g, '')}
+            {viewOnly ? '#' : ''}{tag.replace(/"/g, '').toUpperCase()}
         </div>
     );
 };

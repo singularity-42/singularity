@@ -20,12 +20,16 @@ const useFiles = (filter: Filter): UseFilesResult => {
       try {
         setLoading(true);
         setError(null);
+        const tagsString = filter.tags?.join(',') ?? '';
+        const connectionsString = filter.connections?.join(',') ?? '';
+        const nameString = filter.name ?? '';
 
-        const filterString = filter.tags?.join(',') ?? '';
-        const categoryString = `category=${filter.category}`;
-        const fileFilterString = filterString ? `filter=${filterString}` : '';
+        const tagFilterString = tagsString ? `tags=${tagsString}` : '';
+        const nameFilterString = nameString ? `name=${nameString}` : '';
+        const categoryFilterString = `category=${filter.category}`;
+        const connectionFilterString = `connections=${connectionsString}`;
 
-        const url = `${process.env.NEXT_PUBLIC_API_URL}/files?${categoryString}${fileFilterString ? '&' + fileFilterString : ''}`;
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/files?${(filter.tags|| []).length > 0 ? '&' + tagFilterString : ''}${(filter.connections || []).length > 0 ? '&' + connectionFilterString : ''}${(filter.category|| []).length > 0 ? '&' + categoryFilterString : ''}${(filter.name|| []).length > 0 ? '&' + nameFilterString : ''}`;
 
         const response = await axios.get(url, {
           headers: {

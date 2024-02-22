@@ -1,15 +1,16 @@
 "use client"
 
 import { useFilter } from '@/hooks/provider/FilterProvider';
+import { CategoryType } from '@/types';
 import React, { useEffect } from 'react';
 
 const CollectivePage: React.FC = () => {
-  const filter = 'collectives';
   const { setFilterCategory } = useFilter();
 
   useEffect(() => {
-    setFilterCategory(filter);
+    setFilterCategory(CategoryType.Collective);
   }, []);
+
 
   return <></>;
 };

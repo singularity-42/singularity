@@ -11,6 +11,7 @@ import {
   editMetadataKeyValue,
 } from "./metadata";
 import { Metadata, FileContent, LoadResult, SaveFile, Change } from "@/types";
+import { getIncomingFiles, getOutgoingFiles } from "./connections";
 
 export const loadFile = (credentials: string[], name?: string, path?: string, category?: string, date?: string): FileContent | null => {
   let content = '';
@@ -69,6 +70,30 @@ const hasAllFilterTags = (tags: string[], filters: string[]) => {
   return allFiltersAreInTags;
 };
 
+const hasAllConnections = (file: FileContent, connections: string[], credentials: string[] = []) => {
+  if (connections.length === 0) return true;
+  if (connections.includes(file.name.toLowerCase())) return true;
+
+  let hasMetadataConnections = false;
+  if (file.metadata.connections)
+    if (Array.isArray(file.metadata.connections))
+      file.metadata.connections.forEach((connection) => {
+        connections.forEach((connectionFilter) => {
+          if (connection.toLowerCase().includes(connectionFilter.toLowerCase())) hasMetadataConnections = true;
+        });
+      });
+    else
+      // if (connections.includes(file.metadata.connections.toString().toLowerCase())) return true;
+      connections.forEach((connection) => {
+        if (file.metadata.connections.toString().toLowerCase().includes(connection)) hasMetadataConnections = true;
+      })
+  return hasMetadataConnections;
+};
+
+const hasNameInContent = (file: FileContent, name: string) => {
+  return file.markdown.toLowerCase().includes(name.toLowerCase()) || file.name.toLowerCase().includes(name.toLowerCase());
+};
+
 const hasLockAndNoCredentials = (file: FileContent, credentials: string[]) => {
   let hasLock = file.metadata.credentials !== undefined;
   let hasNoCredentials = credentials.length === 0;
@@ -78,7 +103,6 @@ const hasLockAndNoCredentials = (file: FileContent, credentials: string[]) => {
     if (!file.metadata.credentials) return false;
     if (typeof file.metadata.credentials === 'string') return file.metadata.credentials === credential;
     if (!Array.isArray(file.metadata.credentials)) return false;
-    console.log(`Checking ${file.metadata.credentials} for credential ${credential}`);
     return file.metadata.credentials?.includes(credential);
   });
 
@@ -93,30 +117,27 @@ export const loadFiles = (
   category: string | null = null, // null for all categories
   filter: string[] = [],
   credentials: string[] | null = null,
-  date: string | null = null,
-  limit: number = 0
+  connections: string[] = [],
+  name: string = ''
 ): FileContent[] => {
   let filePaths = getFilePaths();
-  if (date) {
-    filePaths = filePaths.filter((file) => file.includes(getFileDatePath(date)));
-  }
-  if (category) {
+
+  if (category && category.length > 0) {
     filePaths = filePaths.filter((file) => file.includes(category));
   }
 
-  if (limit > 0) {
-    filePaths = filePaths.slice(0, limit);
-  }
   let file_contents: FileContent[] = [];
-
 
   filePaths.forEach((filePath) => {
     let content = fs.readFileSync(filePath).toString();
     let { metadata, markdown } = extractMetadataMarkdown(content);
-    let { category, name, date } = getCategoryDateName(filePath);
-    let fileContent: FileContent = { metadata, markdown, name, category, path: filePath, date };
+    let { category: fileCategory, name: fileName, date } = getCategoryDateName(filePath);
+    if (category && category.length > 0 && fileCategory !== category) return;
+    let fileContent: FileContent = { metadata, markdown, name: fileName, category: fileCategory, path: filePath, date };
+    if (name && name.length > 0 && !hasNameInContent(fileContent, name)) return;
     if (!hasAllFilterTags(metadata?.tags as string[] || [], filter) && filter.length !== 0) return;
     if (hasLockAndNoCredentials(fileContent, credentials || [])) return;
+    if (!hasAllConnections(fileContent, connections, credentials || [])) return;
 
     // filter following information out if file content meta
 
@@ -242,7 +263,7 @@ export const getFilePath = (name: string, date: string | null = null, category: 
 };
 
 export const getDocsDir = (): string => {
-  if (__dirname.includes("server") && !__dirname.includes("app"))return path.join(__dirname, "..", "..", "..", "docs").toString();
+  if (__dirname.includes("server") && !__dirname.includes("app")) return path.join(__dirname, "..", "..", "..", "docs").toString();
   else if (__dirname.includes("app")) return path.join(__dirname, "..", "..", "..", "..", "..", "docs").toString();
   return path.join(__dirname, "..", "docs").toString();
 };
@@ -321,7 +342,7 @@ export const deleteFile = (name: string): boolean => {
 
 export const generateChangesFile = (file: FileContent, name: string): FileContent => {
   // new name will be "YYYY-MM-DD-HH-SS_NAME.md", than replace file name in path and name in file content
-  
+
   let changeFileContent = file;
   changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'cancel', '0');
   changeFileContent.metadata = editMetadataKeyValue(changeFileContent.metadata, 'confirmed', '0');

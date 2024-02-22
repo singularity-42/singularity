@@ -10,6 +10,5 @@ tags:
   - workshop
 address: Jakobstraße 42, 09130 Chemnitz, Germany
 connections:
-  - "[[Calea]]"
 ---
-Chemnitz Sonnenberg playandlearn construct in digitallabor from [[Klub Solitaer]] mostly opened Monday from 4-8
+Chemnitz Sonnenberg playandlearn construct in digitallabor from [[Klub Solitaer]] mostly opened Monday from 4-8. Moderated by [[Calea]]

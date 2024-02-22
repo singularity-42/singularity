@@ -9,7 +9,7 @@ interface ConnectionsProps {
 const Connections: React.FC<ConnectionsProps> = ({ connections }) => {
     return (
         <div className={styles.connectionsContainer}>
-            {connections.map((connection, index) => (
+            {(typeof connections === 'string' ? [connections] : connections).map((connection, index) => (
                 <Link key={index} name={connection.replace(/[\[\]"]+/g, "")}>
                     {connection.replace(/[\[\]"]+/g, "")}
                 </Link>

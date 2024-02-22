@@ -8,8 +8,8 @@ import Content from "@/components/content/Content";
 
 import { SITE_METADATA } from "@/types";
 
-import { DetailsProvider } from "@/hooks/provider/DetailsProvider";
-import EntityDetailsOverlay from "@/components/data/EntityDetailsOverlay";
+import { EntitiyProvider } from "@/hooks/provider/EntitiyProvider";
+import EntityOverlay from "@/components/data/EntityOverlay";
 
 import { CredentialsProvider } from "@/hooks/provider/CredentialsProvider";
 import CredentialsOverlay from "@/components/data/CredentialsOverlay";
@@ -19,22 +19,22 @@ import { VisualProvider } from "@/hooks/provider/VisualProvider";
 import { FilterProvider } from "@/hooks/provider/FilterProvider";
 
 import localFont from 'next/font/local';
-const inter = localFont( {src: './Inter.ttf'});
+const inter = localFont({ src: './Inter.ttf' });
 
-export default function RootLayout(props: { children: React.ReactNode }) {  
+export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
-  
+
   return (
     <html suppressHydrationWarning={true}>
       <body className={inter.className}>
-        <CredentialsProvider><CredentialsOverlay />
-          <DetailsProvider><EntityDetailsOverlay />
-            <VisualProvider><FilterProvider>
+        <VisualProvider><FilterProvider>
+          <CredentialsProvider><CredentialsOverlay />
+            <EntitiyProvider><EntityOverlay />
               {children}
               <Content />
-            </FilterProvider></VisualProvider>
-          </DetailsProvider>
-        </CredentialsProvider>
+            </EntitiyProvider>
+          </CredentialsProvider>
+        </FilterProvider></VisualProvider>
       </body>
     </html>
   );

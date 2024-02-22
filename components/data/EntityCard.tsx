@@ -3,8 +3,8 @@
 import React, { useCallback, useState } from "react";
 import styles from "./EntityCard.module.scss";
 import Tags from "./ListTags";
-import { useDetails } from "@/hooks/provider/DetailsProvider";
-import Markdown from "@/components/data/EntityMarkdown";
+import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import EntityMarkdown from "@/components/data/EntityMarkdown";
 import Socials from "./ListSocials";
 import { FileContent } from "@/types";
 import Connections from "./ListConnections";
@@ -17,9 +17,12 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
   const { name, metadata, category, markdown } = file || {};
-  const { tags, connections } = metadata || {};
+  const { tags, connections } = metadata || {
+    tags: [],
+    connections: [],
+  };
 
-  const { setName, toggleVisibility } = useDetails();
+  const { setName, toggleVisibility } = useEntitiy();
   const [isScrolling, setScrolling] = useState(false);
 
   const handleClick = useCallback(() => {
@@ -32,8 +35,8 @@ const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
     setScrolling(!isScrolling);
   };
 
-  const categoryIcon = ( category: string ) => {
-    switch (category){
+  const categoryIcon = (category: string) => {
+    switch (category) {
       case "collaborations":
         return <MdOutlineCalendarMonth />;
       case "collectives":
@@ -44,40 +47,36 @@ const Card: React.FC<CardProps> = ({ file, onTagClick }) => {
         return <MdPages />;
       default:
         return '';
-    } 
+    }
   }
 
-  const renderCardContent = () => (
-    <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
-      <div className={styles.contentContainer}>
-        <div className={styles.titleContainer}>
-          <h2 className={styles.title}>{categoryIcon(category || '')}&nbsp;{name || "&nbsp;"}</h2>
-        </div>
-        {connections && (
-          <div className={styles.location}>
-            <Connections connections={typeof(connections) === "string" ? [connections] : connections} />
-          </div>
-        )}
-        {tags && tags.length > 0 && (
-          <div className={styles.tagsContainer}>
-            <Tags tags={typeof(tags) === "string" ? [tags] : tags} onTagClick={onTagClick} />
-          </div>
-        )}
-        {markdown && (
-          <div className={`${styles.description} ${isScrolling ? styles.scrollable : ""}`}>
-            <Markdown content={markdown} active={isScrolling} />
-          </div>
-        )}
-        {file.metadata && (
-          <div className={styles.socialMediaContainer}>
-            <Socials metadata={file.metadata} />
-          </div>
-        )}
+  return <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
+    <div className={styles.contentContainer}>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.title}>{categoryIcon(category || '')}&nbsp;{name || "&nbsp;"}</h2>
       </div>
+      {connections && (
+        <div className={styles.location}>
+          <Connections connections={connections as string[]} />
+        </div>
+      )}
+      {tags && tags.length > 0 && (
+        <div className={styles.tagsContainer}>
+          <Tags tags={typeof (tags) === "string" ? [tags] : tags} onTagClick={onTagClick} />
+        </div>
+      )}
+      {markdown && (
+        <div className={`${styles.description} ${isScrolling ? styles.scrollable : ""}`}>
+          <EntityMarkdown content={markdown} active={isScrolling} />
+        </div>
+      )}
+      {file.metadata && (
+        <div className={styles.socialMediaContainer}>
+          <Socials metadata={file.metadata} />
+        </div>
+      )}
     </div>
-  );
-
-  return renderCardContent();
+  </div>;
 };
 
 export default Card;

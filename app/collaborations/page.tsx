@@ -1,12 +1,15 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFilter } from '@/hooks/provider/FilterProvider';
+import { CategoryType } from '@/types';
 
 const collaborationPage: React.FC = () => {
-  const filter = 'collaborations';
   const { setFilterCategory } = useFilter();
-  setFilterCategory(filter);
+
+  useEffect(() => {
+    setFilterCategory(CategoryType.Collaboration);
+  }, []);
   return <></>;
 };
 

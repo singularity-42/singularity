@@ -2,17 +2,19 @@
 
 import React, { useEffect } from 'react';
 import { useFilter } from '@/hooks/provider/FilterProvider';
+import { CategoryType } from '@/types';
 
-const CreativesPage: React.FC = () => {
-  const filter = 'creatives';
+const CreativePage: React.FC = () => {
   const { setFilterCategory } = useFilter();
 
   useEffect(() => {
-    console.log('useEffect');
-    setFilterCategory(filter);
-  }, []);
+    setFilterCategory(CategoryType.Creative);
+  }, []); 
 
-  return <></>;
+  return (
+    <></>
+  );
 };
 
-export default CreativesPage;
+
+export default CreativePage;
