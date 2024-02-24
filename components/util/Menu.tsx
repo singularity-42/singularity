@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import { useEntity } from "@/hooks/provider/EntityProvider";
 import { MdGroups, MdOutlineCalendarMonth, MdOutlineEditNote, MdPages, MdPerson } from "react-icons/md";
 import { CategoryType, TYPE_DESCRIPTIONS } from "@/types";
 import { useFilter } from "@/hooks/provider/FilterProvider";
@@ -13,7 +13,7 @@ interface MenuProps {
 }
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
-  const { visible, toggleVisibility, setName } = useEntitiy();
+  const { visible, toggleVisibility, setName } = useEntity();
   const [lastClicked, setLastClicked] = React.useState("");
   const { setFilterCategory } = useFilter();
 
@@ -22,11 +22,11 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
     setLastClicked(str);
     // wait 420ms and then close the menu>
     // setFilterCategory(str.replace("/", ""));
-    let category: CategoryType = str.replace("/", "") as CategoryType;
-    setFilterCategory(category);
+    // let category: CategoryType = str.replace("/", "") as CategoryType;
+    // setFilterCategory(category);
     setTimeout(() => {
       onClose();
-    }, 420);
+    }, 42);
   };
 
   const getCurrentPage = (path: string) => {

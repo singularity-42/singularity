@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './EntityCardCalendar.module.scss'; // Import SCSS styles
 import DateComponent from '../util/DateComponent';
-import EntityCardGrid from './EntityCardGrid'; // Assuming you've implemented this component
+import EntityCardGrid from './EntityCardsColumn'; // Assuming you've implemented this component
 
 interface CalendarProps {
   files: any[];

@@ -8,7 +8,7 @@ import { useVisual } from "@/hooks/provider/VisualProvider";
 import { useFilter } from "@/hooks/provider/FilterProvider";
 import Filter from "../util/Filter";
 
-import EntityCardGrid from "./EntityCardGrid";
+import EntityCardsColumn from "./EntityCardsColumn";
 import EntityCardCarousel from "./EntityCardCarousel";
 import EntityCardCalendar from "./EntityCardCalendar";
 import EntityCardConnections from "./EntityCardConnections";
@@ -20,7 +20,7 @@ interface EntitiesProps {
 // view types:
 /*
  - Cards Calender
- - Cards Coll (Grid)
+ - Cards Column
  - Cards Carousel 
  - Cards Connections (Graph)
 */
@@ -40,7 +40,7 @@ const Entities: React.FC<EntitiesProps> = ({
 
   const ViewComponent = {
     [ViewMode.CardsCalender]: EntityCardCalendar,
-    [ViewMode.CardsColl]: EntityCardGrid,
+    [ViewMode.CardsColumn]: EntityCardsColumn,
     [ViewMode.CardsCarousel]: EntityCardCarousel,
     [ViewMode.CardsConnections]: EntityCardConnections,
   }[mode];
@@ -61,7 +61,9 @@ const Entities: React.FC<EntitiesProps> = ({
         <Cards files={(!filter.name ? files : (files || []).filter(file => file.name.includes(filter.name))) || []} onTagClick={handleTagClick} />
       ))} */}
       {loading ? <Loading /> : (
-        <ViewComponent files={(files) || []} onTagClick={handleTagClick} />
+        <div className={styles.cardsContainer}>
+          <ViewComponent files={(files) || []} onTagClick={handleTagClick} />
+        </div>
       )}
     </div>
   )

@@ -2,11 +2,11 @@
 
 import React, { useRef, useEffect } from "react";
 import { DataSet, Network, Node, Edge, Options } from "vis-network";
-import styles from "./EntityGraph.module.scss";
-import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import styles from "./EntityConnections.module.scss";
+import { useEntity as useEntity } from "@/hooks/provider/EntityProvider";
 
-interface GraphProps {
-  graphData: { nodes: Node[]; edges: Edge[] };
+interface EntityConnectionsProps {
+  connections: { nodes: Node[]; edges: Edge[] };
   options?: Options;
   events?: { [key: string]: Function };
   getNetwork?: Function;
@@ -16,10 +16,10 @@ interface GraphProps {
   style?: React.CSSProperties;
 }
 
-const EntityGraph: React.FC<GraphProps> = ({ graphData, options, events, getNetwork }) => {
+const EntityConnections: React.FC<EntityConnectionsProps> = ({ connections: graphData, options, events, getNetwork }) => {
   const container = useRef<HTMLDivElement | null>(null);
   const { edges, nodes } = graphData;
-  const { setName } = useEntitiy();
+  const { setName } = useEntity();
 
   const mergeDuplicateNodes = (nodeArray: Node[]): Node[] => {
     const idMap = new Map<string, Node>(); 
@@ -149,4 +149,4 @@ const EntityGraph: React.FC<GraphProps> = ({ graphData, options, events, getNetw
   );
 };
 
-export default EntityGraph;
+export default EntityConnections;

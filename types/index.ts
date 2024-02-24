@@ -1,16 +1,16 @@
 import { Edge, Node } from "vis-network";
 
+export interface Connection {
+  title: string;
+  nodes: Node[];
+  edges: Edge[];
+}
 export enum OrderType {
     Alphabetical = "Alphabetical",
     Random = "Random",
     CounterAlphabetical = "CounterAlphabetical"
 }
 
-export interface Connection {
-  title: string;
-  nodes: Node[];
-  edges: Edge[];
-}
 
 export interface I18nMessages {
   [key: string]: string;
@@ -92,7 +92,7 @@ export const SITE_METADATA = {
 
 export enum ViewMode {
   CardsCalender = "Calender",
-  CardsColl = "Column",
+  CardsColumn = "Column",
   CardsCarousel = "Carousel",
   CardsConnections = "Connection",
 }

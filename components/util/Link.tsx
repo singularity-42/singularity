@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from './Link.module.scss';
-import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import { useEntity } from "@/hooks/provider/EntityProvider";
 
 interface HoverLinkProps {
     name?: string;
@@ -14,7 +14,7 @@ interface HoverLinkProps {
 const Link: React.FC<HoverLinkProps> = ({ name = '', href = '', openInNewTab = false, children }) => {
 
     const [actualName, setActualName] = useState<string>(name);
-    const { setName, toggleVisibility, visible } = useEntitiy(); 
+    const { setName, toggleVisibility, visible } = useEntity(); 
 
     useEffect(() => {
         // name is a path to a file so we need to convert it to a file name

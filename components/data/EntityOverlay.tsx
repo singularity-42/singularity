@@ -6,8 +6,8 @@ import Markdown from "./EntityMarkdown";
 import Tags from "./ListTags";
 import useFile from "@/hooks/useFile";
 import Socials from "./ListSocials";
-import EntityGraph from "./EntityGraph";
-import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import EntityConnections from "./EntityConnections";
+import { useEntity } from "@/hooks/provider/EntityProvider";
 import useConnection from "@/hooks/useConnection";
 import { MdClose, MdEdit, MdLink, MdSave, MdShare } from "react-icons/md";
 import EmbedTrackSpotify from "../content/EmbedTrackSpotify";
@@ -17,7 +17,7 @@ import { FileContent } from "@/types";
 interface DetailsProps { }
 
 const EntityOverlay: React.FC<DetailsProps> = () => {
-  const { name, setName, visible, toggleVisibility, editing, setEditing } = useEntitiy();
+  const { name, setName, visible, toggleVisibility, editing, setEditing } = useEntity();
   const { connection } = useConnection(name);
   const { file, loading, error, update, save } = useFile(name);
   const [graphVisible, setGraphVisible] = useState(false);
@@ -139,7 +139,7 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
           {file && (file as any).soundcloudtrack && <EmbedTrackSoundcloud track={(file as any).soundcloudtrack} />}
         </div>
         <div className={styles.graphContainer}>
-          {<EntityGraph graphData={connection} />}
+          {<EntityConnections connections={connection} />}
         </div>
       </div>
     </div>

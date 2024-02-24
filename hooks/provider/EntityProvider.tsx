@@ -3,7 +3,7 @@
 import React, { createContext, useState } from 'react';
 
 // Define the context interface
-interface EntitiyContextInterface {
+interface EntityContextInterface {
     name: string;
     setName: (name: string) => void;
     toggleVisibility: () => void;
@@ -13,15 +13,15 @@ interface EntitiyContextInterface {
 }
 
 // Create the context
-const EntitiyContext = createContext<EntitiyContextInterface | undefined>(undefined);
+const EntityContext = createContext<EntityContextInterface | undefined>(undefined);
 
 // Define the props for the DetailsProvider
-interface EntitiyProviderProps {
+interface EntityProviderProps {
     children: React.ReactNode;
 }
 
 // Create a provider component for the details context
-export const EntitiyProvider: React.FC<EntitiyProviderProps> = ({ children }: EntitiyProviderProps) => {
+export const EntityProvider: React.FC<EntityProviderProps> = ({ children }: EntityProviderProps) => {
     const [name, setName] = useState<string>('');
     const [visible, setVisible] = useState<boolean>(false);
     const [editing, setEditing] = useState(false);
@@ -30,7 +30,7 @@ export const EntitiyProvider: React.FC<EntitiyProviderProps> = ({ children }: En
         setVisible(!visible);
     };
 
-    const detailsContextValue: EntitiyContextInterface = {
+    const detailsContextValue: EntityContextInterface = {
         name,
         setName,
         toggleVisibility,
@@ -40,20 +40,20 @@ export const EntitiyProvider: React.FC<EntitiyProviderProps> = ({ children }: En
     };
 
     return (
-        <EntitiyContext.Provider value={detailsContextValue}>
+        <EntityContext.Provider value={detailsContextValue}>
             {children}
-        </EntitiyContext.Provider>
+        </EntityContext.Provider>
     );
 };
 
 
-// useEntitiy is a custom hook to consume the Entitiy context
+// useEntity is a custom hook to consume the Entity context
 
-export const useEntitiy = () => {
-    const context = React.useContext(EntitiyContext);
+export const useEntity = () => {
+    const context = React.useContext(EntityContext);
 
     if (context === undefined) {
-        throw new Error('useEntitiy must be used within a EntitiyProvider');
+        throw new Error('useEntity must be used within a EntityProvider');
     }
 
     return context;

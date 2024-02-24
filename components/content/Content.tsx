@@ -8,7 +8,7 @@ import Hamburger from "./Hamburger";
 import { useVisual } from "@/hooks/provider/VisualProvider";
 import Tooltip from "../util/Tooltip";
 import Title from "./Title";
-import { useEntitiy } from "@/hooks/provider/EntitiyProvider";
+import { useEntity } from "@/hooks/provider/EntityProvider";
 import Background from "./Background";
 import { Lock } from "../data/CredentialsOverlay";
 import Entities from "../data/Entities";
@@ -18,7 +18,7 @@ const Content = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isShrunk, setIsShrunk] = useState(false);
-  const { visible, toggleVisibility } = useEntitiy();
+  const { visible, toggleVisibility } = useEntity();
   const context = useVisual();
 
   const handleHamburgerClick = useCallback(() => {

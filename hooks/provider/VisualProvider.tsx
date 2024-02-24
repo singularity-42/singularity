@@ -22,7 +22,7 @@ interface TooltipProviderProps {
 // Create a provider component for the tooltip context
 export const VisualProvider: React.FC<TooltipProviderProps> = ({ children }: TooltipProviderProps) => {
     const [tooltip, setTooltip] = useState("Welcome - back to the Singularity!");
-    const [mode, setMode] = useState(ViewMode.CardsColl);
+    const [mode, setMode] = useState(ViewMode.CardsColumn);
 
     const visualContextValue: VisualContextInterface = {
         tooltip,

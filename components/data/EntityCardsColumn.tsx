@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./EntityCardGrid.module.scss";
-import Card from "./EntityCard";
+import styles from "./EntityCardsColumn.module.scss";
+import EntitiyCard from "./EntityCard";
 // import CardCreate from "./CardCreate";
 
 interface CardsProps {
@@ -8,12 +8,12 @@ interface CardsProps {
   onTagClick?: (tag: string) => void;
 }
 
-const Cards: React.FC<CardsProps> = ({ files, onTagClick }) => {
+const EntityCardsColumn: React.FC<CardsProps> = ({ files, onTagClick }) => {
   return (
     <div className={styles.cardGrid}>
       {files.map((file: any, index: number) => (
         <div key={`card-${index}`} className={styles.cardWrapper}>
-          <Card file={file} onTagClick={onTagClick} />
+          <EntitiyCard file={file} onTagClick={onTagClick} />
 
         </div>
       ))}
@@ -25,4 +25,4 @@ const Cards: React.FC<CardsProps> = ({ files, onTagClick }) => {
 };
 
 
-export default Cards;
+export default EntityCardsColumn;

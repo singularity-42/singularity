@@ -8,7 +8,7 @@ import Content from "@/components/content/Content";
 
 import { SITE_METADATA } from "@/types";
 
-import { EntitiyProvider } from "@/hooks/provider/EntitiyProvider";
+import { EntityProvider } from "@/hooks/provider/EntityProvider";
 import EntityOverlay from "@/components/data/EntityOverlay";
 
 import { CredentialsProvider } from "@/hooks/provider/CredentialsProvider";
@@ -29,10 +29,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body className={inter.className}>
         <VisualProvider><FilterProvider>
           <CredentialsProvider><CredentialsOverlay />
-            <EntitiyProvider><EntityOverlay />
+            <EntityProvider><EntityOverlay />
               {children}
               <Content />
-            </EntitiyProvider>
+            </EntityProvider>
           </CredentialsProvider>
         </FilterProvider></VisualProvider>
       </body>

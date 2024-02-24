@@ -1,0 +1,42 @@
+// Slider.module.scss
+.slider_container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  height: 60vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #0000052c;
+}
+
+.slider_items {
+  display: flex;
+  gap: 10px;
+  height: 50vh;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.slide {
+  flex-shrink: 0;
+  width: 80%;
+  object-fit: cover;
+}
+
+.navigationButton {
+  position: absolute;
+  top: 100%;
+  transform: translateY(-50%);
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navigationButton:hover {
+  background-color: #2980b9;
+}
