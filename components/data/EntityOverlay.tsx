@@ -9,7 +9,7 @@ import Socials from "./ListSocials";
 import EntityConnections from "./EntityConnections";
 import { useEntity } from "@/hooks/provider/EntityProvider";
 import useConnection from "@/hooks/useConnection";
-import { MdClose, MdEdit, MdLink, MdSave, MdShare } from "react-icons/md";
+import { MdClose, MdEdit, MdLink, MdSave, MdShare, MdUndo } from "react-icons/md";
 import EmbedTrackSpotify from "../content/EmbedTrackSpotify";
 import EmbedTrackSoundcloud from "../content/EmbedTrackSoundcloud";
 import { FileContent } from "@/types";
@@ -21,6 +21,7 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
   const { connection } = useConnection(name);
   const { file, loading, error, update, save } = useFile(name);
   const [graphVisible, setGraphVisible] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false);
 
   const handleToggleGraph = () => {
     setGraphVisible(!graphVisible);
@@ -28,10 +29,18 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
 
   const handleEdit = () => {
     if (editing) {
-      save();
+      // todo should undo last change
       setEditing(false);
+      setName(name);
+      setHasChanged(false);
+      return;
     }
-    else setEditing(true);
+    setEditing(true);
+  };
+
+  const handleSave = () => {
+    save();
+    setEditing(false);
   };
 
   const handleExit = useCallback(() => {
@@ -57,21 +66,25 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
     // update({ ...file, name: e.target.value });
     let newName = e.target.value;
     let newFile = { ...file, name: newName } as FileContent;
+    setHasChanged(true);
     update(newFile);
   };
 
   const handleTagsChange = (tags: string[]) => {
     let newFile = { ...file, metadata: { ...file?.metadata, tags } } as FileContent;
+    setHasChanged(true);
     update(newFile);
   };
 
   const handleMarkdownChange = (markdown: string) => {
     let newFile = { ...file, markdown } as FileContent;
+    setHasChanged(true);
     update(newFile);
   };
 
   const handleSocialsChange = (metadata: any) => {
     let newFile = { ...file, metadata } as FileContent;
+    setHasChanged(true);
     update(newFile);
   };
 
@@ -112,8 +125,13 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
         <MdShare />
       </button>
       <button className={styles.editButtonContainer} onClick={handleEdit}>
-        {editing ? <MdSave /> : <MdEdit />}
+        {!editing ? <MdEdit /> : <MdUndo />}
       </button>
+      {
+        hasChanged && <button className={styles.saveButtonContainer} onClick={handleSave}>
+          <MdSave />
+        </button>
+      }
       <div className={styles.contentContainer}>
         <div className={styles.leftContainer}>
           <div className={styles.detailsContainer}>

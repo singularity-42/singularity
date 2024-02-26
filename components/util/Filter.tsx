@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './Filter.module.scss';
 import Tag from '../content/Tag';
 import { CategoryType, FileContent, Filter as FilterType } from '@/types';
 
-import { MdSearch } from 'react-icons/md';
+import { MdCyclone, MdSearch, MdSwapCalls } from 'react-icons/md';
 import { IoMdPricetag } from "react-icons/io";
 import { FaHashtag } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
+import { useVisual } from '@/hooks/provider/VisualProvider';
 
 
 interface FilterProps {
@@ -28,6 +29,7 @@ const Filter: React.FC<FilterProps> = ({ files, filter, setFilterName, setFilter
   const [tags, setTags] = useState<string[]>([]);
   const [filterSwapPossible, setFilterSwapPossible] = useState(false);
   const [filterSwapValue, setFilterSwapValue] = useState('');
+  const { cylceViewMode } = useVisual();
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -129,6 +131,21 @@ const Filter: React.FC<FilterProps> = ({ files, filter, setFilterName, setFilter
   };
 
 
+  const [iconAnimated, setIconAnimated] = useState(false); // State for icon animation
+
+  // Function to handle the cycle button click and trigger animation
+  const handleCycleClick = () => {
+    cylceViewMode();
+    setIconAnimated(true); // Trigger animation by setting state
+  
+    // Remove the animation class after a short duration to stop the animation
+    setTimeout(() => {
+      setIconAnimated(false);
+    }, 500);
+  };
+  
+
+
   return (
     <div className={styles.filter}>
       <div className={styles.filterSearchContainer}>
@@ -142,6 +159,7 @@ const Filter: React.FC<FilterProps> = ({ files, filter, setFilterName, setFilter
           onKeyDown={handleNameEnter}
           value={filter.name}
         />
+         <p className={`${styles.filterTitle} ${iconAnimated ? styles.iconAnimated : ''}`} onClick={handleCycleClick}><MdSwapCalls /></p>
       </div>
       <div className={styles.filtersContainer}>
         {costs.length > 0 && <div className={styles.filterContainer}>

@@ -13,7 +13,7 @@ const EntityCardsColumn: React.FC<CardsProps> = ({ files, onTagClick }) => {
     <div className={styles.cardGrid}>
       {files.map((file: any, index: number) => (
         <div key={`card-${index}`} className={styles.cardWrapper}>
-          <EntitiyCard file={file} onTagClick={onTagClick} />
+          <EntitiyCard file={file} onTagClick={onTagClick} showDetailsOverlay={true}/>
 
         </div>
       ))}

@@ -23,12 +23,16 @@
 }
 
 .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: rgb(var(--dark-rgb));
+  background-color: rgba(var(--dark-rgb), 0.42);
   box-shadow: var(--box-shadow);
-  padding: 0 0.42rem;
+  padding: 0.42rem;
   width: 100%; /* Ensures full width */
 }
 

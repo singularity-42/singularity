@@ -8,9 +8,11 @@ import Socials from "./ListSocials";
 import Connections from "./ListConnections";
 import { MdGroups, MdOutlineCalendarMonth, MdPages, MdPerson } from "react-icons/md";
 import { FileContent } from "@/types";
+import { IoMdEye } from "react-icons/io";
 
 interface CardProps {
-  file: FileContent;
+  file?: FileContent;
+  className?: string;
   onTagClick?: (tag: string) => void;
   showDetailsOverlay?: boolean; // Add a prop to control overlay visibility
   onDetailsButtonClick?: () => void; // Callback for button click
@@ -19,10 +21,16 @@ interface CardProps {
 const EntityCard: React.FC<CardProps> = ({
   file,
   onTagClick,
+  className,
   showDetailsOverlay = false,
   onDetailsButtonClick,
 }) => {
-  const { name, metadata, category, markdown } = file || {};
+  const { name, metadata, category, markdown } = file || {
+    name: "",
+    metadata: null,
+    category: "",
+    markdown: "",
+  };
   const { tags, connections } = metadata || {
     tags: [],
     connections: [],
@@ -42,6 +50,10 @@ const EntityCard: React.FC<CardProps> = ({
     e.stopPropagation();
     if (onDetailsButtonClick) {
       onDetailsButtonClick();
+    }else{
+      toggleVisibility();
+      setName(name);
+      setScrolling(false);
     }
   };
 
@@ -66,15 +78,15 @@ const EntityCard: React.FC<CardProps> = ({
   };
 
   return (
-    <div className={styles.card} onClick={handleClick} onContextMenu={handleContextMenu}>
+    <div className={`${styles.card} ${className}`} onClick={handleClick} onContextMenu={handleContextMenu}>
       <div className={styles.contentContainer}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>
-            {categoryIcon(category || '')}&nbsp;{name || "&nbsp;"}
+            {categoryIcon(category || '')}&nbsp;{name || ''}
           </h2>
-          {showDetailsOverlay && (
+          {!showDetailsOverlay && (
             <button className={styles.detailsButton} onClick={handleDetailsButtonClick}>
-              Show Details
+              <IoMdEye />
             </button>
           )}
         </div>
@@ -93,9 +105,9 @@ const EntityCard: React.FC<CardProps> = ({
             <EntityMarkdown content={markdown} active={isScrolling} />
           </div>
         )}
-        {file.metadata && (
+        {metadata && (
           <div className={styles.socialMediaContainer}>
-            <Socials metadata={file.metadata} />
+            <Socials metadata={metadata} />
           </div>
         )}
       </div>

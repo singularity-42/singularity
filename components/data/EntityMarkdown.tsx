@@ -18,21 +18,51 @@ interface MarkdownProps {
   onChange?: (content: string) => void;
 }
 
-const applyLinks = (str: string) => {
-  const linkTemplate = (name: string) => <Link name={name}>{name}</Link>;
-  const matches = str.match(/\[\[([^\]]+)\]\]/g); // Use specific regex
-  if (matches) {
-    return (
-      <span className={styles.section}>
-        {str.split(/\[\[([^\]]+)\]\]/g).map((part, i) => (
-          <div key={`${name}-${i}`} className={styles.p}>
-            {i % 2 === 0 ? part : linkTemplate(matches[Math.floor(i / 2)].replace('[[', '').replace(']]', ''))}
-          </div>
-        ))}
-      </span>
-    );
-  }
-  return <span>{str}</span>;
+
+const applyMarkdown = (str: string) => {
+  const linkRegex = /\[\[([^\]]+)\]\]/g;
+  const headerRegex = /^(#+)\s+(.+)/gm;
+  const hrefRegex = /\[([^\]]+)\]\(([^\)]+)\)/g;
+  const lineRegex = /\n/g;
+
+  const elements = str.split(lineRegex).flatMap((line, i) => {
+    const linkMatches = Array.from(line.matchAll(linkRegex));
+    if (linkMatches.length > 0) {
+      return linkMatches.map((match, j) => {
+        const [_, name] = match;
+        return <div key={`${i}-${j}`}>{line.split(linkRegex).map((part, k) => k % 2 === 0 ? part : <Link name={name}>{name}</Link>)}</div>;
+      });
+    }
+
+    const hrefMatches = Array.from(line.matchAll(hrefRegex));
+    if (hrefMatches.length > 0) {
+      return hrefMatches.map((match, j) => {
+        const [_, name, href] = match;
+        return <div key={`${i}-${j}`}>{line.split(hrefRegex).map((part, k) => {
+          if ([name, href].includes(part))
+
+            return part == name ? <Link href={href}>{name}</Link> : <></>;
+          return part;
+        })}</div>;
+      });
+    }
+
+    const headerMatches = Array.from(line.matchAll(headerRegex));
+    if (headerMatches.length > 0) {
+      return headerMatches.map((match, j) => {
+        const [_, level, text] = match;
+        return <div key={`${i}-${j}`}><h1 className={`${styles.header} ${styles[`header-${level.length}`]}`}>{text}</h1></div>;
+      });
+    }
+
+    return <div key={i}>{line}</div>;
+  });
+
+  return (
+    <span className={styles.section}>
+      {elements}
+    </span>
+  );
 };
 
 const EntityMarkdown: React.FC<MarkdownProps> = ({ content, active, editing, onChange }) => {
@@ -62,7 +92,7 @@ const EntityMarkdown: React.FC<MarkdownProps> = ({ content, active, editing, onC
           disabled={!editing}
         />
         : <div className={styles.section}>
-          {applyLinks(formattedContent)}
+          {applyMarkdown(formattedContent)}
         </div>
       }
     </div>

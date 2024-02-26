@@ -8,11 +8,16 @@
 
 .markdown {
     width: 100%;
-    margin: 0 auto;
-    padding: 20px;
+    // margin: 0 auto;
+    // padding: 20px;
+    // blocksatz
     // background-color: #f9f9f9;
     border-radius: 5px;
     text-align: left;
+
+    // text warp
+    word-wrap: break-word;
+    word-break: break-word;
 
 
     transition: color 0.2s ease-in-out;

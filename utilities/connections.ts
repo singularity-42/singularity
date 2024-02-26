@@ -106,21 +106,44 @@ export const buildNodesAndEdges = (
   return connection;
 };
 
-const getColorBackground = (category: string): string => {
+const getDarkerColor = (color: string, amount: number): string => {
+  const hex = color.replace(/^#/, ''); // Ensure the '#' is at the start
+  const c_r = hex.match(/.{1,2}/g) || ['00', '00', '00'];
+
+  const [r, g, b] = c_r.map((channel) => Math.max(parseInt(channel, 16) - amount, 0));
+
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+};
+
+const getColorBackground = (category: string, darker: number = 0): string => {
   switch (category) {
     case 'concepts':
-      return '#424242';
+      return getDarkerColor('#a840a8', darker);
     case 'creatives':
-      return '#ff2a2a';
+      return getDarkerColor('#ff2a2a', darker);
     case 'collectives':
-      return '#de5454';
+      return getDarkerColor('#de5454', darker);
     case 'collaborations':
-      return '#40a8a8';
+      return getDarkerColor('#40a8a8', darker);
     default:
-      return '#42424280';
+      return getDarkerColor('#C4C4C4', darker);
   }
 };
 
+const getShape = (category: string): string => {
+  switch (category) {
+    case 'concepts':
+      return 'diamond';
+    case 'creatives':
+        return 'dot';
+    case 'collectives':
+      return 'box';
+    case 'collaborations':
+      return 'box';
+    default:
+      return 'text';
+  }
+};
 
 export const generateNode = (file: FileContent, id: number): Node => {
   return {
@@ -129,14 +152,21 @@ export const generateNode = (file: FileContent, id: number): Node => {
     title: `Node: ${id}, Name: ${file.name}`,
 
     color: {
-      background: id == 0 ? '#ffffff' : getColorBackground(file.category || ''),
-      border: '#00000000',
+      background: getColorBackground(file.category || '', 42),
+      border: id == 0 ? '#ffffff' : '#000000',
       highlight: {
         background: '#420000',
         border: '#ffffff',
       },
+      hover: {
+        background: getColorBackground(file.category || ''),
+      },
     },
+    level: Math.round(Math.random() * 10),
+    shape: getShape(file.category || ''),
+    size: id == 0 ? 20 : 10,
     borderWidth: 3,
+    // id== 0 is center
     fixed: id == 0 ? true : false,
   } as Node;
 

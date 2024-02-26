@@ -76,7 +76,7 @@ const EntityConnections: React.FC<EntityConnectionsProps> = ({ connections: grap
         font: {
           size: 20,
           color: "#ffffff",
-          face: "Arial", // Change the font face
+          face: "Inter", // Change the font face
         },
         color: {
           border: "#ffffff",

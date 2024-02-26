@@ -16,4 +16,21 @@
 
 
 .cardsContainer {
+    height: 78vh;
+    overflow-y: scroll;
+}
+
+// centered on all screen
+.noResults {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 50vh;
+    padding: 20px;
+}
+.noResults svg {
+    font-size: 10rem;
+    color: rgba(var(--light-rgb), 0.5);
 }

@@ -13,6 +13,7 @@ import EntityCardCarousel from "./EntityCardCarousel";
 import EntityCardCalendar from "./EntityCardCalendar";
 import EntityCardConnections from "./EntityCardConnections";
 import { ViewMode } from "@/types";
+import { MdQuestionMark } from "react-icons/md";
 
 interface EntitiesProps {
 }
@@ -60,11 +61,11 @@ const Entities: React.FC<EntitiesProps> = ({
       {/* {loading ? <Loading /> : ((
         <Cards files={(!filter.name ? files : (files || []).filter(file => file.name.includes(filter.name))) || []} onTagClick={handleTagClick} />
       ))} */}
-      {loading ? <Loading /> : (
+      {loading ? <Loading /> : (files?.length === 0 ? <div className={styles.noResults}><MdQuestionMark /></div> : (
         <div className={styles.cardsContainer}>
           <ViewComponent files={(files) || []} onTagClick={handleTagClick} />
         </div>
-      )}
+      ))}
     </div>
   )
 }

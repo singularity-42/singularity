@@ -10,7 +10,7 @@ const CreativePage: React.FC = () => {
   const { setMode } = useVisual();
 
   useEffect(() => {
-    setMode(ViewMode.CardsCarousel)
+    setMode(ViewMode.CardsColumn)
     setFilterCategory(CategoryType.Creative);
   }, []); 
 

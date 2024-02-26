@@ -13,3 +13,5 @@ This time accompanied by percussion sounds from the heart, produced by hand stra
 We are looking forward to the live decoration of our circle of love !
 
 As well as dj sets from the ambassadors of body trembling, soul moving music."
+
+[[Funk]] [[Disco]] [[House]] [[Soul]]

@@ -5,14 +5,32 @@
   --header-height: 3rem;
 
 
-  --light: #C4C4C4;
   --light-rgb: 222, 222, 222;
+  --light: #C4C4C4;
+  --dark-rgb: 10, 10, 10; 
   --dark: #0a0a0a;
-  --dark-rgb: 10, 10, 10;
   --primary-rgb: 255, 42, 42;
-  --secondary-rgb: 222, 84, 84;
-  --tertiary-rgb: 64, 168, 168;
+  --primary: #ff2a2a;
+  --secondary-rgb: 222, 87, 87;
+  --secondary: #de5454;
+  --tertiary-rgb: 64, 168, 168; 
+  --tertiary: #40a8a8;
+  --quaternary-rgb: 168, 64, 168; 
+  --quaternary: #a840a8;
+  --quinary-rgb: 168, 168, 64; 
+  --quinary: #a8a840;
 }
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter.ttf') format('truetype');
+  /* Add additional font formats if necessary (e.g., woff, woff2) */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 
 * {
   box-sizing: border-box;

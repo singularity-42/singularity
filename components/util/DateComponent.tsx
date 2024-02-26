@@ -9,7 +9,22 @@ interface DateComponentProps {
 const DateComponent: React.FC<DateComponentProps> = ({ date }) => {
   // Assuming date is in the format "YYYY\\MM\\DD\\title.md"
   // Format date to "DD.MM.YYYY"
-  const formattedDate = date.split("\\").slice(0, 3).join(".");
+  // 
+
+
+  // if(date.includes("/"))
+  // const possibleFormattedDate = date.split("\\").slice(0, 3).join(".");
+
+
+  let formattedDate = date;
+  if (date.includes("/")) {
+    formattedDate = date.split("/").slice(0, 3).join(".");
+  }else{
+    // than date is now
+    let now = new Date();
+    formattedDate = `${now.getFullYear()}.${now.getMonth()+1}-${now.getDate()}`;
+  }
+
   const currentDate = new Date(formattedDate);
   const day = currentDate.getDate();
   const month = currentDate.getMonth() + 1; // Months are zero-based

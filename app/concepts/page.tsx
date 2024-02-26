@@ -10,7 +10,7 @@ const ConceptPage: React.FC = () => {
   const { setMode } = useVisual();
 
   useEffect(() => {
-    setMode(ViewMode.CardsConnections)
+    setMode(ViewMode.CardsCarousel)
     setFilterCategory(CategoryType.Concept);
   }, []);
 

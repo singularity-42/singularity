@@ -7,11 +7,10 @@ import { useEntity } from "@/hooks/provider/EntityProvider";
 interface HoverLinkProps {
     name?: string;
     href?: string;
-    openInNewTab?: boolean; // Added prop to control opening in a new tab
     children: React.ReactNode;
 }
 
-const Link: React.FC<HoverLinkProps> = ({ name = '', href = '', openInNewTab = false, children }) => {
+const Link: React.FC<HoverLinkProps> = ({ name = '', href = '', children }) => {
 
     const [actualName, setActualName] = useState<string>(name);
     const { setName, toggleVisibility, visible } = useEntity(); 
@@ -29,11 +28,7 @@ const Link: React.FC<HoverLinkProps> = ({ name = '', href = '', openInNewTab = f
             onMouseDown={(e : React.MouseEvent) => {
                 e.preventDefault();
                 if (href) {
-                    // Open in a new tab if specified
-                    if (openInNewTab) {
-                        window.open(href, '_blank');
-                        return;
-                    }
+                    window.open(href, '_blank');
                 }
                 setName(name);
                 if (!visible) {

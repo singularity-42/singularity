@@ -107,7 +107,7 @@
   position: fixed;
   text-align: left;
   top: 1.5rem;
-  right: 4.2rem;
+  right: 4rem;
   transform: scale(1.2);
   cursor: pointer;
   color: var(--light-color);
@@ -126,7 +126,7 @@
   position: fixed;
   text-align: left;
   top: 1.5rem;
-  right: calc(4.2rem + (4.2rem - 1.5rem));
+  right: 6.5rem;
   transform: scale(1.2);
   cursor: pointer;
   color: var(--light-color);
@@ -138,6 +138,26 @@
   &:hover {
     color: rgb(var(--secondary-rgb));
   }
+}
+
+.saveButtonContainer {
+  position: fixed;
+  text-align: left;
+  top: 1.5rem;
+  right: 9rem;
+  transform: scale(1.2);
+
+  cursor: pointer;
+  color: var(--light-color);
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  outline: none;
+
+  &:hover {
+    color: rgb(var(--secondary-rgb));
+  }
+
 }
 
 .graphButtonContainer {
@@ -311,6 +331,7 @@
   padding-top: 1rem;
   padding-right: 1rem;
   display: flex;
+  height: 77vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -339,6 +360,7 @@
 
   .contentContainer {
     grid-template-columns: 1fr;
+    height: 42vh;
   }
 
   .fileContainer {
@@ -347,5 +369,10 @@
 
   .leftContainer {
     width: 90vw;
+    height: auto;
+  }
+
+  .graphContainer{
+    height: auto;
   }
 }

@@ -19,7 +19,6 @@
 
 .filter {
   padding: 1rem;
-  margin: 0.42rem;
   border-radius: 20px;
 }
 
@@ -29,22 +28,22 @@
   flex-wrap: wrap;
 }
 
-.filtersContainer{  
+.filtersContainer {
   display: flex;
   // flex-direction: column;
   gap: 10px;
   flex-wrap: nowrap;
   margin-bottom: 10px;
   // between items will be "|"
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: left;
 
   .filterContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
   }
-  
+
   // all sub items will have border right bot not the last
   .filterContainer:not(:last-child) {
     border-right: 3px solid rgba(var(--light-rgb), 0.6);
@@ -70,6 +69,15 @@
     border: none;
     white-space: nowrap;
     padding: 10px;
+    transition: border 0.2s;
+
+    &:hover {
+      border: 1px solid rgba(var(--light-rgb), 0.6);
+    }
+
+    &:focus {
+      border: 1px solid rgba(var(--light-rgb), 0.6);
+    }
   }
 
 
@@ -85,7 +93,7 @@
     &:focus {
       border: 1px solid rgba(var(--light-rgb), 0.6);
     }
-  
+
   }
 
   .filterSwapPossible {
@@ -111,4 +119,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: border 0.2s;
+
+  &:hover {
+    border: 1px solid rgba(var(--light-rgb), 0.6);
+  }
+
+  &:focus {
+    border: 1px solid rgba(var(--light-rgb), 0.6);
+  }
+}
+
+
+
+// Add CSS class for animation in your CSS file
+.iconAnimated {
+  svg {
+    animation: spin 0.5s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

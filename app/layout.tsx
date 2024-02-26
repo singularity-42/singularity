@@ -1,5 +1,5 @@
 export const metadata: NextMetadata = SITE_METADATA;
-import "./globals.scss";
+import "./globals.css";
 
 import type { Metadata as NextMetadata } from "next";
 

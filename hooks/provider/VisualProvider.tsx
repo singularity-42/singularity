@@ -9,6 +9,7 @@ interface VisualContextInterface {
     setTooltip: (tooltip: string) => void;
     mode: ViewMode;
     setMode: (mode: ViewMode) => void;
+    cylceViewMode: () => void;
 }
 
 // Create the context
@@ -24,12 +25,22 @@ export const VisualProvider: React.FC<TooltipProviderProps> = ({ children }: Too
     const [tooltip, setTooltip] = useState("Welcome - back to the Singularity!");
     const [mode, setMode] = useState(ViewMode.CardsColumn);
 
+    const cylceViewMode = () => {
+        let type_strings = Object.keys(ViewMode);
+        let type_values = Object.values(ViewMode);
+        let index = type_values.indexOf(mode);
+        index = (index + 1) % type_values.length;
+        setMode(type_values[index]);
+    };
+
     const visualContextValue: VisualContextInterface = {
         tooltip,
         setTooltip,
         mode,
-        setMode
+        setMode,
+        cylceViewMode
     };
+
 
     return (
         <VisualContext.Provider value={visualContextValue}>
