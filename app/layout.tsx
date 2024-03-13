@@ -1,40 +1,44 @@
-export const metadata: NextMetadata = SITE_METADATA;
 import "./globals.css";
 
 import type { Metadata as NextMetadata } from "next";
 
-
-import Content from "@/components/content/Content";
-
-import { SITE_METADATA } from "@/types";
-
-import { EntityProvider } from "@/hooks/provider/EntityProvider";
-import EntityOverlay from "@/components/data/EntityOverlay";
-
-import { CredentialsProvider } from "@/hooks/provider/CredentialsProvider";
-import CredentialsOverlay from "@/components/data/CredentialsOverlay";
-
-import { VisualProvider } from "@/hooks/provider/VisualProvider";
-
-import { FilterProvider } from "@/hooks/provider/FilterProvider";
+import { EntityProvider } from "@/hooks/provider/useEntityOverlay";
+import { CredentialsProvider } from "@/hooks/provider/useCredentials";
+import { VisualProvider } from "@/hooks/provider/useVisual";
+import { FilterProvider } from "@/hooks/provider/useFilter";
 
 import localFont from 'next/font/local';
+import CredentialsOverlay from "@/components/layouts/OverlayCredentials";
+import EntityOverlay from "@/components/layouts/OverlayEntity";
+import Content from "@/components/layouts/Content";
+import { SITE_METADATA } from "./defaults";
+import { LoadingProvider } from "@/hooks/provider/useLoading";
+
 const inter = localFont({ src: './Inter.ttf' });
 
-export default function RootLayout(props: { children: React.ReactNode }) {
+export const metadata: NextMetadata = SITE_METADATA;
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function RootLayout(props: Props) {
   const { children } = props;
 
   return (
     <html suppressHydrationWarning={true}>
       <body className={inter.className}>
-        <VisualProvider><FilterProvider>
-          <CredentialsProvider><CredentialsOverlay />
-            <EntityProvider><EntityOverlay />
-              {children}
-              <Content />
-            </EntityProvider>
-          </CredentialsProvider>
-        </FilterProvider></VisualProvider>
+        <LoadingProvider>
+          <VisualProvider><FilterProvider>
+            <CredentialsProvider><CredentialsOverlay />
+              <EntityProvider><EntityOverlay />
+                <Content>
+                  {children}
+                </Content>
+              </EntityProvider>
+            </CredentialsProvider>
+          </FilterProvider></VisualProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

@@ -1,0 +1,134 @@
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background: rgba(var(--dark-rgb), 0.5);
+  padding: 0 0.96rem;
+  width: 100%;
+  margin-top: 0;
+  justify-content: space-between;
+  z-index: 100;
+  height: var(--header-height);
+}
+
+.main {
+  padding-top: var(--header-height);
+  flex: 1;
+  /* Expands to fill remaining space */
+}
+
+.content {
+  display: flex;
+  min-height: 100vh;
+  /* Ensures viewport height */
+  flex-direction: column;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  // background-color: rgba(var(--dark-rgb), 0.42);
+  box-shadow: var(--box-shadow);
+  padding: 0.1rem 0.42rem;
+  z-index: 100;
+
+  width: 100%;
+  /* Ensures full width */
+}
+
+.footer__left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.footer__right {
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  height: 2em;
+}
+
+.footer__center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.tooltip {
+  // display: inline-block;
+  padding: 0.42rem;
+  padding-left: calc(0.42 * 3rem);
+  position: relative;
+  top: 0;
+  left: 0;
+  max-width: 90vw;
+  transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out;
+  white-space: nowrap;
+  display: flex;
+
+  .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+  .name {
+    padding-right: 1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &.changing {
+    animation: fadeOutLeft 0.3s ease-in-out forwards;
+  }
+
+  /* Additional styles for mobile view */
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+    left: 0;
+  }
+
+  to {
+    opacity: 0;
+    left: -1rem;
+  }
+}
+
+.tooltip.changing {
+  opacity: 0;
+  left: 1rem;
+  animation: fadeInLeft 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    left: 1rem;
+  }
+
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}

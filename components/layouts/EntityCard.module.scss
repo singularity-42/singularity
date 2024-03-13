@@ -1,0 +1,112 @@
+// Card.module.scss
+.card {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: rgba(var(--dark-rgb), 0.42);
+  padding: 1rem;
+
+  &.scrollable {
+    overflow: scroll;
+  }
+
+  transition: transform 0.3s ease-in-out;
+
+
+}
+
+.titleContainer {
+  background: rgba(var(--dark-rgb), 0.2);
+  border-radius: 8px;
+  padding: 0.42rem;
+  margin: 0;
+  margin-bottom: 12px;
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--light-rgb);
+  //center
+  height: 10%;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.contentContainer {
+  // color: mix colors var(--light-rgb) var(--dark-rgb) var(--tertiary-rgb);
+  color: var(--light-rgb);
+  height: 60%;
+  // margin-top: 8px;
+
+  // overflow scroll
+  overflow: auto;
+  overflow-y: hidden;
+  // ... existing styles
+  mask-image: linear-gradient(to top, transparent, black);
+  //display text  "..." after the text
+
+  // start at 50%
+  // mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5) 150%, transparent);
+
+
+  &.scrollable {
+    overflow: scroll;
+    mask-image: none;
+  }
+}
+
+
+
+.socialMediaContainer {
+  position: absolute;
+  bottom: 16px;
+  overflow-x: auto;
+  width: calc(100% - 32px);
+}
+
+
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.imageContainer {
+  // will be background of card
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 12px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+
+.selected {
+  border: 1px solid rgb(var(--light-rgb));
+  background-color: rgba(var(--light-rgb), 0.1);
+}
+
+
+
+@media (max-width: 768px) {
+}

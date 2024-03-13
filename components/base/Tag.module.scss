@@ -1,0 +1,53 @@
+.tag {
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: var(--font-size);
+    padding: 0.2rem;
+    font-weight: bold;
+    color: rgb(var(--light-rgb));
+    transition: transform 0.3s ease;
+    position: static;
+    border-radius: 4.2px;
+    cursor: pointer;
+    background: rgba(var(--dark-rgb), 0.2);
+    transition: background-color 0.3s ease;
+    border: none;
+    white-space: nowrap;
+    
+    &:hover {
+      background-color: rgba(var(--light-rgb), 0.2);
+    }
+
+    &.selected {
+      background-color: rgb(var(--secondary-rgb));
+    }
+}
+
+
+.viewOnly {
+  cursor: default;
+  &:hover {
+    transform: none;
+    background-color: rgba(var(--light-rgb), 0.2);
+  }
+}
+
+.highlight {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    scale: 1
+  }
+  42% {
+    scale: 1.2
+  }
+  84% {
+    scale: 1
+  }
+  100% {
+    scale: 1
+  }
+}

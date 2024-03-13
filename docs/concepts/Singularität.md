@@ -1,1 +1,0 @@
-Gleichzeitig am selben Ort.

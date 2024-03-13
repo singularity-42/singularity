@@ -1,19 +1,19 @@
 "use client"
 
 import React, { useEffect } from 'react';
-import { useFilter } from '@/hooks/provider/FilterProvider';
-import { CategoryType, ViewMode } from '@/types';
-import { useVisual } from '@/hooks/provider/VisualProvider';
+import { useFilter } from '@/hooks/provider/useFilter';
+import { useVisual } from '@/hooks/provider/useVisual';
+import { CategoryType, ViewType } from './defaults';
 
-export default function Home() {
+const collaborationPage: React.FC = () => {
   const { setFilterCategory } = useFilter();
   const { setMode } = useVisual();
 
   useEffect(() => {
-    setMode(ViewMode.CardsCalender)
+    setMode(ViewType.CardsCalender)
     setFilterCategory(CategoryType.Collaboration);
   }, []);
-
-
   return <></>;
 };
+
+export default collaborationPage;

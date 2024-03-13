@@ -1,0 +1,61 @@
+.icon {
+
+    white-space: nowrap;
+    font-size: var(--font-size);
+    font-weight: bold;
+    text-transform: uppercase;
+
+    transition: border 0.2s;
+
+    background-color: rgba(var(--dark-rgb), 0.2);
+    border: 1px solid rgba(var(--light-rgb), 0);
+    padding: 10px;
+    border-radius: 10px;
+
+    &:hover {
+        border: 1px solid rgba(var(--light-rgb), 0.6);
+    }
+
+    &:focus {
+        border: 1px solid rgba(var(--light-rgb), 0.6);
+    }
+    // icon should be centered vertical and horizontal
+    svg {
+        margin: auto;
+    }
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.noBorder {
+    border: none;
+    background: transparent;
+
+    &:hover {
+        border: none;
+    }
+
+    &:focus {
+        border: none;
+    }
+}
+
+
+.iconAnimated {
+    svg {
+        animation: spin 0.5s linear infinite;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

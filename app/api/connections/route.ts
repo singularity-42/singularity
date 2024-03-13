@@ -1,6 +1,6 @@
-import { Connection, buildNodesAndEdges, findConnections } from '@/utilities/connections';
+import { Connection, buildNodesAndEdges, findConnections } from '@/data/tools/connections';
 import { NextRequest, NextResponse } from 'next/server';
-import { loadFile } from '@/utilities/file';
+import { loadFile } from '@/data/tools/file';
 
 export const GET = async (req: NextRequest, res: NextResponse): Promise<Response> => {
   let relation: Connection = {
@@ -8,7 +8,7 @@ export const GET = async (req: NextRequest, res: NextResponse): Promise<Response
     edges: [],
   };
   const fileName = req.nextUrl.searchParams.get('name');
-
+  const fileData = req.nextUrl.searchParams.get('data');
   if (!fileName){ 
     return new Response(JSON.stringify(relation), { status: 400 })};
 

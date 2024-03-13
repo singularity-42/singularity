@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Connection } from '@/types';
-import { useCredentials } from './provider/CredentialsProvider';
+import { Connection, Filter } from '@/app/types';
+import { useCredentials } from './provider/useCredentials';
 
-const useConnection = (name: string) => {
+const useConnection = (filter: Filter) => {
+    const { name , date} = filter;
     const [connection, setConnection] = useState<Connection>({
         title: '',
         nodes: [],
@@ -20,7 +21,8 @@ const useConnection = (name: string) => {
         const fetchRelation = async () => {
             if (!name) return;
             try {
-                const url = `${process.env.NEXT_PUBLIC_API_URL}`+`connections?name=${name}`;
+                const url = `${process.env.NEXT_PUBLIC_API_URL}`+`connections?name=${name}${date ? `&date=${date}` : ''}`;
+        
                 const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Dusk ${credentials.join(':')}`

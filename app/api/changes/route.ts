@@ -1,9 +1,6 @@
-import { Change, FileContent, Metadata } from "@/types";
-import { generateChangesFile, getChanges, loadFile, saveFile } from "@/utilities/file";
-import { editMetadataKeyValue } from "@/utilities/metadata";
-import fs from "fs";
-import * as glob from "glob";
-
+import { Change, FileContent } from "@/app/types";
+import { generateChangesFile, getChanges, loadFile, saveFile } from "@/data/tools/file";
+import { editMetadataKeyValue } from "@/data/tools/metadata";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
@@ -31,7 +28,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   }
   
   let changesFile = generateChangesFile(newFile, crrFile.name);
-
   // generate new credentials
   // TODO: do this in secure way
 
@@ -43,9 +39,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       newCredentials += "-";
     newCredentials += chars[Math.floor(Math.random() * chars.length)];
   }
-  // newCredentials = newCredentials.slice(0, -1);
-  // get rid of first
-
 
   changesFile.metadata = editMetadataKeyValue(changesFile.metadata, "credentials", newCredentials);
   saveFile(changesFile);

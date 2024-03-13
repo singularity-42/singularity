@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Connection } from '@/types';
-import { useCredentials } from './provider/CredentialsProvider';
+import { Connection } from '@/app/types';
+import { useCredentials } from './provider/useCredentials';
 import { Edge, Node } from 'vis-network';
 
 const useConnections = (names: string[]) => {

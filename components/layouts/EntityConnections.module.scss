@@ -1,0 +1,56 @@
+.graphContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+      
+    box-sizing: border-box;
+    overflow: hidden;
+
+    // border: 1px dashed rgb(var(--light-rgb));
+    border-left: 2px solid rgba(var(--light-rgb), 0.42);
+    // border-radius: 0.42rem;#
+
+    @media (max-width: 768px) {
+      border-left: none;
+    }
+}
+
+@media (max-width: 768px) {
+  .graph {
+    margin-top: 0;
+    // height: 42vh;
+  }
+}
+
+.graph {
+    position: relative;
+    top: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+
+    // graph font
+    font-size: 1.42rem;
+    color: rgba(var(--light-rgb), 0.42);
+}
+
+.graphTitle {
+  position: relative;
+  top: -2.3rem;
+  opacity: 0.42;
+  left: 0.6rem;
+  font-size: 1.5rem;
+
+  @media (max-width: 768px) {
+    top: -100%;
+    left: 0.3rem;
+  }
+}
