@@ -1,7 +1,7 @@
 // EntityCard.tsx
 import React, { useCallback, useState } from "react";
 import styles from "./EntityCard.module.scss";
-import { useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
+import { useEntityOverlay } from "@/hooks/useEntityOverlay";
 import { FileContent } from "@/app/types";
 import { IoMdEye } from "react-icons/io";
 import Connections from "../collections/ListConnections";
@@ -83,9 +83,9 @@ const EntityCard: React.FC<CardProps> = ({
           <ListSocials metadata={metadata} />
         </div>
       )}
-      {tags && tags.length > 0 && (
+      {tags && (tags as string[]).length > 0 && (
         <div className={styles.tagsContainer}>
-          <ListTags tags={typeof tags === "string" ? [tags] : tags} onTagClick={onTagClick} highlight="sponsor" />
+          <ListTags tags={typeof tags === "string" ? [tags] : (tags as string[])} onTagClick={onTagClick} highlight="sponsor" />
         </div>
       )}
       {markdown && (
@@ -98,7 +98,7 @@ const EntityCard: React.FC<CardProps> = ({
         <div className={styles.imageContainer}>
           <img
             src={image as string}
-            alt={name}
+            alt=""
             onLoad={() => {
               const img = document.querySelector(`.${styles.imageContainer} img`) as HTMLImageElement;
               img.classList.add(styles.imageLoaded);

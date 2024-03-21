@@ -1,21 +1,29 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Filter } from '@/app/types';
+import { FileContent as EntityContent, Filter } from '@/app/types';
 import { useCredentials } from './provider/useCredentials';
+import { useFilter } from './useFilter';
 
 interface UseEntitiesResult {
-  files: any[] | null;
+  files: EntityContent[];
   loading: boolean;
   error: string | null;
 }
 
-const useEntities = (filter: Filter): UseEntitiesResult => {
-  const [files, setFiles] = useState<any[] | null>(null);
+const useEntities = (
+  loadedEntities?: EntityContent[],
+): UseEntitiesResult => {
+  const { filter } = useFilter();
+  const [files, setFiles] = useState<EntityContent[]>(loadedEntities || []);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { credentials } = useCredentials();
 
   useEffect(() => {
+    if (!loadedEntities) {
+      return;
+    }
+
     const fetchFiles = async () => {
       try {
         setLoading(true);
@@ -30,9 +38,7 @@ const useEntities = (filter: Filter): UseEntitiesResult => {
           return;
         }
 
-
         const url = `${process.env.NEXT_PUBLIC_API_URL}/entities?tags=${tagsString}&connections=${connectionsString}&category=${filter.category}&name=${nameString}`;
-
 
         const response = await axios.get(url, {
           headers: {
@@ -40,7 +46,7 @@ const useEntities = (filter: Filter): UseEntitiesResult => {
           },
         });
 
-        setFiles(response.data);
+        setFiles(response.data as EntityContent[]);
       } catch (error) {
         setError('Error fetching files');
       } finally {

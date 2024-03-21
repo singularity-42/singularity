@@ -1,9 +1,10 @@
 "use client"
 
-import { useFilter } from '@/hooks/provider/useFilter';
-import { useVisual } from '@/hooks/provider/useVisual';
+import { useFilter } from '@/hooks/useFilter';
+import { useVisual } from '@/hooks/useVisual';
 import { CategoryType, ViewType } from '../../defaults';
 import React, { useEffect } from 'react';
+import ListEntities from '@/components/collections/ListEntities';
 
 const ConceptPage: React.FC = () => {
   const { setFilterCategory } = useFilter();
@@ -15,7 +16,7 @@ const ConceptPage: React.FC = () => {
   }, []);
 
 
-  return <></>;
+  return <ListEntities />;
 }
 
 export default ConceptPage;

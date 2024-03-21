@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from './Link.module.scss';
-import { useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
+import { useEntityOverlay } from "@/hooks/useEntityOverlay";
 
 interface HoverLinkProps {
     name?: string;

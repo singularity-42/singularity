@@ -2,13 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import styles from './EntityCardCalendar.module.scss'; // Import SCSS styles
 import DateComponent from '../base/Calendar';
 import EntityCardGrid from './EntityCardsColumn'; // Assuming you've implemented this component
+import useEntities from '@/hooks/useEntities';
 
 interface CalendarProps {
-  files: any[];
-  onTagClick: (tag: string) => void;
 }
 
-const EntityCardCalendar: React.FC<CalendarProps> = ({ files, onTagClick }) => {
+const EntityCardCalendar: React.FC<CalendarProps> = () => {
+  const { files } = useEntities();
   const [datedFiles, setDatedFiles] = useState<{ [date: string]: any[] }>({});
 
   useEffect(() => {
@@ -17,7 +17,12 @@ const EntityCardCalendar: React.FC<CalendarProps> = ({ files, onTagClick }) => {
     // Group files by date
     const updatedDatedFiles: { [date: string]: any[] } = {};
     files.forEach((file) => {
-      const date = file.date.split(/-/gm).reverse().join("."); // Format date as needed
+      let date = file.date?.split(/-/gm).reverse().join(".");
+      if (!date) {
+        date = "Unknown";
+      }
+      
+      // Create new date group if it doesn't exist yet
       updatedDatedFiles[date] = updatedDatedFiles[date] || [];
       updatedDatedFiles[date].push(file);
     });
@@ -42,7 +47,7 @@ const EntityCardCalendar: React.FC<CalendarProps> = ({ files, onTagClick }) => {
             <DateComponent date={date} />
           </div>
           <div className={styles.cardsContainer}>
-            <EntityCardGrid files={datedFiles[date]} onTagClick={onTagClick} />
+            <EntityCardGrid files={datedFiles[date]} />
           </div>
         </div>
       ))}

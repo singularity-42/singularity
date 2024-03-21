@@ -1,9 +1,10 @@
 "use client"
 
 import React, { useEffect } from 'react';
-import { useFilter } from '@/hooks/provider/useFilter';
-import { useVisual } from '@/hooks/provider/useVisual';
+import { useFilter } from '@/hooks/useFilter';
+import { useVisual } from '@/hooks/useVisual';
 import { CategoryType, ViewType } from '../../defaults';
+import ListEntities from '@/components/collections/ListEntities';
 
 const CreativePage: React.FC = () => {
   const { setFilterCategory } = useFilter();
@@ -14,9 +15,7 @@ const CreativePage: React.FC = () => {
     setFilterCategory(CategoryType.Creative);
   }, []); 
 
-  return (
-    <></>
-  );
+  return <ListEntities />;
 };
 
 

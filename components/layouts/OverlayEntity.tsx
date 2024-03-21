@@ -4,9 +4,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import styles from "./OverlayEntity.module.scss";
 import EntityContent from "./EntityContent";
 import EntityConnections from "./EntityConnections";
-import { useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
+import { useEntityOverlay } from "@/hooks/useEntityOverlay";
 import useConnection from "@/hooks/useConnection";
-import { MdChangeHistory, MdClose, MdEdit, MdLink, MdSave, MdShare, MdUndo, MdVerified } from "react-icons/md";
+import { MdChangeCircle, MdChangeHistory, MdClose, MdEdit, MdHistoryEdu, MdLink, MdSave, MdShare, MdUndo, MdVerified } from "react-icons/md";
 import { FileContent, Filter } from "@/app/types";
 import ListSocials from "../collections/ListSocials";
 import ListTags from "../collections/ListTags";
@@ -182,7 +182,7 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
             <div className={styles.metadataChangeInformation}>
               <div className={styles.metadataContainer}>
                 <Icon noBorder={true} >
-                  <MdChangeHistory />
+                  <MdHistoryEdu />
                 </Icon>
                 <div className={styles.createdDate}>
                   {file?.metadata.changed &&
@@ -200,13 +200,6 @@ const EntityOverlay: React.FC<DetailsProps> = () => {
         <div className={styles.graphContainer}>
           {<EntityConnections connections={connection} />}
         </div>
-        {/* display
-metadata.
-createstamp
-timestamp
-changed (will be link to last changer)
-*/}
-
       </div>
     </div>
   );

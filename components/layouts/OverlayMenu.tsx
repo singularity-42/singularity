@@ -2,9 +2,8 @@ import React from "react";
 import styles from "./OverlayMenu.module.scss";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
-import { useFilter } from "@/hooks/provider/useFilter";
-import useCategories from "@/hooks/useCategories";
+import { useEntityOverlay } from "@/hooks/useEntityOverlay";
+import { useFilter } from "@/hooks/useFilter";
 import { CATEGORY_DESCRIPTIONS, CATEGORY_ICONS } from "@/app/defaults";
 
 interface MenuProps {
@@ -15,7 +14,6 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const { visible, toggleVisibility, setName } = useEntityOverlay();
   const [lastClicked, setLastClicked] = React.useState("");
-  const { categories } = useCategories();
   const { setFilterCategory } = useFilter();
 
   const handleLinkClick = (str: string) => {

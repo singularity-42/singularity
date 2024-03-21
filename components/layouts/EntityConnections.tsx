@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { DataSet, Network, Node, Edge, Options } from "vis-network";
 import styles from "./EntityConnections.module.scss";
-import { useEntityOverlay as useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
+import { useEntityOverlay as useEntityOverlay } from "@/hooks/useEntityOverlay";
 
 interface EntityConnectionsProps {
   connections: { nodes: Node[]; edges: Edge[] };

@@ -1,209 +1,191 @@
+// import React, { useState, useEffect } from 'react';
+// import styles from './EntityFilter.module.scss';
+// import { FileContent, Filter, FilterType, FilterValue } from '@/app/types';
+// import { FaSearch } from 'react-icons/fa';
+// import { useVisual } from '@/hooks/provider/useVisual';
+// import Icon from '../base/Icon';
+// import ListTags from '../collections/ListTags';
+// import { FILTER_ICONS, FILTER_REGEX, VIEW_ICONS } from '@/app/defaults';
+
+// interface FilterProps {
+//   files: FileContent[];
+//   filter: Filter;
+//   setFilter: (filter: Filter) => void;
+// }
+
+// const extractPossibleFiltersFromFiles = (files: FileContent[]): FilterValue[] => {
+//   const allFilters: FilterValue[] = [];
+
+//   files.forEach((file) => {
+//     const tags = file.metadata.tags as string[];
+//     const connections = file.metadata.connections;
+//     if (tags) {
+//       tags.forEach((tag) => allFilters.push({ value: tag, type: FilterType.Tag }));
+//     }
+//     if (connections) {
+//       if (Array.isArray(connections)) {
+//         connections.forEach((connection) => allFilters.push({ value: connection, type: FilterType.Connection }));
+//       } else {
+//         allFilters.push({ value: connections as string, type: FilterType.Connection });
+//       }
+//     }
+//   });
+
+//   return allFilters;
+// };
+
+// const applyFilterRegex = (value: string, regex: RegExp): boolean => regex.test(value.toLowerCase());
+
+// const EntityFilter: React.FC<FilterProps> = ({ files, filter, setFilter }) => {
+//   const [allFilters, setAllFilters] = useState<FilterValue[]>([]);
+//   const [filteredFilters, setFilteredFilters] = useState<FilterValue[]>([]);
+//   const [filterSwapPossible, setFilterSwapPossible] = useState(false);
+//   const [filterSwapValue, setFilterSwapValue] = useState('');
+
+//   useEffect(() => {
+//     const extractedFilters = extractPossibleFiltersFromFiles(files);
+//     setAllFilters(extractedFilters);
+//     setFilteredFilters(extractedFilters);
+//   }, [files]);
+
+//   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const newName = e.target.value;
+//     const regexPatterns = [FILTER_REGEX.date, FILTER_REGEX.tag, FILTER_REGEX.cost, FILTER_REGEX.time, FILTER_REGEX.connection];
+
+//     for (const pattern of regexPatterns) {
+//       const match = newName.match(pattern);
+//       if (match) {
+//         setFilterSwapPossible(true);
+//         setFilterSwapValue(match[0]);
+//         return;
+//       }
+//     }
+
+//     const newFilteredFilters = allFilters.filter((filter) => applyFilterRegex(filter.value, new RegExp(newName, 'i')));
+//     setFilteredFilters(newFilteredFilters);
+
+//     if (newFilteredFilters.some((f) => f.value === newName)) {
+//       setFilterSwapPossible(true);
+//       setFilterSwapValue(newName);
+//     } else {
+//       setFilterSwapPossible(false);
+//       setFilterSwapValue('');
+//     }
+//   };
+
+//   const handleNameEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+//     if (e.key === 'Enter' && filterSwapPossible) {
+//       handleSwap();
+//     }
+//   };
+
+//   const handleSwap = () => {
+//     const currentName = filter.name || '';
+//     const newName = currentName.replace(filterSwapValue, '');
+//     setFilter({ ...filter, name: newName });
+//     setFilterSwapValue('');
+//     setFilterSwapPossible(false);
+
+//     switch (true) {
+//       case filterSwapValue.match(FILTER_REGEX.date) !== null:
+//         setFilter({ ...filter, date: new Date(filterSwapValue) });
+//         break;
+//       case filterSwapValue.match(FILTER_REGEX.tag) !== null:
+//       case filterSwapValue.match(FILTER_REGEX.cost) !== null:
+//       case filterSwapValue.match(FILTER_REGEX.time) !== null:
+//         setFilter({ ...filter, tags: [...filter.tags || [], filterSwapValue] });
+//         break;
+//       case filterSwapValue.match(FILTER_REGEX.connection) !== null:
+//         setFilter({ ...filter, connections: [...filter.connections || [], filterSwapValue] });
+//         break;
+//       default:
+//         if (allFilters.some((f) => f.value === filterSwapValue)) {
+//           setFilter({ ...filter, tags: [...filter.tags || [], filterSwapValue] });
+//         }
+//         break;
+//     }
+//   };
+
+//   const { cycleViewMode, mode } = useVisual();
+
+//   return (
+//     <div className={styles.filter}>
+//       <div className={styles.filterSearchContainer}>
+//         <Icon onClick={handleSwap}>
+//           <FaSearch />
+//         </Icon>
+//         <input
+//           className={`${styles.filterSearch} ${filterSwapPossible ? styles.filterSwapPossible : ''}`}
+//           type="text"
+//           placeholder=""
+//           autoFocus
+//           onChange={handleNameChange}
+//           onKeyDown={handleNameEnter}
+//           value={filter.name || ''}
+//         />
+//         <Icon onClick={cycleViewMode} spinOnClick={true}>
+//           {VIEW_ICONS[mode]}
+//         </Icon>
+//       </div>
+//       <div className={styles.filtersContainer}>
+//         {/* {filteredFilters.map((filteredFilter, index) => (
+//           <div key={index} className={styles.filterContainer}>
+//             <Icon noBorder={true}>{FILTER_ICONS[filteredFilter.type]}</Icon>
+//             <ListTags
+//               highlight={''}
+//               tags={[filteredFilter.value]}
+//               onTagClick={(tag) => {
+//                 if (filteredFilter.type === FilterType.Tag) {
+//                   setFilter({ ...filter, tags: [...filter.tags || [], tag] });
+//                 } else if (filteredFilter.type === FilterType.Connection) {
+//                   setFilter({ ...filter, connections: [...filter.connections || [], tag] });
+//                 }
+//               }}
+//             />
+//           </div>
+//         ))} */}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default EntityFilter;
+
 import React, { useState, useEffect } from 'react';
 import styles from './EntityFilter.module.scss';
-import { FileContent, Filter } from '@/app/types';
+import { FileContent, Filter, FilterType, FilterValue } from '@/app/types';
 import { FaSearch } from 'react-icons/fa';
-import { useVisual } from '@/hooks/provider/useVisual';
+import { useVisual } from '@/hooks/useVisual';
 import Icon from '../base/Icon';
 import ListTags from '../collections/ListTags';
 import { FILTER_ICONS, FILTER_REGEX, VIEW_ICONS } from '@/app/defaults';
+import { useFilter } from '@/hooks/useFilter';
 
-interface FilterProps {
-  files: FileContent[];
-  filter: Filter;
-  setFilterName: (name: string) => void;
-  setFilterDate: (date: Date) => void;
-  setFilterTag: (tag: string) => void;
-  setFilterConnection: (connection: string) => void;
+interface EntityFilterProps {
 }
 
-const extractPossibleFiltersFromFiles = (files: FileContent[]): string[] =>{
-  const tags = files.reduce((acc: string[], file: FileContent) => {
-    const tags = file.metadata.tags as string[];
-    if (tags) {
-      acc.push(...tags);
-    }
-    return acc;
-  }, []);
+import { useSearchParams } from 'next/navigation';
 
-  const connections = files.reduce((acc: string[], file: FileContent) => {
-    const connections = file.metadata.connections;
-    if (connections) {
-      if (Array.isArray(connections)) {
-        acc.push(...connections);
-      } else {
-        acc.push(connections);
-      }
-    }
-    return acc;
-  }, []);
+export function useTags() {
+  const searchParams = useSearchParams();
+  const tags = searchParams.get('tags');
 
-  const possibleFilters = [...tags, ...connections];
+  // If you need to split the tags into an array, you can do so here
+  const tagsArray = tags ? tags.split(',') : [];
 
-  return possibleFilters
+  return tagsArray;
 }
 
-const applyTagRegex = (tag: string, regex: RegExp): boolean => regex.test(tag);
 
-const extractFilteredTags = (tags: string[], filter: Filter) =>
-  tags.reduce(
-    (acc: any, tag: any) => {
-      if (!tag) return acc;
-
-      tag = tag.toLowerCase();
-      const hasCostRegex = applyTagRegex(tag, FILTER_REGEX.cost);
-      const hasTimeRegex = applyTagRegex(tag, /(doors|close|day|morgen)/gm);
-      const hasConnectionRegex =
-        applyTagRegex(tag, /(\[\[.*?\]\]|.*?\|\[\[.*?\]\])/gm) ||
-        (tag.includes('[[') && tag.includes(']]'));
-
-      // // check if tag is in in acc
-      // if (acc.costs.has(tag)) acc.costs.delete(tag);
-      // if (acc.time.has(tag)) acc.time.delete(tag);
-      // if (acc.connections.has(tag)) acc.connections.delete(tag);
-      // if (acc.concepts.has(tag)) acc.concepts.delete(tag);
-
-      if (hasCostRegex) acc.costs.add(tag);
-      else if (hasTimeRegex) acc.time.add(tag);
-      else if (hasConnectionRegex) acc.connections.add(tag.replace(/\[\[|\]\]/gm, '').replace(/"/gm, ''));
-      else acc.concepts.add(tag);
-      return acc;
-    },
-    { costs: new Set(), time: new Set(), connections: new Set(), concepts: new Set() }
-  );
-
-const EntityFilter: React.FC<FilterProps> = ({ files, filter, setFilterName, setFilterDate, setFilterTag, setFilterConnection }) => {
-  const [costs, setCosts] = useState<string[]>([]);
-  const [time, setTime] = useState<string[]>([]);
-  const [connections, setConnections] = useState<string[]>([]);
-  const [tags, setConcepts] = useState<string[]>([]);
-  const [filterSwapPossible, setFilterSwapPossible] = useState(false);
-  const [filterSwapValue, setFilterSwapValue] = useState('');
+const EntityFilter: React.FC<EntityFilterProps> = () => {
+  const [search, setSearch] = useState('');
   const { cycleViewMode, mode } = useVisual();
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = e.target.value;
-    setFilterName(newName);
-
-    const regexPatterns = [FILTER_REGEX.date, FILTER_REGEX.tag, FILTER_REGEX.cost, FILTER_REGEX.time, FILTER_REGEX.connection];
-
-    for (const pattern of regexPatterns) {
-      const match = newName.match(pattern);
-      if (match) {
-        setFilterSwapPossible(true);
-        setFilterSwapValue(match[0]);
-        return;
-      }
-    }
-
-    if (currentVisibleTags.includes(newName)) {
-      setFilterSwapPossible(true);
-      setFilterSwapValue(newName);
-    } else {
-      setFilterSwapPossible(false);
-      setFilterSwapValue('');
-    }
-  };
-
-  const handleNameEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && filterSwapPossible) {
-      handleSwap();
-    }
-  };
+  const { filter } = useFilter();
 
   const handleSwap = () => {
-    const currentName = filter.name || '';
-    const newName = currentName.replace(filterSwapValue, '');
-    setFilterName(newName);
-    setFilterSwapValue('');
-    setFilterSwapPossible(false);
-
-    switch (true) {
-      case filterSwapValue.match(FILTER_REGEX.date) !== null:
-        setFilterDate(new Date(filterSwapValue));
-        break;
-      case filterSwapValue.match(FILTER_REGEX.tag) !== null:
-        setFilterTag(filterSwapValue.replace(/\#/gm, ''));
-        break;
-      case filterSwapValue.match(FILTER_REGEX.cost) !== null:
-      case filterSwapValue.match(FILTER_REGEX.time) !== null:
-        setFilterTag(filterSwapValue);
-        break;
-      case filterSwapValue.match(FILTER_REGEX.connection) !== null:
-        setFilterConnection(filterSwapValue.replace(/\[\[|\]\]/gm, '').replace(/\"/gm, ''));
-        break;
-      default:
-        if (currentVisibleTags.includes(filterSwapValue)) {
-          setFilterTag(filterSwapValue);
-        }
-        break;
-    }
+    console.log('swap');
   };
 
-  const [currentVisibleTags, setCurrentVisibleTags] = useState<string[]>([]);
-
-  useEffect(() => {
-    setCurrentVisibleTags(extractPossibleFiltersFromFiles(files));
-  }, [files]);
-
-  useEffect(() => {
-    const categorizedTags = extractFilteredTags(currentVisibleTags, filter);
-
-    if (filter.tags) {
-      filter.tags.forEach((tag) => {
-        if (tag.match(FILTER_REGEX.date)) categorizedTags.time.add(tag);
-        else if (tag.match(FILTER_REGEX.tag)) categorizedTags.concepts.add(tag);
-        else if (tag.match(FILTER_REGEX.cost)) categorizedTags.costs.add(tag);
-        else if (tag.match(FILTER_REGEX.time)) categorizedTags.time.add(tag);
-        else if (tag.match(FILTER_REGEX.connection)) categorizedTags.connections.add(tag.replace(/"/gm, ''));
-        else categorizedTags.concepts.add(tag);
-      });
-    }
-
-    if (filter.date) {
-      categorizedTags.time.add(
-        filter.date.toLocaleDateString('de-DE', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        })
-      );
-    }
-
-    if (filter.connections) {
-      filter.connections.forEach((connection) => {
-        if (categorizedTags.connections.has(connection)) categorizedTags.connections.delete(connection);
-        categorizedTags.connections.add(connection.replace(/"/gm, ''));
-      });
-    }
-
-    // make uniq
-    setCosts(Array.from(new Set(categorizedTags.costs)));
-    setTime(Array.from(new Set(categorizedTags.time)));
-    setConnections(Array.from(new Set(categorizedTags.connections)));
-    setConcepts(Array.from(new Set(categorizedTags.concepts)));
-  }, [currentVisibleTags]);
-
-  const handleTagClick = (tag: string) => {
-    setFilterTag(tag);
-  };
-
-  const handleConnectionClick = (connection: string) => {
-    setFilterConnection(connection);
-  };
-
-  const renderFilterContainer = (
-    tags: string[],
-    icon: React.ReactNode,
-    onClick: (tag: string) => void,
-    selected?: string[],
-    highlight: string = ''
-  ) =>
-    tags.length > 0 && (
-      <div className={styles.filterContainer}>
-        <Icon noBorder={true}>{icon}</Icon>
-        <ListTags tags={tags} onTagClick={onClick} selected={selected} highlight={highlight} />
-      </div>
-    );
 
   return (
     <div className={styles.filter}>
@@ -211,27 +193,15 @@ const EntityFilter: React.FC<FilterProps> = ({ files, filter, setFilterName, set
         <Icon onClick={handleSwap}>
           <FaSearch />
         </Icon>
-        <input
-          className={`${styles.filterSearch} ${filterSwapPossible ? styles.filterSwapPossible : ''}`}
-          type="text"
-          placeholder=""
-          autoFocus
-          onChange={handleNameChange}
-          onKeyDown={handleNameEnter}
-          value={filter.name || ''}
-        />
+        <input className={styles.filterSearch} type="text" placeholder="" autoFocus value={search} onChange={(e) => setSearch(e.target.value)} />
         <Icon onClick={cycleViewMode} spinOnClick={true}>
           {VIEW_ICONS[mode]}
         </Icon>
       </div>
       <div className={styles.filtersContainer}>
-        {renderFilterContainer(costs, FILTER_ICONS.costs, handleTagClick, filter.tags, filterSwapValue)}
-        {renderFilterContainer(time, FILTER_ICONS.time, handleTagClick, filter.tags, filterSwapValue)}
-        {renderFilterContainer(tags, FILTER_ICONS.concepts, handleTagClick, filter.tags, filterSwapValue)}
-        {renderFilterContainer(connections, FILTER_ICONS.connections, handleConnectionClick, filter.connections, filterSwapValue)}
       </div>
     </div>
   );
-};
+}
 
 export default EntityFilter;

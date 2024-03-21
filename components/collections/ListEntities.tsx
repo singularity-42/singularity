@@ -3,8 +3,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./ListEntities.module.scss";
 import useEntities from "@/hooks/useEntities";
-import { useVisual } from "@/hooks/provider/useVisual";
-import { useFilter } from "@/hooks/provider/useFilter";
+import { useVisual } from "@/hooks/useVisual";
+import { useFilter } from "@/hooks/useFilter";
 
 import { ViewType } from "@/app/defaults";
 import { MdQuestionMark } from "react-icons/md";
@@ -16,16 +16,8 @@ import EntityFilter from "../layouts/EntityFilter";
 import Loading from "../base/Loading";
 
 const Entities: React.FC = () => {
-
-  const { filter, setFilterTag, setFilterCategory, setFilterDate, setFilterName, setFilterConnection } = useFilter();
-  const { files, loading, error } = useEntities(filter);
-  const [name, setName] = useState<string>("");
+  const { loading, error } = useEntities();
   const { setTooltip, setMode, mode } = useVisual();
-
-  useEffect(() => {
-  }, [name]);
-
-  const handleTagClick = (tag: string) => tag && setFilterTag(tag);
 
   const ViewComponent = {
     [ViewType.CardsCalender]: EntityCardCalendar,
@@ -36,17 +28,9 @@ const Entities: React.FC = () => {
 
   return (
     <div className={styles.filterCardsContainer}>
-      <EntityFilter
-        files={files || []}
-        filter={filter}
-        setFilterTag={setFilterTag}
-        // setFilterCategory={setFilterCategory}
-        setFilterDate={setFilterDate}
-        setFilterName={setFilterName}
-        setFilterConnection={setFilterConnection}
-      />
+      <EntityFilter/>
       <div className={styles.cardsContainer}>
-        <ViewComponent files={(files) || []} onTagClick={handleTagClick} />
+        <ViewComponent />
       </div>
     </div>
   )

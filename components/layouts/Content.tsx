@@ -4,9 +4,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import styles from "./Content.module.scss";
 import Hamburger from "../base/Hamburger";
-import { useVisual } from "@/hooks/provider/useVisual";
+import { useVisual } from "@/hooks/useVisual";
 import Title from "../base/Title";
-import { useEntityOverlay } from "@/hooks/provider/useEntityOverlay";
+import { useEntityOverlay } from "@/hooks/useEntityOverlay";
 import Background from "../base/Background";
 import ListEntities from "../collections/ListEntities";
 import Menu from "./OverlayMenu";
@@ -68,7 +68,6 @@ const GlobalContent = (props: Props) => {
       </nav>
       <main className={styles.main}>
         {children}
-        <ListEntities />
       </main>
       <footer className={styles.footer}>
         <div className={styles.footer__left}>

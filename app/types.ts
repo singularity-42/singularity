@@ -8,6 +8,19 @@ export interface Connection {
 }
 
 
+export enum FilterType {
+  Tag = 'tag',
+  Name = 'name',
+  Date = 'date',
+  Category = 'category',
+  Connection = 'connection'
+} 
+
+export interface FilterValue {
+  type: FilterType;
+  value: string;
+}
+
 export interface Metadata {
   [key: string]: string | string[] | number;
 }

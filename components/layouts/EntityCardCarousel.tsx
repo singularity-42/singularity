@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import EntityCard from './EntityCard';
 import styles from './EntityCardCarousel.module.scss';
-import { MdArrowForward, MdArrowBack } from 'react-icons/md'; // Import MD icons
 import Slider from '../base/Slider';
+import useEntities from '@/hooks/useEntities';
 
-interface EntityCardCarouselProps {
-  files: any[];
-  onTagClick: (tag: string) => void;
-}
+interface EntityCardCarouselProps {}
 
-const EntityCardCarousel: React.FC<EntityCardCarouselProps> = ({
-  files,
-  onTagClick,
-}) => {
+const EntityCardCarousel: React.FC<EntityCardCarouselProps> = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { files } = useEntities();
 
   return (
     <div className={styles.container}>
@@ -26,7 +21,6 @@ const EntityCardCarousel: React.FC<EntityCardCarouselProps> = ({
           <EntityCard
             key={index}
             file={file}
-            onTagClick={onTagClick}
             className={styles.cardWrapper} // Add class to card wrapper
           />
         ))}

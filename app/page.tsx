@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useEffect } from 'react';
-import { useFilter } from '@/hooks/provider/useFilter';
-import { useVisual } from '@/hooks/provider/useVisual';
+import { useFilter } from '@/hooks/useFilter';
+import { useVisual } from '@/hooks/useVisual';
 import { CategoryType, ViewType } from './defaults';
 
 const collaborationPage: React.FC = () => {
